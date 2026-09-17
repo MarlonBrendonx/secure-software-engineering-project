@@ -4,7 +4,7 @@
 
 | Documento | Status | O que responde |
 |-----------|--------|----------------|
-| [Visão Geral do Sistema](Visao_Geral_Do_Sistema.md) | ✅ | O que o sistema é, o que faz, quais são os ativos importantes e onde estão os riscos |
+| [Visão Geral do Sistema](extra/Visao_Geral_Do_Sistema.md) | ✅ | O que o sistema é, o que faz, quais são os ativos importantes e onde estão os riscos |
 | Glossário | ✅ | Vocabulário do domínio: lançamento, competência, provisão, contraprestação |
 
 ### Arquitetura 
