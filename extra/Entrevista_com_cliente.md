@@ -1,6 +1,6 @@
 Entrevista com o "Cliente"
 
-Analista de Requisitos:  Para começarmos, pode me contar se o sistema precisa fazer alguma validação ou autenticação de usuário?
+Analista de Requisitos: Para começarmos, pode me contar se o sistema precisa fazer alguma validação ou autenticação de usuário?
 
 Cliente: Sim, o sistema precisa de um painel de administrador que só pode ser acessado por usuário autorizado. Só que precisa ser um esquema bem seguro, porque há alguns anos atrás tivemos um problema com um hacker que invadiu nossos sitema antigo e causou o maior estrago, roubando dados e expondo informações do sistema. Isso não pode acontecer!
 
@@ -40,7 +40,61 @@ Analista de Requisitos: Depende de quão rígidas são as regras do login corpor
 
 Cliente: Com certeza. Acho que podemos adicionar esse login que está falando também.
 
+Analista de Requisitos: Perfeito. Depois que o usuário está logado, o que ele pode fazer?
 
+Cliente: Depende de quem é o usuário.
+
+Analista de Requisitos: Então temos tipos de usuários? Quais?
+
+Cliente: Temos o usuário administrador que faz o cadastro de  empresas, clientes, contratos, segmentos, programas, grupos econômicos, centros de custo, unidades de negócio, fornecedores e regras de serviço. Temos o usuário operacional que faz os lançamentos por cliente × período × regra de serviço e o gestor que faz a validação e aprovação dos lançamentos. O operacional ainda gera planilhas para alimentar o ERP.
+
+Analista de Requisitos: Certo. Então temos usuários com escopos muito bem delimitados, de forma que um usuário administrador não faz o que um usuário do operacional faz e vice-versa ou existem exceções?
+
+Cliente: O usuário administrador não faz as mesmas coisa que o operacional e isso nem pode ser permitido.
+
+Analista de Requisitos: Ok. Então deixa eu te perguntar sobre uma situação hipotética: e se algum usuário do operacional que fez o login corporativo e passou pela autenticação de dois fatores conseguir de alguma maneira acessar as funcionalidades de um usuário administrador. Isso precisará ser identificado e tratado, correto?
+
+Cliente: Com certeza! Nesse caso o usuário precisará falar com o RH depois. Porque a pergunta?
+
+Analista de Requisitos: Porque uma das formas de se verificar esse tipo de problema é registrando o que o usuário faz. Porém pra isso, é necessário saber quais informações são importantes registrar, visto que essa informação crescerá com o tempo, sendo mais difícil de auditar. Nesse cenário, quais ações do usuário seria bom que o sistema registrasse?
+
+Cliente: O acesso dele, qualquer operação de edição ou remoção que ele fizer em qualquer empresa, cliente ou outros dados do sistema. 
+
+Analista de Requisitos: Isso vale para todos os usuários ou apenas para alguns?
+
+Cliente: Acho melhor para todos né. Tem como segregar isso no sistema depois ou fica tudo junto?
+
+Analista de Requisitos: Podemos segregar sim. 
+
+Cliente: Ótimo!
+
+Analista de Requisitos: Uma outra pergunta. Como o sistema é para uso corporativo, a ideia é permitir o acesso apenas dentro da rede corporativa, uma VPN ou terá algum acesso público?
+
+Cliente: Só dentro da VPN da empresa. Não deve ser permitido acesso externo
+
+Analista de Requisitos: Acesso apenas via VPN é uma boa escolha para esse tipo de aplicação mesmo. Ainda assim, o ideal é termos comunicação encriptada entre os usuários e o servidor.
+
+Cliente: Mesmo dentro da VPN?
+
+Analista de Requisitos: Mesmo dentro da VPN. Isso dificulta a vida de algum usuário, interno à VPN, que possa estar usando alguma ferramenta de monitoramento de rede, de acessar dados que não deveria.
+
+Cliente: Entendi.
+
+Analista de Requisitos: Por fim, uma última pergunta: quantos usuários são previstos de acessar o sistema?
+
+Cliente: Cerca de 50 usuários.
+
+Analista de Requisitos: Então no máximo teríamos 50 a 100 usuários no sistema? Não precisaríamos esperar algo em torno de mil usuários ou mais?
+
+Cliente: Não tem como fazer o sistema para qualquer quantidade de usuários?
+
+Analista de Requisitos: Não necessariamente. As funcionalidades que são implementadas para 10 usuários admins são as mesmas implementadas para 1000 usuários admins. Porém a forma de lidar com a carga do sistema e até a parte de segurança mudam completamente. Para exemplificar, um servidor que consegue atender 50 usuários simultâneos não é o mesmo que atende 10 mil usuários simultâneos. Da mesma maneira, um sistema de log, o registro das ações dos usuários, muda por completo a quantidade de informação gerada de quando se tem 50 pessoas para quando se tem mil pessoas gerando informações de edição/remoção regularmente. 
+
+Cliente: Entendi. Vamos considerar um sistema para até mil usuários então.
+
+Analista de Requisitos: Certo. Bom, acho que tenho já bastante coisa para analisar por agora. Eu vou revisar o que anotei aqui e montar uma lista de funcionalidades para nossa próxima reunião. Pode ser?
+
+Cliente: Claro. Eu fico no aguardo então.
 
 
 ##
