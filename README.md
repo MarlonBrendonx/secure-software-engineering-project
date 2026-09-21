@@ -35,10 +35,10 @@ evidências de execução ou artefatos de verificação automatizada.
 
 ## Navegação por etapa
 
-| Etapa                       | Descrição                                                            | Documentos                                                                                                                          |
-| --------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Base                        | Documentação e visão geral do sistema                                | [Visão geral do sistema](extra/visao-geral-do-sistema.md)                                                                           |
-| 1. Ameaças e casos de abuso | Casos de Abuso e Modelagem de Ameaças com STRIDE                     | [Identificação do Sistema](docs/etapa-1-identificacao-sistema.md), [Índice STRIDE e casos de abuso](docs/etapa-1-ameacas-stride.md) |
+| Etapa                       | Descrição                                                            | Documentos                                                                                                                                          |
+| --------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Base                        | Documentação e visão geral do sistema                                | [Visão geral do sistema](extra/visao-geral-do-sistema.md)                                                                                           |
+| 1. Ameaças e casos de abuso | Casos de Abuso e Modelagem de Ameaças com STRIDE                     | [Identificação do Sistema](docs/etapa-1/etapa-1-identificacao-sistema.md), [Índice STRIDE e casos de abuso](docs/etapa-1/etapa-1-ameacas-stride.md) |
 | 2. Riscos e NIST CSF 2.0    | Planejada Análise, Priorização e Tratamento de Riscos com o NIST CSF |
 
 ## Organização do repositório

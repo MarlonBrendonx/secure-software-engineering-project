@@ -92,16 +92,16 @@ Esta seção apresenta os principais diagramas que representam a arquitetura e o
 
 O diagrama abaixo apresenta uma visão geral da arquitetura do sistema, destacando seus principais componentes e a comunicação entre eles.
 
-![Diagrama geral da arquitetura](./diagramas/fluxo-geral.png)
+![Diagrama geral da arquitetura](../../diagramas/diagrama-fluxo-geral.png)
 
 ### Fluxo de criação de lançamento
 
 O diagrama de sequência apresenta o fluxo de criação de um lançamento, detalhando a interação entre os principais componentes envolvidos no processo.
 
-![Diagrama de sequência — criação de lançamento](./diagramas/diagrama-sequencia.png)
+![Diagrama de sequência — criação de lançamento](../../diagramas/diagrama-sequencia.png)
 
 ### Fluxo de regra de serviço
 
 O diagrama abaixo apresenta o fluxo de execução das regras de serviço, destacando a interação entre os principais componentes envolvidos no processamento.
 
-![Diagrama de sequência — regra de serviço](./diagramas/diagrama-regra-servico.png)
+![Diagrama de sequência — regra de serviço](../../diagramas/diagrama-regra-servico.png)
