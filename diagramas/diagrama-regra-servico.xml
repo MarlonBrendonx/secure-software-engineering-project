@@ -1,0 +1,184 @@
+<mxfile host="app.diagrams.net" agent="claude-code">
+  <diagram id="act-criacao-regra-servico" name="Atividades - Criacao da Regra de Servico">
+    <mxGraphModel dx="1505" dy="735" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="960" pageHeight="1240" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="note1" parent="1" style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=6;size=12;" value="Rota de cadastro: exige JWT + role ≠ none" vertex="1">
+          <mxGeometry height="40" width="230" x="400" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="start" parent="1" style="ellipse;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="325" y="44" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Recebe o comando&#xa;(cliente, dados da regra, programas, faixas opcionais)" vertex="1">
+          <mxGeometry height="50" width="280" x="200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="Cliente existe?" vertex="1">
+          <mxGeometry height="64" width="120" x="280" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="404 — Cliente não encontrado" vertex="1">
+          <mxGeometry height="48" width="190" x="560" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="Nome + conjunto de programas já existe para o cliente?" vertex="1">
+          <mxGeometry height="76" width="160" x="260" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="409 — Conflito de nome/programas" vertex="1">
+          <mxGeometry height="48" width="190" x="560" y="314" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="Todo programa pertence ao cliente?" vertex="1">
+          <mxGeometry height="76" width="160" x="260" y="418" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="404 / 422 — Programa inexistente ou de outro cliente" vertex="1">
+          <mxGeometry height="48" width="190" x="560" y="432" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="Mais de 1 programa?" vertex="1">
+          <mxGeometry height="64" width="120" x="280" y="536" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="Todos no mesmo centro de lucro?" vertex="1">
+          <mxGeometry height="76" width="160" x="520" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" value="422 — Centros de lucro diferentes" vertex="1">
+          <mxGeometry height="48" width="190" x="740" y="544" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="320" y="632" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Monta os itens de programa e de faixa" vertex="1">
+          <mxGeometry height="44" width="280" x="200" y="702" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;" value="tipo de regra" vertex="1">
+          <mxGeometry height="64" width="120" x="280" y="776" as="geometry" />
+        </mxCell>
+        <mxCell id="9quyjssQ1YxRkpgOBgH2-10" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="991" />
+            </Array>
+            <mxPoint x="120.0322580645161" y="929" as="sourcePoint" />
+            <mxPoint x="320" y="991" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Usa percentual (%)" vertex="1">
+          <mxGeometry height="50" width="160" x="40" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Multiplicação" vertex="1">
+          <mxGeometry height="50" width="160" x="230" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="9quyjssQ1YxRkpgOBgH2-12" edge="1" parent="1" source="t3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="m2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="960" />
+              <mxPoint x="340" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Usa faixas" vertex="1">
+          <mxGeometry height="50" width="160" x="420" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;" value="Valor fixo" vertex="1">
+          <mxGeometry height="50" width="180" x="610" y="880" as="geometry" />
+        </mxCell>
+        <mxCell id="m2" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="40" width="40" x="320" y="972" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Persiste" vertex="1">
+          <mxGeometry height="48" width="280" x="200" y="1052" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" value="Registra log de criação" vertex="1">
+          <mxGeometry height="44" width="280" x="200" y="1124" as="geometry" />
+        </mxCell>
+        <mxCell id="endok" parent="1" style="shape=endState;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" value="" vertex="1">
+          <mxGeometry height="36" width="36" x="322" y="1192" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-s" edge="1" parent="1" source="start" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-1" edge="1" parent="1" source="a1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d1s" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="d2" value="Sim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d1n" edge="1" parent="1" source="d1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="e1" value="Não">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d2s" edge="1" parent="1" source="d2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="e2" value="Sim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d2n" edge="1" parent="1" source="d2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="d3" value="Não">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d3n" edge="1" parent="1" source="d3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="e3" value="Não">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d3s" edge="1" parent="1" source="d3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="d4" value="Sim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d4s" edge="1" parent="1" source="d4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="d5" value="Sim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d4n" edge="1" parent="1" source="d4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="m1" value="Não">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d5n" edge="1" parent="1" source="d5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;" target="e4" value="Não">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-d5s" edge="1" parent="1" source="d5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=11;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="m1" value="Sim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-m1a2" edge="1" parent="1" source="m1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-a2d6" edge="1" parent="1" source="a2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="d6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-t1" edge="1" parent="1" source="d6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" target="t1" value="Porcentagem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-t2" edge="1" parent="1" source="d6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" target="t2" value="multiplicação">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-t3" edge="1" parent="1" source="d6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" target="t3" value="Faixas">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-t4" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;fontSize=10;" value="Fixo">
+          <mxGeometry relative="1" x="-0.0056" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="400" y="820" />
+              <mxPoint x="700" y="820" />
+            </Array>
+            <mxPoint x="400" y="810" as="sourcePoint" />
+            <mxPoint x="700.092258064516" y="871.97" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed-t2m" edge="1" parent="1" source="t2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="m2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="960" />
+              <mxPoint x="340" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed-t4m" edge="1" parent="1" source="t4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="m2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="992" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed-m2a3" edge="1" parent="1" source="m2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="a3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="1020" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed-a3a4" edge="1" parent="1" source="a3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="a4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ed-a4e" edge="1" parent="1" source="a4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;" target="endok">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
