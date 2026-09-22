@@ -67,7 +67,7 @@ Legenda de criticidade: 🔴 alta · 🟡 média.
 | Identificador | Ativo                                                      | Tipo                 | Crít. | Por que importa (impacto se comprometido)                                      |
 | ------------- | ---------------------------------------------------------- | -------------------- | :---: | ------------------------------------------------------------------------------ |
 | A1            | Lançamentos e faturamentos (valores por cliente × período) | Dado                 |  🔴   | Adulteração muda o valor real faturado ao cliente.                             |
-| A2            | Timeline de transições e auditoria                         | Dado                 |  🔴   | Prova de quem fez o quê, sua perda inviabiliza auditoria e contestação.        |
+| A2            | Timeline de transações e auditoria                         | Dado                 |  🔴   | Prova de quem fez o quê, sua perda inviabiliza auditoria e contestação.        |
 | A3            | Regras de serviço e faixas (base do cálculo)               | Dado                 |  🔴   | Erro/adulteração se propaga silenciosamente para todo valor calculado.         |
 | A4            | Anexos dos lançamentos                                     | Dado                 |  🟡   | Documentos de suporte ao faturamento, podem conter dados de negócio sensíveis. |
 | A5            | CNPJ de clientes e fornecedores                            | Dado pessoal/negócio |  🟡   | Dado identificável de pessoa jurídica, exposição indevida e vazamento.         |
