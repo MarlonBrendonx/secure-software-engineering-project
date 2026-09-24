@@ -8,29 +8,29 @@
 
 | ID  | Categoria STRIDE       | Ativos   | Ameaça                 | Impacto |
 | --- | ---------------------- |--------- | ---------------------- | ------- | 
-| T01 | Tampering              | A1       | Usuário não autorizado altera lançamentos |  |
-| T02 | Elevation of Privilege | A1, A2, A3   | Usuário sem permissões para acesso obtêm o controle de usuário com permissões | |
-| T03 | Elevation of Privilege | A1       | Usuário obtêm dados de lançamentos sem autorização | |
-| T04 | Information Disclosure | A1       | Usuário vaza lançamentos do sistema | |
-| T05 | Repudiation            | A2       | Perda do timeline impede a identificação do que cada usuário fez no sistema | |
-| T06 | Tampering              | A3       | Alteração não autorizada em regras de serviço | |
-| T07 | Elevation of Privilege | A4       | Acesso não autorizado a anexos | |
-| T08 | Information Disclosure | A4       | Vazamento de informações dos anexos | |
-| T09 | Elevation of Privilege | A5       | Acesso não autorizado a CNPJs | |
-| T10 | Information Disclosure | A5       | Vazamento de CNPJs | |
-| T11 | Elevation of Privilege | A6       | Acesso não autorizado a endereços de e-mail dos aprovadores | |
-| T12 | Information Disclosure | A6       | Vazamento de endereços de e-mail dos aprovadores | |
-| T13 | Tampering              | A7       | Alteração em código de cálculo de valores | |
-| T14 | Denial of Service      | A8       | Falha induzida no código impedindo o fluxo de autorização | |
-| T15 | Information Disclosure | A9       | Vazamento de segredo gerador de token  | |
-| T16 | Spoofing               | A9       | Uso de segredo vazado para impersonificar usuário válido | | 
-| T17 | Information Disclosure | A10      | Vazamento da chave de API interna | | 
-| T18 | Spoofing               | A10      | Código não autorizado impersonificando chamadas válidas  | |
-| T19 | Elevation of Privilege | A11      | Acesso não autorizado aos anexos extra sistema | |
-| T20 | Denial of Service      | A12      | Ataque a infraestrutura, deixando o sistema inoperante | |
-| T21 | Spoofing               | A13, A14 | Envio de e-mails impersonificando sender válido | |
-| T22 | Information Disclosure | A15      | Vazamento de informações sobre faturamento | |
-| T23 | Denial of Service      | A15      | Sobrecarga no EventBus impedindo operações válidas | | 
+| T01 | Tampering              | A1       | Usuário não autorizado altera lançamentos | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T02 | Elevation of Privilege | A1, A2, A3   | Usuário sem permissões para acesso obtêm o controle de usuário com permissões | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T03 | Elevation of Privilege | A1       | Usuário obtêm dados de lançamentos sem autorização | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T04 | Information Disclosure | A1       | Usuário vaza lançamentos do sistema | ![Vazamento](impacto-ameacas/vazamento.md) |
+| T05 | Repudiation            | A2       | Perda do timeline impede a identificação do que cada usuário fez no sistema | ![Impedimento](impacto-ameacas/impedimento.md) |
+| T06 | Tampering              | A3       | Alteração não autorizada em regras de serviço | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T07 | Elevation of Privilege | A4       | Acesso não autorizado a anexos | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T08 | Information Disclosure | A4       | Vazamento de informações dos anexos | ![Vazamento](impacto-ameacas/vazamento.md) |
+| T09 | Elevation of Privilege | A5       | Acesso não autorizado a CNPJs | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T10 | Information Disclosure | A5       | Vazamento de CNPJs | ![Vazamento](impacto-ameacas/vazamento.md) |
+| T11 | Elevation of Privilege | A6       | Acesso não autorizado a endereços de e-mail dos aprovadores | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T12 | Information Disclosure | A6       | Vazamento de endereços de e-mail dos aprovadores | ![Vazamento](impacto-ameacas/vazamento.md) |
+| T13 | Tampering              | A7       | Alteração em código de cálculo de valores | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) |
+| T14 | Denial of Service      | A8       | Falha induzida no código impedindo o fluxo de autorização | ![Impedimento](impacto-ameacas/impedimento.md) |
+| T15 | Information Disclosure | A9       | Vazamento de segredo gerador de token  | ![Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
+| T16 | Spoofing               | A9       | Uso de segredo vazado para impersonificar usuário válido | ![Usuário não autorizado](impacto-ameacas/usuario-nao-autorizado.md) | 
+| T17 | Information Disclosure | A10      | Vazamento da chave de API interna | ![Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) | 
+| T18 | Spoofing               | A10      | Código não autorizado impersonificando chamadas válidas  | ![Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
+| T19 | Elevation of Privilege | A11      | Acesso não autorizado aos anexos extra sistema | ![Vazamento](impacto-ameacas/vazamento.md) |
+| T20 | Denial of Service      | A12      | Ataque a infraestrutura, deixando o sistema inoperante | ![Impedimento](impacto-ameacas/impedimento.md) |
+| T21 | Spoofing               | A13, A14 | Envio de e-mails impersonificando sender válido | ![Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
+| T22 | Information Disclosure | A15      | Vazamento de informações sobre faturamento | ![Vazamento](impacto-ameacas/vazamento.md) |
+| T23 | Denial of Service      | A15      | Sobrecarga no EventBus impedindo operações válidas | ![Impedimento](impacto-ameacas/impedimento.md) | 
 
 ## Casos de Abuso
 
