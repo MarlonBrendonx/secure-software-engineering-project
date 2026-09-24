@@ -1,6 +1,6 @@
 # Usuários não autorizados
 
-Esse documento descreve os impactos relacionados a usuários não autorizados contra os ![ativos](../etapa-1-identificacao-sistemas.md) do sistema.
+Esse documento descreve os impactos relacionados a usuários não autorizados contra os ![ativos](../etapa-1-identificacao-sistema.md) do sistema.
 
 ## Problema
 
