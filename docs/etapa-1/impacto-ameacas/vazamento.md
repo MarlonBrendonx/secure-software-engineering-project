@@ -1,6 +1,6 @@
 # Vazamentos
 
-Esse documento descreve os impactos relacionados a vazamentos contra os ![ativos](../etapa-1-identificacao-sistema.md) do sistema.
+Esse documento descreve os impactos relacionados a vazamentos contra os [ativos](../etapa-1-identificacao-sistema.md) do sistema.
 
 ## Problema
 
