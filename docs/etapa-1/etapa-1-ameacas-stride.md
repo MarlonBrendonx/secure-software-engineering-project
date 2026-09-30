@@ -31,21 +31,3 @@
 | T21 | Spoofing               | A13, A14 | Envio de e-mails impersonificando sender válido | [Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
 | T22 | Information Disclosure | A15      | Vazamento de informações sobre faturamento | [Vazamento](impacto-ameacas/vazamento.md) |
 | T23 | Denial of Service      | A15      | Sobrecarga no EventBus impedindo operações válidas | [Impedimento](impacto-ameacas/impedimentos.md) | 
-
-## Casos de Abuso
-
-| ID  | Título | Ator e objetivo resumidos | Ameaças |
-| --- | ------ | ------------------------- | ------- |
-| C01 | Alteração de lançamentos | Ator altera ou remove lançamentos financeiros prejudicando as operações de faturamento no sistema | T01 |
-| C02 | Captura de usuário do SSO | Ator não autorizado obtêm o controle de usuário com privilégios via SSO | T02 |
-| C03 | Acesso não autorizado | Ator com usuário capturado ou acesso direto, acessa dados que não deveria no sistema como lançamentos, anexos, etc  | T03, T07, T09, T11, T19 |
-| C04 | Vazamento de informações | Ator com usuário capturado ou acesso direto vaza informações críticas do sistema | T04, T08, T10, T12, T15, T17, T22  |
-| C05 | Remoção de timeline | Ator remove timeline impedindo a audição do sistema | T05 |
-| C06 | Alteração de regras de serviço | Ator altera regras de serviço prejudicando operações do sistema | T06 |
-| C07 | Tampering no código | Ator altera os módulos do código responsáveis pelos cálculos de valores | T13 | 
-| C08 | Sobrecarga no fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14 |
-| C09 | Acesso Fake | Ator com segredo vazado consegue obter acesso não autorizado ao sistema | T16 |
-| C10 | Chamadas Fake | Código malicioso com segredo do API consegue forjar requisições falsas no sistema | T18 |
-| C11 | Banco offline | Ator consegue sobrecarregar o banco de dados, deixando o sistema inteiro inoperante | T20 |
-| C12 | Envio malicioso | Ator consegue enviar e-mails maliciosos em nome da empresa | T21 |
-| C13 | Sobrecarga no EventBus | Ator consegue sobrecarregar o EventBus impedindo o processamento de operações válidas | T23 |

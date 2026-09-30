@@ -21,6 +21,26 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 
 ## Casos de abuso
 
+### Tabela Resumo
+
+
+| ID  | Título | Ator e objetivo resumidos | Ameaças |
+| --- | ------ | ------------------------- | ------- |
+| CA01 | Alteração ou remoção de lançamentos | Ator altera ou remove lançamentos financeiros prejudicando as operações de faturamento no sistema | T01 |
+| CA02 | Captura de usuário privilegiado via SSO | Ator não autorizado obtêm o controle de usuário com privilégios via SSO | T02 |
+| CA03 | Acesso não autorizado a dados restritos | Ator com usuário capturado ou acesso direto, acessa dados que não deveria no sistema como lançamentos, anexos, etc  | T03, T07, T09, T11, T19 |
+| CA04 | Vazamento de informações críticas | Ator com usuário capturado ou acesso direto vaza informações críticas do sistema | T04, T08, T10, T12, T15, T17, T22  |
+| CA05 | Remoção da timeline de auditoria | Ator remove timeline impedindo a audição do sistema | T05 |
+| CA06 | Alteração de regras de serviço | Ator altera regras de serviço prejudicando operações do sistema | T06 |
+| CA07 | Adulteração do motor de cálculo | Ator altera os módulos do código responsáveis pelos cálculos de valores | T13 | 
+| CA08 | Sobrecarga no fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14 |
+| CA09 | Acesso não autorizado por meio de token de autenticação vazado | Ator com segredo vazado consegue obter acesso não autorizado ao sistema | T16 |
+| CA10 | Requisições internas forjadas com chave de callback vazada | Código malicioso com segredo do API consegue forjar requisições falsas no sistema | T18 |
+| CA11 | Indisponibilidade do banco de dados | Ator consegue sobrecarregar o banco de dados, deixando o sistema inteiro inoperante | T20 |
+| CA12 | Envio de e-mails maliciosos em nome da empresa | Ator consegue enviar e-mails maliciosos em nome da empresa | T21 |
+| CA13 | Sobrecarga do EventBus WebSocket | Ator consegue sobrecarregar o EventBus impedindo o processamento de operações válidas | T23 |
+
+
 ### CA01 — Alteração ou remoção de lançamentos
 
 - **Ator:** analista legítimo mal intencionado , ou usuário com acesso indevido a
