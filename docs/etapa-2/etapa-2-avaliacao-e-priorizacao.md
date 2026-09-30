@@ -1,0 +1,188 @@
+# Etapa 2 — Avaliação e priorização dos riscos
+
+## 4. Justificativas das avaliações
+
+Para cada risco, foram apresentadas as justificativas atribuídas à probabilidade e ao impacto, identificando os ativos, processos ou componentes afetados e explicando como esses fatores fundamentam o nível de risco no contexto analisado.
+
+### R01 — Alteração/remoção de lançamentos (Crítico, 3×4)
+
+- **Probabilidade (3):** o perfil `analista` já possui escrita sobre lançamentos,
+  o abuso não exige capacidade técnica especial, apenas má intenção.
+- **Impacto (4):** o valor adulterado chega ao ERP e é cobrado do cliente.
+  Afeta A1 (lançamentos), o faturamento, pode
+  atingir vários clientes e períodos.
+- **Contexto:** integridade do valor faturado é o objetivo central do sistema,
+  a adulteração ataca a razão de existir do software
+
+### R02 — Captura de conta/perfil SSO (Crítico, 3×4)
+
+- **Probabilidade (3):** phishing e reuso de credenciais são plausíveis em
+  ambiente corporativom não há MFA nem a detecção de sessão anômala.
+- **Impacto (4):** conta `admin`/`gestor` dá controle total, inclusive aprovar,
+  reprovar e encobrir atividade. Afeta A1, A2 e A3 e habilita a maioria dos
+  demais abusos.
+- **Contexto:** é a principal porta de entrada,pois amplifica quase
+  todos os outros riscos.
+
+### R03 — Acesso não autorizado a dados restritos (Alto, 3×3)
+
+- **Probabilidade (3):** falhas de autorização na APIs REST, como
+  uma rota, endpoint de anexo ou consulta sem verificação.
+- **Impacto (3):** exposição de leitura de lançamentos, anexos, CNPJ e e-mails.
+  Prejuízo relevante à privacidade e ao negócio, mas sem alteração direta de valor.
+- **Contexto:** é a base para R05, fraude e vazamentos.
+
+### R04 — Acesso direto aos anexos no storage (Médio, 2×3)
+
+- **Probabilidade (2):** depende de condição específica, URL assinada com
+  validade longa/sem escopo, ou vazamento das credenciais de storage.
+- **Impacto (3):** anexos podem conter comprovantes e dados sensíveis de negócio,
+  o acesso ocorre fora do controle e do log da aplicação.
+- **Contexto:** pode comprometer a confidencialidade de documentos e dados sensíveis de negócio, sem os controles de autorização e rastreabilidade da aplicação.
+
+### R05 — Extração de dados em volume (Alto, 2×4)
+
+- **Probabilidade (2):** exige que o ator já tenha leitura (perfil, conta
+  capturada ou R03) e que não haja limite/monitoração de extração em massa.
+- **Impacto (4):** vazamento de dados de terceiros (CNPJ, anexos), risco
+  jurídico/LGPD, dano a reputação e muitas pessoas afetadas.
+- **Contexto:** consequência de maior gravidade da cadeia de acesso não autorizado
+
+### R06 — Vazamento do `JWT_SECRET` (Alto, 2×4)
+
+- **Probabilidade (2):** com um bom gerenciamento de chaves, como em keyvault, é quase improvável, mas a exposição por log, repositório, imagem ou variável de ambiente é uma condição específica que pode ocorrer.
+- **Impacto (4):** compromete o ativo A9, permite forjar tokens de qualquer perfil, como identificado no risco R07, quebrando a autenticação de todo o sistema.
+- **Contexto:** com prioridade elevada por ser pré-condição de R07.
+
+### R07 — Falsificar token (Alto, 2×4)
+
+- **Probabilidade (2):** condicionada ao vazamento da chave (R06). Com o token em mãos, falsificar é uma etapa considerada fácil
+- **Impacto (4):** acesso total sob identidade falsificada, inclusive `admin`,
+  habilitando todos os abusos de acesso, alteração e vazamento, por exemplo.
+- **Contexto:** dependente de R06. Tendo o vazamento e uma vez falsificado, o
+  token contorna todo o controle de autenticação e autorização, o atacante age
+  como qualquer perfil.
+
+### R08 — Remoção/adulteração da auditoria (Alto, 2×4)
+
+- **Probabilidade (2):** exige acesso a operação capaz de remover/alterar
+  registros ou ao armazenamento da timeline, condição mais específica.
+- **Impacto (4):** perda da capacidade de auditoria e de responsabilização,
+  viabiliza ocultar os rastros no R01, R02 e R09.
+- **Contexto:** a auditoria é o controle que sustenta a responsabilização de todos os demais riscos, sem ela, R01, R02 e R09 tornam-se mais difíceis de detectar. Não é o primeiro elo de um ataque, mas é o que garante que os outros deixem rastro
+
+### R09 — Alteração de regras de serviço (Alto, 2×4)
+
+- **Probabilidade (2):** poucos perfis têm escrita em serviços, requer acesso
+  específico, mas é uma operação normal do sistema.
+- **Impacto (4):** a regra adulterada propaga-se de forma silenciosa a todos
+  os cálculos futuros, faturamento errado em escala, sendo difícil de detectar.
+- **Contexto:** A prioridade é elevada porque a falha se propaga de forma silenciosa, os dados corrompidos fluem entre módulos sem disparar erros ou alertas, o que atrasa a detecção. Quando o problema é percebido, a alteração já contaminou registros e cálculos derivados, o que dificulta identificar a origem e o alcance do dano.
+
+### R10 — Adulteração do motor de cálculo (Médio, 1×4)
+
+- **Probabilidade (1):** exige acesso ao repositório ou cadeia de
+  build comprometida, além de contornar revisão e testes, grande capacidade e
+  acesso muito específico.
+- **Impacto (4):** fatura errado em escala a partir do core, com rastreio
+  difícil da possível causa.
+- **Contexto:** ataca o núcleo do cálculo, que é usado na aprovação. A probabilidade é baixa, mas a gravidade somada à dificuldade de detecção coloca o R10 à frente de vários riscos
+
+### R11 — DoS no fluxo de autorização (Médio, 2×2)
+
+- **Probabilidade (2):** requer volume de requisições contra as transições,
+  precisa de sessão válida ou endpoint alcançável.
+- **Impacto (2):** paralisa temporariamente o fluxo de aprovação, recuperável e
+  sem perda de dados
+- **Contexto:** risco de disponibilidade, recuperável e sem
+  dano ao dado. Tem mais importância se combinado com R14, tendo indisponibilidade de infra
+
+### R12 — Vazamento do `CELERY_CALLBACK_SECRET` (Alto, 2×4)
+
+- **Probabilidade (2):** mesma natureza de R06, exposição por config/log/repo.
+- **Impacto (4):** é a única barreira dos callbacks internos, o vazamento
+  habilita R13.
+- **Contexto:** Mesma classe de R06 (chave
+  em cofre/rotação/varredura) e pré-condição de R13.
+
+### R13 — Falsificação de callbacks internos (Médio, 2×3)
+
+- **Probabilidade (2):** condicionada ao vazamento de A10 com o risco R12.
+- **Impacto (3):** injeção de operações/estados falsos no processamento
+  assíncrono, mas não concede acesso administrativo completo.
+- **Contexto:** Risco no callback interno, dependendo de R06 e R07.O vazamento da chave em R12, também permite a falsificação, como descrito no R13. A gravidade é menor porque o alcance se limita ao processamento assíncrono, sem privilégio administrativo.
+
+### R14 — Indisponibilidade do banco/infra (Alto, 2×4)
+
+- **Probabilidade (2):** por estar na rede corporativa, um ataque vindo de fora é
+  difícil. Mas a própria aplicação pode derrubar o banco, abrir mais conexões do
+  que ele suporta, ou sobrecarregá-lo com consultas
+  pesadas. Esse cenário interno é plausível.
+- **Impacto (4):** sem o banco, todo o sistema para. Além da parada, operações em
+  andamento durante a sobrecarga podem ficar incompletas e deixar dados
+  inconsistentes.
+- **Contexto:** todo o sistema depende de um único banco, se ele cai, não há
+  alternativa. Esse ponto único de falha justifica o nível Alto.
+
+### R15 — Envio de e-mails maliciosos (Médio, 2×3)
+
+- **Probabilidade (2):** depende do vazamento da `EMAIL_SERVICE_API_KEY`.
+- **Impacto (3):** phishing/fraude de cobrança contra clientes e aprovadores e
+  dano reputacional, o impacto é mais abrangente fora do sistema.
+- **Contexto:** o abuso não corrompe dados internos, mas usa um canal legítimo (email) para atacar clientes e funcionários. O dano é externo e relacionado a reputação, difícil de reverter.
+
+### R16 — DoS no EventBus WebSocket (Médio, 3×2)
+
+- **Probabilidade (3):** endpoints WebSocket costumam ser alcançáveis, abrir
+  muitas conexões ou publicar em volume é fácil.
+- **Impacto (2):** notificações em tempo real atrasam ou se perdem; o núcleo de
+  faturamento continua operando. Médio é adequado.
+- **Contexto:** o abuso não corrompe dados internos, mas usa um canal legítimo para atacar clientes e funcionários. Está alinhado com os riscos R11/R14
+
+### R17 — Subscrição indevida no ws vaza faturamento (Médio, 2×2)
+
+- **Probabilidade (2):** requer falta de autorização por canal na inscrição do ws.
+- **Impacto (2):** vaza o estado de faturamento de um período, informações sensíveis e eventos.
+  Porém, não há alteração de dados
+- **Contexto:** o risco está associado a exposição não autorizada de informações de faturamento, restrita ao período e ao escopo da inscrição no ws. Embora possa comprometer a confidencialidade dos dados, a ausência de permissões de escrita limita os efeitos do incidente, sem possibilidade de alteração de registros ou interferência no processamento do faturamento.
+
+---
+
+## 5. Priorização dos riscos
+
+### 5.1 Critérios usados para ordenar
+
+Além da pontuação (Probabilidade × Impacto), a ordem considera:
+
+1. **Gravidade e escala da consequência** — dano financeiro, número de
+   clientes/usuários afetados, dificuldade de reverter.
+2. **Importância do ativo atingido** — ativos centrais ao propósito do sistema
+   pesam mais que ativos periféricos.
+3. **Dependências entre riscos** — quando um risco é pré-condição de outro, o
+   risco-causa é tratado primeiro.
+4. **Efeito habilitador** — riscos que abrem caminho para vários outros sobem
+   na fila mesmo com pontuação igual a outros.
+5. **Facilidade de detecção e recuperação** — quanto mais silenciosa e mais
+   difícil de reverter a consequência, maior a urgência.
+
+### 5.2 Tabela de priorização
+
+| Ordem | Risco                                                | Nível   | Pontuação (P×I) | Por que é tratado nesta posição                                                                                 |
+| :---: | ---------------------------------------------------- | ------- | :-------------: | --------------------------------------------------------------------------------------------------------------- |
+|   1   | **R02** — Captura de conta/perfil SSO                | Crítico |    3×4 = 12     | Porta de entrada que habilita R01, R03, R05, R08, R09. Crítico e de probabilidade média-alta (sem MFA).         |
+|   2   | **R01** — Alteração/remoção de lançamentos           | Crítico |    3×4 = 12     | Ataca diretamente o valor faturado, objetivo central do sistema, com prejuízo financeiro imediato.              |
+|   3   | **R06** — Vazamento do `JWT_SECRET`                  | Alto    |     2×4 = 8     | Sozinho não causa dano, mas é pré-condição de R07 (comprometimento total). Trata-se antes de R07.               |
+|   4   | **R07** — Falsificar token                           | Alto    |     2×4 = 8     | Consequência direta de R06, concede acesso total sob identidade forjada.                                        |
+|   5   | **R09** — Alteração de regras de serviço             | Alto    |     2×4 = 8     | Corrompe o cálculo em escala de forma silenciosa, difícil de detectar depois.                                   |
+|   6   | **R10** — Adulteração do motor de cálculo            | Médio   |     1×4 = 4     | Pontuação baixa (probabilidade rara), mas gravidade e invisibilidade elevam a prioridade acima de vários Altos. |
+|   7   | **R08** — Remoção/adulteração da auditoria           | Alto    |     2×4 = 8     | Protege a auditoria para responsabilização R01, R02 e R09. Sem ela, os demais abusos ficam irrastreáveis.       |
+|   8   | **R03** — Acesso não autorizado a dados restritos    | Alto    |     3×3 = 9     | Base ampla para R05 e para fraude, com muitas rotas expostas.                                                   |
+|   9   | **R05** — Extração de dados em volume                | Alto    |     2×4 = 8     | Maior consequência jurídica/reputacional. Depende de R03/R02, já tratados.                                      |
+|  10   | **R12** — Vazamento do `CELERY_CALLBACK_SECRET`      | Alto    |     2×4 = 8     | Pré-condição de R13, mesma classe de R06.                                                                       |
+|  11   | **R13** — Falsificação de callbacks internos         | Médio   |     2×3 = 6     | Consequência de R12, corrompe o processamento assíncrono.                                                       |
+|  12   | **R14** — Indisponibilidade do banco/infra           | Alto    |     2×4 = 8     | Ponto único de dependência, com parada total, mas recuperável.                                                  |
+|  13   | **R11** — DoS no fluxo de autorização                | Médio   |     2×2 = 4     | Interrompe aprovação, recuperável e sem perda de dado.                                                          |
+|  14   | **R16** — DoS no EventBus WebSocket                  | Médio   |     3×2 = 6     | Degrada notificações, mas o núcleo segue operando.                                                              |
+|  15   | **R04** — Acesso direto aos anexos no storage        | Médio   |     2×3 = 6     | Exposição condicionada à má configuração, com escopo limitado.                                                  |
+|  16   | **R15** — Envio de e-mails maliciosos                | Médio   |     2×3 = 6     | Impacto fora do sistema, mitigável por controle de remetente e do provedor.                                     |
+|  17   | **R17** — Subscrição indevida no ws vaza faturamento | Médio   |     2×2 = 4     | Escopo e impacto limitados, com correção pontual de autorização de canal.                                       |
