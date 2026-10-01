@@ -148,9 +148,23 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 
 ---
 
-## 5. Priorização dos riscos
 
-### 5.1 Critérios usados para ordenar
+## 5. Matriz de riscos (probabilidade × impacto)
+
+Impacto cresce para a direita. Probabilidade cresce para cima.
+Nível: 12 Crítico, 8–9 Alto, 4–6 Médio.
+
+| Probabilidade \ Impacto | 1 — Insignificante | 2 — Baixo | 3 — Moderado | 4 — Grave |
+| --- | --- | --- | --- | --- |
+| **3 — Provável** | — | **Médio (6)** R16 | **Alto (9)** R03 | **Crítico (12)** R01; R02 |
+| **2 — Possível** | — | **Médio (4)** R11; R17 | **Médio (6)** R04; R13; R15 | **Alto (8)** R05; R06; R07; R08; R09; R12; R14 |
+| **1 — Raro** | — | — | — | **Médio (4)** R10 |
+
+---
+
+## 6. Priorização dos riscos
+
+### 6.1 Critérios usados para ordenar
 
 Além da pontuação (Probabilidade × Impacto), a ordem considera:
 
@@ -165,7 +179,7 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 5. **Facilidade de detecção e recuperação** — quanto mais silenciosa e mais
    difícil de reverter a consequência, maior a urgência.
 
-### 5.2 Tabela de priorização
+### 6.2 Tabela de priorização
 
 | Ordem | Risco                                                | Nível   | Pontuação (P×I) | Por que é tratado nesta posição                                                                                 |
 | :---: | ---------------------------------------------------- | ------- | :-------------: | --------------------------------------------------------------------------------------------------------------- |
@@ -186,3 +200,4 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 |  15   | **R04** — Acesso direto aos anexos no storage        | Médio   |     2×3 = 6     | Exposição condicionada à má configuração, com escopo limitado.                                                  |
 |  16   | **R15** — Envio de e-mails maliciosos                | Médio   |     2×3 = 6     | Impacto fora do sistema, mitigável por controle de remetente e do provedor.                                     |
 |  17   | **R17** — Subscrição indevida no ws vaza faturamento | Médio   |     2×2 = 4     | Escopo e impacto limitados, com correção pontual de autorização de canal.                                       |
+
