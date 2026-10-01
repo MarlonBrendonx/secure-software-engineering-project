@@ -3,7 +3,7 @@
 Esta etapa dá continuidade à
 [Etapa 1 — Modelagem de ameaças e casos de abuso](/docs/etapa-1/etapa-1-casos-de-abuso.md),
 transformando as ameaças STRIDE (T01–T23) e os casos de abuso (CA01–CA13) em
-**riscos** avaliáveis, priorizáveis e tratáveis. O sistema, os ativos (A1–A15),
+**riscos** avaliáveis, priorizáveis e tratáveis. O sistema, os ativos (A1–A14),
 os usuários e os componentes analisados são os mesmos já descritos na Etapa 1.
 
 Nesta etapa não se implementam controles, o objetivo é produzir um plano de

@@ -28,6 +28,6 @@
 | T18 | Spoofing               | A10      | Código não autorizado impersonificando chamadas válidas  | [Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
 | T19 | Elevation of Privilege | A11      | Acesso não autorizado aos anexos extra sistema | [Vazamento](impacto-ameacas/vazamento.md) |
 | T20 | Denial of Service      | A12      | Ataque a infraestrutura, deixando o sistema inoperante | [Impedimento](impacto-ameacas/impedimentos.md) |
-| T21 | Spoofing               | A13, A14 | Envio de e-mails impersonificando sender válido | [Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
-| T22 | Information Disclosure | A15      | Vazamento de informações sobre faturamento | [Vazamento](impacto-ameacas/vazamento.md) |
-| T23 | Denial of Service      | A15      | Sobrecarga no EventBus impedindo operações válidas | [Impedimento](impacto-ameacas/impedimentos.md) | 
+| T21 | Spoofing               | A13      | Envio de e-mails impersonificando sender válido | [Sistema não autorizado](impacto-ameacas/sistema-nao-autorizado.md) |
+| T22 | Information Disclosure | A14      | Vazamento de informações sobre faturamento | [Vazamento](impacto-ameacas/vazamento.md) |
+| T23 | Denial of Service      | A14      | Sobrecarga no EventBus impedindo operações válidas | [Impedimento](impacto-ameacas/impedimentos.md) | 

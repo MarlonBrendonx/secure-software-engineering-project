@@ -79,8 +79,7 @@ Legenda de criticidade: 🔴 alta · 🟡 média.
 | A11           | Credenciais/URLs de storage                                | Chave                |  🔴   | Acesso direto aos anexos fora do controle da aplicação.                        |
 | A12           | PostgreSQL                                                 | Infra                |  🔴   | Dados dos lançamentos, serviços e roles                                        |
 | A13           | `EMAIL_SERVICE_API_KEY`                                    | Chave                |  🔴   | Permite enviar e-mail em nome da empresa, spoofing de cobrança ao cliente.     |
-| A14           | `EMAIL_SERVICE_API_KEY`                                    | Chave                |  🔴   | Permite enviar e-mail em nome da empresa, spoofing de cobrança ao cliente.     |
-| A15           | EventBus WebSocket, validação canal `billing:{AAAA-MM}`    | Código / Infra       |  🟡   | inscrição indevida vaza o estado de faturamento do período.                    |
+| A14           | EventBus WebSocket, validação canal `billing:{AAAA-MM}`    | Código / Infra       |  🟡   | inscrição indevida vaza o estado de faturamento do período.                    |
 
 ---
 
