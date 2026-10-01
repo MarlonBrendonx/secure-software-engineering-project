@@ -224,13 +224,14 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 ## 5. Matriz de riscos (probabilidade × impacto)
 
 Impacto cresce para a direita. Probabilidade cresce para cima.
-Nível: 12 Crítico, 8–9 Alto, 4–6 Médio.
+Nível: 1 a 3 Baixo, 4 a 7 Médio, 8 a 11 Alto, 12 a 16 Crítico.
 
-| Probabilidade \ Impacto | 1 — Insignificante | 2 — Baixo | 3 — Moderado | 4 — Grave |
+| Probabilidade \ Impacto | 1 — Baixo | 2 — Moderado | 3 — Alto | 4 — Muito alto |
 | --- | --- | --- | --- | --- |
-| **3 — Provável** | — | **Médio (6)** R16 | **Alto (9)** R03 | **Crítico (12)** R01; R02; R18 |
-| **2 — Possível** | — | **Médio (4)** R11; R17 | **Médio (6)** R04; R13; R15; R19; R22 | **Alto (8)** R05; R06; R07; R08; R09; R12; R14; R20; R21; R23 |
-| **1 — Raro** | — | — | — | **Médio (4)** R10 |
+| **4 — Alta** | **Médio (4)** — | **Alto (8)** — | **Crítico (12)** — | **Crítico (16)** — |
+| **3 — Média-alta** | **Baixo (3)** — | **Médio (6)** R16 | **Alto (9)** R03 | **Crítico (12)** R01; R02; R18 |
+| **2 — Média-baixa** | **Baixo (2)** — | **Médio (4)** R11; R17 | **Médio (6)** R04; R13; R15; R19; R22 | **Alto (8)** R05; R06; R07; R08; R09; R12; R14; R20; R21; R23 |
+| **1 — Baixa** | **Baixo (1)** — | **Baixo (2)** — | **Baixo (3)** — | **Médio (4)** R10 |
 
 ---
 
@@ -263,7 +264,7 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 |   6   | **R07** — Falsificar token                           | Alto    |     2×4 = 8     | 3                          | Consequência direta de R06, concede acesso total sob identidade forjada.                                        |
 |   7   | **R03** — Acesso não autorizado a dados restritos    | Alto    |     3×3 = 9     | 4                          | Maior pontuação depois dos críticos e base ampla para R05 e para fraude, com muitas rotas expostas.             |
 |   8   | **R09** — Alteração de regras de serviço             | Alto    |     2×4 = 8     | 1, 5                       | Corrompe o cálculo em escala de forma silenciosa, difícil de detectar depois.                                   |
-|   9   | **R10** — Adulteração do motor de cálculo            | Médio   |     1×4 = 4     | 1, 5                       | Pontuação baixa (probabilidade rara), mas gravidade e invisibilidade elevam a prioridade acima de vários Altos. |
+|   9   | **R10** — Adulteração do motor de cálculo            | Médio   |     1×4 = 4     | 1, 5                       | Pontuação baixa (probabilidade baixa), mas gravidade e invisibilidade elevam a prioridade acima de vários Altos. |
 |  10   | **R08** — Remoção/adulteração da auditoria           | Alto    |     2×4 = 8     | 4, 5                       | Protege a auditoria para responsabilização R01, R02 e R09. Sem ela, os demais abusos ficam irrastreáveis.       |
 |  11   | **R05** — Extração de dados em volume                | Alto    |     2×4 = 8     | 1, 3                       | Maior consequência jurídica/reputacional. Depende de R03/R02, já tratados.                                      |
 |  12   | **R23** — Adulteração ou injeção de fórmula na carga ERP | Alto |     2×4 = 8     | 1, 2, 5                    | O ERP confia no arquivo de carga, e a adulteração vira lançamento contábil sem passar pelo cálculo do servidor. |
