@@ -139,7 +139,9 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
   muitas conexões ou publicar em volume é fácil.
 - **Impacto (2):** notificações em tempo real atrasam ou se perdem; o núcleo de
   faturamento continua operando. Médio é adequado.
-- **Contexto:** o abuso não corrompe dados internos, mas usa um canal legítimo para atacar clientes e funcionários. Está alinhado com os riscos R11/R14
+- **Contexto:** risco de disponibilidade restrito ao canal de notificações. O
+  faturamento continua funcionando e o usuário pode recarregar a tela para ver o estado
+  atual. Alinha-se a R11 e R14 como risco de disponibilidade, mas com menor alcance.
 
 ### R17 — Subscrição indevida no ws vaza faturamento (Médio, 2×2)
 
