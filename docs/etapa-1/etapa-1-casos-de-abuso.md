@@ -49,9 +49,12 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   faturado a um cliente em benefício próprio ou de terceiros.
 - **Condições necessárias:** o ator tem sessão válida com permissão,
   o controle de acesso não impedem a edição do
-  lançamento no estado em que ele se encontra.
+  lançamento no estado em que ele se encontra. O lançamento está em um estado
+  que admite edição (por exemplo, antes do envio para aprovação ou após
+  reprovação), ou o sistema permite editá-lo mesmo depois de aprovado.
 - **Sequência de ações:**
-  1. O ator autentica-se no sistema com uma conta com permissão de gestor ou admin.
+  1. O ator autentica-se no sistema com uma conta com permissão de escrita em
+     lançamentos (`analista` ou `admin`).
   2. O ator localiza o lançamento alvo na listagem por período.
   3. O ator altera o valor, o período ou a regra do lançamento, ou o remove.
   4. O valor adulterado segue no fluxo e chega ao ERP como se fosse legítimo.
