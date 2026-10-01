@@ -46,7 +46,7 @@ Usuários corporativos internos, autenticados por SSO corporativo
 
 Os valores financeiros e sua trilha de aprovação, os CNPJs de clientes e fornecedores, os
 anexos, as credenciais/segredos de assinatura de token e de callback, e o próprio motor de
-cálculo — detalhados na seção 8.3.
+cálculo — detalhados no [Inventário de ativos](#inventário-de-ativos).
 
 ---
 
