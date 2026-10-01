@@ -81,8 +81,8 @@ Legenda de criticidade: 🔴 alta · 🟡 média.
 | A4            | Anexos dos lançamentos                                     | Dado                 |  🟡   | Documentos de suporte ao faturamento, podem conter dados de negócio sensíveis. |
 | A5            | CNPJ de clientes e fornecedores                            | Dado de negócio (pode conter dado pessoal em MEI/EI) |  🟡   | Dado identificável de pessoa jurídica, exposição indevida e vazamento.         |
 | A6            | E-mails corporativos de aprovadores                        | Dado pessoal         |  🟡   | Alvo de phishing, usado no fluxo de aprovação por e-mail.                      |
-| A7            | Motor de cálculo de valores                                | Código               |  🔴   | Core de todo calculo, bug ou adulteração fatura errado em escala.              |
-| A8            | Máquina de estados com guards de autorização               | Código               |  🔴   | Único ponto entre o token e a mutação, falha pode burla o fluxo de aprovação.  |
+| A7            | Motor de cálculo de valores                                | Código               |  🔴   | Núcleo de todo cálculo, bug ou adulteração fatura errado em escala.              |
+| A8            | Máquina de estados com guards de autorização               | Código               |  🔴   | Único ponto entre o token e a mutação, falha pode burlar o fluxo de aprovação.  |
 | A9            | `JWT_SECRET`                                               | Segredo              |  🔴   | Vazamento permite forjar token com roles de `admin`.                           |
 | A10           | `CELERY_CALLBACK_SECRET`                                   | Chave                |  🔴   | Única barreira dos callbacks internos.                                         |
 | A11           | Credenciais/URLs de storage                                | Chave                |  🔴   | Acesso direto aos anexos fora do controle da aplicação.                        |

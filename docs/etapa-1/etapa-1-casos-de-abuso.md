@@ -27,10 +27,10 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | ID  | Título | Ator e objetivo resumidos | Ameaças |
 | --- | ------ | ------------------------- | ------- |
 | CA01 | Alteração ou remoção de lançamentos | Ator altera ou remove lançamentos financeiros prejudicando as operações de faturamento no sistema | T01 |
-| CA02 | Captura de usuário privilegiado via SSO | Ator não autorizado obtêm o controle de usuário com privilégios via SSO | T02 |
+| CA02 | Captura de usuário privilegiado via SSO | Ator não autorizado obtém o controle de usuário com privilégios via SSO | T02 |
 | CA03 | Acesso não autorizado a dados restritos | Ator com usuário capturado ou acesso direto, acessa dados que não deveria no sistema como lançamentos, anexos, etc  | T03, T07, T09, T11, T19 |
 | CA04 | Vazamento de informações críticas | Ator com usuário capturado ou acesso direto vaza informações críticas do sistema | T04, T08, T10, T12, T15, T17, T22  |
-| CA05 | Remoção da timeline de auditoria | Ator remove timeline impedindo a audição do sistema | T05 |
+| CA05 | Remoção da timeline de auditoria | Ator remove timeline impedindo a auditoria do sistema | T05 |
 | CA06 | Alteração de regras de serviço | Ator altera regras de serviço prejudicando operações do sistema | T06 |
 | CA07 | Adulteração do motor de cálculo | Ator altera os módulos do código responsáveis pelos cálculos de valores | T13 | 
 | CA08 | Sobrecarga no fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14a |
@@ -53,7 +53,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 - **Objetivo:** alterar ou remover lançamentos financeiros para mudar o valor
   faturado a um cliente em benefício próprio ou de terceiros.
 - **Condições necessárias:** o ator tem sessão válida com permissão,
-  o controle de acesso não impedem a edição do
+  o controle de acesso não impede a edição do
   lançamento no estado em que ele se encontra. O lançamento está em um estado
   que admite edição (por exemplo, antes do envio para aprovação ou após
   reprovação), ou o sistema permite editá-lo mesmo depois de aprovado.
@@ -121,7 +121,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   3. O ator transmite os dados para fora do ambiente corporativo.
 - **Impacto esperado:** perda de propriedade intelectual e de dados de
   terceiros, exposição de pessoas chave a phishing e recrutamento, risco de
-  processos judiciais por vazamento e dano reputacional a empresa.
+  processos judiciais por vazamento e dano reputacional à empresa.
 - **Categorias STRIDE:** Information Disclosure (T04, T08, T10, T12, T15, T17,
   T22).
 
@@ -186,7 +186,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 - **Objetivo:** sobrecarregar a máquina de estados e seus guards de autorização
   para impedir o fluxo de aprovação de lançamentos.
 - **Condições necessárias:** o ator consegue enviar requisições em volume às
-  transições de status, sobrecarregando o endpoint e impossibilitante as aprovações
+  transições de status, sobrecarregando o endpoint e impossibilitando as aprovações
 - **Sequência de ações:**
   1. O ator dispara um volume alto de requisições de transição de status.
   2. Os guards de autorização e a máquina de estados ficam saturados.
@@ -214,7 +214,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 ### CA10 — Requisições internas forjadas com chave de callback vazada
 
 - **Ator:** código ou serviço malicioso de posse do `CELERY_CALLBACK_SECRET` que é
-  responsável pro retornos de processamentos asíncronos
+  responsável pelos retornos de processamentos assíncronos
 - **Objetivo:** forjar chamadas de callback internas para injetar operações
   falsas no sistema.
 - **Condições necessárias:** o `CELERY_CALLBACK_SECRET` foi exposto, a chave é a
@@ -259,7 +259,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   3. As mensagens chegam às vítimas como se fossem da empresa.
   4. As vítimas confiam no remetente e agem sobre o conteúdo malicioso.
 - **Impacto esperado:** phishing e fraude de cobrança contra clientes,
-  comprometimento de aprovadores e dano reputacional a empresa
+  comprometimento de aprovadores e dano reputacional à empresa
 - **Categorias STRIDE:** Spoofing (T21)
 
 ### CA13 — Sobrecarga do EventBus WebSocket
