@@ -56,9 +56,18 @@ cálculo — detalhados na seção 8.3.
 
 | Ação / Transição                    | `admin` | `gestor` | `analista` | `none` |
 | ----------------------------------- | :-----: | :------: | :--------: | :----: |
+| **Listar/consultar lançamentos**    |    ?    |    ?     |     ?      |   ❌   |
+| **Criar / editar lançamento**       |   ✅    |    ?     |     ✅     |   ❌   |
+| **Excluir / replicar lançamento**   |    ?    |    ?     |     ?      |   ❌   |
 | **Enviar para aprovação da gestão** |   ✅    |    ❌    |     ✅     |   ❌   |
 | **Aprovar**                         |   ✅    |    ✅    |     ❌     |   ❌   |
 | **Reprovar**                        |   ✅    |    ✅    |     ❌     |   ❌   |
+| **CRUD de regras de serviço**       |    ?    |    ?     |     ?      |   ❌   |
+| **Upload / download de anexos**     |    ?    |    ?     |     ?      |   ❌   |
+| **Exportar carga ERP**              |    ?    |    ?     |     ?      |   ❌   |
+| **Solicitar acesso**                |    —    |    —     |     —      |   ✅   |
+
+Legenda: ✅ permitido · ❌ negado · ? a confirmar nos guards `require_role` / `require_any_role` das rotas · — não se aplica.
 
 ### Inventário de ativos
 
