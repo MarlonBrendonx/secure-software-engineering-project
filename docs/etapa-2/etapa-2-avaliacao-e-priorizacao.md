@@ -279,3 +279,15 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 |  22   | **R15** — Envio de e-mails maliciosos                | Médio   |     2×3 = 6     | 1                          | Impacto fora do sistema, mitigável por controle de remetente e do provedor.                                     |
 |  23   | **R17** — Subscrição indevida no ws vaza faturamento | Médio   |     2×2 = 4     | 2                          | Escopo e impacto limitados, com correção pontual de autorização de canal.                                       |
 
+### 6.3 Ondas de tratamento
+
+Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolvem com o mesmo cofre). Por isso, os riscos são agrupados em ondas de tratamento, evitando tratar duas vezes o mesmo problema.
+
+| Onda | Tema | Riscos | Controle comum |
+| ---- | ---- | ------ | -------------- |
+| 1 | Identidade e segredos | R02, R06, R07, R12, R13 | MFA, cofre com rotação, validação de token, HMAC nos callbacks |
+| 2 | Integridade do valor faturado | R01, R09, R10, R08, R18 | Segregação de funções, versionamento de regras, revisão obrigatória, auditoria imutável |
+| 3 | Confidencialidade | R03, R05, R04, R17 | Testes de autorização, limites de exportação, URLs de curta duração, autorização por canal |
+| 4 | Disponibilidade | R14, R11, R16 | Isolamento do banco, limites de conexão, rate limit por usuário |
+| 5 | Canal externo | R15 | Destinatário amarrado ao cadastro, SPF/DKIM/DMARC |
+
