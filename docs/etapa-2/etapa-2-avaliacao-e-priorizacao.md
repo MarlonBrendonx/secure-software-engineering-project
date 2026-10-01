@@ -161,6 +161,63 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
   Porém, não há alteração de dados
 - **Contexto:** o risco está associado a exposição não autorizada de informações de faturamento, restrita ao período e ao escopo da inscrição no ws. Embora possa comprometer a confidencialidade dos dados, a ausência de permissões de escrita limita os efeitos do incidente, sem possibilidade de alteração de registros ou interferência no processamento do faturamento.
 
+### R18 — Autoaprovação sem segregação de funções (Crítico, 3×4)
+
+- **Origem:** T24 / CA14.
+- **Probabilidade (3):** a regra que impediria o autor do envio de aprovar o
+  próprio lançamento não existe, basta uma conta `admin`.
+- **Impacto (4):** fraude com trilha aparentemente legítima, o valor segue para o
+  ERP como se tivesse passado por um fluxo completo de aprovação.
+- **Contexto:** não depende de nenhuma falha técnica, apenas de uma regra de
+  negócio ausente (princípio dos quatro olhos).
+
+### R19 — Injeção de SQL no Oracle (Médio, 2×3)
+
+- **Origem:** T25 / CA15.
+- **Probabilidade (2):** existe a skill `sec-oracle`, mas SQL cru exige
+  disciplina contínua no uso de bindvars.
+- **Impacto (3):** o usuário Oracle é somente leitura, a injeção expõe dados
+  legados fora do escopo do usuário, sem alteração.
+- **Contexto:** `queries/` é o único lugar com SQL concatenado à mão, o que
+  concentra a superfície de injeção.
+
+### R20 — Configuração insegura em produção (`local` / `DEBUG`) (Alto, 2×4)
+
+- **Origem:** T28.
+- **Probabilidade (2):** basta uma variável errada no deploy.
+- **Impacto (4):** reabre autenticação local com senha e expõe o mapa completo da
+  API em `/docs`.
+- **Contexto:** ambos os comportamentos são trocados por variável de ambiente,
+  sem barreira adicional.
+
+### R21 — Isolamento insuficiente entre ambientes (Alto, 2×4)
+
+- **Origem:** T32 / CA18.
+- **Probabilidade (2):** a instância PostgreSQL é única, o isolamento depende da
+  separação de usuários por schema.
+- **Impacto (4):** credencial de QA pode alcançar o schema de produção, e testes
+  de carga ou migrations de QA disputam recursos com produção.
+- **Contexto:** relaciona-se a R14, pois o ambiente de QA também pode derrubar o
+  banco de produção.
+
+### R22 — Anexo malicioso contra aprovadores (Médio, 2×3)
+
+- **Origem:** T29 / CA16.
+- **Probabilidade (2):** a validação de MIME/extensão não detecta conteúdo
+  malicioso.
+- **Impacto (3):** pode comprometer a estação de quem tem perfil de aprovação.
+- **Contexto:** o alvo são usuários privilegiados, o que pode abrir caminho para
+  R02.
+
+### R23 — Adulteração ou injeção de fórmula na carga ERP (Alto, 2×4)
+
+- **Origem:** T30, T31.
+- **Probabilidade (2):** campos textuais exportados sem tratamento e arquivo
+  armazenado sem hash ou assinatura.
+- **Impacto (4):** o ERP confia no arquivo, e um erro vira lançamento contábil.
+- **Contexto:** a adulteração ocorre depois do cálculo no servidor, fora da
+  autoridade do sistema sobre o valor.
+
 ---
 
 
@@ -171,8 +228,8 @@ Nível: 12 Crítico, 8–9 Alto, 4–6 Médio.
 
 | Probabilidade \ Impacto | 1 — Insignificante | 2 — Baixo | 3 — Moderado | 4 — Grave |
 | --- | --- | --- | --- | --- |
-| **3 — Provável** | — | **Médio (6)** R16 | **Alto (9)** R03 | **Crítico (12)** R01; R02 |
-| **2 — Possível** | — | **Médio (4)** R11; R17 | **Médio (6)** R04; R13; R15 | **Alto (8)** R05; R06; R07; R08; R09; R12; R14 |
+| **3 — Provável** | — | **Médio (6)** R16 | **Alto (9)** R03 | **Crítico (12)** R01; R02; R18 |
+| **2 — Possível** | — | **Médio (4)** R11; R17 | **Médio (6)** R04; R13; R15; R19; R22 | **Alto (8)** R05; R06; R07; R08; R09; R12; R14; R20; R21; R23 |
 | **1 — Raro** | — | — | — | **Médio (4)** R10 |
 
 ---
