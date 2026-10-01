@@ -4,6 +4,8 @@
 
 Para cada risco, foram apresentadas as justificativas atribuídas à probabilidade e ao impacto, identificando os ativos, processos ou componentes afetados e explicando como esses fatores fundamentam o nível de risco no contexto analisado.
 
+Os riscos são avaliados como **risco atual**, ou seja, considerando os controles que já existem no sistema. Assim, o risco residual mostra apenas o efeito dos controles novos propostos no plano de tratamento. Os controles já existentes são indicados em cada risco.
+
 ### R01 — Alteração/remoção de lançamentos (Crítico, 3×4)
 
 - **Probabilidade (3):** o perfil `analista` já possui escrita sobre lançamentos,
@@ -31,6 +33,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Impacto (3):** exposição de leitura de lançamentos, anexos, CNPJ e e-mails.
   Prejuízo relevante à privacidade e ao negócio, mas sem alteração direta de valor.
 - **Contexto:** é a base para R05, fraude e vazamentos.
+- **Controles existentes:** guard `require_role` em todas as rotas; skill `sec-route`.
 
 ### R04 — Acesso direto aos anexos no storage (Médio, 2×3)
 
@@ -39,6 +42,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Impacto (3):** anexos podem conter comprovantes e dados sensíveis de negócio,
   o acesso ocorre fora do controle e do log da aplicação.
 - **Contexto:** pode comprometer a confidencialidade de documentos e dados sensíveis de negócio, sem os controles de autorização e rastreabilidade da aplicação.
+- **Controles existentes:** URLs assinadas temporárias.
 
 ### R05 — Extração de dados em volume (Alto, 2×4)
 
@@ -53,6 +57,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Probabilidade (2):** com um bom gerenciamento de chaves, como em keyvault, é quase improvável, mas a exposição por log, repositório, imagem ou variável de ambiente é uma condição específica que pode ocorrer.
 - **Impacto (4):** compromete o ativo A9, permite forjar tokens de qualquer perfil, como identificado no risco R07, quebrando a autenticação de todo o sistema.
 - **Contexto:** com prioridade elevada por ser pré-condição de R07.
+- **Controles existentes:** segredos no cofre corporativo; Gitleaks local e no CI.
 
 ### R07 — Falsificar token (Alto, 2×4)
 
@@ -70,6 +75,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Impacto (4):** perda da capacidade de auditoria e de responsabilização,
   viabiliza ocultar os rastros no R01, R02 e R09.
 - **Contexto:** a auditoria é o controle que sustenta a responsabilização de todos os demais riscos, sem ela, R01, R02 e R09 tornam-se mais difíceis de detectar. Não é o primeiro elo de um ataque, mas é o que garante que os outros deixem rastro
+- **Controles existentes:** `AuditMiddleware` grava toda requisição mutante.
 
 ### R09 — Alteração de regras de serviço (Alto, 2×4)
 
@@ -87,6 +93,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Impacto (4):** fatura errado em escala a partir do core, com rastreio
   difícil da possível causa.
 - **Contexto:** ataca o núcleo do cálculo, que é usado na aprovação. A probabilidade é baixa, mas a gravidade somada à dificuldade de detecção coloca o R10 à frente de vários riscos
+- **Controles existentes:** Mypy strict, ~2.900 testes, PR-Agent, Trivy, cooldown de dependências.
 
 ### R11 — DoS no fluxo de autorização (Médio, 2×2)
 
@@ -96,6 +103,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
   sem perda de dados
 - **Contexto:** risco de disponibilidade, recuperável e sem
   dano ao dado. Tem mais importância se combinado com R14, tendo indisponibilidade de infra
+- **Controles existentes:** rate limit de 10/min em operações em lote e 30/min na criação.
 
 ### R12 — Vazamento do `CELERY_CALLBACK_SECRET` (Alto, 2×4)
 
@@ -104,6 +112,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
   habilita R13.
 - **Contexto:** Mesma classe de R06 (chave
   em cofre/rotação/varredura) e pré-condição de R13.
+- **Controles existentes:** segredos no cofre corporativo; Gitleaks local e no CI.
 
 ### R13 — Falsificação de callbacks internos (Médio, 2×3)
 
@@ -132,6 +141,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Impacto (3):** phishing/fraude de cobrança contra clientes e aprovadores e
   dano reputacional, o impacto é mais abrangente fora do sistema.
 - **Contexto:** o abuso não corrompe dados internos, mas usa um canal legítimo (email) para atacar clientes e funcionários. O dano é externo e relacionado a reputação, difícil de reverter.
+- **Controles existentes:** segredos no cofre corporativo; Gitleaks local e no CI.
 
 ### R16 — DoS no EventBus WebSocket (Médio, 3×2)
 
@@ -142,6 +152,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Contexto:** risco de disponibilidade restrito ao canal de notificações. O
   faturamento continua funcionando e o usuário pode recarregar a tela para ver o estado
   atual. Alinha-se a R11 e R14 como risco de disponibilidade, mas com menor alcance.
+- **Controles existentes:** rate limit global de 60/min por IP (avaliar se cobre o `/ws`).
 
 ### R17 — Subscrição indevida no ws vaza faturamento (Médio, 2×2)
 
