@@ -39,6 +39,11 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | CA11 | Indisponibilidade do banco de dados | Ator consegue sobrecarregar o banco de dados, deixando o sistema inteiro inoperante | T20 |
 | CA12 | Envio de e-mails maliciosos em nome da empresa | Ator consegue enviar e-mails maliciosos em nome da empresa | T21 |
 | CA13 | Sobrecarga do EventBus WebSocket | Ator consegue sobrecarregar o EventBus impedindo o processamento de operações válidas | T23 |
+| CA14 | Autoaprovação de lançamento (violação de segregação de funções) | Usuário `admin` cria, envia e aprova o próprio lançamento com valor favorável, sem participação de outra pessoa | T24 |
+| CA15 | Injeção de SQL no legado Oracle | Usuário autenticado manipula filtros para extrair dados fora do seu escopo | T25 |
+| CA16 | Anexo malicioso contra aprovador | Analista anexa arquivo malicioso para comprometer a estação de quem tem perfil de aprovação | T29 |
+| CA17 | Desvio de e-mail de aprovação | Usuário altera destinatário na central de aprovações e envia valores de um cliente a terceiro | T36 |
+| CA18 | Movimento lateral entre ambientes | Ator com credencial de QA acessa ou derruba o schema de produção na instância compartilhada | T32 |
 
 
 ### CA01 — Alteração ou remoção de lançamentos
@@ -268,6 +273,23 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   3. As notificações legítimas de faturamento sofrem atrasos ou deixam de ser entregues aos usuários.
 - **Impacto esperado:** As notificações de faturamento podem deixar de chegar em tempo real, prejudicando o acompanhamento das operações e a experiência dos usuários. Dependendo de como os eventos são armazenados e tratados, também pode haver perda de notificações e inconsistências no processamento do faturamento.
 - **Categorias STRIDE:** Denial of Service (T23).
+
+### CA14 — Autoaprovação de lançamento (violação de segregação de funções)
+
+- **Ator:** usuário `admin` legítimo agindo de má-fé, ou atacante com conta
+  `admin` capturada.
+- **Objetivo:** criar e aprovar um lançamento com valor favorável sem
+  participação de outra pessoa.
+- **Condições necessárias:** o perfil `admin` executa todas as transições e o
+  sistema não impede que o autor do envio seja o aprovador.
+- **Sequência de ações:**
+  1. O ator cria ou edita um lançamento.
+  2. O ator envia o lançamento para aprovação.
+  3. O ator aprova o mesmo lançamento.
+  4. O valor segue para o ERP com aparência de fluxo completo.
+- **Impacto esperado:** fraude financeira com trilha aparentemente legítima, o
+  fluxo de aprovação perde o propósito.
+- **Categorias STRIDE:** Tampering, Elevation of Privilege (T24).
 
 ## Considerações finais
 
