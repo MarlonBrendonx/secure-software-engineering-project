@@ -33,7 +33,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | CA05 | Remoção da timeline de auditoria | Ator remove timeline impedindo a audição do sistema | T05 |
 | CA06 | Alteração de regras de serviço | Ator altera regras de serviço prejudicando operações do sistema | T06 |
 | CA07 | Adulteração do motor de cálculo | Ator altera os módulos do código responsáveis pelos cálculos de valores | T13 | 
-| CA08 | Sobrecarga no fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14 |
+| CA08 | Sobrecarga no fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14a |
 | CA09 | Acesso não autorizado por meio de token de autenticação vazado | Ator com segredo vazado consegue obter acesso não autorizado ao sistema | T16 |
 | CA10 | Requisições internas forjadas com chave de callback vazada | Código malicioso com segredo do API consegue forjar requisições falsas no sistema | T18 |
 | CA11 | Indisponibilidade do banco de dados | Ator consegue sobrecarregar o banco de dados, deixando o sistema inteiro inoperante | T20 |
@@ -97,7 +97,8 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   4. O ator lê ou copia o dado restrito.
 - **Impacto esperado:** exposição de valores financeiros, dados de negócio,
   CNPJs e informações pessoais, base para vazamento (CA04) e para fraude.
-- **Categorias STRIDE:** Elevation of Privilege (T03, T07, T09, T11, T19).
+- **Categorias STRIDE:** Information Disclosure (T03, T07, T09, T11) e
+  Elevation of Privilege (T19).
 
 ### CA04 — Vazamento de informações críticas
 
@@ -187,7 +188,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   3. Requisições legítimas de aprovação deixam de ser processadas.
 - **Impacto esperado:** paralisação do fluxo de aprovação, atraso no
   faturamento e risco de operações incompletas sob sobrecarga.
-- **Categorias STRIDE:** Denial of Service (T14).
+- **Categorias STRIDE:** Denial of Service (T14a).
 
 ### CA09 — Acesso não autorizado por meio de token de autenticação vazado
 
