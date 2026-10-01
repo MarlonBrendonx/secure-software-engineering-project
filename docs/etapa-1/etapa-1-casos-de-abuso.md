@@ -44,6 +44,12 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | CA16 | Anexo malicioso contra aprovador | Analista anexa arquivo malicioso para comprometer a estação de quem tem perfil de aprovação | T29 |
 | CA17 | Desvio de e-mail de aprovação | Usuário altera destinatário na central de aprovações e envia valores de um cliente a terceiro | T36 |
 | CA18 | Movimento lateral entre ambientes | Ator com credencial de QA acessa ou derruba o schema de produção na instância compartilhada | T32 |
+| CA19 | Injeção de fórmula no arquivo de carga ERP | Usuário insere fórmula em campo textual para alterar o comportamento da planilha exportada | T30 |
+| CA20 | Adulteração da carga antes da importação no ERP | Ator com acesso de escrita ao storage modifica o arquivo gerado para faturar valores indevidos | T31 |
+| CA21 | Reuso de refresh token roubado | Ator usa refresh token de outra pessoa para renovar o acesso sob a identidade da vítima | T33 |
+| CA22 | Exploração de falha na gravação da auditoria | Ator realiza alterações e explora uma interrupção na gravação em background para deixar ações sem registro | T34 |
+| CA23 | Repúdio de aprovação de lançamento | Aprovador nega uma aprovação irregular e explora a insuficiência das evidências de autoria | T35 |
+| CA24 | Comprometimento do cálculo por dependência maliciosa | Ator introduz dependência maliciosa no processo de entrega para adulterar valores calculados | T37 |
 
 
 ### CA01 — Alteração ou remoção de lançamentos
@@ -290,6 +296,210 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 - **Impacto esperado:** fraude financeira com trilha aparentemente legítima, o
   fluxo de aprovação perde o propósito.
 - **Categorias STRIDE:** Tampering, Elevation of Privilege (T24).
+
+### CA15 — Injeção de SQL no legado Oracle
+
+- **Ator:** usuário autenticado mal intencionado, ou atacante com conta
+  capturada e acesso às consultas que usam o legado Oracle.
+- **Objetivo:** manipular a consulta para obter dados de clientes e fornecedores
+  fora do escopo permitido ao usuário.
+- **Condições necessárias:** um filtro fornecido pelo usuário é incorporado a
+  uma consulta SQL sem parametrização adequada. O usuário Oracle, mesmo sendo
+  somente leitura, pode consultar os dados visados pelo ator.
+- **Sequência de ações:**
+  1. O ator acessa uma funcionalidade que consulta o legado Oracle.
+  2. O ator manipula um filtro para alterar a estrutura da consulta executada.
+  3. A consulta modificada retorna dados além dos previstos pela funcionalidade.
+  4. O ator copia os resultados obtidos fora do seu escopo.
+- **Impacto esperado:** exposição de dados de clientes e fornecedores e perda
+  de confiança nos resultados das consultas. A permissão de somente leitura
+  limita alterações no Oracle, mas não impede a extração indevida de dados.
+- **Categorias STRIDE:** Tampering e Information Disclosure (T25).
+
+### CA16 — Anexo malicioso contra aprovador
+
+- **Ator:** analista mal intencionado, ou atacante com conta capturada que
+  permita enviar anexos.
+- **Objetivo:** comprometer a estação de um aprovador por meio de um arquivo
+  apresentado como documento de suporte ao faturamento.
+- **Condições necessárias:** o arquivo malicioso passa pela validação de tipo
+  e tamanho, e o aprovador o abre em um aplicativo vulnerável ou permite a
+  execução de conteúdo ativo. A extensão e o MIME type não bastam para
+  identificar o conteúdo malicioso.
+- **Sequência de ações:**
+  1. O ator envia um arquivo malicioso como anexo de um lançamento.
+  2. O ator encaminha o lançamento para aprovação, apresentando o anexo como
+     evidência necessária para a análise.
+  3. O aprovador baixa e abre o arquivo.
+  4. O conteúdo malicioso executa na estação, caso as condições de exploração
+     estejam presentes.
+- **Impacto esperado:** comprometimento da estação do aprovador, possível
+  captura de sessão ou credenciais e uso posterior do perfil para aprovar
+  lançamentos indevidos.
+- **Categorias STRIDE:** Tampering (T29).
+
+### CA17 — Desvio de e-mail de aprovação
+
+- **Ator:** usuário legítimo mal intencionado, ou atacante com conta capturada
+  e acesso à central de aprovações.
+- **Objetivo:** enviar informações financeiras de um cliente a um terceiro
+  usando a funcionalidade legítima de e-mail de aprovação.
+- **Condições necessárias:** o ator pode informar ou alterar o destinatário,
+  e o sistema não valida suficientemente se esse endereço está autorizado a
+  receber os dados do cliente.
+- **Sequência de ações:**
+  1. O ator seleciona um lançamento na central de aprovações.
+  2. O ator informa um endereço de terceiro como destinatário.
+  3. O ator solicita o envio do e-mail pela funcionalidade normal do sistema.
+  4. O terceiro recebe os valores e demais informações incluídas na mensagem.
+- **Impacto esperado:** vazamento de informações de faturamento a destinatário
+  indevido e dano à confiança do cliente. O log de envio pode permitir rastrear
+  a ação, mas não impede a divulgação.
+- **Categorias STRIDE:** Information Disclosure (T36).
+
+### CA18 — Movimento lateral entre ambientes
+
+- **Ator:** usuário interno mal intencionado, ou atacante com credenciais de
+  banco do ambiente de QA.
+- **Objetivo:** usar o acesso a um ambiente menos restrito para ler ou alterar
+  dados de produção, ou comprometer a disponibilidade da instância compartilhada.
+- **Condições necessárias:** QA e produção compartilham a instância PostgreSQL.
+  Para acessar dados de produção, a credencial de QA possui permissões além do
+  seu schema; para causar indisponibilidade, a carga de QA consegue consumir
+  recursos compartilhados sem isolamento suficiente.
+- **Sequência de ações:**
+  1. O ator obtém uma credencial válida do ambiente de QA.
+  2. O ator conecta-se à instância compartilhada.
+  3. O ator acessa o schema de produção, caso tenha permissões indevidas, ou
+     gera carga excessiva a partir de QA.
+  4. Os dados de produção são expostos ou alterados, ou o sistema de produção
+     deixa de responder devido ao consumo de recursos da instância.
+- **Impacto esperado:** vazamento ou corrupção de dados reais e interrupção do
+  faturamento. A separação por schema, sem permissões e isolamento de recursos
+  adequados, não impede esses efeitos entre ambientes.
+- **Categorias STRIDE:** Tampering, Information Disclosure e Denial of Service
+  (T32).
+
+### CA19 — Injeção de fórmula no arquivo de carga ERP
+
+- **Ator:** usuário legítimo mal intencionado com permissão para preencher
+  campos textuais incluídos na exportação.
+- **Objetivo:** fazer um campo textual ser interpretado como fórmula ao abrir
+  a planilha de carga, alterando seu comportamento ou os dados usados no faturamento.
+- **Condições necessárias:** o gerador exporta conteúdo controlado pelo usuário
+  sem garantir seu tratamento como texto, e o aplicativo usado na conferência
+  interpreta esse conteúdo como fórmula.
+- **Sequência de ações:**
+  1. O ator insere conteúdo de fórmula em um campo textual exportável.
+  2. O sistema gera o arquivo de carga ERP com esse conteúdo.
+  3. Um usuário abre o arquivo em um aplicativo de planilhas para conferência.
+  4. O aplicativo interpreta o campo como fórmula, podendo produzir resultados
+     enganosos ou afetar a carga que será encaminhada ao ERP.
+- **Impacto esperado:** perda de integridade da planilha exportada, indução do
+  responsável pela conferência a erro e possível faturamento incorreto se os
+  dados afetados forem utilizados na importação.
+- **Categorias STRIDE:** Tampering (T30).
+
+### CA20 — Adulteração da carga antes da importação no ERP
+
+- **Ator:** agente interno mal intencionado, ou atacante com credencial de
+  storage que permita modificar os arquivos de carga.
+- **Objetivo:** alterar valores ou destinatários do faturamento depois da
+  geração da carga, contornando o cálculo e a aprovação da aplicação.
+- **Condições necessárias:** o ator pode substituir ou modificar o arquivo no
+  Azure Blob / MinIO entre a geração e a importação. Não há verificação de
+  integridade que detecte a alteração antes do uso no ERP.
+- **Sequência de ações:**
+  1. O sistema gera a carga a partir dos lançamentos aprovados e a armazena.
+  2. O ator acessa o arquivo no storage e modifica os dados de faturamento.
+  3. O ator disponibiliza o arquivo adulterado no local esperado para a carga.
+  4. O arquivo é importado no ERP sem que a divergência seja detectada.
+- **Impacto esperado:** cobrança incorreta e divergência entre os lançamentos
+  aprovados na aplicação e os dados recebidos pelo ERP, dificultando a
+  conciliação e a identificação da origem da fraude.
+- **Categorias STRIDE:** Tampering (T31).
+
+### CA21 — Reuso de refresh token roubado
+
+- **Ator:** atacante de posse do refresh token de um usuário legítimo.
+- **Objetivo:** renovar o acesso ao sistema sob a identidade da vítima,
+  prolongando o uso indevido da conta.
+- **Condições necessárias:** o ator obtém um refresh token ainda válido e
+  consegue apresentá-lo em `/v1/auth/refresh`. O reuso permanece possível se
+  não houver rotação, revogação ou detecção suficiente de reutilização; esses
+  controles ainda precisam ser confirmados.
+- **Sequência de ações:**
+  1. O ator obtém o refresh token da vítima.
+  2. O ator apresenta o token ao endpoint de renovação.
+  3. O sistema aceita o token e emite um novo token de acesso.
+  4. O ator usa o acesso renovado para executar ações permitidas ao perfil da
+     vítima e tenta repetir a renovação enquanto o token for aceito.
+- **Impacto esperado:** acesso indevido persistente, exposição ou alteração de
+  dados e ações atribuídas à identidade da vítima.
+- **Categorias STRIDE:** Spoofing (T33).
+
+### CA22 — Exploração de falha na gravação da auditoria
+
+- **Ator:** usuário mal intencionado com permissão para operações mutantes e
+  capacidade de provocar ou explorar uma interrupção na gravação da auditoria.
+- **Objetivo:** realizar alterações sem deixar registros suficientes para
+  reconstruir a ação e atribuir sua autoria.
+- **Condições necessárias:** a operação de negócio é concluída antes da
+  persistência da auditoria em background, e uma falha, reinício ou exceção pode
+  descartar o registro pendente sem recuperação garantida.
+- **Sequência de ações:**
+  1. O ator realiza uma alteração ou transição de status indevida.
+  2. A aplicação confirma a operação enquanto a auditoria ainda está pendente.
+  3. O ator provoca uma interrupção, caso tenha essa capacidade, ou explora uma
+     janela de falha conhecida na gravação em background.
+  4. A operação permanece efetivada, mas o registro correspondente não é salvo
+     nem recuperado.
+- **Impacto esperado:** lacunas na trilha de auditoria e dificuldade de provar
+  a autoria de alterações. Diferentemente de CA05, o abuso explora a ausência
+  de gravação, sem precisar remover registros já persistidos.
+- **Categorias STRIDE:** Repudiation (T34).
+
+### CA23 — Repúdio de aprovação de lançamento
+
+- **Ator:** aprovador legítimo que age de má-fé após aprovar um lançamento
+  irregular.
+- **Objetivo:** negar a aprovação para evitar responsabilização pelo valor
+  faturado.
+- **Condições necessárias:** a evidência disponível associa a ação ao usuário
+  extraído do token, mas não permite esclarecer suficientemente a autoria em
+  uma contestação, por exemplo, diante de alegação de uso indevido da sessão.
+- **Sequência de ações:**
+  1. O ator aprova um lançamento irregular usando sua sessão válida.
+  2. O lançamento segue no fluxo e a divergência é identificada posteriormente.
+  3. O ator nega ter aprovado e alega que outra pessoa utilizou sua sessão.
+  4. A investigação não encontra evidências suficientes para confirmar ou
+     refutar a alegação e atribuir a responsabilidade.
+- **Impacto esperado:** dificuldade de responsabilização e de resolução de
+  disputas sobre valores faturados, mesmo quando existe um registro de
+  aprovação associado à conta.
+- **Categorias STRIDE:** Repudiation (T35).
+
+### CA24 — Comprometimento do cálculo por dependência maliciosa
+
+- **Ator:** atacante que compromete uma dependência Python utilizada pelo
+  sistema, ou agente com acesso à seleção de dependências no processo de entrega.
+- **Objetivo:** introduzir código malicioso por uma dependência para adulterar
+  o cálculo de faturamento em produção.
+- **Condições necessárias:** uma versão maliciosa é incorporada ao build e
+  chega a produção sem detecção pelos controles de atualização, revisão,
+  varredura e testes. A dependência consegue interferir no cálculo executado.
+- **Sequência de ações:**
+  1. O ator disponibiliza uma versão maliciosa de uma dependência ou manipula a
+     atualização para incluir um pacote comprometido.
+  2. O processo de entrega incorpora a dependência ao artefato da aplicação.
+  3. A versão comprometida é implantada e seu código executa no sistema.
+  4. A dependência interfere nos valores calculados, que seguem no fluxo de
+     faturamento como resultados legítimos.
+- **Impacto esperado:** faturamento incorreto em escala e dificuldade de
+  identificar a origem da adulteração, pois o código próprio do motor pode
+  permanecer sem alterações. O cooldown e a varredura de dependências reduzem
+  o risco, mas não garantem a detecção de comportamento malicioso.
+- **Categorias STRIDE:** Tampering (T37).
 
 ## Considerações finais
 

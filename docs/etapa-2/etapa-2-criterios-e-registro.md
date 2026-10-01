@@ -22,6 +22,6 @@
 | R18 | Autoaprovação sem segregação de funções | CA14 |
 | R19 | Injeção de SQL no Oracle | CA15 |
 | R20 | Configuração insegura em produção (`local` / `DEBUG`) |  |
-| R21 | Isolamento insuficiente entre ambientes |  |
+| R21 | Isolamento insuficiente entre ambientes | CA18 |
 | R22 | Anexo malicioso contra aprovadores | CA16 |
 | R23 | Adulteração ou injeção de fórmula na carga ERP |  |
