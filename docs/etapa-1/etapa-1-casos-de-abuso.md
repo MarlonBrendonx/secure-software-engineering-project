@@ -50,6 +50,10 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | CA22 | Exploração de falha na gravação da auditoria | Ator realiza alterações e explora uma interrupção na gravação em background para deixar ações sem registro | T34 |
 | CA23 | Repúdio de aprovação de lançamento | Aprovador nega uma aprovação irregular e explora a insuficiência das evidências de autoria | T35 |
 | CA24 | Comprometimento do cálculo por dependência maliciosa | Ator introduz dependência maliciosa no processo de entrega para adulterar valores calculados | T37 |
+| CA25 | Contorno de autorização por falha aberta do guard | Usuário sem o perfil necessário explora uma exceção na autorização para executar ação restrita | T14b |
+| CA26 | Acesso a lançamento ou anexo fora do escopo por troca de ID | Usuário autenticado troca o identificador do recurso para consultar dados de outro cliente ou período | T26 |
+| CA27 | Alteração de lançamento por requisição induzida (CSRF) | Atacante induz o navegador de uma vítima autenticada a executar uma operação usando seu cookie de sessão | T27 |
+| CA28 | Exploração de configuração insegura em produção | Atacante explora autenticação local indevida ou informações expostas pelo modo de depuração | T28 |
 
 
 ### CA01 — Alteração ou remoção de lançamentos
@@ -500,6 +504,95 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   permanecer sem alterações. O cooldown e a varredura de dependências reduzem
   o risco, mas não garantem a detecção de comportamento malicioso.
 - **Categorias STRIDE:** Tampering (T37).
+
+### CA25 — Contorno de autorização por falha aberta do guard
+
+- **Ator:** usuário autenticado sem o perfil necessário para uma ação, ou
+  atacante com uma conta de privilégios limitados capturada.
+- **Objetivo:** executar uma operação restrita, como aprovar um lançamento ou
+  acessar uma rota administrativa, sem a autorização exigida.
+- **Condições necessárias:** o guard de autorização encontra uma exceção ou
+  falha de execução e o tratamento dessa falha permite que a requisição
+  prossiga, em vez de negar o acesso. O ator consegue provocar ou aproveitar
+  essa condição.
+- **Sequência de ações:**
+  1. O ator autentica-se com uma conta sem permissão para a operação desejada.
+  2. O ator envia uma requisição à rota restrita em uma condição que provoca
+     falha na verificação de autorização.
+  3. A aplicação trata a falha como permissão e deixa a requisição prosseguir.
+  4. A operação é executada apesar de o perfil do ator não estar autorizado.
+- **Impacto esperado:** execução indevida de ações privilegiadas, contorno do
+  fluxo de aprovação e possível alteração de valores faturados.
+- **Categorias STRIDE:** Elevation of Privilege (T14b).
+
+### CA26 — Acesso a lançamento ou anexo fora do escopo por troca de ID
+
+- **Ator:** usuário autenticado com acesso às consultas de lançamentos ou
+  anexos, mas sem autorização para o recurso visado.
+- **Objetivo:** ler dados de outro cliente ou período alterando o identificador
+  usado na requisição.
+- **Condições necessárias:** a rota verifica o perfil do usuário, mas não
+  verifica se ele pode acessar o lançamento ou anexo específico. O ator
+  consegue obter ou descobrir um identificador de recurso fora do seu escopo.
+- **Sequência de ações:**
+  1. O ator consulta um lançamento ou anexo ao qual tem acesso legítimo.
+  2. O ator troca o identificador na URL pelo de um recurso fora do seu escopo.
+  3. A aplicação valida o perfil, mas não a autorização sobre o recurso pedido.
+  4. O ator recebe os dados do lançamento ou acesso ao download do anexo.
+- **Impacto esperado:** exposição de valores financeiros e documentos de outros
+  clientes ou períodos. Esse caso detalha uma forma específica do acesso
+  indevido descrito em CA03.
+- **Categorias STRIDE:** Information Disclosure (T26).
+
+### CA27 — Alteração de lançamento por requisição induzida (CSRF)
+
+- **Ator:** atacante que controla uma página ou conteúdo acessado por um usuário
+  autenticado no sistema.
+- **Objetivo:** executar uma operação mutante sob a identidade da vítima sem
+  que ela tenha solicitado a ação.
+- **Condições necessárias:** uma rota mutante aceita autenticação pelo cookie
+  `access_token`, e o navegador envia esse cookie em uma requisição induzida
+  pelo atacante. A política `SameSite`, a validação de origem e a proteção
+  anti-CSRF estão ausentes ou são insuficientes para bloquear o cenário; esses
+  controles ainda precisam ser confirmados. A requisição também deve satisfazer
+  o método e o formato aceitos pela rota.
+- **Sequência de ações:**
+  1. A vítima mantém uma sessão válida no sistema e acessa o conteúdo controlado
+     pelo atacante.
+  2. Esse conteúdo induz o navegador a enviar uma requisição mutante ao sistema.
+  3. O navegador inclui o cookie da vítima e a aplicação o usa para autenticá-la.
+  4. Sem uma validação suficiente da origem da ação, a aplicação executa a
+     operação com as permissões da vítima.
+- **Impacto esperado:** alteração indevida de lançamentos ou transições de
+  status, com registros associados à conta da vítima. O atributo `HttpOnly`
+  impede a leitura do cookie por scripts, mas não impede seu envio automático
+  pelo navegador nesse cenário.
+- **Categorias STRIDE:** Spoofing e Tampering (T27).
+
+### CA28 — Exploração de configuração insegura em produção
+
+- **Ator:** atacante com acesso aos endpoints expostos pela aplicação em
+  produção.
+- **Objetivo:** aproveitar uma configuração inadequada para contornar a
+  autenticação corporativa ou obter informações que facilitem outros ataques.
+- **Condições necessárias:** o deploy mantém o provedor de autenticação `local`
+  habilitado com uma forma de autenticação indevidamente acessível ao atacante,
+  ou mantém `DEBUG=true` e expõe documentação ou informações internas que
+  deveriam ser restritas. A exposição de `/docs`, por si só, não concede acesso
+  às operações protegidas nem comprova vazamento de segredos.
+- **Sequência de ações:**
+  1. O ator identifica endpoints de autenticação local ou documentação de API
+     acessíveis no ambiente de produção.
+  2. Se o provedor local permitir acesso indevido, o ator obtém uma sessão sem
+     passar pelo fluxo corporativo de SSO esperado.
+  3. Se o modo de depuração expuser informações internas, o ator coleta detalhes
+     sobre rotas, parâmetros e mecanismos de autenticação.
+  4. O ator usa a sessão obtida para operar com o perfil concedido, ou usa as
+     informações coletadas para orientar tentativas de exploração.
+- **Impacto esperado:** acesso sob identidade indevida, quando a configuração
+  local permite esse contorno, e exposição de detalhes internos da aplicação
+  que podem facilitar outros abusos.
+- **Categorias STRIDE:** Spoofing e Information Disclosure (T28).
 
 ## Considerações finais
 
