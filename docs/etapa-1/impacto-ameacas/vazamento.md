@@ -8,11 +8,11 @@ Dados de fornecedores, lançamentos, pagamentos, regras de negócio, entre outro
 
 ## Ameaças relacionadas
 
-T04, T08, T10, T12, T22.
+T04, T08, T10, T12, T22, T25, T32, T36.
 
 ## Ativos afetados
 
-A1, A4, A5, A6, A14.
+A1, A4, A5, A6, A12, A14 e Oracle legado.
 
 ## Dimensões de impacto
 

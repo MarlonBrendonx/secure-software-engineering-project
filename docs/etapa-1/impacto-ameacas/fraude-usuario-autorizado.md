@@ -8,11 +8,11 @@ Nem todo abuso vem de quem não deveria ter acesso. Um usuário legítimo, com a
 
 ## Ameaças relacionadas
 
-T01, T06.
+T01, T06, T24, T30.
 
 ## Ativos afetados
 
-A1, A3.
+A1, A3, A8 e arquivos de carga ERP.
 
 ## Dimensões de impacto
 

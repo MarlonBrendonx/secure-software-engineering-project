@@ -8,11 +8,11 @@ A timeline de transições e a auditoria são a prova de quem fez o quê no sist
 
 ## Ameaças relacionadas
 
-T05.
+T05, T34, T35.
 
 ## Ativos afetados
 
-A2.
+A1, A2.
 
 ## Dimensões de impacto
 

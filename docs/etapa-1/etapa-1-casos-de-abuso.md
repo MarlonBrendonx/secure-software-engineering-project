@@ -4,7 +4,7 @@ Este documento detalha os casos de abuso do sistema e apresenta a síntese
 final da análise. Ele complementa a
 [modelagem de ameaças STRIDE](etapa-1-ameacas-stride.md) e a
 [identificação do sistema](etapa-1-identificacao-sistema.md), que definem os
-ativos (A1–A14) e as ameaças (T01–T23) referenciados aqui.
+ativos (A1–A14) e as ameaças (T01–T37) referenciados aqui.
 
 Os casos de abuso descrevem formas pelas quais um agente mal intencionado, um
 usuário indevido ou até um usuário legítimo poderia usar o sistema para causar

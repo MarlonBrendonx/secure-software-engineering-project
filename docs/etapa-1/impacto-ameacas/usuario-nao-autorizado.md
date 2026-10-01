@@ -10,11 +10,11 @@ Em suma, boa parte dos demais problemas de segurança no sistema, começam com o
 
 ## Ameaças relacionadas
 
-T01, T02, T03, T06, T07, T09, T11, T14b, T16, T19.
+T01, T02, T03, T06, T07, T09, T11, T14b, T16, T19, T26, T27, T28, T29, T31, T33.
 
 ## Ativos afetados
 
-A1, A2, A3, A4, A5, A6, A8, A9, A11.
+A1, A2, A3, A4, A5, A6, A8, A9, A11, arquivos de carga ERP e sessão.
 
 ## Dimensões de impacto
 

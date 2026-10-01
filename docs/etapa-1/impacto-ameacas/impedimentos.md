@@ -8,7 +8,7 @@ Impedimentos interferem no bom funcionamento do sistema, impedindo que requisiç
 
 ## Ameaças relacionadas
 
-T14a, T20, T23.
+T14a, T20, T23, T32.
 
 ## Ativos afetados
 

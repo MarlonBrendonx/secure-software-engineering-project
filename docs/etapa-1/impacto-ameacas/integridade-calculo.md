@@ -8,7 +8,7 @@ O motor de cálculo é a autoridade sobre todo valor faturado. Uma alteração n
 
 ## Ameaças relacionadas
 
-T13.
+T13, T37.
 
 ## Ativos afetados
 
