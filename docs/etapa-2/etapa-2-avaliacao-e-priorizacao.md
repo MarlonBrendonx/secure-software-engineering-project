@@ -110,7 +110,9 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 - **Probabilidade (2):** condicionada ao vazamento de A10 com o risco R12.
 - **Impacto (3):** injeção de operações/estados falsos no processamento
   assíncrono, mas não concede acesso administrativo completo.
-- **Contexto:** Risco no callback interno, dependendo de R06 e R07.O vazamento da chave em R12, também permite a falsificação, como descrito no R13. A gravidade é menor porque o alcance se limita ao processamento assíncrono, sem privilégio administrativo.
+- **Contexto:** risco no callback interno, dependente do vazamento da chave (R12). A
+  gravidade é menor que a de R07 porque o alcance se limita ao processamento
+  assíncrono, sem privilégio administrativo.
 
 ### R14 — Indisponibilidade do banco/infra (Alto, 2×4)
 
