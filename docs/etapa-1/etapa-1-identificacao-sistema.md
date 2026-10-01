@@ -79,7 +79,7 @@ Legenda de criticidade: 🔴 alta · 🟡 média.
 | A2            | Timeline de transações e auditoria                         | Dado                 |  🔴   | Prova de quem fez o quê, sua perda inviabiliza auditoria e contestação.        |
 | A3            | Regras de serviço e faixas (base do cálculo)               | Dado                 |  🔴   | Erro/adulteração se propaga silenciosamente para todo valor calculado.         |
 | A4            | Anexos dos lançamentos                                     | Dado                 |  🟡   | Documentos de suporte ao faturamento, podem conter dados de negócio sensíveis. |
-| A5            | CNPJ de clientes e fornecedores                            | Dado pessoal/negócio |  🟡   | Dado identificável de pessoa jurídica, exposição indevida e vazamento.         |
+| A5            | CNPJ de clientes e fornecedores                            | Dado de negócio (pode conter dado pessoal em MEI/EI) |  🟡   | Dado identificável de pessoa jurídica, exposição indevida e vazamento.         |
 | A6            | E-mails corporativos de aprovadores                        | Dado pessoal         |  🟡   | Alvo de phishing, usado no fluxo de aprovação por e-mail.                      |
 | A7            | Motor de cálculo de valores                                | Código               |  🔴   | Core de todo calculo, bug ou adulteração fatura errado em escala.              |
 | A8            | Máquina de estados com guards de autorização               | Código               |  🔴   | Único ponto entre o token e a mutação, falha pode burla o fluxo de aprovação.  |
