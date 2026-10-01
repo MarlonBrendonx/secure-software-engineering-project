@@ -19,11 +19,11 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 ### R02 — Captura de conta/perfil SSO (Crítico, 3×4)
 
 - **Probabilidade (3):** phishing e reuso de credenciais são plausíveis em
-  ambiente corporativom não há MFA nem a detecção de sessão anômala.
+  ambiente corporativo; não há MFA nem a detecção de sessão anômala.
 - **Impacto (4):** conta `admin`/`gestor` dá controle total, inclusive aprovar,
   reprovar e encobrir atividade. Afeta A1, A2 e A3 e habilita a maioria dos
   demais abusos.
-- **Contexto:** é a principal porta de entrada,pois amplifica quase
+- **Contexto:** é a principal porta de entrada, pois amplifica quase
   todos os outros riscos.
 
 ### R03 — Acesso não autorizado a dados restritos (Alto, 3×3)
@@ -64,9 +64,9 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 - **Probabilidade (2):** condicionada ao vazamento da chave (R06). Com a chave em mãos, gerar um token válido é trivial (qualquer biblioteca JWT faz isso).
 - **Impacto (4):** acesso total sob identidade falsificada, inclusive `admin`,
   habilitando todos os abusos de acesso, alteração e vazamento, por exemplo.
-- **Contexto:** dependente de R06. Tendo o vazamento e uma vez falsificado, o
-  token contorna todo o controle de autenticação e autorização, o atacante age
-  como qualquer perfil.
+- **Contexto:** dependente de R06. Com a chave vazada e o token falsificado, o atacante
+  contorna todo o controle de autenticação e autorização e age como qualquer
+  perfil.
 
 ### R08 — Remoção/adulteração da auditoria (Alto, 2×4)
 
