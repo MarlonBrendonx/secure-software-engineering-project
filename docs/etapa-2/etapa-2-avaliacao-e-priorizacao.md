@@ -56,7 +56,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 
 ### R07 — Falsificar token (Alto, 2×4)
 
-- **Probabilidade (2):** condicionada ao vazamento da chave (R06). Com o token em mãos, falsificar é uma etapa considerada fácil
+- **Probabilidade (2):** condicionada ao vazamento da chave (R06). Com a chave em mãos, gerar um token válido é trivial (qualquer biblioteca JWT faz isso).
 - **Impacto (4):** acesso total sob identidade falsificada, inclusive `admin`,
   habilitando todos os abusos de acesso, alteração e vazamento, por exemplo.
 - **Contexto:** dependente de R06. Tendo o vazamento e uma vez falsificado, o
