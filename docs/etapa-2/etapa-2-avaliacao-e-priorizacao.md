@@ -7,7 +7,7 @@ Para cada risco, foram apresentadas as justificativas atribuídas à probabilida
 ### R01 — Alteração/remoção de lançamentos (Crítico, 3×4)
 
 - **Probabilidade (3):** o perfil `analista` já possui escrita sobre lançamentos,
-  o abuso não exige capacidade técnica especial, apenas má intenção.
+  assim como o `admin`, o abuso não exige capacidade técnica especial, apenas má intenção.
 - **Impacto (4):** o valor adulterado chega ao ERP e é cobrado do cliente.
   Afeta A1 (lançamentos), o faturamento, pode
   atingir vários clientes e períodos.
