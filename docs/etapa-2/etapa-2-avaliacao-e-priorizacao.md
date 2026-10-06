@@ -220,24 +220,9 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ---
 
+## 5. Priorização dos riscos
 
-## 5. Matriz de riscos (probabilidade × impacto)
-
-Impacto cresce para a direita. Probabilidade cresce para cima.
-Nível: 1 a 3 Baixo, 4 a 7 Médio, 8 a 11 Alto, 12 a 16 Crítico.
-
-| Probabilidade \ Impacto | 1 — Baixo | 2 — Moderado | 3 — Alto | 4 — Muito alto |
-| --- | --- | --- | --- | --- |
-| **4 — Alta** | **Médio (4)** — | **Alto (8)** — | **Crítico (12)** — | **Crítico (16)** — |
-| **3 — Média-alta** | **Baixo (3)** — | **Médio (6)** R16 | **Alto (9)** R03 | **Crítico (12)** R01; R02; R18 |
-| **2 — Média-baixa** | **Baixo (2)** — | **Médio (4)** R11; R17 | **Médio (6)** R04; R13; R15; R19; R22 | **Alto (8)** R05; R06; R07; R08; R09; R12; R14; R20; R21; R23 |
-| **1 — Baixa** | **Baixo (1)** — | **Baixo (2)** — | **Baixo (3)** — | **Médio (4)** R10 |
-
----
-
-## 6. Priorização dos riscos
-
-### 6.1 Critérios usados para ordenar
+### 5.1 Critérios usados para ordenar
 
 Além da pontuação (Probabilidade × Impacto), a ordem considera:
 
@@ -252,9 +237,9 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 5. **Facilidade de detecção e recuperação** — quanto mais silenciosa e mais
    difícil de reverter a consequência, maior a urgência.
 
-### 6.2 Tabela de priorização
+### 5.2 Tabela de priorização
 
-| Ordem | Risco                                                | Nível   | Pontuação (P×I) | Critérios de 6.1 aplicados | Por que é tratado nesta posição                                                                                 |
+| Ordem | Risco                                                | Nível   | Pontuação (P×I) | Critérios de 5.1 aplicados | Por que é tratado nesta posição                                                                                 |
 | :---: | ---------------------------------------------------- | ------- | :-------------: | :------------------------: | --------------------------------------------------------------------------------------------------------------- |
 |   1   | **R02** — Captura de conta/perfil SSO                | Crítico |    3×4 = 12     | 4                          | Porta de entrada que habilita R01, R03, R05, R08, R09. Crítico e de probabilidade média-alta (sem MFA).         |
 |   2   | **R01** — Alteração/remoção de lançamentos           | Crítico |    3×4 = 12     | 1, 2                       | Ataca diretamente o valor faturado, objetivo central do sistema, com prejuízo financeiro imediato.              |
@@ -280,7 +265,7 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 |  22   | **R15** — Envio de e-mails maliciosos                | Médio   |     2×3 = 6     | 1                          | Impacto fora do sistema, mitigável por controle de remetente e do provedor.                                     |
 |  23   | **R17** — Subscrição indevida no ws vaza faturamento | Médio   |     2×2 = 4     | 2                          | Escopo e impacto limitados, com correção pontual de autorização de canal.                                       |
 
-### 6.3 Sequência de tratamento
+### 5.3 Sequência de tratamento
 
 Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolvem com o mesmo cofre). Por isso, os riscos são agrupados em ondas de tratamento, evitando tratar duas vezes o mesmo problema.
 
