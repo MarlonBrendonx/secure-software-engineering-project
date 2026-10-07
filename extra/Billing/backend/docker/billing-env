@@ -1,0 +1,23 @@
+# Carregado (com ".") pelo entrypoint e pelo comando nbb dentro do container.
+# Valem as chaves do ambiente/.env. Se faltar alguma (ou ainda estiver com o texto
+# de exemplo), usa a guardada no volume /segredos, gerando-a uma única vez.
+_faltando() { case "$1" in ""|*cole-aqui*) return 0 ;; *) return 1 ;; esac; }
+_old_umask=$(umask); umask 077
+
+if _faltando "$NBB_JWT_KEYS"; then
+  if [ ! -s /segredos/jwt_key ]; then
+    echo "[billing] gerando a chave do JWT em /segredos" >&2
+    /usr/local/bin/nbb generate-key > /segredos/jwt_key
+  fi
+  NBB_JWT_KEYS="{\"vol1\":\"$(cat /segredos/jwt_key)\"}"
+  NBB_JWT_ACTIVE_KID=vol1
+fi
+if _faltando "$NBB_DATA_ENCRYPTION_KEYS"; then
+  if [ ! -s /segredos/data_key ]; then
+    echo "[billing] gerando a chave de criptografia do 2FA em /segredos" >&2
+    /usr/local/bin/nbb generate-data-key > /segredos/data_key
+  fi
+  NBB_DATA_ENCRYPTION_KEYS="[\"$(cat /segredos/data_key)\"]"
+fi
+export NBB_JWT_KEYS NBB_JWT_ACTIVE_KID NBB_DATA_ENCRYPTION_KEYS
+umask "$_old_umask"

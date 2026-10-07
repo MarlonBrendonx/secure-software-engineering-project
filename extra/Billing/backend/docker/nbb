@@ -1,0 +1,4 @@
+#!/bin/sh
+# "docker compose exec api nbb ..." usa as mesmas chaves que a API.
+. /opt/billing/bin/billing-env
+exec /usr/local/bin/nbb "$@"
