@@ -54,6 +54,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | CA26 | Acesso a lançamento ou anexo fora do escopo por troca de ID | Usuário autenticado troca o identificador do recurso para consultar dados de outro cliente ou período | T26 |
 | CA27 | Alteração de lançamento por requisição induzida (CSRF) | Atacante induz o navegador de uma vítima autenticada a executar uma operação usando seu cookie de sessão | T27 |
 | CA28 | Exploração de configuração insegura em produção | Atacante explora autenticação local indevida ou informações expostas pelo modo de depuração | T28 |
+| CA29 | Subscrição indevida em canal de faturamento no WebSocket | Usuário autenticado inscreve-se em canal fora de seu escopo para receber informações e eventos de faturamento | T22 |
 
 
 ### CA01 — Alteração ou remoção de lançamentos
@@ -593,6 +594,34 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
   local permite esse contorno, e exposição de detalhes internos da aplicação
   que podem facilitar outros abusos.
 - **Categorias STRIDE:** Spoofing e Information Disclosure (T28).
+
+### CA29 — Subscrição indevida em canal de faturamento no WebSocket
+
+- **Ator:** usuário autenticado mal intencionado, ou atacante com acesso a uma
+  conta válida, sem autorização para consultar o faturamento do período alvo.
+- **Objetivo:** obter informações e eventos de faturamento de um período fora
+  do escopo permitido à conta.
+- **Condições necessárias:** o ator consegue conectar-se ao endpoint `/ws` e
+  autenticar-se pela primeira mensagem. A inscrição no canal
+  `billing:{AAAA-MM}` não verifica a autorização da conta para o período
+  solicitado, ou essa verificação é insuficiente. O canal publica informações
+  de faturamento que deveriam ser restritas; a ausência desse controle é uma
+  condição do cenário, a confirmar na implementação.
+- **Sequência de ações:**
+  1. O ator estabelece uma conexão com `/ws` e apresenta um token válido na
+     primeira mensagem de autenticação.
+  2. O ator solicita inscrição no canal `billing:{AAAA-MM}` de um período para
+     o qual sua conta não tem autorização de consulta.
+  3. O servidor aceita a inscrição sem validar suficientemente o escopo de
+     acesso da conta ao canal solicitado.
+  4. Quando eventos de faturamento são publicados nesse canal, o ator recebe
+     e registra as informações expostas nas mensagens.
+- **Impacto esperado:** exposição não autorizada do estado de faturamento e
+  de informações sensíveis presentes nos eventos do período inscrito,
+  comprometendo a confidencialidade do ativo A14. A inscrição, por si só, não
+  concede permissão para alterar lançamentos ou interferir no processamento
+  do faturamento.
+- **Categorias STRIDE:** Information Disclosure (T22).
 
 ## Considerações finais
 

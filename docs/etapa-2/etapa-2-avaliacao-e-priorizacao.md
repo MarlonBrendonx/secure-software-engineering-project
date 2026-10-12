@@ -8,6 +8,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R01 — Alteração/remoção de lançamentos (Crítico, 3×4)
 
+- **Origem:** CA01
 - **Probabilidade (3):** o perfil `analista` já possui escrita sobre lançamentos,
   assim como o `admin`, o abuso não exige capacidade técnica especial, apenas má intenção.
 - **Impacto (4):** o valor adulterado chega ao ERP e é cobrado do cliente.
@@ -18,6 +19,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R02 — Captura de conta/perfil SSO (Crítico, 3×4)
 
+- **Origem:** CA02
 - **Probabilidade (3):** phishing e reuso de credenciais são plausíveis em
   ambiente corporativo; não há MFA nem a detecção de sessão anômala.
 - **Impacto (4):** conta `admin`/`gestor` dá controle total, inclusive aprovar,
@@ -28,6 +30,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R03 — Acesso não autorizado a dados restritos (Alto, 3×3)
 
+- **Origem:** CA03
 - **Probabilidade (3):** falhas de autorização na APIs REST, como
   uma rota, endpoint de anexo ou consulta sem verificação.
 - **Impacto (3):** exposição de leitura de lançamentos, anexos, CNPJ e e-mails.
@@ -37,6 +40,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R04 — Acesso direto aos anexos no storage (Médio, 2×3)
 
+- **Origem:**  C04
 - **Probabilidade (2):** depende de condição específica, URL assinada com
   validade longa/sem escopo, ou vazamento das credenciais de storage.
 - **Impacto (3):** anexos podem conter comprovantes e dados sensíveis de negócio,
@@ -46,6 +50,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R05 — Extração de dados em volume (Alto, 2×4)
 
+- **Origem:** C04
 - **Probabilidade (2):** exige que o ator já tenha leitura (perfil, conta
   capturada ou R03) e que não haja limite/monitoração de extração em massa.
 - **Impacto (4):** vazamento de dados de terceiros (CNPJ, anexos), risco
@@ -54,6 +59,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R06 — Vazamento do `JWT_SECRET` (Alto, 2×4)
 
+- **Origem:** C09
 - **Probabilidade (2):** com um bom gerenciamento de chaves, como em keyvault, é quase improvável, mas a exposição por log, repositório, imagem ou variável de ambiente é uma condição específica que pode ocorrer.
 - **Impacto (4):** compromete o ativo A9, permite forjar tokens de qualquer perfil, como identificado no risco R07, quebrando a autenticação de todo o sistema.
 - **Contexto:** com prioridade elevada por ser pré-condição de R07.
@@ -61,6 +67,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R07 — Falsificar token (Alto, 2×4)
 
+- **Origem:** C09
 - **Probabilidade (2):** condicionada ao vazamento da chave (R06). Com a chave em mãos, gerar um token válido é trivial (qualquer biblioteca JWT faz isso).
 - **Impacto (4):** acesso total sob identidade falsificada, inclusive `admin`,
   habilitando todos os abusos de acesso, alteração e vazamento, por exemplo.
@@ -70,6 +77,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R08 — Remoção/adulteração da auditoria (Alto, 2×4)
 
+- **Origem:** CA05
 - **Probabilidade (2):** exige acesso a operação capaz de remover/alterar
   registros ou ao armazenamento da timeline, condição mais específica.
 - **Impacto (4):** perda da capacidade de auditoria e de responsabilização,
@@ -79,6 +87,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R09 — Alteração de regras de serviço (Alto, 2×4)
 
+- **Origem:** CA06
 - **Probabilidade (2):** poucos perfis têm escrita em serviços, requer acesso
   específico, mas é uma operação normal do sistema.
 - **Impacto (4):** a regra adulterada propaga-se de forma silenciosa a todos
@@ -87,6 +96,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R10 — Adulteração do motor de cálculo (Médio, 1×4)
 
+- **Origem:** CA07
 - **Probabilidade (1):** exige acesso ao repositório ou cadeia de
   build comprometida, além de contornar revisão e testes, grande capacidade e
   acesso muito específico.
@@ -97,6 +107,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R11 — DoS no fluxo de autorização (Médio, 2×2)
 
+- **Origem:** CA08
 - **Probabilidade (2):** requer volume de requisições contra as transições,
   precisa de sessão válida ou endpoint alcançável.
 - **Impacto (2):** paralisa temporariamente o fluxo de aprovação, recuperável e
@@ -107,6 +118,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R12 — Vazamento do `CELERY_CALLBACK_SECRET` (Alto, 2×4)
 
+- **Origem:** CA10
 - **Probabilidade (2):** mesma natureza de R06, exposição por config/log/repo.
 - **Impacto (4):** é a única barreira dos callbacks internos, o vazamento
   habilita R13.
@@ -116,6 +128,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R13 — Falsificação de callbacks internos (Médio, 2×3)
 
+- **Origem:** CA10
 - **Probabilidade (2):** condicionada ao vazamento de A10 com o risco R12.
 - **Impacto (3):** injeção de operações/estados falsos no processamento
   assíncrono, mas não concede acesso administrativo completo.
@@ -125,6 +138,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R14 — Indisponibilidade do banco/infra (Alto, 2×4)
 
+- **Origem:** CA11
 - **Probabilidade (2):** por estar na rede corporativa, um ataque vindo de fora é
   difícil. Mas a própria aplicação pode derrubar o banco, abrir mais conexões do
   que ele suporta, ou sobrecarregá-lo com consultas
@@ -137,6 +151,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R15 — Envio de e-mails maliciosos (Médio, 2×3)
 
+- **Origem:** CA12
 - **Probabilidade (2):** depende do vazamento da `EMAIL_SERVICE_API_KEY`.
 - **Impacto (3):** phishing/fraude de cobrança contra clientes e aprovadores e
   dano reputacional, o impacto é mais abrangente fora do sistema.
@@ -145,6 +160,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R16 — DoS no EventBus WebSocket (Médio, 3×2)
 
+- **Origem:** CA13
 - **Probabilidade (3):** endpoints WebSocket costumam ser alcançáveis, abrir
   muitas conexões ou publicar em volume é fácil.
 - **Impacto (2):** notificações em tempo real atrasam ou se perdem; o núcleo de
@@ -156,6 +172,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R17 — Subscrição indevida no ws vaza faturamento (Médio, 2×2)
 
+- **Origem:** T22 / CA29.
 - **Probabilidade (2):** requer falta de autorização por canal na inscrição do ws.
 - **Impacto (2):** vaza o estado de faturamento de um período, informações sensíveis e eventos.
   Porém, não há alteração de dados
