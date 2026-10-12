@@ -81,3 +81,25 @@ omissão é intencional (ver 8.3).
 | Risco | Govern                                    | Identify | Protect                             | Detect                                    | Respond                                      | Recover                                                    |
 | ----- | ----------------------------------------- | -------- | ----------------------------------- | ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------- |
 | R01   | GV.RR: matriz de quem escreve lançamentos | —        | PR.AA: mínimo privilégio na escrita | DE.CM: alerta de alteração fora do padrão | RS.MA: bloquear usuário e congelar o período | RC.RP: recompor valor pela auditoria antes do envio ao ERP |
+| R02   | —        | —        |  PR.AA: autenticação de dois fatores (MFA) | DE.CM: alerta para falha no segundo nível de autenticação | RS.MA: bloquear usuário e congelar o período | - | 
+| R03   | —        | —        | PR.PS: verificação de autorização, permissões do perfil para cada requisição | —       | —       | —       |
+| R04   | —        | —        | PR.PS: URL's de acesso externo com validade curta ou uso único | —       | —       | —       |
+| R05   | —        | —        | — | DE.CM: monitoramento ativo das ações de cada usuário | RS.MI: bloqueio temporário do usuário em caso de comportamento anômalo | — |
+| R06   | —        | —        | PR.DS: `JWT_SECRET` armazenado no cofre corporativo, uso de gitleaks | — | — | — |
+| R07   | —        | —        | — | DE.CM: monitoramento das ações de cada usuário, procurando comportamento anômalo | RS.MA: se confirmado o vazamento do `JWT_SECRET`, gera outro em substituição ao antigo | RC.RP: reverter operações de escrita realizadas com secret vazado |
+| R08   | —        | —        | PR.PS: registro read-only de toda operação mutante no sistema | — | — | — | 
+| R09   | GV.RR: matriz de quem escreve regras de serviço | — | PR.DS: registro de operação mutante em log read-only | — | — | RC.RP: reverter faturamentos gerados com regras de serviço erradas | 
+| R10   | — | — | PR.IR: uso de validadores de código, testes automatizados, ferramentas de qualidade e segurança de código | — | — | — |
+| R11   | — | — | PR.IR: uso de rate limiters conforme operação | — | — | — |
+| R12   |  —        | —        | PR.DS: `CELERY_CALLBACK_SECRET` armazenado no cofre corporativo, uso de gitleaks | — | — | — |
+| R13   | —        | —        | PR.PS: validação de origem nas requisições | DE.CM: monitoramento das requisições, procurando por copmortamento anômalo | RS.MA: se confirmado o vazamento do `CELERY_CALLBACK_SECRET`, gera outro em substituição ao antigo | — |
+| R14   | GV.SC: escolha de serviços/software de banco de dados que seja escalável |  —        | PR.IR: adição de múltiplas instâncias espelhadas do banco de dados e uso de balanceameto de carga entre as instâncias | DE.CM: monitoramento da carga nas instâncias do banco de dados | — | — | 
+| R15   | —        | —        | PR.DS: `EMAIL_SERVICE_API_KEY` armazenado no cofre corporativo, uso de gitleaks; PR.PS: uso de autenticação de domínio no servidor de e-mails (SPF, DKIM, DMARC) | — | — | — |
+| R16   | —        | —        | PR.IR: uso de limites globais de acesso por IP | — | — | — |
+| R17   | —        | —        | PR.DS: verificação de permissões/autorização de acesso para inscrição no ws | — | — | — |
+| R18   | GV.PO: política que impede que usuário `admin` aprove o próprio lançamento | —        | PR.DS: validação do usuáiro que requisita a aprovação de lançamento | — | — | — |
+| R19   | —        | —        | PR.DS: filtros em todas as queries realizadas no banco de dados, buscando prevenir SQL injection |  — | — | — | 
+| R20   | —        | —        | PR.IR: verificação de variáveis de controle conforme o ambiente; PR.AT: conscientizar a equipe a verificar as variáveis de controle antes de realizar o deploy |  — | — | — | 
+| R21   | —        | —        | PR.IR: separação do schema de produção e testes | — | — | — | 
+| R22   | —        | —        | PR.PS: uso de anti-vírus e scanners de conteúdos maliciosos nos anexos | — | RS.MA: report do usuário que anexou material com conteúdo malicioso | — | 
+| R23   | —        | —        | PR.PS: validação de dados a serem exportados para o ERP | — | RS.MA: report do usuário que tentou inserir dados maliciosos para os arquivos do ERP | — |
