@@ -30,7 +30,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R03 — Acesso não autorizado a dados restritos (Alto, 3×3)
 
-- **Origem:** CA03
+- **Origem:** T03, T07, T09, T11, T26 / CA03, CA26.
 - **Probabilidade (3):** falhas de autorização na APIs REST, como
   uma rota, endpoint de anexo ou consulta sem verificação.
 - **Impacto (3):** exposição de leitura de lançamentos, anexos, CNPJ e e-mails.
@@ -40,7 +40,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R04 — Acesso direto aos anexos no storage (Médio, 2×3)
 
-- **Origem:**  C04
+- **Origem:** T19 / CA03.
 - **Probabilidade (2):** depende de condição específica, URL assinada com
   validade longa/sem escopo, ou vazamento das credenciais de storage.
 - **Impacto (3):** anexos podem conter comprovantes e dados sensíveis de negócio,
@@ -50,7 +50,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R05 — Extração de dados em volume (Alto, 2×4)
 
-- **Origem:** C04
+- **Origem:** T04, T08, T10, T12 / CA04.
 - **Probabilidade (2):** exige que o ator já tenha leitura (perfil, conta
   capturada ou R03) e que não haja limite/monitoração de extração em massa.
 - **Impacto (4):** vazamento de dados de terceiros (CNPJ, anexos), risco
@@ -59,7 +59,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R06 — Vazamento do `JWT_SECRET` (Alto, 2×4)
 
-- **Origem:** C09
+- **Origem:** T15 / CA04.
 - **Probabilidade (2):** com um bom gerenciamento de chaves, como em keyvault, é quase improvável, mas a exposição por log, repositório, imagem ou variável de ambiente é uma condição específica que pode ocorrer.
 - **Impacto (4):** compromete o ativo A9, permite forjar tokens de qualquer perfil, como identificado no risco R07, quebrando a autenticação de todo o sistema.
 - **Contexto:** com prioridade elevada por ser pré-condição de R07.
@@ -67,7 +67,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R07 — Falsificar token (Alto, 2×4)
 
-- **Origem:** C09
+- **Origem:** T16 / CA09.
 - **Probabilidade (2):** condicionada ao vazamento da chave (R06). Com a chave em mãos, gerar um token válido é trivial (qualquer biblioteca JWT faz isso).
 - **Impacto (4):** acesso total sob identidade falsificada, inclusive `admin`,
   habilitando todos os abusos de acesso, alteração e vazamento, por exemplo.
@@ -96,7 +96,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R10 — Adulteração do motor de cálculo (Médio, 1×4)
 
-- **Origem:** CA07
+- **Origem:** T13, T37 / CA07, CA24.
 - **Probabilidade (1):** exige acesso ao repositório ou cadeia de
   build comprometida, além de contornar revisão e testes, grande capacidade e
   acesso muito específico.
@@ -107,7 +107,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R11 — DoS no fluxo de autorização (Médio, 2×2)
 
-- **Origem:** CA08
+- **Origem:** T14a / CA08.
 - **Probabilidade (2):** requer volume de requisições contra as transições,
   precisa de sessão válida ou endpoint alcançável.
 - **Impacto (2):** paralisa temporariamente o fluxo de aprovação, recuperável e
@@ -118,7 +118,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R12 — Vazamento do `CELERY_CALLBACK_SECRET` (Alto, 2×4)
 
-- **Origem:** CA10
+- **Origem:** T17 / CA04.
 - **Probabilidade (2):** mesma natureza de R06, exposição por config/log/repo.
 - **Impacto (4):** é a única barreira dos callbacks internos, o vazamento
   habilita R13.
@@ -200,7 +200,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R20 — Configuração insegura em produção (`local` / `DEBUG`) (Alto, 2×4)
 
-- **Origem:** T28.
+- **Origem:** T28 / CA28.
 - **Probabilidade (2):** basta uma variável errada no deploy.
 - **Impacto (4):** reabre autenticação local com senha e expõe o mapa completo da
   API em `/docs`.
@@ -228,12 +228,60 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 
 ### R23 — Adulteração ou injeção de fórmula na carga ERP (Alto, 2×4)
 
-- **Origem:** T30, T31.
+- **Origem:** T30, T31 / CA19, CA20.
 - **Probabilidade (2):** campos textuais exportados sem tratamento e arquivo
   armazenado sem hash ou assinatura.
 - **Impacto (4):** o ERP confia no arquivo, e um erro vira lançamento contábil.
 - **Contexto:** a adulteração ocorre depois do cálculo no servidor, fora da
   autoridade do sistema sobre o valor.
+
+### R24 — Desvio de e-mail de aprovação (Médio, 2×3)
+
+- **Origem:** T36 / CA17.
+- **Probabilidade (2):** Usuário com acesso à central pode indicar destinatário não autorizado, sem validação suficiente de vínculo com o cliente. O cenário depende dessas condições específicas.
+- **Impacto (3):** Informações financeiras de um cliente são enviadas a terceiro pelo serviço legítimo, comprometendo a confidencialidade e a confiança do cliente.
+- **Contexto:** Diferente de R15, não exige chave de e-mail vazada nem falsificação de remetente; explora a funcionalidade normal de envio.
+- **Controles existentes:** log de envio preserva destinatários e valores; permite rastrear, mas não impede o vazamento.
+
+### R25 — Reuso de refresh token roubado (Alto, 2×4)
+
+- **Origem:** T33 / CA21.
+- **Probabilidade (2):** Atacante obtém refresh token ainda válido e o reuso não é impedido por rotação, revogação ou detecção suficiente; esses controles estão a confirmar. O cenário depende dessas condições específicas.
+- **Impacto (4):** Renovação persistente de acesso sob a identidade da vítima; uma conta privilegiada permite exposição e alteração de dados em escala.
+- **Contexto:** Complementa R02: avalia a manutenção do acesso pelo endpoint de renovação, mesmo após a expiração do token de acesso.
+- **Controles existentes:** cookie de refresh com path restrito a `/v1/auth/refresh`; rotação a confirmar.
+
+### R26 — Perda de auditoria por falha na gravação (Alto, 2×4)
+
+- **Origem:** T34 / CA22.
+- **Probabilidade (2):** Operação de negócio é confirmada antes da persistência da auditoria em background, e interrupção pode descartar registros sem recuperação garantida. O cenário depende dessas condições específicas.
+- **Impacto (4):** Alterações financeiras permanecem efetivadas sem evidências suficientes para reconstrução e responsabilização, dificultando detectar e investigar fraudes.
+- **Contexto:** Diferente de R08, os registros não chegam a ser persistidos; proteger registros existentes contra alteração não resolve essa lacuna.
+- **Controles existentes:** `AuditMiddleware` registra requisições mutantes em background.
+
+### R27 — Repúdio de aprovação por evidência insuficiente (Médio, 2×3)
+
+- **Origem:** T35 / CA23.
+- **Probabilidade (2):** Aprovação é associada ao usuário do token, mas as evidências disponíveis são insuficientes para esclarecer uma contestação de autoria. O cenário depende dessas condições específicas.
+- **Impacto (3):** Dificuldade de responsabilização e de resolução de disputas sobre lançamentos aprovados, mesmo com registro da operação.
+- **Contexto:** Diferente de R08 e R26, a evidência existe, mas é insuficiente para investigar a alegação de uso indevido da sessão.
+- **Controles existentes:** timeline e `AuditMiddleware` associam a ação ao usuário extraído do token.
+
+### R28 — Contorno de autorização por falha aberta do guard (Alto, 2×4)
+
+- **Origem:** T14b / CA25.
+- **Probabilidade (2):** Exceção na verificação de autorização é tratada como permissão, e usuário de privilégios limitados consegue provocar ou aproveitar essa falha. O cenário depende dessas condições específicas.
+- **Impacto (4):** Execução de operações privilegiadas, como aprovação indevida ou ação administrativa, com possível comprometimento dos valores faturados.
+- **Contexto:** Diferente de R03, o cenário abrange escrita e aprovação; a existência de falha aberta deve ser confirmada na implementação.
+- **Controles existentes:** skill `sec-route` e testes automatizados, sem confirmação de cobertura das falhas de autorização.
+
+### R29 — Alteração de lançamento por CSRF (Alto, 2×4)
+
+- **Origem:** T27 / CA27.
+- **Probabilidade (2):** Rota mutante aceita cookie de sessão enviado em requisição induzida; SameSite, validação de origem e proteção anti-CSRF são ausentes ou insuficientes, a confirmar. O cenário depende dessas condições específicas.
+- **Impacto (4):** Alterações financeiras ou transições indevidas são executadas com as permissões da vítima e atribuídas à sua conta, podendo alcançar o ERP.
+- **Contexto:** Complementa R01: a ação parte do navegador de uma vítima autenticada; requer que método, formato e envio do cookie permitam a requisição induzida.
+- **Controles existentes:** cookie `HttpOnly`; política `SameSite` e proteção anti-CSRF a confirmar.
 
 ---
 
@@ -281,6 +329,12 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 |  21   | **R19** — Injeção de SQL no Oracle                   | Médio   |     2×3 = 6     | 2                          | Usuário Oracle somente leitura, sem alteração de dados.                                                         |
 |  22   | **R15** — Envio de e-mails maliciosos                | Médio   |     2×3 = 6     | 1                          | Impacto fora do sistema, mitigável por controle de remetente e do provedor.                                     |
 |  23   | **R17** — Subscrição indevida no ws vaza faturamento | Médio   |     2×2 = 4     | 2                          | Escopo e impacto limitados, com correção pontual de autorização de canal.                                       |
+| 24 | **R24** — Desvio de e-mail de aprovação | Médio | 2×3 = 6 | 1, 2 | Diferente de R15, não exige chave de e-mail vazada nem falsificação de remetente; explora a funcionalidade normal de envio. |
+| 25 | **R25** — Reuso de refresh token roubado | Alto | 2×4 = 8 | 3, 4 | Complementa R02: avalia a manutenção do acesso pelo endpoint de renovação, mesmo após a expiração do token de acesso. |
+| 26 | **R26** — Perda de auditoria por falha na gravação | Alto | 2×4 = 8 | 1, 5 | Diferente de R08, os registros não chegam a ser persistidos; proteger registros existentes contra alteração não resolve essa lacuna. |
+| 27 | **R27** — Repúdio de aprovação por evidência insuficiente | Médio | 2×3 = 6 | 5 | Diferente de R08 e R26, a evidência existe, mas é insuficiente para investigar a alegação de uso indevido da sessão. |
+| 28 | **R28** — Contorno de autorização por falha aberta do guard | Alto | 2×4 = 8 | 1, 4 | Diferente de R03, o cenário abrange escrita e aprovação; a existência de falha aberta deve ser confirmada na implementação. |
+| 29 | **R29** — Alteração de lançamento por CSRF | Alto | 2×4 = 8 | 1, 4 | Complementa R01: a ação parte do navegador de uma vítima autenticada; requer que método, formato e envio do cookie permitam a requisição induzida. |
 
 ### 5.3 Sequência de tratamento
 
@@ -288,9 +342,9 @@ Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolve
 
 | Sequência | Tema | Riscos | Controle comum |
 | ---- | ---- | ------ | -------------- |
-| 1 | Identidade e segredos | R02, R06, R07, R12, R13 | MFA, cofre com rotação, validação de token, HMAC nos callbacks |
-| 2 | Integridade do valor faturado | R01, R09, R10, R08, R18 | Segregação de funções, versionamento de regras, revisão obrigatória, auditoria imutável |
-| 3 | Confidencialidade | R03, R05, R04, R17 | Testes de autorização, limites de exportação, URLs de curta duração, autorização por canal |
+| 1 | Identidade e segredos | R02, R06, R07, R12, R13, R25 | MFA, cofre com rotação, validação de token, HMAC nos callbacks |
+| 2 | Integridade do valor faturado | R01, R09, R10, R08, R18,  R26, R27, R28, R29 | Segregação de funções, versionamento de regras, revisão obrigatória, auditoria imutável |
+| 3 | Confidencialidade | R03, R05, R04, R17 | Testes de autorização, limites de exportação, URLs de curta duração, autorização por canal, auditoria durável, evidências de aprovação, negação de acesso em falhas |
 | 4 | Disponibilidade | R14, R11, R16 | Isolamento do banco, limites de conexão, rate limit por usuário |
-| 5 | Canal externo | R15 | Destinatário amarrado ao cadastro, SPF/DKIM/DMARC |
+| 5 | Canal externo | R15, R24 | Destinatário amarrado ao cadastro, SPF/DKIM/DMARC |
 

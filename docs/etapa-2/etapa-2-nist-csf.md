@@ -1,7 +1,7 @@
 # Etapa 2 — Estratégias de tratamento e NIST CSF 2.0
 
 Este documento define as estratégias de tratamento, apresenta as funções do
-**NIST Cybersecurity Framework 2.0** e mapeia cada risco (R01–R23) às funções.
+**NIST Cybersecurity Framework 2.0** e mapeia cada risco (R01–R29) às funções.
 
 Os ativos citados (A1–A14) são os da
 [identificação do sistema](../etapa-1/etapa-1-identificacao-sistema.md).
@@ -24,6 +24,34 @@ Os ativos citados (A1–A14) são os da
 | Risco | Estratégia principal | Justificativa da escolha                                                                                                                       |
 | ----- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | R01   | Reduzir              | Escrever lançamentos é função legítima e não se elimina. Reduz-se com mínimo privilégio, aprovação por perfil e detecção de alteração anômala. |
+| R02 | Reduzir | O SSO é necessário ao acesso corporativo. MFA, monitoração de sessões anômalas e bloqueio de contas comprometidas diminuem a captura e o uso indevido de perfis privilegiados. |
+| R03 | Reduzir | Consultar dados é função legítima. Verificar perfil e escopo do recurso em cada requisição reduz o acesso indevido, inclusive por troca de identificadores. |
+| R04 | Reduzir | O armazenamento externo de anexos é necessário. URLs assinadas de curta duração e escopo restrito, com proteção das credenciais de storage, diminuem o acesso fora do controle da aplicação. |
+| R05 | Reduzir | A leitura e a exportação de dados atendem ao negócio. Limites de extração, monitoração das ações e bloqueio de comportamento anômalo reduzem o vazamento em volume. |
+| R06 | Reduzir | O segredo é necessário à assinatura dos tokens. Armazenamento em cofre, rotação e varredura com Gitleaks reduzem sua exposição e a possibilidade de exploração em R07. |
+| R07 | Reduzir | A autenticação por token é necessária. Prevenir o vazamento em R06, detectar ações anômalas e substituir a chave comprometida limitam a falsificação e permitem conter seus efeitos. |
+| R08 | Reduzir | A auditoria é necessária à responsabilização. Proteger os registros contra alteração e remoção reduz a possibilidade de apagar rastros de operações indevidas. |
+| R09 | Reduzir | A manutenção de regras de serviço é função legítima. Uma matriz de permissões, versionamento das regras e trilha protegida reduzem alterações indevidas e permitem corrigir os faturamentos afetados. |
+| R10 | Reduzir | O motor de cálculo e suas dependências são necessários. Revisão de código, testes, validadores e varredura de dependências reduzem a adulteração pela cadeia de entrega. |
+| R11 | Reduzir | As transições de aprovação são necessárias. Limites de requisições por operação reduzem a sobrecarga sem eliminar o fluxo legítimo de autorização. |
+| R12 | Reduzir | A chave autentica callbacks necessários ao processamento assíncrono. Cofre, rotação e varredura de segredos reduzem a exposição que habilita R13. |
+| R13 | Reduzir | Os callbacks internos são necessários. Validação de origem, proteção da chave, monitoração e substituição do segredo comprometido reduzem chamadas forjadas e permitem contê-las. |
+| R14 | Reduzir | O banco de dados é essencial ao sistema. Limites de conexões, isolamento de recursos, monitoração de carga e redundância reduzem a probabilidade e a duração da indisponibilidade. |
+| R15 | Reduzir | O envio corporativo de e-mails é necessário. Proteger a chave em cofre e aplicar autenticação de domínio com SPF, DKIM e DMARC reduzem o uso indevido do canal e a falsificação de remetente. |
+| R16 | Reduzir | As notificações em tempo real são úteis ao fluxo de faturamento. Limites de conexões e eventos, com controle de taxa no WebSocket, reduzem a sobrecarga do EventBus. |
+| R17 | Reduzir | A inscrição em canais de faturamento é função legítima. Verificar a autorização para cada canal e período reduz a divulgação de eventos fora do escopo permitido. |
+| R18 | Reduzir | Criar, enviar e aprovar lançamentos são atividades necessárias. Segregar essas funções e impedir a aprovação pelo próprio autor reduz a fraude sem eliminar o fluxo de aprovação. |
+| R19 | Reduzir | As consultas ao Oracle são necessárias à integração legada. Uso de bindvars, validação de parâmetros e manutenção de acesso somente leitura reduzem a injeção e seu alcance. |
+| R20 | Evitar | Autenticação local e modo de depuração são dispensáveis em produção. Desabilitar essas opções e impedir o deploy com configuração insegura elimina a condição que origina o risco. |
+| R21 | Reduzir | Os ambientes de produção e testes são necessários. Separação de credenciais e permissões por schema, com isolamento de recursos ou instâncias, reduz o movimento lateral e a disputa de capacidade. |
+| R22 | Reduzir | Os anexos fazem parte do processo de aprovação. Varredura de conteúdo malicioso e isolamento de arquivos suspeitos reduzem o comprometimento dos aprovadores ao abrir documentos. |
+| R23 | Reduzir | A carga de integração com o ERP é necessária. Tratar campos exportados como texto e verificar a integridade do arquivo antes da importação reduzem a injeção de fórmulas e a adulteração no storage. |
+| R24 | Reduzir | Validar destinatários autorizados por cliente no servidor; registrar destinatário, usuário e lançamento; alertar sobre desvios. |
+| R25 | Reduzir | Rotacionar refresh tokens e detectar reutilização; revogar a família de tokens e as sessões comprometidas. |
+| R26 | Reduzir | Persistir evento de auditoria de forma durável e vinculada à operação; usar entrega com repetição e reconciliação; alertar sobre falhas. |
+| R27 | Reduzir | Exigir reautenticação adicional em aprovações críticas; preservar identidade, sessão, horário e conteúdo aprovado em trilha protegida. |
+| R28 | Reduzir | Negar acesso quando a autorização falhar; testar exceções e indisponibilidade de dependências dos guards; registrar tentativas negadas. |
+| R29 | Reduzir | Aplicar proteção anti-CSRF e validação de origem nas rotas autenticadas por cookie; configurar SameSite adequado e testar requisições entre origens. |
 
 ### 6.3 Regra para aceitação de risco
 
@@ -103,3 +131,9 @@ omissão é intencional (ver 8.3).
 | R21   | —        | —        | PR.IR: separação do schema de produção e testes | — | — | — | 
 | R22   | —        | —        | PR.PS: uso de anti-vírus e scanners de conteúdos maliciosos nos anexos | — | RS.MA: report do usuário que anexou material com conteúdo malicioso | — | 
 | R23   | —        | —        | PR.PS: validação de dados a serem exportados para o ERP | — | RS.MA: report do usuário que tentou inserir dados maliciosos para os arquivos do ERP | — |
+| R24 | — | — | PR.AA: autorizar destinatários por cliente | DE.CM: alertar sobre destinatários indevidos | RS.MI: bloquear envio indevido e investigar destinatários | — |
+| R25 | — | — | PR.AA: rotacionar e revogar refresh tokens | DE.CM: detectar reuso de refresh token | RS.MI: revogar sessões e família de tokens | — |
+| R26 | — | — | PR.PS: persistência durável dos logs de auditoria | DE.CM: alertar sobre falhas e lacunas na auditoria | RS.MI: conter operações sem rastreabilidade e investigar falha | — |
+| R27 | — | — | PR.AA: reautenticação em aprovação crítica; PR.DS: proteção da evidência | DE.CM: correlacionar aprovação, sessão e reautenticação | RS.MI: preservar evidências e investigar contestação | — |
+| R28 | — | — | PR.AA: negar acesso em falhas dos guards | DE.CM: monitorar exceções e tentativas negadas | RS.MI: bloquear rota afetada e investigar operações realizadas | — |
+| R29 | — | — | PR.PS: proteção anti-CSRF e configuração dos cookies | DE.CM: monitorar requisições mutantes de origem indevida | RS.MI: revogar sessão comprometida e investigar alterações | — |
