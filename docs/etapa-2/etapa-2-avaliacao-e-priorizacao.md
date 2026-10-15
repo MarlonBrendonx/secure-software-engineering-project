@@ -31,7 +31,7 @@ Os riscos são avaliados como **risco atual**, ou seja, considerando os controle
 ### R03 — Acesso não autorizado a dados restritos (Alto, 3×3)
 
 - **Origem:** T03, T07, T09, T11, T26 / CA03, CA26.
-- **Probabilidade (3):** falhas de autorização na APIs REST, como
+- **Probabilidade (3):** falhas de autorização nas APIs REST, como
   uma rota, endpoint de anexo ou consulta sem verificação.
 - **Impacto (3):** exposição de leitura de lançamentos, anexos, CNPJ e e-mails.
   Prejuízo relevante à privacidade e ao negócio, mas sem alteração direta de valor.
