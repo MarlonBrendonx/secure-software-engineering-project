@@ -59,7 +59,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 
 ### CA01 — Alteração ou remoção de lançamentos
 
-- **Ator:** analista legítimo mal intencionado , ou usuário com acesso indevido a
+- **Ator:** analista legítimo mal-intencionado , ou usuário com acesso indevido a
   uma conta com permissão de escrita.
 - **Objetivo:** alterar ou remover lançamentos financeiros para mudar o valor
   faturado a um cliente em benefício próprio ou de terceiros.
