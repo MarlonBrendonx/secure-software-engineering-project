@@ -338,7 +338,7 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 
 ### 5.3 Sequência de tratamento
 
-Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolvem com o mesmo cofre). Por isso, os riscos são agrupados em ondas de tratamento, evitando tratar duas vezes o mesmo problema.
+Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolvem com o mesmo cofre). Por isso, os riscos são agrupados em estágios de tratamento, evitando tratar duas vezes o mesmo problema.
 
 | Sequência | Tema | Riscos | Controle comum |
 | ---- | ---- | ------ | -------------- |

@@ -11,7 +11,7 @@
 |   3   | Média-alta    | O evento é plausível e pode ocorrer em situações comuns de uso ou ataque.                     |
 |   4   | Alta          | O evento pode ocorrer com facilidade, frequência ou durante condições previsíveis do sistema. |
 
-A probabilidade de cada risco é calculada e justificada no documento [Justificativa das avaliações](etapa-2-avaliacao-e-priorizacao.md#justificativas-das-avaliações) com base nas características do sistema
+A probabilidade de cada risco é calculada e justificada no documento [4. Justificativa das avaliações](#4-justificativas-das-avaliações) com base nas características do sistema
 
 ### 2.2 Critérios de impacto
 
@@ -22,9 +22,7 @@ A probabilidade de cada risco é calculada e justificada no documento [Justifica
 |   3   | Alto          | Causa prejuízo relevante aos usuários, ao negócio, à administração ou à privacidade.  |
 |   4   | Muito alto    | Pode afetar muitos usuários, comprometer operações críticas ou causar prejuízo grave. |
 
-Por outro lado, na avaliação do impacto foram considerados conforme o contexto do software, ou seja, prejuízo financeiro,
-como o valor lançado nos faturamentos, vazamentos de dados de terceiros como CNPJ, anexos, e-mails, conforme a LGPD. Além disso,
-a avaliação lida também com quedas e interrupções
+Na avaliação do impacto, foram considerados o contexto do software, o prejuízo financeiro (como o valor lançado nos faturamentos), o vazamento de dados de terceiros, como CNPJ, anexos e e-mails, à luz da LGPD, e as quedas e interrupções do serviço.
 
 ### 2.3 Cálculo e classificação
 

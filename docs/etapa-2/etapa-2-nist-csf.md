@@ -103,37 +103,46 @@ e a página do framework fica em
 
 ### 8.2 Análise de cada relação
 
-Cada linha diz o que a função faz pelo risco. Onde a função não está marcada, a
-omissão é intencional (ver 8.3).
+Cada linha diz o que a função faz pelo risco. Onde a função não está marcada, a omissão é intencional (ver 8.3).
 
 | Risco | Govern                                    | Identify | Protect                             | Detect                                    | Respond                                      | Recover                                                    |
 | ----- | ----------------------------------------- | -------- | ----------------------------------- | ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------- |
 | R01   | GV.RR: matriz de quem escreve lançamentos | —        | PR.AA: mínimo privilégio na escrita | DE.CM: alerta de alteração fora do padrão | RS.MA: bloquear usuário e congelar o período | RC.RP: recompor valor pela auditoria antes do envio ao ERP |
-| R02   | —        | —        |  PR.AA: autenticação de dois fatores (MFA) | DE.CM: alerta para falha no segundo nível de autenticação | RS.MA: bloquear usuário e congelar o período | - | 
-| R03   | —        | —        | PR.PS: verificação de autorização, permissões do perfil para cada requisição | —       | —       | —       |
-| R04   | —        | —        | PR.PS: URLs de acesso externo com validade curta ou uso único | —       | —       | —       |
-| R05   | —        | —        | — | DE.CM: monitoramento ativo das ações de cada usuário | RS.MI: bloqueio temporário do usuário em caso de comportamento anômalo | — |
+| R02   | —        | —        |  PR.AA: autenticação de dois fatores (MFA) | DE.CM: alerta para falha no segundo nível de autenticação | RS.MA: bloquear usuário e congelar o período | RC.RP: revisar e reverter operações feitas pela conta comprometida | 
+| R03   | —        | —        | PR.AA: verificação de autorização, permissões do perfil para cada requisição | DE.CM: registrar e alertar sobre negações por escopo indevido | —       | —       |
+| R04   | —        | —        | PR.PS: URLs de acesso externo com validade curta ou uso único | DE.CM: registrar a emissão de URLs assinadas | —       | —       |
+| R05   | —        | —        | — | DE.CM: monitoramento ativo das ações de cada usuário | RS.MI: bloqueio temporário do usuário em caso de comportamento anômalo; RS.CO: comunicar o encarregado de dados quando houver dado pessoal | — |
 | R06   | —        | —        | PR.DS: `JWT_SECRET` armazenado no cofre corporativo, uso de gitleaks | — | — | — |
 | R07   | —        | —        | — | DE.CM: monitoramento das ações de cada usuário, procurando comportamento anômalo | RS.MA: se confirmado o vazamento do `JWT_SECRET`, gera outro em substituição ao antigo | RC.RP: reverter operações de escrita realizadas com secret vazado |
-| R08   | —        | —        | PR.PS: registro read-only de toda operação mutante no sistema | — | — | — | 
-| R09   | GV.RR: matriz de quem escreve regras de serviço | — | PR.DS: registro de operação mutante em log read-only | — | — | RC.RP: reverter faturamentos gerados com regras de serviço erradas | 
-| R10   | — | — | PR.IR: uso de validadores de código, testes automatizados, ferramentas de qualidade e segurança de código | — | — | — |
+| R08   | —        | —        | PR.DS: registro read-only de toda operação mutante no sistema | DE.CM: verificar o encadeamento por hash dos registros | — | — | 
+| R09   | GV.RR: matriz de quem escreve regras de serviço | — | PR.DS: registro de operação mutante em log read-only | DE.CM: alertar sobre alteração de regra de serviço | — | RC.RP: reverter faturamentos gerados com regras de serviço erradas | 
+| R10   | GV.SC: inventário de dependências (SBOM) e assinatura de artefatos | — | PR.IR: uso de validadores de código, testes automatizados, ferramentas de qualidade e segurança de código | — | — | — |
 | R11   | — | — | PR.IR: uso de rate limiters conforme operação | — | — | — |
 | R12   |  —        | —        | PR.DS: `CELERY_CALLBACK_SECRET` armazenado no cofre corporativo, uso de gitleaks | — | — | — |
 | R13   | —        | —        | PR.PS: validação de origem nas requisições | DE.CM: monitoramento das requisições, procurando por comportamento anômalo | RS.MA: se confirmado o vazamento do `CELERY_CALLBACK_SECRET`, gera outro em substituição ao antigo | — |
-| R14   | GV.SC: escolha de serviços/software de banco de dados que seja escalável |  —        | PR.IR: adição de múltiplas instâncias espelhadas do banco de dados e uso de balanceamento de carga entre as instâncias | DE.CM: monitoramento da carga nas instâncias do banco de dados | — | — | 
+| R14   | GV.SC: escolha de serviços/software de banco de dados que seja escalável |  —        | PR.IR: adição de múltiplas instâncias espelhadas do banco de dados e uso de balanceamento de carga entre as instâncias | DE.CM: monitoramento da carga nas instâncias do banco de dados | — | RC.RP: failover para réplica e restauração de backup | 
 | R15   | —        | —        | PR.DS: `EMAIL_SERVICE_API_KEY` armazenado no cofre corporativo, uso de gitleaks; PR.PS: uso de autenticação de domínio no servidor de e-mails (SPF, DKIM, DMARC) | — | — | — |
 | R16   | —        | —        | PR.IR: uso de limites globais de acesso por IP | — | — | — |
-| R17   | —        | —        | PR.DS: verificação de permissões/autorização de acesso para inscrição no ws | — | — | — |
-| R18   | GV.PO: política que impede que usuário `admin` aprove o próprio lançamento | —        | PR.DS: validação do usuário que requisita a aprovação de lançamento | — | — | — |
-| R19   | —        | —        | PR.DS: filtros em todas as queries realizadas no banco de dados, buscando prevenir SQL injection |  — | — | — | 
-| R20   | —        | —        | PR.IR: verificação de variáveis de controle conforme o ambiente; PR.AT: conscientizar a equipe a verificar as variáveis de controle antes de realizar o deploy |  — | — | — | 
-| R21   | —        | —        | PR.IR: separação do schema de produção e testes | — | — | — | 
+| R17   | —        | —        | PR.AA: verificação de permissões/autorização de acesso para inscrição no ws | — | — | — |
+| R18   | GV.PO: política que impede que usuário `admin` aprove o próprio lançamento | —        | PR.AA: validação do usuário que requisita a aprovação de lançamento | DE.CM: alertar sobre tentativa de autoaprovação | — | — |
+| R19   | —        | —        | PR.DS: filtros em todas as queries realizadas no banco de dados, buscando prevenir SQL injection | DE.CM: análise estática de SQL concatenado no CI | — | — | 
+| R20   | —        | —        | PR.IR: verificação de variáveis de controle conforme o ambiente; PR.AT: conscientizar a equipe a verificar as variáveis de controle antes de realizar o deploy | DE.CM: bloqueio de deploy com configuração insegura | — | — | 
+| R21   | GV.PO: credenciais distintas por ambiente | —        | PR.IR: separação do schema de produção e testes | — | — | — | 
 | R22   | —        | —        | PR.PS: uso de anti-vírus e scanners de conteúdos maliciosos nos anexos | — | RS.MA: report do usuário que anexou material com conteúdo malicioso | — | 
-| R23   | —        | —        | PR.PS: validação de dados a serem exportados para o ERP | — | RS.MA: report do usuário que tentou inserir dados maliciosos para os arquivos do ERP | — |
+| R23   | —        | —        | PR.PS: validação de dados a serem exportados para o ERP | — | RS.MA: report do usuário que tentou inserir dados maliciosos para os arquivos do ERP | RC.RP: regenerar o arquivo de carga pelo sistema |
 | R24 | — | — | PR.AA: autorizar destinatários por cliente | DE.CM: alertar sobre destinatários indevidos | RS.MI: bloquear envio indevido e investigar destinatários | — |
 | R25 | — | — | PR.AA: rotacionar e revogar refresh tokens | DE.CM: detectar reuso de refresh token | RS.MI: revogar sessões e família de tokens | — |
 | R26 | — | — | PR.PS: persistência durável dos logs de auditoria | DE.CM: alertar sobre falhas e lacunas na auditoria | RS.MI: conter operações sem rastreabilidade e investigar falha | — |
 | R27 | — | — | PR.AA: reautenticação em aprovação crítica; PR.DS: proteção da evidência | DE.CM: correlacionar aprovação, sessão e reautenticação | RS.MI: preservar evidências e investigar contestação | — |
 | R28 | — | — | PR.AA: negar acesso em falhas dos guards | DE.CM: monitorar exceções e tentativas negadas | RS.MI: bloquear rota afetada e investigar operações realizadas | — |
 | R29 | — | — | PR.PS: proteção anti-CSRF e configuração dos cookies | DE.CM: monitorar requisições mutantes de origem indevida | RS.MI: revogar sessão comprometida e investigar alterações | — |
+
+---
+
+### 8.3 Funções não marcadas
+
+- **Identify** não aparece em nenhuma linha porque é transversal: o inventário de ativos (ID.AM) foi feito na Etapa 1 e o registro de riscos (ID.RA) é o próprio documento de critérios e registro, válido para todos os riscos.
+- **Govern** só é marcado quando o risco exige política ou atribuição de responsabilidade própria (R01, R09, R14, R18). Os demais seguem a política geral de segredos e de aceitação de risco da seção 6.3.
+- **Detect, Respond e Recover** ficam sem marcação quando o controle preventivo basta para o nível residual pretendido ou quando o evento é detectado de imediato pela própria falha. O plano de tratamento acrescenta ações nessas funções onde foram necessárias (ver 3.2).
+
+  ---
