@@ -70,7 +70,7 @@ A implementação segue os estágios da seção 5.3. Dentro de cada estágio, os
 | 4 | Disponibilidade | R21, R14, R11, R16 | Instâncias de produção e QA separadas, limites de conexão, réplica com failover, rate limit nas transições e no `/ws` |
 | 5 | Canal externo | R15, R24 | SPF/DKIM/DMARC com política de rejeição, destinatário vinculado ao cadastro do cliente |
 
-Consideando que os riscos R19, R20, R21, R22 e R23 não constam da tabela da seção 5.3, eles foram encaixados nos estágios pelo controle que compartilham:
+Considerando que os riscos R19, R20, R21, R22 e R23 não constam da tabela da seção 5.3, eles foram encaixados nos estágios pelo controle que compartilham:
 
 - **R20, estágio 1:** reabre a autenticação local, o que o coloca no tema identidade.
 - **R23, estágio 2:** a adulteração da carga atinge o valor que chega ao ERP.
