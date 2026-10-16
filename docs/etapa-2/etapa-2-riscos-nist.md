@@ -1,13 +1,9 @@
 # Etapa 2 — Riscos e NIST CSF 2.0
 
 Esta etapa dá continuidade à
-[Etapa 1 — Modelagem de ameaças e casos de abuso](/docs/etapa-1/etapa-1-casos-de-abuso.md),
-transformando as ameaças STRIDE (T01–T37) e os casos de abuso (CA01–CA29) em
-**riscos** avaliáveis, priorizáveis e tratáveis. O sistema, os ativos (A1–A14),
-os usuários e os componentes analisados são os mesmos já descritos na Etapa 1.
+[Etapa 1 — Modelagem de ameaças e casos de abuso](../etapa-1/etapa-1-casos-de-abuso.md), transformando as ameaças STRIDE (T01–T37) e os casos de abuso (CA01–CA29) em **riscos** avaliáveis, priorizáveis e tratáveis. O sistema, os ativos (A1–A14), os usuários e os componentes analisados são os mesmos já descritos na Etapa 1.
 
-Nesta etapa não se implementam controles, o objetivo é produzir um plano de
-tratamento coerente com o sistema e com os riscos identificados.
+Nesta etapa não se implementam controles, o objetivo é produzir um plano de tratamento coerente com o sistema e com os riscos identificados.
 
 ## Documentos desta etapa
 
@@ -20,10 +16,7 @@ tratamento coerente com o sistema e com os riscos identificados.
 
 ## Riscos identificados
 
-Os 29 riscos (R01–R29) percorrem os quatro documentos acima: são avaliados no
-documento 1, justificados e priorizados no documento 2, mapeados ao NIST CSF no
-documento 3 e possuem plano de tratamento para R24–R29 no documento 4. O plano individual de R01–R23 ainda está pendente nesse documento.
-
+Os 29 riscos (R01–R29) percorrem os quatro documentos acima: são avaliados no documento 1, justificados e priorizados no documento 2, mapeados ao NIST CSF no documento 3 e recebem, no documento 4, plano de tratamento, ordem de implementação, estimativa de risco residual e proposta de aceitação.
 ---
 
 **Etapa anterior:** [Ameaças e casos de abuso](../etapa-1/etapa-1-ameacas-stride.md)
