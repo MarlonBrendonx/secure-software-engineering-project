@@ -20,7 +20,7 @@ flowchart LR
 
     %% ---------- Fronteira 2: Borda e identidade ----------
     subgraph Z2["Fronteira 2 · Borda e identidade"]
-        KC["SSO · Keycloak + OAuth Service .NET<br/>OIDC + PKCE<br/><b>C1</b> MFA obrigatório p/ admin e gestor<br/>(RS02 · D01)"]
+        KC["SSO · Keycloak + OAuth Service .NET<br/>OIDC + PKCE<br/><b>C1</b> MFA obrigatório p/ admin e gestor<br/>WebAuthn/FIDO2 preferencial<br/>(RS02 · D01)"]
         APIM["APIM · gateway<br/>TLS · rate limit"]
     end
 
@@ -85,14 +85,16 @@ flowchart LR
 
 | Controle | Onde fica                                       | O que faz                                                                                                                   | Requisito | Decisão | Risco | Ameaça STRIDE (Etapa 1)        | NIST CSF 2.0 (Etapa 2) |
 | :------: | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | :-------: | :-----: | :---: | ------------------------------ | ---------------------- |
-|    C1    | Keycloak e OAuth Service .NET                   | Exige o segundo fator para administrador e gestor antes de emitir a sessão                                                  |   RS02    |   D01   |  R02  | T02 — Spoofing (+ EoP)         | Protect · PR.AA        |
+|    C1    | Keycloak e OAuth Service .NET                   | Exige o segundo fator para administrador e gestor antes de emitir a sessão, com WebAuthn/FIDO2 como fator preferencial      |   RS02    |   D01   |  R02  | T02 — Spoofing (+ EoP)         | Protect · PR.AA        |
 |    C2    | Guards da API (`src/core/auth`, `presentation`) | Recusa token de perfil privilegiado sem a indicação de MFA concluído                                                        |   RS02    |   D01   |  R02  | T02 — Spoofing (+ EoP)         | Protect · PR.AA        |
-|    C3    | Casos de uso da camada `application`            | Verifica a permissão sobre o recurso (cliente, período, responsável) em lançamentos, anexos e consultas; IDs não sequenciais |   RS03    |   D02   |  R03  | T03, T07, T09 — Info. Disclosure (+ EoP) | Protect · PR.AA |
-|    C4    | Máquina de estados (`billing_status`)           | Recusa `PATCH`/`DELETE` direto após o envio para aprovação; a mudança só ocorre pela transição "reabrir", que devolve o lançamento a `Rascunho` e exige nova aprovação por usuário diferente do autor (premissa de R18) |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.AA        |
+|    C3    | Casos de uso da camada `application`            | Verifica a permissão sobre o recurso (cliente, período, responsável) em lançamentos, anexos e consultas; IDs não sequenciais como defesa em profundidade, sem substituir essa verificação |   RS03    |   D02   |  R03  | T03, T07, T09 — Info. Disclosure (+ EoP) | Protect · PR.AA |
+|    C4    | Máquina de estados (`billing_status`)           | Recusa `PATCH`/`DELETE` direto após o envio para aprovação; a mudança só ocorre pela transição "reabrir", que devolve o lançamento a `Rascunho` e exige nova aprovação por usuário diferente do autor (premissa de R18) |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.DS        |
 |    C5    | Gerador da carga do ERP                         | Lê somente a última versão aprovada de cada lançamento; um lançamento reaberto fica fora da carga até nova aprovação       |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.DS        |
-|    C6    | Tabela `audit_logs`                             | Registra cada transição, tentativa recusada e negação por escopo, com usuário, recurso, operação e resultado; tabela append-only, sem `UPDATE`/`DELETE` para o usuário da aplicação e com encadeamento por hash (R08) | RS01, RS03 | D02, D03 | R01, R03 | T01, T05 — Repudiation      | Protect · PR.DS        |
+|    C6    | Tabela `audit_logs`                             | Registra cada transição, tentativa recusada e negação por escopo, com usuário, recurso, operação e resultado; tabela append-only, sem `UPDATE`/`DELETE` para o usuário da aplicação e com encadeamento por hash (R08) | RS01, RS03 | D02, D03 | R01, R03 | T01, T05 — Repudiation      | Protect · PR.PS        |
 |    C7    | Monitoramento e alertas                         | Alerta a equipe de segurança sobre falhas repetidas no segundo fator, negações por escopo e tentativas de alteração pós-envio | RS02, RS03, RS01 | D01, D02, D03 | R01, R02, R03 | T01, T02, T03 | Detect · DE.CM / DE.AE |
 |    C8    | Pipeline de CI                                  | Roda a suíte de testes de autorização por rota e os testes da máquina de estados; bloqueia o deploy se falharem             | RS01, RS03 | D02, D03 | R01, R03 | T01, T03, T14b              | Protect · PR.PS        |
+
+Na coluna NIST CSF 2.0, C4 e C5 estão em PR.DS porque protegem a integridade do lançamento depois do envio para aprovação. A Etapa 2 associa R01 a PR.AA pelo mínimo privilégio na escrita, que continua valendo para o acesso de cada perfil, mas a recusa da alteração direta é proteção do dado. C6 está em PR.PS, categoria que inclui a geração de registros de log. A detecção feita sobre esses registros fica em C7.
 
 ## 3. Justificativa do posicionamento dos controles
 
@@ -100,11 +102,11 @@ A tabela anterior mostra onde cada controle fica. Esta seção justifica por que
 
 | Controle | Vulnerabilidade tratada              | Por que neste ponto da arquitetura                                                                                                                                                                                                                                                                |
 | :------: | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|    C1    | CWE-308, OWASP A07                   | O SSO corporativo é o único ponto de emissão de sessão. Exigir o segundo fator ali evita reimplementar o MFA na aplicação e o aplica de forma uniforme a todo cliente do Keycloak (D01).                                                                                                          |
-|    C2    | CWE-308, OWASP A07                   | O MFA no SSO não basta sozinho, porque um token emitido por outro fluxo, como o provedor `local` de desenvolvimento ou um cliente mal configurado, chegaria à API sem o segundo fator. A verificação no guard fecha esse desvio na primeira fronteira controlada pela aplicação (D01; R20 na Etapa 2). |
-|    C3    | CWE-639, CWE-862, OWASP A01          | O guard `require_role` responde ao que o perfil pode fazer, e não sobre quais registros. A checagem precisa conhecer o recurso carregado (cliente, período e responsável), e essa informação só existe no caso de uso. Colocá-la ali, e não na rota, impede que um endpoint novo a omita (D02). |
-|    C4    | CWE-841, OWASP A04                   | A regra de aprovação é uma invariante de domínio. Na máquina de estados `billing_status`, ela vale para qualquer rota, tarefa Celery ou caso de uso que altere o lançamento, sem depender da interface (D03). A transição de aprovação também confere que o aprovador é diferente do autor, premissa herdada de R18.                                                                                     |
-|    C5    | CWE-841, OWASP A04                   | O ERP é o destino final do valor e fica fora da fronteira do sistema. Restringir a leitura à versão aprovada no próprio gerador da carga garante que uma alteração não aprovada nunca cruze essa fronteira, mesmo que C4 falhe (defesa em profundidade, D03). Um lançamento reaberto não tem versão aprovada vigente e, por isso, não entra na carga até ser aprovado de novo.                                     |
+|    C1    | CWE-308, OWASP A07:2025                 | O SSO corporativo é o único ponto de emissão de sessão. Exigir o segundo fator ali evita reimplementar o MFA na aplicação e o aplica de forma uniforme a todo cliente do Keycloak (D01).                                                                                                          |
+|    C2    | CWE-308, OWASP A07:2025                 | O MFA no SSO não basta sozinho, porque um token emitido por outro fluxo, como o provedor `local` de desenvolvimento ou um cliente mal configurado, chegaria à API sem o segundo fator. A verificação no guard fecha esse desvio na primeira fronteira controlada pela aplicação (D01; R20 na Etapa 2). |
+|    C3    | CWE-639, CWE-862, OWASP A01:2025        | O guard `require_role` responde ao que o perfil pode fazer, e não sobre quais registros. A checagem precisa conhecer o recurso carregado (cliente, período e responsável), e essa informação só existe no caso de uso. Colocá-la ali, e não na rota, impede que um endpoint novo a omita (D02). Os identificadores não sequenciais só dificultam adivinhar registros de outro escopo. São defesa em profundidade e não substituem a autorização por recurso, porque um identificador vazado ou observado continua válido. |
+|    C4    | CWE-841, OWASP A06:2025                 | A regra de aprovação é uma invariante de domínio. Na máquina de estados `billing_status`, ela vale para qualquer rota, tarefa Celery ou caso de uso que altere o lançamento, sem depender da interface (D03). A transição de aprovação também confere que o aprovador é diferente do autor, premissa herdada de R18.                                                                                     |
+|    C5    | CWE-841, OWASP A06:2025                 | O ERP é o destino final do valor e fica fora da fronteira do sistema. Restringir a leitura à versão aprovada no próprio gerador da carga garante que uma alteração não aprovada nunca cruze essa fronteira, mesmo que C4 falhe (defesa em profundidade, D03). Um lançamento reaberto não tem versão aprovada vigente e, por isso, não entra na carga até ser aprovado de novo.                                     |
 |    C6    | Suporte a CWE-841 e CWE-639          | O registro é gravado no mesmo ponto em que a transição ou a negação acontece. Assim, a evidência de não repúdio (T05) e a entrada para a detecção (C7) não dependem de um componente separado que possa ser ignorado. A tabela é append-only: o usuário da aplicação só tem `INSERT`, sem `UPDATE` nem `DELETE`, e cada registro guarda o hash do anterior. Assim, quem compromete a API não apaga o próprio rastro sem quebrar o encadeamento, conforme o tratamento de R08 na Etapa 2.                                                                           |
 |    C7    | Suporte a CWE-308, CWE-639 e CWE-841 | Os eventos vêm de duas fontes, os logins do Keycloak e os registros de `audit_logs`. O monitoramento fica fora da aplicação para que um comprometimento da API não silencie os alertas. Ele implementa a função Detect (DE.CM e DE.AE) do plano da Etapa 2.                                        |
 |    C8    | CWE-862, CWE-841                     | O CI é o último ponto antes do deploy. Testes de autorização por rota e da máquina de estados ali transformam RS01 e RS03 em critérios verificáveis e detectam regressões como o guard que falha aberto (T14b, R28).                                                                            |
@@ -128,7 +130,7 @@ sequenceDiagram
     U->>KC: Senha válida
     KC->>U: Solicita segundo fator (C1)
     alt Segundo fator confirmado
-        U->>KC: Código TOTP válido
+        U->>KC: WebAuthn/FIDO2 (preferencial) ou código TOTP válido
         KC-->>SPA: Token com indicação de MFA (acr/amr)
         SPA->>API: Requisição com Bearer JWT
         API->>API: Valida assinatura, perfil e MFA (C2)
@@ -141,6 +143,8 @@ sequenceDiagram
     end
     Note over API: Token de admin/gestor emitido por outro fluxo,<br/>sem indicação de MFA, recebe 401 (C2)
 ```
+
+O fator preferencial é o WebAuthn/FIDO2 (chave de segurança ou passkey) configurado no Keycloak, porque a assinatura fica vinculada à origem e não é aceita por um site falso. O TOTP fica como alternativa, mas tem uma limitação conhecida: um proxy de phishing em tempo real pode capturar a senha e o código e reutilizá-los dentro da validade do código. Nesse caso, a defesa restante são os alertas de C7 e a detecção de sessão anômala prevista no plano da Etapa 2.
 
 ### 4.2 R03 — Autorização por recurso (C3, C6 e C8)
 
@@ -160,12 +164,14 @@ sequenceDiagram
     UC->>UC: Usuário tem permissão sobre cliente, período e responsável? (C3)
     alt Fora do escopo
         UC->>AUD: Registra negação (C6)
-        UC-->>A: 403/404 — acesso negado
+        UC-->>A: 404 Not Found
     else Dentro do escopo
         UC-->>A: 200 OK com identificadores não sequenciais
     end
     Note over UC: A regra fica no caso de uso, não só na rota:<br/>um endpoint novo não esquece a checagem.<br/>O CI testa todas as rotas com IDs de outro escopo (C8).
 ```
+
+Para recurso fora do escopo, a API responde sempre `404 Not Found`, a mesma resposta dada a um identificador inexistente. Um `403` confirmaria que o registro existe e permitiria enumerar identificadores de outros clientes. A negação continua registrada em `audit_logs` com o motivo real (C6).
 
 ### 4.3 R01 — Máquina de estados como única via de mudança (C4, C5 e C6)
 

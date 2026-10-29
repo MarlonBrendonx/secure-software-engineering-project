@@ -21,9 +21,9 @@ Os três riscos escolhidos (R01, R02 e R03) percorrem os quatro documentos acima
 
 | Requisito | Risco | Vulnerabilidade             | Decisão | Controle da arquitetura                                             | Controle do plano da Etapa 2 (seção 9.2)                             |
 | --------- | ----- | --------------------------- | ------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| RS01      | R01   | CWE-841, OWASP A04          | D03     | Transição obrigatória pela máquina de estados e trilha de auditoria | Aprovação obrigatória após o envio, alertas e auditoria              |
-| RS02      | R02   | CWE-308, OWASP A07          | D01     | MFA no SSO, validação do MFA na API e alertas                       | MFA para administrador e gestor, monitoramento de acessos suspeitos  |
-| RS03      | R03   | CWE-639, CWE-862, OWASP A01 | D02     | Autorização por recurso nos casos de uso e registro das negações    | Verificação de permissão por recurso e testes automatizados por rota |
+| RS01      | R01   | CWE-841, OWASP A06:2025          | D03     | Transição obrigatória pela máquina de estados e trilha de auditoria | Aprovação obrigatória após o envio, alertas e auditoria              |
+| RS02      | R02   | CWE-308, OWASP A07:2025     | D01     | MFA no SSO, validação do MFA na API e alertas                       | MFA para administrador e gestor, monitoramento de acessos suspeitos  |
+| RS03      | R03   | CWE-639, CWE-862, OWASP A01:2025 | D02     | Autorização por recurso nos casos de uso e registro das negações    | Verificação de permissão por recurso e testes automatizados por rota |
 
 A ordem de implementação segue os estágios da [seção 10 do plano](../etapa-2/etapa-2-plano-e-residual.md), na qual R02 fica no estágio 1, R01 no estágio 2 e R03 no estágio 3.
 
