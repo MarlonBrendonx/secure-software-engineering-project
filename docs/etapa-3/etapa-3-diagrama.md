@@ -79,7 +79,7 @@ flowchart LR
     style Z5 stroke-dasharray: 6 4
 ```
 
-**Leitura do fluxo principal:** o usuário autentica no SSO (①), que só emite token de administrador ou gestor depois do segundo fator. A SPA chama a API pelo APIM (③ e ④). Os guards validam o token e, nos perfis privilegiados, a indicação de MFA. O caso de uso confere se o usuário tem permissão **sobre aquele registro** antes de ler ou gravar (⑤). Qualquer mudança em lançamento já enviado passa pela máquina de estados, que o devolve à aprovação e grava a transição em `audit_logs` (⑥). O ERP recebe apenas a versão aprovada (⑦).
+**Leitura do fluxo principal:** o usuário autentica no SSO (①), que só emite token de administrador ou gestor depois do segundo fator. A SPA chama a API pelo APIM (③ e ④). Os guards validam o token e, nos perfis privilegiados, a indicação de MFA. O caso de uso confere se o usuário tem permissão **sobre aquele registro** antes de ler ou gravar (⑤). Qualquer mudança em lançamento já enviado para aprovação passa pela máquina de estados: o lançamento aprovado é reaberto para `Rascunho`, sai da carga do ERP e precisa de novo envio e nova aprovação, e a transição fica gravada em `audit_logs` (⑥). O ERP recebe apenas a versão aprovada (⑦).
 
 ## 2. Controles posicionados no diagrama
 
@@ -88,8 +88,8 @@ flowchart LR
 |    C1    | Keycloak e OAuth Service .NET                   | Exige o segundo fator para administrador e gestor antes de emitir a sessão                                                  |   RS02    |   D01   |  R02  | T02 — Spoofing (+ EoP)         | Protect · PR.AA        |
 |    C2    | Guards da API (`src/core/auth`, `presentation`) | Recusa token de perfil privilegiado sem a indicação de MFA concluído                                                        |   RS02    |   D01   |  R02  | T02 — Spoofing (+ EoP)         | Protect · PR.AA        |
 |    C3    | Casos de uso da camada `application`            | Verifica a permissão sobre o recurso (cliente, período, responsável) em lançamentos, anexos e consultas; IDs não sequenciais |   RS03    |   D02   |  R03  | T03, T07, T09 — Info. Disclosure (+ EoP) | Protect · PR.AA |
-|    C4    | Máquina de estados (`billing_status`)           | Recusa `PATCH`/`DELETE` direto após o envio; a mudança só ocorre pela transição que devolve o lançamento à aprovação        |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.AA        |
-|    C5    | Gerador da carga do ERP                         | Lê somente a última versão aprovada de cada lançamento                                                                      |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.DS        |
+|    C4    | Máquina de estados (`billing_status`)           | Recusa `PATCH`/`DELETE` direto após o envio para aprovação; a mudança só ocorre pela transição "reabrir", que devolve o lançamento a `Rascunho` e exige nova aprovação por usuário diferente do autor (premissa de R18) |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.AA        |
+|    C5    | Gerador da carga do ERP                         | Lê somente a última versão aprovada de cada lançamento; um lançamento reaberto fica fora da carga até nova aprovação       |   RS01    |   D03   |  R01  | T01 — Tampering                | Protect · PR.DS        |
 |    C6    | Tabela `audit_logs`                             | Registra cada transição, tentativa recusada e negação por escopo, com usuário, recurso, operação e resultado                | RS01, RS03 | D02, D03 | R01, R03 | T01, T05 — Repudiation      | Protect · PR.DS        |
 |    C7    | Monitoramento e alertas                         | Alerta a equipe de segurança sobre falhas repetidas no segundo fator, negações por escopo e tentativas de alteração pós-envio | RS02, RS03, RS01 | D01, D02, D03 | R01, R02, R03 | T01, T02, T03 | Detect · DE.CM / DE.AE |
 |    C8    | Pipeline de CI                                  | Roda a suíte de testes de autorização por rota e os testes da máquina de estados; bloqueia o deploy se falharem             | RS01, RS03 | D02, D03 | R01, R03 | T01, T03, T14b              | Protect · PR.PS        |
@@ -103,8 +103,8 @@ A tabela anterior mostra onde cada controle fica. Esta seção justifica por que
 |    C1    | CWE-308, OWASP A07                   | O SSO corporativo é o único ponto de emissão de sessão. Exigir o segundo fator ali evita reimplementar o MFA na aplicação e o aplica de forma uniforme a todo cliente do Keycloak (D01).                                                                                                          |
 |    C2    | CWE-308, OWASP A07                   | O MFA no SSO não basta sozinho, porque um token emitido por outro fluxo, como o provedor `local` de desenvolvimento ou um cliente mal configurado, chegaria à API sem o segundo fator. A verificação no guard fecha esse desvio na primeira fronteira controlada pela aplicação (D01; R20 na Etapa 2). |
 |    C3    | CWE-639, CWE-862, OWASP A01          | O guard `require_role` responde ao que o perfil pode fazer, e não sobre quais registros. A checagem precisa conhecer o recurso carregado (cliente, período e responsável), e essa informação só existe no caso de uso. Colocá-la ali, e não na rota, impede que um endpoint novo a omita (D02). |
-|    C4    | CWE-841, OWASP A04                   | A regra de aprovação é uma invariante de domínio. Na máquina de estados `billing_status`, ela vale para qualquer rota, tarefa Celery ou caso de uso que altere o lançamento, sem depender da interface (D03).                                                                                     |
-|    C5    | CWE-841, OWASP A04                   | O ERP é o destino final do valor e fica fora da fronteira do sistema. Restringir a leitura à versão aprovada no próprio gerador da carga garante que uma alteração não aprovada nunca cruze essa fronteira, mesmo que C4 falhe (defesa em profundidade, D03).                                     |
+|    C4    | CWE-841, OWASP A04                   | A regra de aprovação é uma invariante de domínio. Na máquina de estados `billing_status`, ela vale para qualquer rota, tarefa Celery ou caso de uso que altere o lançamento, sem depender da interface (D03). A transição de aprovação também confere que o aprovador é diferente do autor, premissa herdada de R18.                                                                                     |
+|    C5    | CWE-841, OWASP A04                   | O ERP é o destino final do valor e fica fora da fronteira do sistema. Restringir a leitura à versão aprovada no próprio gerador da carga garante que uma alteração não aprovada nunca cruze essa fronteira, mesmo que C4 falhe (defesa em profundidade, D03). Um lançamento reaberto não tem versão aprovada vigente e, por isso, não entra na carga até ser aprovado de novo.                                     |
 |    C6    | Suporte a CWE-841 e CWE-639          | O registro é gravado no mesmo ponto em que a transição ou a negação acontece. Assim, a evidência de não repúdio (T05) e a entrada para a detecção (C7) não dependem de um componente separado que possa ser ignorado.                                                                           |
 |    C7    | Suporte a CWE-308, CWE-639 e CWE-841 | Os eventos vêm de duas fontes, os logins do Keycloak e os registros de `audit_logs`. O monitoramento fica fora da aplicação para que um comprometimento da API não silencie os alertas. Ele implementa a função Detect (DE.CM e DE.AE) do plano da Etapa 2.                                        |
 |    C8    | CWE-862, CWE-841                     | O CI é o último ponto antes do deploy. Testes de autorização por rota e da máquina de estados ali transformam RS01 e RS03 em critérios verificáveis e detectam regressões como o guard que falha aberto (T14b, R28).                                                                            |
@@ -177,21 +177,24 @@ stateDiagram-v2
     AguardandoAprovacao --> Aprovado: gestor aprova
     AguardandoAprovacao --> Reprovado: gestor reprova
     Reprovado --> Rascunho: analista corrige
-    Aprovado --> AguardandoAprovacao: reabrir (transição auditada)
+    Aprovado --> Rascunho: reabrir (transição auditada)
     Aprovado --> EnviadoERP: carga lê só a versão aprovada (C5)
     EnviadoERP --> [*]
 
     note right of AguardandoAprovacao
         PATCH/DELETE direto → recusado (C4)
         tentativa registrada em audit_logs (C6)
+        aprovador ≠ autor (premissa de R18)
     end note
     note right of Aprovado
-        Alterar exige reabrir:
-        volta à aprovação de um segundo usuário
+        PATCH/DELETE direto → recusado (C4)
+        Alterar exige reabrir: volta a Rascunho,
+        sai da carga do ERP e precisa de novo
+        envio e nova aprovação por outro usuário
     end note
 ```
 
-> Os nomes dos estados acima são ilustrativos. Na implementação, devem corresponder aos valores do objeto de valor `billing_status`.
+> Os nomes dos estados acima são ilustrativos. Na implementação, devem corresponder aos valores do objeto de valor `billing_status`. "Enviado", nos requisitos e nas decisões, significa enviado para aprovação (a partir de `AguardandoAprovacao`), e não `EnviadoERP`. A reabertura leva a `Rascunho`, o único estado em que `PATCH` e `DELETE` são aceitos, e não a `AguardandoAprovacao`, onde seriam recusados.
 
 ## 5. Relação com as etapas anteriores
 

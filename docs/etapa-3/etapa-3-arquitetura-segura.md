@@ -15,7 +15,7 @@ Nesta etapa não se implementam controles. O objetivo é mostrar como o sistema 
 
 ## Riscos tratados
 
-Os três riscos escolhidos (R01, R02 e R03) percorrem os quatro documentos acima. R01 e R02 são Críticos, e R03 é o Alto de maior pontuação. Cada um gera um requisito no documento 1, é ligado a uma vulnerabilidade catalogada no documento 2, aparece no diagrama do documento 3 e é tratado por uma decisão no documento 4.
+Os três riscos escolhidos (R01, R02 e R03) percorrem os quatro documentos acima. R01 e R02 estão entre os riscos Críticos, e R03 é o Alto de maior pontuação. R18 também é Crítico (3×4), mas não foi escolhido como risco próprio. O motivo está no [documento de requisitos](etapa-3-requisitos.md#riscos-prioritários-selecionados), e a segregação de funções que ele exige entra como premissa de D03. Cada um gera um requisito no documento 1, é ligado a uma vulnerabilidade catalogada no documento 2, aparece no diagrama do documento 3 e é tratado por uma decisão no documento 4.
 
 ## Rastreabilidade
 
