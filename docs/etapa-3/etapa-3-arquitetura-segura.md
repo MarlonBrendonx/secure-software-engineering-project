@@ -36,6 +36,6 @@ R18 também é Crítico (3×4), mas não foi escolhido como risco próprio. O mo
 
 Os controles C1–C14 estão descritos na [seção 2 do diagrama](etapa-3-diagrama.md#2-controles-posicionados-no-diagrama).
 
-A ordem de implementação segue os estágios da [seção 10 do plano](../etapa-2/etapa-2-plano-e-residual.md), na qual R02, R06 e R07 ficam no estágio 1, R01, R23, R26, R28 e R29 no estágio 2 e R03 no estágio 3. Dentro do estágio 2, R26 e R28 vêm antes de R01, porque C11 e C12 são a base de que C4 e C6 dependem. R29 vem logo depois de R01, porque protege as mesmas rotas, e R23 vem por último no estágio, porque estende C5 até o ERP.
+A ordem de implementação segue os estágios da [seção 10 do plano](../etapa-2/etapa-2-plano-e-residual.md), na qual R02, R06 e R07 ficam no estágio 1, R01, R23, R26, R28 e R29 no estágio 2 e R03 no estágio 3. Dentro do estágio 2, a seção 10 coloca R01 primeiro. Esta etapa propõe ajustar essa ordem e implementar C11 (R26) e C12 (R28) antes de C4 (R01), porque os critérios de verificação de RS01 dependem de a auditoria ser gravada e de o guard negar em caso de falha. A proposta não muda os estágios nem as pontuações da Etapa 2.
 
 ---

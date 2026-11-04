@@ -36,13 +36,14 @@ Cada suposição corresponde a um risco Alto dos estágios 1 e 2 do plano, ou se
 | R23        | Adulteração ou injeção de fórmula na carga do ERP                |     Alto (2×4)    |    2    | O ERP confia no arquivo, e um valor alterado depois da geração vira lançamento contábil sem passar pelo cálculo do servidor nem pela aprovação. Estende R01 até a fronteira com o ERP, onde C5 deixa de alcançar. Vem de Tampering (T30 e T31). |
 | R29        | Alteração de lançamento por CSRF                                 |     Alto (2×4)    |    2    | A alteração é feita com as permissões da vítima e atribuída a ela, de modo que a auditoria aponta o usuário errado e a aprovação de outra pessoa não percebe a fraude. Um link ou uma página de outro sistema corporativo basta para disparar a requisição. Vem de Spoofing e Tampering (T27). |
 
-Os demais riscos Altos ficaram fora por estes motivos:
+Os demais riscos Altos, e os Médios ligados a eles, ficaram fora por estes motivos:
 
 - **R12 e R13** (`CELERY_CALLBACK_SECRET`) são da mesma classe de R06. O cofre e a rotação de D04 se estendem a esse segredo, mas a verificação de origem dos callbacks (rede restrita ou mTLS, HMAC e idempotência) pede uma decisão própria, deixada para depois.
 - **R08** já está tratado por C6 (tabela append-only com encadeamento por hash).
+- **R05** (extração em volume) depende de o ator já ter leitura, que R02 e R03 restringem, e os controles dele (limites de consulta e exportação e detecção de extração fora do padrão) são operacionais e ficam para o estágio 3.
 - **R09** é de Tampering, e a aprovação de uma regra de serviço por outro usuário repetiria a lógica de D01. **R10** trata da cadeia de build e entra na etapa de DevSecOps.
 - **R20** já aparece em C2, que recusa tokens do provedor `local`. **R25** (reuso de refresh token) se beneficia do registro de sessões de RS04, que permite revogar a sessão, mas a rotação com detecção de reuso fica como próximo candidato.
-- **R14, R11 e R16** (Denial of Service) foram rebaixados na priorização por serem recuperáveis, e os controles deles são de infraestrutura (limites de conexão, isolamento do banco e rate limit no APIM), e não de arquitetura da aplicação.
+- **R14, R11 e R16** (Denial of Service) foram rebaixados na priorização por serem recuperáveis, e os controles deles são de infraestrutura (limites de conexão, isolamento do banco e rate limit no APIM), e não de arquitetura da aplicação. **R21** (isolamento entre ambientes) é tratado pelos mesmos meios de infraestrutura, com instâncias e credenciais separadas para produção e QA.
 
 ## Requisitos
 

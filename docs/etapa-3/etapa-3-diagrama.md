@@ -158,8 +158,8 @@ sequenceDiagram
     KC->>U: Solicita segundo fator (C1)
     alt Segundo fator confirmado
         U->>KC: WebAuthn/FIDO2 (preferencial) ou código TOTP válido
-        KC-->>SPA: Token com indicação de MFA (acr/amr)
-        SPA->>API: Requisição com Bearer JWT
+        KC-->>SPA: Token de sessão com indicação de MFA (acr/amr), assinado pelo emissor (C9)
+        SPA->>API: Requisição com o token de sessão
         API->>API: Valida assinatura, perfil e MFA (C2)
         API-->>SPA: 200 OK
     else Segundo fator ausente ou inválido
