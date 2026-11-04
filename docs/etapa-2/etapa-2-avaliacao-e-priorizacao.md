@@ -342,9 +342,9 @@ Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolve
 
 | Sequência | Tema | Riscos | Controle comum |
 | ---- | ---- | ------ | -------------- |
-| 1 | Identidade e segredos | R02, R06, R07, R12, R13, R25 | MFA, cofre com rotação, validação de token, HMAC nos callbacks |
-| 2 | Integridade do valor faturado | R01, R09, R10, R08, R18,  R26, R27, R28, R29 | Segregação de funções, versionamento de regras, revisão obrigatória, auditoria imutável |
-| 3 | Confidencialidade | R03, R05, R04, R17 | Testes de autorização, limites de exportação, URLs de curta duração, autorização por canal, auditoria durável, evidências de aprovação, negação de acesso em falhas |
-| 4 | Disponibilidade | R14, R11, R16 | Isolamento do banco, limites de conexão, rate limit por usuário |
+| 1 | Identidade e segredos | R02, R06, R07, R12, R13, R20, R25 | MFA, cofre com rotação, validação de token, HMAC nos callbacks, bloqueio de deploy com configuração insegura |
+| 2 | Integridade do valor faturado | R01, R09, R10, R08, R18, R23, R26, R27, R28, R29 | Segregação de funções, versionamento de regras, revisão obrigatória, auditoria imutável e durável, evidências de aprovação, verificação de integridade da carga do ERP, negação de acesso em falhas, proteção anti-CSRF |
+| 3 | Confidencialidade | R03, R05, R04, R17, R19, R22 | Testes de autorização, limites de exportação, URLs de curta duração, autorização por canal, bindvars, varredura de anexos |
+| 4 | Disponibilidade | R21, R14, R11, R16 | Isolamento entre ambientes e do banco, limites de conexão, rate limit por usuário |
 | 5 | Canal externo | R15, R24 | Destinatário amarrado ao cadastro, SPF/DKIM/DMARC |
 

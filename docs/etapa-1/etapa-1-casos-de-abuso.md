@@ -33,7 +33,7 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 | CA05 | Remoção da timeline de auditoria | Ator remove timeline impedindo a auditoria do sistema | T05 |
 | CA06 | Alteração de regras de serviço | Ator altera regras de serviço prejudicando operações do sistema | T06 |
 | CA07 | Adulteração do motor de cálculo | Ator altera os módulos do código responsáveis pelos cálculos de valores | T13 | 
-| CA08 | Sobrecarga no fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14a |
+| CA08 | Sobrecarga do fluxo de autorização | Ator sobrecarrega a máquina de estados com os guards de autorização impedindo o fluxo de aprovação de lançamentos | T14a |
 | CA09 | Acesso não autorizado por meio de token de autenticação vazado | Ator com segredo vazado consegue obter acesso não autorizado ao sistema | T16 |
 | CA10 | Requisições internas forjadas com chave de callback vazada | Código malicioso com segredo do API consegue forjar requisições falsas no sistema | T18 |
 | CA11 | Indisponibilidade do banco de dados | Ator consegue sobrecarregar o banco de dados, deixando o sistema inteiro inoperante | T20 |
@@ -630,9 +630,10 @@ dano e prejuízos. Cada caso de uso segue a seguinte estrutura:
 As ameaças de maior preocupação são as que comprometem a integridade do valor
 faturado e a identidade dos usuários:
 
-- **Vazamento do `JWT_SECRET` (T16 / CA09)** e **da chave de callback
-  (T18 / CA10)**, que quebram a autenticação e habilitam quase todos os demais
-  abusos.
+- **Vazamento do `JWT_SECRET` (T15) e seu uso para forjar tokens (T16 / CA09)**
+  e **vazamento da chave de callback (T17) e seu uso para forjar chamadas
+  internas (T18 / CA10)**, que quebram a autenticação e habilitam quase todos
+  os demais abusos.
 - **Adulteração do motor de cálculo (T13 / CA07)** e **das regras de serviço
   (T06 / CA06)**, que corrompem o faturamento em escala de forma silenciosa.
 - **Captura de usuário privilegiado (T02 / CA02)**, porta de entrada para

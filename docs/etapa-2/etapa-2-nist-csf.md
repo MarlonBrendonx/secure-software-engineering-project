@@ -101,9 +101,9 @@ e a página do framework fica em
 
 ## 8. Mapeamento dos riscos para o NIST CSF
 
-### 8.2 Análise de cada relação
+### 8.1 Análise de cada relação
 
-Cada linha diz o que a função faz pelo risco. Onde a função não está marcada, a omissão é intencional (ver 8.3).
+Cada linha diz o que a função faz pelo risco. Onde a função não está marcada, a omissão é intencional (ver 8.2).
 
 | Risco | Govern                                    | Identify | Protect                             | Detect                                    | Respond                                      | Recover                                                    |
 | ----- | ----------------------------------------- | -------- | ----------------------------------- | ----------------------------------------- | -------------------------------------------- | ---------------------------------------------------------- |
@@ -116,7 +116,7 @@ Cada linha diz o que a função faz pelo risco. Onde a função não está marca
 | R07   | —        | —        | — | DE.CM: monitoramento das ações de cada usuário, procurando comportamento anômalo | RS.MA: se confirmado o vazamento do `JWT_SECRET`, gera outro em substituição ao antigo | RC.RP: reverter operações de escrita realizadas com secret vazado |
 | R08   | —        | —        | PR.DS: registro read-only de toda operação mutante no sistema | DE.CM: verificar o encadeamento por hash dos registros | — | — | 
 | R09   | GV.RR: matriz de quem escreve regras de serviço | — | PR.DS: registro de operação mutante em log read-only | DE.CM: alertar sobre alteração de regra de serviço | — | RC.RP: reverter faturamentos gerados com regras de serviço erradas | 
-| R10   | GV.SC: inventário de dependências (SBOM) e assinatura de artefatos | — | PR.IR: uso de validadores de código, testes automatizados, ferramentas de qualidade e segurança de código | — | — | — |
+| R10   | GV.SC: inventário de dependências (SBOM) e assinatura de artefatos | — | PR.PS: uso de validadores de código, testes automatizados, ferramentas de qualidade e segurança de código | — | — | — |
 | R11   | — | — | PR.IR: uso de rate limiters conforme operação | — | — | — |
 | R12   |  —        | —        | PR.DS: `CELERY_CALLBACK_SECRET` armazenado no cofre corporativo, uso de gitleaks | — | — | — |
 | R13   | —        | —        | PR.PS: validação de origem nas requisições | DE.CM: monitoramento das requisições, procurando por comportamento anômalo | RS.MA: se confirmado o vazamento do `CELERY_CALLBACK_SECRET`, gera outro em substituição ao antigo | — |
@@ -126,7 +126,7 @@ Cada linha diz o que a função faz pelo risco. Onde a função não está marca
 | R17   | —        | —        | PR.AA: verificação de permissões/autorização de acesso para inscrição no ws | — | — | — |
 | R18   | GV.PO: política que impede que usuário `admin` aprove o próprio lançamento | —        | PR.AA: validação do usuário que requisita a aprovação de lançamento | DE.CM: alertar sobre tentativa de autoaprovação | — | — |
 | R19   | —        | —        | PR.DS: filtros em todas as queries realizadas no banco de dados, buscando prevenir SQL injection | DE.CM: análise estática de SQL concatenado no CI | — | — | 
-| R20   | —        | —        | PR.IR: verificação de variáveis de controle conforme o ambiente; PR.AT: conscientizar a equipe a verificar as variáveis de controle antes de realizar o deploy | DE.CM: bloqueio de deploy com configuração insegura | — | — | 
+| R20   | —        | —        | PR.PS: verificação de variáveis de controle conforme o ambiente; PR.AT: conscientizar a equipe a verificar as variáveis de controle antes de realizar o deploy | DE.CM: bloqueio de deploy com configuração insegura | — | — | 
 | R21   | GV.PO: credenciais distintas por ambiente | —        | PR.IR: separação do schema de produção e testes | — | — | — | 
 | R22   | —        | —        | PR.PS: uso de anti-vírus e scanners de conteúdos maliciosos nos anexos | — | RS.MA: report do usuário que anexou material com conteúdo malicioso | — | 
 | R23   | —        | —        | PR.PS: validação de dados a serem exportados para o ERP | — | RS.MA: report do usuário que tentou inserir dados maliciosos para os arquivos do ERP | RC.RP: regenerar o arquivo de carga pelo sistema |
@@ -139,10 +139,10 @@ Cada linha diz o que a função faz pelo risco. Onde a função não está marca
 
 ---
 
-### 8.3 Funções não marcadas
+### 8.2 Funções não marcadas
 
 - **Identify** não aparece em nenhuma linha porque é transversal: o inventário de ativos (ID.AM) foi feito na Etapa 1 e o registro de riscos (ID.RA) é o próprio documento de critérios e registro, válido para todos os riscos.
-- **Govern** só é marcado quando o risco exige política ou atribuição de responsabilidade própria (R01, R09, R14, R18). Os demais seguem a política geral de segredos e de aceitação de risco da seção 6.3.
-- **Detect, Respond e Recover** ficam sem marcação quando o controle preventivo basta para o nível residual pretendido ou quando o evento é detectado de imediato pela própria falha. O plano de tratamento acrescenta ações nessas funções onde foram necessárias (ver 3.2).
+- **Govern** só é marcado quando o risco exige política ou atribuição de responsabilidade própria (R01, R09, R10, R14, R18, R21). Os demais seguem a política geral de segredos e de aceitação de risco da seção 6.3.
+- **Detect, Respond e Recover** ficam sem marcação quando o controle preventivo basta para o nível residual pretendido ou quando o evento é detectado de imediato pela própria falha. O plano de tratamento acrescenta ações nessas funções onde foram necessárias (ver a [seção 9.2 do plano](etapa-2-plano-e-residual.md#92-plano-dos-riscos-r01r29)).
 
   ---

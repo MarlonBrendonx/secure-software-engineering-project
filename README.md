@@ -12,9 +12,9 @@
 
 Este repositório reúne a documentação de engenharia de software seguro do sistema de
 **Faturamento de Redes**, o processo pelo qual lançamentos de rede credenciada são
-apurados por competência, provisionados e faturado. O sistema possibilita o gerenciamento das redes cadastradas e o controle de acesso por meio de diferentes perfis de usuário (Administrador, Analista e Gestor). Além disso, permite realizar o fluxo completo de lançamentos, incluindo sua criação, aprovação e reprovação.
+apurados por competência, provisionados e faturados. O sistema possibilita o gerenciamento das redes cadastradas e o controle de acesso por meio de diferentes perfis de usuário (Administrador, Analista e Gestor). Além disso, permite realizar o fluxo completo de lançamentos, incluindo sua criação, aprovação e reprovação.
 
-O software foi construído sobre as sequintes stacks e arquitetura
+O software foi construído sobre as seguintes stacks e arquitetura
 
 **Backend:** Desenvolvido em **Python 3.11** com **FastAPI**, utilizando **Oracle** e **PostgreSQL** como bancos de dados. A aplicação foi estruturada seguindo os princípios de **Clean Architecture** e **Domain-Driven Design (DDD)**, com **TDD (Test-Driven Development)** aplicado ao desenvolvimento e à validação das funcionalidades.
 

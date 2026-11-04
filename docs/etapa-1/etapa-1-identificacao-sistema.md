@@ -13,11 +13,11 @@ estados de aprovação** com auditoria completa.
 
 Usuários corporativos internos, autenticados por SSO corporativo
 
-| Perfil     | Uso típico no PSP                                                                           |
+| Perfil     | Uso típico no sistema                                                                       |
 | ---------- | ------------------------------------------------------------------------------------------- |
 | `admin`    | Acesso total; opera criação, edição, todas as transições de status e rotas administrativas. |
 | `analista` | Cria e edita lançamentos, envia para aprovação da gestão                                    |
-| `gerente`  | Aprova e reprova lançamentos                                                                |
+| `gestor`   | Aprova e reprova lançamentos                                                                |
 | `none`     | Sem acesso ao negócio, só pode solicitar acesso.                                            |
 
 ### Principais funcionalidades

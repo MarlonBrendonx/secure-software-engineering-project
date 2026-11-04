@@ -11,7 +11,7 @@
 |   3   | Média-alta    | O evento é plausível e pode ocorrer em situações comuns de uso ou ataque.                     |
 |   4   | Alta          | O evento pode ocorrer com facilidade, frequência ou durante condições previsíveis do sistema. |
 
-A probabilidade de cada risco é calculada e justificada no documento [4. Justificativa das avaliações](#4-justificativas-das-avaliações) com base nas características do sistema
+A probabilidade de cada risco é calculada e justificada no documento [4. Justificativas das avaliações](etapa-2-avaliacao-e-priorizacao.md#4-justificativas-das-avaliações) com base nas características do sistema
 
 ### 2.2 Critérios de impacto
 

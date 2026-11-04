@@ -3,6 +3,8 @@
 
 ## Escopo
 
+A tabela abaixo consolida as ameaças (T01–T37) identificadas com o STRIDE sobre os componentes, pontos de entrada e ativos (A1–A14) descritos na [identificação do sistema](etapa-1-identificacao-sistema.md). Cada ameaça indica o ativo afetado, a propriedade violada, o controle já existente e o impacto, e os [casos de abuso](etapa-1-casos-de-abuso.md) detalham como ela seria explorada.
+
 ## Tabela STRIDE Consolidada
 
 
