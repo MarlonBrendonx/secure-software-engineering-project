@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "css": { "parser": { "tailwindDirectives": true } },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf"
+  },
+  "linter": {
+    "domains": { "next": "recommended", "react": "recommended" },
+    "enabled": true,
+    "rules": {
+      "correctness": { "noUnusedImports": "error" },
+      "style": { "useConsistentTypeDefinitions": "off" },
+      "nursery": { "noLeakedRender": "off" },
+      "recommended": true
+    }
+  },
+  "vcs": { "clientKind": "git", "enabled": true, "useIgnoreFile": true }
+}
