@@ -1,0 +1,38 @@
+# Vale para todos os projetos do repositório (extra/Billing, extra/prototipo-psp, ...).
+# Cada projeto pode ter o seu .gitignore para regras específicas.
+
+# Dependências e saída de build (Node)
+node_modules/
+.next/
+dist/
+build/
+out/
+*.tsbuildinfo
+.pnpm-store/
+
+# Ambiente virtual, caches e artefatos (Python)
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Segredos: só o modelo .env.example é versionado
+.env
+.env.*
+!.env.example
+
+# Testes e logs
+coverage/
+*.log
+
+# Sistema operacional e editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

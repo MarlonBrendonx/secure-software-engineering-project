@@ -22,9 +22,11 @@ Para gerenciamento de filas e processamento assíncrono, são utilizados **Rabbi
 
 **Frontend:** Desenvolvido em **React.js**, utilizando a arquitetura **Feature-Sliced Design (FSD)** para organizar e estruturar a aplicação de forma modular e escalável. A arquitetura promove a separação clara das responsabilidades, facilitando a manutenção, reutilização de componentes e evolução do sistema.
 
-O escopo atual é **documental**. O repositório descreve o sistema, seu vocabulário de
-domínio, seus ativos e seus riscos. Porém, não contém, neste momento, implementação,
-evidências de execução ou artefatos de verificação automatizada.
+O escopo principal é **documental**: o repositório descreve o sistema, seu vocabulário de
+domínio, seus ativos e seus riscos. Há também um **protótipo** do fluxo de lançamentos do PSP e do
+login mock, em [`extra/prototipo-psp`](extra/prototipo-psp/README.md), com testes executáveis
+para as duas práticas da etapa 4. O protótipo não cobre o sistema completo nem prova o risco residual
+em produção.
 
 ### Visão geral
 
@@ -48,7 +50,7 @@ evidências de execução ou artefatos de verificação automatizada.
 ```text
 .
 ├── README.md      # este índice
-├── extra/         # documentações extras ou complementares
+├── extra/         # documentações extras ou complementares e o protótipo (extra/prototipo-psp)
 ├── docs/          # documentações md de cada etapa
 ├── diagramas/     # diagramas e fluxos de cada etapa
 └── imgs/          # imagens no geral
