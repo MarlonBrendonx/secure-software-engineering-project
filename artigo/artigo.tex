@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage[hyphens]{url}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -59,20 +60,47 @@ johnatas@ufu.br}
 
 \section{Introdução}
 \subsection{Contexto e Motivação}
-A cada competência, os lançamentos de uma rede credenciada precisam ser apurados, aprovados e transformados em um valor a faturar. Alguém registra, outra pessoa confere e aprova, e só então o número segue para o sistema financeiro da empresa. Quando esse caminho dependia de planilhas, os problemas eram previsíveis, como um erro de cálculo, uma alteração sem rastro ou uma aprovação da qual ninguém sabia dizer quem era o autor.
+A segurança digital deixou de ser um assunto restrito às equipes de tecnologia. O custo médio global de uma violação de dados chegou a US\$~4,99 milhões em 2026, o maior valor já registrado pelo relatório da IBM~\cite{ibm2026}. No Brasil, a média foi de R\$~7,44 milhões, e a saúde foi o setor de maior custo, com R\$~12,55 milhões por violação~\cite{lobo2026}. Os dados da Verizon indicam ainda que 31\% das violações começam pela exploração de vulnerabilidades de software, hoje a principal forma de entrada, à frente do roubo de senhas~\cite{verizon2026}. O software que sustenta as operações de uma empresa passou, assim, a fazer parte do risco do negócio.
 
-Nesse cenário, o sistema de faturamento passa a ser a autoridade sobre o valor. Ele recalcula cada lançamento a partir da regra de serviço contratada, conduz o lançamento por um fluxo de aprovação e entrega ao sistema de gestão empresarial (ERP) a carga que vira registro contábil. É uma boa solução, mas ela concentra em um único lugar tudo o que um atacante, ou um usuário mal-intencionado, gostaria de alcançar. Um valor adulterado não fica restrito ao sistema, pois chega ao cliente como cobrança e à contabilidade como registro.
+O setor farmacêutico mostra bem essa exposição. O mercado brasileiro de medicamentos faturou R\$~182,8 bilhões em 2025, com 6,3 bilhões de embalagens comercializadas~\cite{anvisa2026}. Entre o fabricante e o paciente há distribuidores, farmácias e prestadores de serviços ligados por sistemas que registram, calculam e cobram, e esses intermediários já foram alvo de incidentes graves. Em 2024, criminosos usaram credenciais comprometidas para entrar em um portal de acesso remoto sem autenticação multifator (MFA) da Change Healthcare~\cite{witty2024}, empresa americana que processa bilhões de pedidos de reembolso de seguros por ano, e o ataque interrompeu pedidos e pagamentos em todo o país~\cite{murphy2024}. No mesmo ano, um roubo de dados na distribuidora Cencora expôs informações de pacientes mantidas em programas de suporte operados para fabricantes como a Novartis~\cite{toulas2024}. Nem todo risco vem de um invasor externo. Ao auditar o programa Farmácia Popular, que depende de farmácias credenciadas, o Tribunal de Contas da União apontou fragilidades no sistema de vendas e baixa assertividade na identificação de fraudes~\cite{tcu2023}.
 
-A segurança desse tipo de sistema costuma ser tratada posteriormente, quando o código já existe e resta corrigir o que aparecer. Este trabalho segue o caminho inverso. Em vez de procurar falhas em um produto pronto, olhamos para o sistema como ele foi desenhado, perguntamos como poderia ser vulnerável e usamos as respostas para decidir quais controles e qual arquitetura reduzem os riscos mais graves. É essa passagem, das ameaças às decisões de projeto, que motiva este artigo.
+Este artigo trata de um sistema desse tipo, o faturamento de uma rede credenciada do setor farmacêutico. A cada competência, os lançamentos de cada cliente precisam ser apurados, aprovados e transformados em um valor a faturar. Alguém registra, outra pessoa confere e aprova, e só então o número segue para o sistema financeiro da empresa. Quando esse caminho dependia de planilhas, os problemas eram previsíveis, como um erro de cálculo, uma alteração sem rastro ou uma aprovação da qual ninguém sabia dizer quem era o autor. Hoje o sistema é a autoridade sobre o valor. Ele recalcula cada lançamento a partir da regra de serviço contratada, conduz o lançamento por um fluxo de aprovação e entrega ao sistema de gestão empresarial (ERP) a carga que vira registro contábil.
+
+Essa centralização resolve os problemas das planilhas, mas reúne em um só lugar o que um atacante, ou um usuário mal-intencionado, gostaria de alcançar. Ao contrário do caso da Cencora, o sistema não guarda dados de pacientes. Seu ativo mais importante é o próprio valor faturado, e um valor adulterado não fica restrito ao sistema, pois chega ao cliente como cobrança e à contabilidade como registro.
+
+Proteger esse valor é, em boa parte, uma questão de arquitetura. Decisões como onde o valor é calculado, quem pode aprovar um lançamento e o que acontece quando uma verificação de permissão falha são tomadas no projeto e não se resolvem com um ajuste pontual no código. A literatura separa os erros de implementação, os \textit{bugs}, das falhas de projeto~\cite{arce2014}, e McGraw estima que estas respondam por cerca de metade dos defeitos de segurança~\cite{mcgraw2006}. O OWASP Top 10 resume a consequência ao afirmar que um projeto inseguro não pode ser corrigido por uma implementação perfeita~\cite{owasp2025a06}. A mesma preocupação aparece nas recomendações do NIST, que incluem a modelagem de ameaças para avaliar o risco de segurança do software~\cite{nist2022ssdf}, e na Lei Geral de Proteção de Dados Pessoais (LGPD), que exige medidas de segurança desde a fase de concepção do produto ou do serviço~\cite{lgpd2018}. Essa exigência alcança os dados pessoais que o sistema guarda, como os e-mails de seus usuários.
+
+Ainda assim, poucos modelos de ciclo de vida de desenvolvimento tratam a segurança em detalhe~\cite{nist2022ssdf}, e ela costuma ficar para depois, quando o código já existe e resta corrigir o que aparecer. Este trabalho segue o caminho inverso. Em vez de procurar falhas em um produto pronto, olhamos para o sistema como ele foi desenhado e usamos a modelagem de ameaças~\cite{shostack2014} e os casos de abuso para perguntar como ele poderia ser atacado. Com as respostas, avaliamos os riscos com o apoio do NIST CSF 2.0~\cite{nist2024csf} e decidimos quais controles e qual arquitetura reduzem os mais graves. É essa passagem, das ameaças às decisões de projeto, que motiva este artigo.
 
 \subsection{Problema e Questões de Pesquisa}
-Declarar o problema de transformar ameaças em riscos priorizados e requisitos verificáveis, com duas a três questões de pesquisa.
-\subsection{Contribuições}
-Listar o que o artigo entrega, do processo ponta a ponta à arquitetura segura proposta.
-\subsection{Organização do Artigo}
-Resumir em um parágrafo o conteúdo de cada seção seguinte.
+Modelar as ameaças, porém, é só o começo. Uma lista de ameaças diz o que pode dar errado, mas não diz por onde começar nem o que exigir do sistema. Para isso, cada ameaça precisa virar um risco com probabilidade e impacto justificados, e os riscos mais graves precisam virar requisitos que possam ser verificados depois, por um teste ou por uma evidência. Sem essa passagem, a modelagem de ameaças termina em um documento que não muda o projeto.
 
-\section{Fundamentação Teórica e Trabalhos Relacionados}
+No sistema de faturamento, essa passagem enfrenta duas dificuldades. A primeira é que a pontuação, sozinha, não define a ordem de tratamento. O acesso não autorizado a dados restritos tem pontuação 9, maior que a do vazamento da chave que assina os tokens, de pontuação 8. Ainda assim, restringir o acesso aos dados adianta pouco se um atacante consegue forjar um token de administrador. A segunda é que os controles partem de suposições que os riscos mais graves não tratam. Conferir o perfil do usuário supõe que o token não foi forjado, e exigir rastreabilidade supõe que o registro de auditoria foi de fato gravado. Se uma dessas suposições falha, os controles que dependem dela deixam de valer, mesmo que tenham sido bem projetados.
+
+O problema tratado neste artigo é, portanto, como transformar as ameaças de um sistema de faturamento em riscos priorizados e em requisitos verificáveis, sem perder a ligação entre cada decisão de arquitetura e a ameaça que a motivou. Três questões de pesquisa guiam o trabalho:
+
+\begin{itemize}
+    \item \textbf{QP1:} Como transformar ameaças e casos de abuso em riscos priorizados, considerando, além da pontuação, as dependências entre os riscos?
+    \item \textbf{QP2:} Como derivar dos riscos prioritários requisitos de segurança verificáveis e decisões de arquitetura, mantendo a rastreabilidade entre ameaça, risco, requisito, vulnerabilidade e controle?
+    \item \textbf{QP3:} Qual redução de risco se pode esperar dos controles propostos, e qual risco residual ainda exige aceitação formal?
+\end{itemize}
+
+\subsection{Contribuições}
+As principais contribuições deste artigo são:
+
+\begin{itemize}
+    \item um processo ponta a ponta, aplicado a um sistema de faturamento de redes farmacêuticas, em que a saída de cada etapa alimenta a seguinte, da modelagem de ameaças à arquitetura segura;
+    \item uma modelagem de ameaças do sistema, com 37 ameaças STRIDE e 29 casos de abuso sobre 14 ativos;
+    \item um registro de 29 riscos avaliados por probabilidade e impacto, ordenados em cinco estágios de implementação segundo critérios que vão além da pontuação, como as dependências entre riscos, e mapeados às funções do NIST CSF 2.0, com plano de tratamento e estimativa do risco residual;
+    \item um critério de seleção em duas rodadas, que acrescenta aos riscos centrais aqueles sem os quais os controles desses riscos deixam de funcionar;
+    \item oito requisitos de segurança verificáveis (RS01 a RS08), ligados a vulnerabilidades catalogadas no CWE e no OWASP Top 10;
+    \item uma arquitetura segura proposta, com diagrama, oito decisões de arquitetura (D01 a D08) e uma tabela de rastreabilidade entre requisitos, riscos, vulnerabilidades, decisões e controles.
+\end{itemize}
+
+\subsection{Organização do Artigo}
+O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, as decisões e a rastreabilidade, e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
+
+\section{Fundamentação Teórica e Trabalhos Relacionados}\label{sec:fundamentacao}
 \subsection{Ciclo de Vida de Engenharia de Software Seguro}
 Situar o artigo no ciclo de vida de engenharia de software seguro e nas etapas cobertas.
 \subsection{Modelagem de Ameaças e Casos de Abuso}
@@ -84,7 +112,7 @@ Apresentar CWE, OWASP Top 10 e cheat sheets da OWASP como base para requisitos d
 \subsection{Trabalhos Relacionados}
 Comparar com trabalhos sobre ameaças e riscos em sistemas financeiros, destacando a lacuna deste artigo.
 
-\section{Sistema Estudado}
+\section{Sistema Estudado}\label{sec:sistema}
 \subsection{Domínio de Negócio e Perfis de Usuário}
 Descrever o processo de faturamento e os perfis Administrador, Analista e Gestor, sem dados reais da empresa.
 \subsection{Arquitetura e Tecnologias}
@@ -94,7 +122,7 @@ Apresentar os 14 ativos e a superfície exposta (endpoints, callbacks e WebSocke
 \subsection{Controles de Segurança Existentes}
 Listar os controles já presentes, que definem o risco atual.
 
-\section{Metodologia}
+\section{Metodologia}\label{sec:metodologia}
 \subsection{Visão Geral do Processo}
 Apresentar as etapas do processo e como a saída de cada uma alimenta a seguinte, de preferência com uma figura.
 \subsection{Modelagem de Ameaças e Casos de Abuso}
@@ -106,7 +134,7 @@ Explicar a ordenação em estágios, as estratégias de tratamento e as dependê
 \subsection{Mapeamento dos Controles às Funções do NIST CSF 2.0}
 Descrever como os controles foram associados às funções do NIST CSF 2.0 e como o risco residual foi estimado.
 
-\section{Resultados da Análise de Riscos}
+\section{Resultados da Análise de Riscos}\label{sec:resultados}
 \subsection{Riscos Identificados e sua Distribuição}
 Apresentar os 29 riscos e a distribuição por nível (3 Críticos, 15 Altos e 11 Médios) e comentar os de maior pontuação.
 \subsection{Priorização e Ordem de Implementação}
@@ -116,7 +144,7 @@ Comparar o risco atual com o residual esperado (18 Médios e 11 Baixos), reforç
 \subsection{Aceitação do Risco Residual}
 Descrever a regra de aceitação do risco residual e por que os Médios exigem aceitação formal.
 
-\section{Projeto da Arquitetura Segura}
+\section{Projeto da Arquitetura Segura}\label{sec:arquitetura}
 \subsection{Requisitos de Segurança}
 Apresentar os requisitos RS01 a RS03, derivados de R01, R02 e R03, com o critério de verificação de cada um.
 \subsection{Mapeamento para Vulnerabilidades Catalogadas}
@@ -128,7 +156,7 @@ Descrever as decisões D01 a D03 com problema, decisão, motivo, componente afet
 \subsection{Rastreabilidade entre Riscos e Controles}
 Mostrar em uma tabela como cada requisito se liga ao risco, à vulnerabilidade, à decisão e ao controle do plano.
 
-\section{Discussão}
+\section{Discussão}\label{sec:discussao}
 \subsection{Lições Aprendidas}
 Discutir o que o processo mostrou ao ligar ameaças, riscos e arquitetura, e as dificuldades encontradas.
 \subsection{Implicações para Sistemas Financeiros}
@@ -136,12 +164,13 @@ Discutir o que os achados significam para sistemas financeiros e de faturamento 
 \subsection{Limitações e Ameaças à Validade}
 Declarar as limitações, como controles apenas propostos e risco residual sem validação.
 
-\section{Conclusão e Trabalhos Futuros}
+\section{Conclusão e Trabalhos Futuros}\label{sec:conclusao}
 Retomar o problema e as contribuições, resumir os resultados e indicar os próximos passos.
 
 \section*{Agradecimentos}
 Agradecer apoios e colaboradores, ou remover esta seção se não for necessária.
 
+\bibliographystyle{IEEEtran}
 \bibliography{references}
 
 \end{document}
