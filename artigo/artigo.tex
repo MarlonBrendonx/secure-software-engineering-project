@@ -1,0 +1,147 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\begin{document}
+
+\title{Engenharia de Software Seguro em um Sistema de Faturamento de Redes Farmacêuticas, da Modelagem de Ameaças à Arquitetura}
+
+\author{
+    \IEEEauthorblockN{Marlon Brendo}
+    \IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
+    \textit{Universidade Federal de Uberlândia (UFU)}\\
+    Uberlândia, Brasil \\
+    marlonbrendoramos@ufu.br}
+
+\and
+\IEEEauthorblockN{2\textsuperscript{o} Nome Sobrenome}
+\IEEEauthorblockA{\textit{departamento} \\
+\textit{instituição}\\
+Cidade, País \\
+e-mail ou ORCID}
+
+\and
+\IEEEauthorblockN{3\textsuperscript{o} Nome Sobrenome}
+\IEEEauthorblockA{\textit{departamento} \\
+\textit{instituição}\\
+Cidade, País \\
+e-mail ou ORCID}
+
+\and
+\IEEEauthorblockN{Johnatas Freitas}
+\IEEEauthorblockA{\textit{FACOM} \\
+\textit{UFU}\\
+Uberlândia, Brasil \\
+johnatas@ufu.br}
+}
+
+\maketitle
+
+\begin{abstract}
+% Escrever por último, em um único parágrafo, com contexto, método, resultados e conclusão.
+\end{abstract}
+
+\begin{IEEEkeywords}
+% engenharia de software seguro, modelagem de ameaças, gestão de riscos,
+% NIST CSF, STRIDE, sistemas de faturamento
+\end{IEEEkeywords}
+
+\section{Introdução}
+\subsection{Contexto e Motivação}
+A cada competência, os lançamentos de uma rede credenciada precisam ser apurados, aprovados e transformados em um valor a faturar. Alguém registra, outra pessoa confere e aprova, e só então o número segue para o sistema financeiro da empresa. Quando esse caminho dependia de planilhas, os problemas eram previsíveis, como um erro de cálculo, uma alteração sem rastro ou uma aprovação da qual ninguém sabia dizer quem era o autor.
+
+Nesse cenário, o sistema de faturamento passa a ser a autoridade sobre o valor. Ele recalcula cada lançamento a partir da regra de serviço contratada, conduz o lançamento por um fluxo de aprovação e entrega ao sistema de gestão empresarial (ERP) a carga que vira registro contábil. É uma boa solução, mas ela concentra em um único lugar tudo o que um atacante, ou um usuário mal-intencionado, gostaria de alcançar. Um valor adulterado não fica restrito ao sistema, pois chega ao cliente como cobrança e à contabilidade como registro.
+
+A segurança desse tipo de sistema costuma ser tratada posteriormente, quando o código já existe e resta corrigir o que aparecer. Este trabalho segue o caminho inverso. Em vez de procurar falhas em um produto pronto, olhamos para o sistema como ele foi desenhado, perguntamos como poderia ser vulnerável e usamos as respostas para decidir quais controles e qual arquitetura reduzem os riscos mais graves. É essa passagem, das ameaças às decisões de projeto, que motiva este artigo.
+
+\subsection{Problema e Questões de Pesquisa}
+Declarar o problema de transformar ameaças em riscos priorizados e requisitos verificáveis, com duas a três questões de pesquisa.
+\subsection{Contribuições}
+Listar o que o artigo entrega, do processo ponta a ponta à arquitetura segura proposta.
+\subsection{Organização do Artigo}
+Resumir em um parágrafo o conteúdo de cada seção seguinte.
+
+\section{Fundamentação Teórica e Trabalhos Relacionados}
+\subsection{Ciclo de Vida de Engenharia de Software Seguro}
+Situar o artigo no ciclo de vida de engenharia de software seguro e nas etapas cobertas.
+\subsection{Modelagem de Ameaças e Casos de Abuso}
+Explicar o modelo STRIDE e o conceito de caso de abuso, e como os dois se complementam.
+\subsection{Gestão de Riscos com o NIST CSF 2.0}
+Descrever as funções do NIST CSF 2.0 e como elas apoiam a escolha dos controles.
+\subsection{Catálogos de Vulnerabilidades e Requisitos de Segurança}
+Apresentar CWE, OWASP Top 10 e cheat sheets da OWASP como base para requisitos de segurança verificáveis.
+\subsection{Trabalhos Relacionados}
+Comparar com trabalhos sobre ameaças e riscos em sistemas financeiros, destacando a lacuna deste artigo.
+
+\section{Sistema Estudado}
+\subsection{Domínio de Negócio e Perfis de Usuário}
+Descrever o processo de faturamento e os perfis Administrador, Analista e Gestor, sem dados reais da empresa.
+\subsection{Arquitetura e Tecnologias}
+Descrever a arquitetura em camadas, as tecnologias do backend e os serviços de apoio, com um diagrama simples.
+\subsection{Ativos e Superfície de Ataque}
+Apresentar os 14 ativos e a superfície exposta (endpoints, callbacks e WebSocket) em uma tabela.
+\subsection{Controles de Segurança Existentes}
+Listar os controles já presentes, que definem o risco atual.
+
+\section{Metodologia}
+\subsection{Visão Geral do Processo}
+Apresentar as etapas do processo e como a saída de cada uma alimenta a seguinte, de preferência com uma figura.
+\subsection{Modelagem de Ameaças e Casos de Abuso}
+Explicar como foram obtidas as 37 ameaças STRIDE e os 29 casos de abuso e como foram revisados.
+\subsection{Critérios de Avaliação de Riscos}
+Definir as escalas de probabilidade e impacto, os níveis de risco e a regra do risco atual.
+\subsection{Priorização e Estratégias de Tratamento}
+Explicar a ordenação em estágios, as estratégias de tratamento e as dependências entre riscos.
+\subsection{Mapeamento dos Controles às Funções do NIST CSF 2.0}
+Descrever como os controles foram associados às funções do NIST CSF 2.0 e como o risco residual foi estimado.
+
+\section{Resultados da Análise de Riscos}
+\subsection{Riscos Identificados e sua Distribuição}
+Apresentar os 29 riscos e a distribuição por nível (3 Críticos, 15 Altos e 11 Médios) e comentar os de maior pontuação.
+\subsection{Priorização e Ordem de Implementação}
+Mostrar os cinco estágios de implementação e a justificativa da ordem.
+\subsection{Plano de Tratamento e Risco Residual Esperado}
+Comparar o risco atual com o residual esperado (18 Médios e 11 Baixos), reforçando que é uma estimativa.
+\subsection{Aceitação do Risco Residual}
+Descrever a regra de aceitação do risco residual e por que os Médios exigem aceitação formal.
+
+\section{Projeto da Arquitetura Segura}
+\subsection{Requisitos de Segurança}
+Apresentar os requisitos RS01 a RS03, derivados de R01, R02 e R03, com o critério de verificação de cada um.
+\subsection{Mapeamento para Vulnerabilidades Catalogadas}
+Mostrar a ligação de cada requisito a uma vulnerabilidade catalogada e sua relação com o sistema.
+\subsection{Diagrama da Arquitetura Segura}
+Inserir o diagrama da arquitetura segura e descrever o fluxo e a posição dos principais controles.
+\subsection{Decisões de Arquitetura}
+Descrever as decisões D01 a D03 com problema, decisão, motivo, componente afetado e resultado esperado.
+\subsection{Rastreabilidade entre Riscos e Controles}
+Mostrar em uma tabela como cada requisito se liga ao risco, à vulnerabilidade, à decisão e ao controle do plano.
+
+\section{Discussão}
+\subsection{Lições Aprendidas}
+Discutir o que o processo mostrou ao ligar ameaças, riscos e arquitetura, e as dificuldades encontradas.
+\subsection{Implicações para Sistemas Financeiros}
+Discutir o que os achados significam para sistemas financeiros e de faturamento em geral.
+\subsection{Limitações e Ameaças à Validade}
+Declarar as limitações, como controles apenas propostos e risco residual sem validação.
+
+\section{Conclusão e Trabalhos Futuros}
+Retomar o problema e as contribuições, resumir os resultados e indicar os próximos passos.
+
+\section*{Agradecimentos}
+Agradecer apoios e colaboradores, ou remover esta seção se não for necessária.
+
+\bibliography{references}
+
+\end{document}
