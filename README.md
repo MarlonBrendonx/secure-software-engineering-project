@@ -44,6 +44,7 @@ em produção.
 | 2. Riscos e NIST CSF 2.0               | Análise, Priorização e Tratamento de Riscos com o NIST CSF 2.0                            | [Índice da Etapa 2](docs/etapa-2/etapa-2-riscos-nist.md), [Critérios e registro](docs/etapa-2/etapa-2-criterios-e-registro.md), [Avaliação e priorização](docs/etapa-2/etapa-2-avaliacao-e-priorizacao.md), [NIST CSF](docs/etapa-2/etapa-2-nist-csf.md), [Plano e residual](docs/etapa-2/etapa-2-plano-e-residual.md) |
 | 3. Arquitetura segura                  | Requisitos de segurança, vulnerabilidades catalogadas, diagrama e decisões de arquitetura | [Índice da Etapa 3](docs/etapa-3/etapa-3-arquitetura-segura.md), [Requisitos](docs/etapa-3/etapa-3-requisitos.md), [Vulnerabilidades](docs/etapa-3/etapa-3-vulnerabilidades.md), [Diagrama](docs/etapa-3/etapa-3-diagrama.md), [Decisões](docs/etapa-3/etapa-3-decisoes.md)                                            |
 | 4. Código seguro e testes de segurança | Práticas de código seguro e testes de segurança definidos antes da implementação          | [Índice da Etapa 4](docs/etapa-4/etapa-4-codigo-seguro.md), [Prática 1: Autorização por recurso](docs/etapa-4/etapa-4-pratica-1-autorizacao-por-recurso.md), [Prática 2: Validação de token e MFA](docs/etapa-4/etapa-4-pratica-2-validacao-de-token-e-mfa.md)                                                         |
+| 5. Verificação de vulnerabilidades     | Varredura do protótipo com o ZAP, análise de três alertas e correções propostas           | [Índice da Etapa 5](docs/etapa-5/etapa-5-verificacao-vulnerabilidades.md), [Ambiente e configuração](docs/etapa-5/etapa-5-ambiente-e-configuracao.md), [Execução e evidências](docs/etapa-5/etapa-5-execucao-e-evidencias.md), [Análise dos achados](docs/etapa-5/etapa-5-analise-dos-achados.md), [Correções propostas](docs/etapa-5/etapa-5-correcoes-propostas.md), [Limitações](docs/etapa-5/etapa-5-limitacoes.md) |
 
 ## Organização do repositório
 
@@ -53,5 +54,6 @@ em produção.
 ├── extra/         # documentações extras ou complementares e o protótipo (extra/prototipo-psp)
 ├── docs/          # documentações md de cada etapa
 ├── diagramas/     # diagramas e fluxos de cada etapa
+├── evidencias/    # capturas de tela e relatórios de cada etapa (etapa-5/)
 └── imgs/          # imagens no geral
 ```

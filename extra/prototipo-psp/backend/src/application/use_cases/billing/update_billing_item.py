@@ -20,6 +20,7 @@ from src.domain.ports.gateways.billing_gateway import BillingGateway
 from src.domain.ports.gateways.billing_item_gateway import BillingItemGateway
 from src.domain.ports.gateways.security_gateway import AuditLogGateway
 from src.domain.ports.gateways.service_rule_gateway import ServiceRuleGateway
+from src.domain.ports.services.billing_events import BillingEventPublisher
 from src.domain.value_objects.billing_status import HistoryAction
 
 _NON_DATA_FIELDS = frozenset({"actor", "item_uuid", "version"})
@@ -33,12 +34,14 @@ class UpdateBillingItemUseCase:
         service_rule_gateway: ServiceRuleGateway,
         guard: ResourceAccessGuard,
         audit: AuditLogGateway,
+        events: BillingEventPublisher,
     ) -> None:
         self._billings = billing_gateway
         self._items = item_gateway
         self._rules = service_rule_gateway
         self._guard = guard
         self._audit = audit
+        self._events = events
 
     async def execute(
         self, cmd: UpdateBillingItemCommand
@@ -101,4 +104,7 @@ class UpdateBillingItemUseCase:
         )
         await self._billings.recalculate_total(billing)
         await audit_item_event(self._audit, "lancamento_atualizado", cmd.actor, item.uuid)
+        await self._events.billing_changed(
+            billing.client_uuid, billing.reference_year, billing.reference_month
+        )
         return enrich_item(updated, rule), warnings

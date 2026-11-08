@@ -6,8 +6,10 @@ const backendUrl = (process.env.NEXT_PUBLIC_BACKEND_URL ?? "").replace(
   "",
 );
 
-// Só a API do protótipo é liberada para conexões; não há WebSocket nem storage externo.
-const connectSrc = ["'self'", backendUrl].filter(Boolean).join(" ");
+// Só a API do protótipo é liberada para conexões, em HTTP e em WebSocket. O `http://host`
+// da lista não cobre `ws://host`: o navegador trata as duas origens como diferentes.
+const wsUrl = backendUrl.replace(/^http/, "ws");
+const connectSrc = ["'self'", backendUrl, wsUrl].filter(Boolean).join(" ");
 
 const csp = [
   "default-src 'self'",

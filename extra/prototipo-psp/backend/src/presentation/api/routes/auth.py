@@ -97,6 +97,7 @@ async def refresh(request: Request, container: ContainerDep) -> JSONResponse:
 @router.post("/logout")
 async def logout(response: Response, auth: SessionUser, container: ContainerDep) -> dict[str, str]:
     await container.logout.execute(auth.user.username, auth.claims.sid)
+    await container.realtime.close_session(auth.claims.sid)
     _clear_cookies(response, container.settings)
     return {"message": "Logged out"}
 

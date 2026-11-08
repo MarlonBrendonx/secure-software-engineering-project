@@ -86,4 +86,5 @@ features/auth/      contexto e cliente de autenticação
 ## Fora do escopo do protótipo
 
 Módulos como dashboard, cadastros, aprovações, integração ERP, provisão e rede
-não existem aqui. Anexos, WebSocket (tempo real) e SSO também foram removidos.
+não existem aqui. Anexos e SSO também foram removidos. O WebSocket existe só para o aviso de
+mudança no faturamento (veja o README da raiz do protótipo).

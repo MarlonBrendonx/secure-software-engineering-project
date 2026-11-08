@@ -15,7 +15,7 @@ from src.infrastructure.persistence.redis.seed import seed_demo_data
 from src.presentation.api.container import Container
 from src.presentation.api.deps import assert_all_routes_have_policy
 from src.presentation.api.exceptions import register_exception_handlers
-from src.presentation.api.routes import audit, auth, billing, registry
+from src.presentation.api.routes import audit, auth, billing, registry, ws
 
 
 def create_app(settings: Settings | None = None, redis: Redis | None = None) -> FastAPI:
@@ -58,6 +58,7 @@ def create_app(settings: Settings | None = None, redis: Redis | None = None) -> 
         ("/v1/billing", billing.router),
         ("/v1", audit.router),
         ("/v1", registry.router),
+        ("", ws.router),
     ]
     for prefix, router in routers:
         app.include_router(router, prefix=prefix)

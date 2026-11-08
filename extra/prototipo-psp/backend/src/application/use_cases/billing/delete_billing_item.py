@@ -15,6 +15,7 @@ from src.domain.ports.gateways.billing_gateway import BillingGateway
 from src.domain.ports.gateways.billing_item_gateway import BillingItemGateway
 from src.domain.ports.gateways.security_gateway import AuditLogGateway
 from src.domain.ports.gateways.service_rule_gateway import ServiceRuleGateway
+from src.domain.ports.services.billing_events import BillingEventPublisher
 from src.domain.value_objects.billing_status import HistoryAction
 
 
@@ -26,12 +27,14 @@ class DeleteBillingItemUseCase:
         service_rule_gateway: ServiceRuleGateway,
         guard: ResourceAccessGuard,
         audit: AuditLogGateway,
+        events: BillingEventPublisher,
     ) -> None:
         self._billings = billing_gateway
         self._items = item_gateway
         self._rules = service_rule_gateway
         self._guard = guard
         self._audit = audit
+        self._events = events
 
     async def execute(self, cmd: DeleteBillingItemCommand) -> None:
         item, billing = await load_item_for_actor(
@@ -75,3 +78,6 @@ class DeleteBillingItemUseCase:
         else:
             await self._billings.recalculate_total(billing)
         await audit_item_event(self._audit, "lancamento_excluido", cmd.actor, item.uuid)
+        await self._events.billing_changed(
+            billing.client_uuid, billing.reference_year, billing.reference_month
+        )

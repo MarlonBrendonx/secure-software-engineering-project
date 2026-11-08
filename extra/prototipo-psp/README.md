@@ -2,8 +2,8 @@
 
 Protótipo da engenharia de software seguro. Replica só o que as etapas 1 a 4 abordam: o fluxo de
 **lançamentos do PSP**, o cadastro de **serviços e regras** que alimenta o lançamento e o
-**login**. O restante do sistema original (anexos, tempo real, central de aprovações, ERP,
-provisão, dashboards e os demais cadastros) ficou de fora.
+**login**, mais o aviso em **tempo real** das mudanças no faturamento. O restante do sistema original
+(anexos, central de aprovações, ERP, provisão, dashboards e os demais cadastros) ficou de fora.
 
 | Parte | Origem | Aqui |
 |---|---|---|
@@ -131,6 +131,29 @@ A rota `GET /v1/billing/items/{id}` não existe no original. Foi acrescentada pa
 ```bash
 cd backend && .venv/bin/python -m pytest -q   # usa fakeredis, não precisa de Redis
 ```
+
+## Tempo real (`/ws`)
+
+Quando alguém cria, altera, exclui, replica ou muda o status de um lançamento, quem está com o mesmo
+mês aberto em `/psp` vê a lista atualizar sozinha.
+
+- O evento é só um **aviso de invalidação** (`billing_changed`, com o cliente). Não leva valores: o
+  front refaz o `GET /v1/billing`, que já aplica o escopo. O canal não vira um caminho paralelo
+  para ler dados de outro cliente.
+- **Autenticação**: o token vai na primeira mensagem (`{"type":"auth","token":...}`), nunca na URL.
+  A checagem é a mesma das rotas HTTP: token, sessão, perfil e MFA. Perfil privilegiado sem OTP
+  é recusado (fecha com 4003).
+- **Origem**: o CORS não vale para WebSocket, então o servidor confere o `Origin` contra
+  `CORS_ORIGINS` e nega quando falta.
+- **Escopo**: só se inscreve em `billing:AAAA-MM` quem tem o período no escopo, e o aviso só chega
+  se o cliente também estiver. O escopo é relido a cada entrega.
+- **Revogação**: logout derruba a conexão, a sessão é conferida a cada entrega e a conexão fecha
+  quando o token expira (4003). O front renova o token e reconecta.
+- **Limites**: 5 conexões por usuário, 12 canais por conexão e mensagens de até 256 bytes.
+
+Limitação: o hub vive em memória de um processo. Com mais de um worker, o aviso só chega a quem
+está conectado no mesmo worker; em produção o hub precisaria de um barramento externo (Redis
+pub/sub). Em Docker, `NEXT_PUBLIC_BACKEND_URL` já cobre o `ws://` (o CSP deriva dele).
 
 ## O que NÃO foi implementado
 

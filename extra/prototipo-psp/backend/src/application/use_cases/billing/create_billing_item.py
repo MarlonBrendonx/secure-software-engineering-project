@@ -25,6 +25,7 @@ from src.domain.ports.gateways.billing_item_gateway import BillingItemGateway
 from src.domain.ports.gateways.client_gateway import ClientGateway
 from src.domain.ports.gateways.security_gateway import AuditLogGateway
 from src.domain.ports.gateways.service_rule_gateway import ServiceRuleGateway
+from src.domain.ports.services.billing_events import BillingEventPublisher
 from src.domain.value_objects.billing_status import BillingStatus, HistoryAction
 
 
@@ -43,6 +44,7 @@ class CreateBillingItemUseCase:
         service_rule_gateway: ServiceRuleGateway,
         guard: ResourceAccessGuard,
         audit: AuditLogGateway,
+        events: BillingEventPublisher,
     ) -> None:
         self._billings = billing_gateway
         self._items = item_gateway
@@ -50,6 +52,7 @@ class CreateBillingItemUseCase:
         self._rules = service_rule_gateway
         self._guard = guard
         self._audit = audit
+        self._events = events
 
     async def execute(
         self, cmd: CreateBillingItemCommand
@@ -137,4 +140,5 @@ class CreateBillingItemUseCase:
         item = await self._items.create(item, history=history)
         await self._billings.recalculate_total(billing)
         await audit_item_event(self._audit, "lancamento_criado", cmd.actor, item.uuid)
+        await self._events.billing_changed(cmd.client_uuid, cmd.reference_year, cmd.reference_month)
         return enrich_item(item, rule), warnings

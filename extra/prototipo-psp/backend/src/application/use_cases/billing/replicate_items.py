@@ -23,6 +23,7 @@ from src.domain.ports.gateways.billing_item_gateway import BillingItemGateway
 from src.domain.ports.gateways.client_gateway import ClientGateway
 from src.domain.ports.gateways.security_gateway import AuditLogGateway
 from src.domain.ports.gateways.service_rule_gateway import ServiceRuleGateway
+from src.domain.ports.services.billing_events import BillingEventPublisher
 from src.domain.value_objects.billing_status import BillingStatus, HistoryAction
 
 
@@ -45,6 +46,7 @@ class ReplicateItemsUseCase:
         service_rule_gateway: ServiceRuleGateway,
         guard: ResourceAccessGuard,
         audit: AuditLogGateway,
+        events: BillingEventPublisher,
     ) -> None:
         self._billings = billing_gateway
         self._items = item_gateway
@@ -52,6 +54,7 @@ class ReplicateItemsUseCase:
         self._rules = service_rule_gateway
         self._guard = guard
         self._audit = audit
+        self._events = events
 
     async def execute(
         self, cmd: ReplicateItemsCommand
@@ -143,4 +146,6 @@ class ReplicateItemsUseCase:
                 self._audit, "lancamento_criado", cmd.actor, item.uuid, detail="replicação"
             )
             created.append(enrich_item(item, rule))
+            # Um aviso por mês: cada período tem o seu canal.
+            await self._events.billing_changed(cmd.client_uuid, year, month)
         return created, warnings

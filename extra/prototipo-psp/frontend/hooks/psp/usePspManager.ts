@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { StatusFilter } from "@/components/psp/Summary";
+import { useBillingWebSocket } from "@/hooks/psp/useBillingWebSocket";
 import { useDebounce } from "@/hooks/use-debounce";
 import {
   useBatchBillingStatus,
@@ -42,6 +43,8 @@ export function usePspManager() {
       page,
       debouncedSearch || undefined,
     );
+
+  useBillingWebSocket(selectedYear, selectedMonth);
 
   const createItem = useCreateBillingItem();
   const updateItem = useUpdateBillingItem();

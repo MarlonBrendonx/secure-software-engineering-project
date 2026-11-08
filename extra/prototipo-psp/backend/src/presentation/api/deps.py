@@ -11,7 +11,7 @@ from collections.abc import Callable, Coroutine
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
-from fastapi.routing import APIRoute
+from fastapi.routing import APIRoute, APIWebSocketRoute
 
 from src.application.authenticator import AuthenticatedUser
 from src.domain.exceptions import DomainError
@@ -97,6 +97,15 @@ async def _public_route() -> None:
 public_route: Any = _with_policy(_public_route, "public")
 
 
+def ws_authenticated(endpoint: Callable[..., Any]) -> Callable[..., Any]:
+    """Marca o endpoint WebSocket como autenticado por mensagem inicial (RS06).
+
+    O WebSocket não passa por `Depends`, então a autenticação mora no próprio handler. Esta
+    marca só declara a intenção; o teste da rota é que prova que ela cumpre o prometido.
+    """
+    return _with_policy(endpoint, "ws-first-message-auth")
+
+
 def rate_limit(name: str, limit: int, window_seconds: int = 60) -> Callable[..., Any]:
     """Limite de requisições por IP e por rota (contador no Redis)."""
 
@@ -131,7 +140,8 @@ RequestId = Annotated[str, Depends(get_request_id)]
 Pagination = Annotated[PaginationParams, Depends(get_pagination)]
 
 # Perfis com acesso ao negócio do PSP.
-billing_user = require_roles("analyst", "manager", "admin")
+BILLING_ROLES = ("analyst", "manager", "admin")
+billing_user = require_roles(*BILLING_ROLES)
 BillingUser = Annotated[AuthenticatedUser, Depends(billing_user)]
 AdminUser = Annotated[AuthenticatedUser, Depends(require_roles("admin"))]
 
@@ -146,6 +156,11 @@ def assert_all_routes_have_policy(routers: list[tuple[str, APIRouter]]) -> None:
     checked = 0
     for prefix, router in routers:
         for route in router.routes:
+            if isinstance(route, APIWebSocketRoute):
+                checked += 1
+                if getattr(route.endpoint, POLICY_ATTR, None) is None:
+                    missing.append(f"WS {prefix}{route.path}")
+                continue
             if not isinstance(route, APIRoute):
                 continue
             checked += 1

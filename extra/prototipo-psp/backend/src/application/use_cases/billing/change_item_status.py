@@ -18,6 +18,7 @@ from src.domain.ports.gateways.billing_item_gateway import BillingItemGateway
 from src.domain.ports.gateways.client_gateway import ClientGateway
 from src.domain.ports.gateways.security_gateway import AuditLogGateway
 from src.domain.ports.gateways.service_rule_gateway import ServiceRuleGateway
+from src.domain.ports.services.billing_events import BillingEventPublisher
 from src.domain.value_objects.billing_status import BillingStatus, HistoryAction
 
 
@@ -30,6 +31,7 @@ class ChangeItemStatusUseCase:
         service_rule_gateway: ServiceRuleGateway,
         guard: ResourceAccessGuard,
         audit: AuditLogGateway,
+        events: BillingEventPublisher,
     ) -> None:
         self._billings = billing_gateway
         self._items = item_gateway
@@ -37,6 +39,7 @@ class ChangeItemStatusUseCase:
         self._rules = service_rule_gateway
         self._guard = guard
         self._audit = audit
+        self._events = events
 
     async def execute(self, cmd: ChangeItemStatusCommand) -> BillingItem:
         item_uuid = cmd.item_uuids[0]
@@ -67,6 +70,9 @@ class ChangeItemStatusUseCase:
         )
         await audit_item_event(
             self._audit, "mudanca_status", cmd.actor, item.uuid, detail=f"{previous} → {target}"
+        )
+        await self._events.billing_changed(
+            billing.client_uuid, billing.reference_year, billing.reference_month
         )
         rule = await self._rules.get_by_uuid(updated.service_rule_uuid)
         return enrich_item(updated, rule)
@@ -144,6 +150,12 @@ class ChangeItemStatusUseCase:
                 i.uuid,
                 detail=f"{previous[i.uuid]} → {target}",
             )
+        affected = {
+            (b.client_uuid, b.reference_year, b.reference_month)
+            for b in (billing_map[i.billing_uuid] for i in updated)
+        }
+        for client_uuid, year, month in affected:
+            await self._events.billing_changed(client_uuid, year, month)
         rules = {
             r.uuid: r
             for r in await self._rules.list_by_clients(

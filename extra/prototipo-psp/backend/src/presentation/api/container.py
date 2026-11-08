@@ -51,6 +51,7 @@ from src.infrastructure.persistence.redis.security_gateways import (
     RedisSessionGateway,
     RedisUserGateway,
 )
+from src.infrastructure.realtime.hub import RealtimeHub
 
 
 class Container:
@@ -89,6 +90,9 @@ class Container:
         self.refresh = RefreshSessionUseCase(self.users, self.sessions, tokens)
         self.logout = LogoutUseCase(self.sessions, self.audit)
 
+        # Tempo real: um hub por aplicação (não por módulo), para cada app de teste ter o seu.
+        self.realtime = RealtimeHub(self.sessions, self.users)
+
         # Casos de uso de billing
         self.list_billings = ListBillingsByPeriodUseCase(billings, clients, guard, self.audit)
         self.list_services = ListServicesWithItemsUseCase(billings, clients, guard)
@@ -97,15 +101,19 @@ class Container:
         self.get_item_history = GetItemHistoryUseCase(billings, items, guard)
         self.get_average = GetBillingAverageUseCase(items, clients, guard)
         self.create_item = CreateBillingItemUseCase(
-            billings, items, clients, rules, guard, self.audit
+            billings, items, clients, rules, guard, self.audit, self.realtime
         )
-        self.update_item = UpdateBillingItemUseCase(billings, items, rules, guard, self.audit)
-        self.delete_item = DeleteBillingItemUseCase(billings, items, rules, guard, self.audit)
+        self.update_item = UpdateBillingItemUseCase(
+            billings, items, rules, guard, self.audit, self.realtime
+        )
+        self.delete_item = DeleteBillingItemUseCase(
+            billings, items, rules, guard, self.audit, self.realtime
+        )
         self.replicate_items = ReplicateItemsUseCase(
-            billings, items, clients, rules, guard, self.audit
+            billings, items, clients, rules, guard, self.audit, self.realtime
         )
         self.change_status = ChangeItemStatusUseCase(
-            billings, items, clients, rules, guard, self.audit
+            billings, items, clients, rules, guard, self.audit, self.realtime
         )
 
         # Casos de uso do cadastro de regras de serviço
