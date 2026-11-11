@@ -11,6 +11,12 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage[hyphens]{url}
+\usepackage{pifont}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{fontawesome}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\passo}[1]{\ding{\numexpr171+#1\relax}} % números circulados do fluxo
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -26,11 +32,11 @@
     marlonbrendoramos@ufu.br}
 
 \and
-\IEEEauthorblockN{2\textsuperscript{o} Nome Sobrenome}
-\IEEEauthorblockA{\textit{departamento} \\
-\textit{instituição}\\
-Cidade, País \\
-e-mail ou ORCID}
+\IEEEauthorblockN{2\textsuperscript{o} Lucas Martins}
+\IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
+\textit{Universidade Federal de Uberlândia (UFU)}\\
+    Uberlândia, Brasil \\
+    lucas.martins@ufu.br}
 
 \and
 \IEEEauthorblockN{3\textsuperscript{o} Nome Sobrenome}
@@ -60,9 +66,15 @@ johnatas@ufu.br}
 
 \section{Introdução}
 \subsection{Contexto e Motivação}
+%A cada competência, os lançamentos de uma rede credenciada precisam ser apurados, aprovados e transformados em um valor a faturar. Alguém registra, outra pessoa confere e aprova, e só então o número segue para o sistema financeiro da empresa. Quando esse caminho dependia de planilhas, os problemas eram previsíveis, como um erro de cálculo, uma alteração sem rastro ou uma aprovação da qual ninguém sabia dizer quem era o autor.
+
+%Nesse cenário, o sistema de faturamento passa a ser a autoridade sobre o valor. Ele recalcula cada lançamento a partir da regra de serviço contratada, conduz o lançamento por um fluxo de aprovação e entrega ao sistema de gestão empresarial (ERP) a carga que vira registro contábil. É uma boa solução, mas ela concentra em um único lugar tudo o que um atacante, ou um usuário mal-intencionado, gostaria de alcançar. Um valor adulterado não fica restrito ao sistema, pois chega ao cliente como cobrança e à contabilidade como registro.
+
+%A segurança desse tipo de sistema costuma ser tratada posteriormente, quando o código já existe e resta corrigir o que aparecer. Este trabalho segue o caminho inverso. Em vez de procurar falhas em um produto pronto, olhamos para o sistema como ele foi desenhado, perguntamos como poderia ser vulnerável e usamos as respostas para decidir quais controles e qual arquitetura reduzem os riscos mais graves. É essa passagem, das ameaças às decisões de projeto, que motiva este artigo.
+
 A segurança digital deixou de ser um assunto restrito às equipes de tecnologia. O custo médio global de uma violação de dados chegou a US\$~4,99 milhões em 2026, o maior valor já registrado pelo relatório da IBM~\cite{ibm2026}. No Brasil, a média foi de R\$~7,44 milhões, e a saúde foi o setor de maior custo, com R\$~12,55 milhões por violação~\cite{lobo2026}. Os dados da Verizon indicam ainda que 31\% das violações começam pela exploração de vulnerabilidades de software, hoje a principal forma de entrada, à frente do roubo de senhas~\cite{verizon2026}. O software que sustenta as operações de uma empresa passou, assim, a fazer parte do risco do negócio.
 
-O setor farmacêutico mostra bem essa exposição. O mercado brasileiro de medicamentos faturou R\$~182,8 bilhões em 2025, com 6,3 bilhões de embalagens comercializadas~\cite{anvisa2026}. Entre o fabricante e o paciente há distribuidores, farmácias e prestadores de serviços ligados por sistemas que registram, calculam e cobram, e esses intermediários já foram alvo de incidentes graves. Em 2024, criminosos usaram credenciais comprometidas para entrar em um portal de acesso remoto sem autenticação multifator (MFA) da Change Healthcare~\cite{witty2024}, empresa americana que processa bilhões de pedidos de reembolso de seguros por ano, e o ataque interrompeu pedidos e pagamentos em todo o país~\cite{murphy2024}. No mesmo ano, um roubo de dados na distribuidora Cencora expôs informações de pacientes mantidas em programas de suporte operados para fabricantes como a Novartis~\cite{toulas2024}. Nem todo risco vem de um invasor externo. Ao auditar o programa Farmácia Popular, que depende de farmácias credenciadas, o Tribunal de Contas da União apontou fragilidades no sistema de vendas e baixa assertividade na identificação de fraudes~\cite{tcu2023}.
+O setor farmacêutico mostra bem essa exposição. O mercado brasileiro de medicamentos faturou R\$~182,8 bilhões em 2025, com 6,3 bilhões de embalagens comercializadas~\cite{anvisa2026}. Entre o fabricante e o paciente há distribuidores, farmácias e prestadores de serviços ligados por sistemas que registram, calculam e cobram, e esses intermediários já foram alvo de incidentes graves. Em 2024, criminosos usaram credenciais comprometidas para entrar em um portal de acesso remoto sem autenticação multifator (MFA) da Change Healthcare~\cite{witty2024}, empresa americana que processa bilhões de pedidos de reembolso de seguros por ano, e o ataque interrompeu pedidos e pagamentos em todo o território americano~\cite{murphy2024}. No mesmo ano, um roubo de dados na distribuidora Cencora expôs informações de pacientes mantidas em programas de suporte operados para fabricantes como a Novartis~\cite{toulas2024}. Nem todo risco vem de um invasor externo. Ao auditar o programa Farmácia Popular, que depende de farmácias credenciadas, o Tribunal de Contas da União apontou fragilidades no sistema de vendas e baixa assertividade na identificação de fraudes~\cite{tcu2023}.
 
 Este artigo trata de um sistema desse tipo, o faturamento de uma rede credenciada do setor farmacêutico. A cada competência, os lançamentos de cada cliente precisam ser apurados, aprovados e transformados em um valor a faturar. Alguém registra, outra pessoa confere e aprova, e só então o número segue para o sistema financeiro da empresa. Quando esse caminho dependia de planilhas, os problemas eram previsíveis, como um erro de cálculo, uma alteração sem rastro ou uma aprovação da qual ninguém sabia dizer quem era o autor. Hoje o sistema é a autoridade sobre o valor. Ele recalcula cada lançamento a partir da regra de serviço contratada, conduz o lançamento por um fluxo de aprovação e entrega ao sistema de gestão empresarial (ERP) a carga que vira registro contábil.
 
@@ -73,9 +85,10 @@ Proteger esse valor é, em boa parte, uma questão de arquitetura. Decisões com
 Ainda assim, poucos modelos de ciclo de vida de desenvolvimento tratam a segurança em detalhe~\cite{nist2022ssdf}, e ela costuma ficar para depois, quando o código já existe e resta corrigir o que aparecer. Este trabalho segue o caminho inverso. Em vez de procurar falhas em um produto pronto, olhamos para o sistema como ele foi desenhado e usamos a modelagem de ameaças~\cite{shostack2014} e os casos de abuso para perguntar como ele poderia ser atacado. Com as respostas, avaliamos os riscos com o apoio do NIST CSF 2.0~\cite{nist2024csf} e decidimos quais controles e qual arquitetura reduzem os mais graves. É essa passagem, das ameaças às decisões de projeto, que motiva este artigo.
 
 \subsection{Problema e Questões de Pesquisa}
+
 Modelar as ameaças, porém, é só o começo. Uma lista de ameaças diz o que pode dar errado, mas não diz por onde começar nem o que exigir do sistema. Para isso, cada ameaça precisa virar um risco com probabilidade e impacto justificados, e os riscos mais graves precisam virar requisitos que possam ser verificados depois, por um teste ou por uma evidência. Sem essa passagem, a modelagem de ameaças termina em um documento que não muda o projeto.
 
-No sistema de faturamento, essa passagem enfrenta duas dificuldades. A primeira é que a pontuação, sozinha, não define a ordem de tratamento. O acesso não autorizado a dados restritos tem pontuação 9, maior que a do vazamento da chave que assina os tokens, de pontuação 8. Ainda assim, restringir o acesso aos dados adianta pouco se um atacante consegue forjar um token de administrador. A segunda é que os controles partem de suposições que os riscos mais graves não tratam. Conferir o perfil do usuário supõe que o token não foi forjado, e exigir rastreabilidade supõe que o registro de auditoria foi de fato gravado. Se uma dessas suposições falha, os controles que dependem dela deixam de valer, mesmo que tenham sido bem projetados.
+No sistema de faturamento, essa passagem enfrenta duas dificuldades. A primeira é que a pontuação, sozinha, não define a ordem de tratamento. O acesso não autorizado a dados restritos tem pontuação 9, maior que a do vazamento da chave que assina os \textit{tokens}, de pontuação 8. Ainda assim, restringir o acesso aos dados adianta pouco se um atacante consegue forjar um \textit{token} de administrador. A segunda é que os controles partem de suposições que os riscos mais graves não tratam. Conferir o perfil do usuário supõe que o \textit{token} não foi forjado, e exigir rastreabilidade supõe que o registro de auditoria foi de fato gravado. Se uma dessas suposições falha, os controles que dependem dela deixam de valer, mesmo que tenham sido bem projetados.
 
 O problema tratado neste artigo é, portanto, como transformar as ameaças de um sistema de faturamento em riscos priorizados e em requisitos verificáveis, sem perder a ligação entre cada decisão de arquitetura e a ameaça que a motivou. Três questões de pesquisa guiam o trabalho:
 
@@ -86,6 +99,7 @@ O problema tratado neste artigo é, portanto, como transformar as ameaças de um
 \end{itemize}
 
 \subsection{Contribuições}
+
 As principais contribuições deste artigo são:
 
 \begin{itemize}
@@ -98,9 +112,12 @@ As principais contribuições deste artigo são:
 \end{itemize}
 
 \subsection{Organização do Artigo}
+
 O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, as decisões e a rastreabilidade, e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
 
-\section{Fundamentação Teórica e Trabalhos Relacionados}\label{sec:fundamentacao}
+
+\section{Fundamentação Teórica e Trabalhos Relacionados}
+\label{sec:fundamentacao}
 \subsection{Ciclo de Vida de Engenharia de Software Seguro}
 Situar o artigo no ciclo de vida de engenharia de software seguro e nas etapas cobertas.
 \subsection{Modelagem de Ameaças e Casos de Abuso}
@@ -110,9 +127,44 @@ Descrever as funções do NIST CSF 2.0 e como elas apoiam a escolha dos controle
 \subsection{Catálogos de Vulnerabilidades e Requisitos de Segurança}
 Apresentar CWE, OWASP Top 10 e cheat sheets da OWASP como base para requisitos de segurança verificáveis.
 \subsection{Trabalhos Relacionados}
-Comparar com trabalhos sobre ameaças e riscos em sistemas financeiros, destacando a lacuna deste artigo.
+\label{subsec:trabalhos}
 
-\section{Sistema Estudado}\label{sec:sistema}
+\begin{table*}[!t]
+\centering
+\caption{Comparação dos trabalhos relacionados (\faCircle: tratado; \faAdjust: tratado em parte; \faCircleO: não tratado). As colunas são definidas na Seção~\ref{subsec:trabalhos}.}
+\label{tab:trabalhos}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccccccccc@{}}
+\hline
+\textbf{Trabalho} & \shortstack{Sistema\\concreto} & \shortstack{Modelagem\\de ameaças} & \shortstack{Riscos por\\prob. e impacto} & \shortstack{Dependências\\entre riscos} & \shortstack{Requisitos\\verificáveis} & \shortstack{Decisões de\\arquitetura} & \shortstack{CWE e\\OWASP} & \shortstack{Rastreabilidade\\ponta a ponta} & \shortstack{Domínio\\financeiro} \\
+\hline
+Mouratidis et al.~\cite{mouratidis2005} & \faCircle & \faCircleO & \faCircleO & \faCircleO & \faAdjust & \faCircle & \faCircleO & \faAdjust & \faCircleO \\
+Fernandez et al.~\cite{fernandez2007} & \faAdjust & \faCircle & \faCircleO & \faCircleO & \faAdjust & \faCircle & \faCircleO & \faAdjust & \faAdjust \\
+Heitmeyer et al.~\cite{heitmeyer2008} & \faCircle & \faCircleO & \faCircleO & \faCircleO & \faCircle & \faCircleO & \faCircleO & \faAdjust & \faCircleO \\
+Liu et al.~\cite{liu2009} & \faAdjust & \faCircle & \faCircleO & \faAdjust & \faAdjust & \faAdjust & \faCircleO & \faAdjust & \faCircleO \\
+Khan et al.~\cite{khan2020} & \faCircleO & \faAdjust & \faCircleO & \faCircleO & \faCircleO & \faCircleO & \faCircleO & \faCircleO & \faCircleO \\
+Khan et al.~\cite{khan2021} & \faCircleO & \faAdjust & \faAdjust & \faCircleO & \faCircleO & \faCircleO & \faCircleO & \faCircleO & \faCircleO \\
+Gollapudi Venkata~\cite{gollapudi2025} & \faCircleO & \faAdjust & \faAdjust & \faCircleO & \faCircleO & \faAdjust & \faAdjust & \faCircleO & \faCircleO \\
+\hline
+\textbf{Este trabalho} & \faCircle & \faCircle & \faCircle & \faCircle & \faCircle & \faCircle & \faCircle & \faCircle & \faCircle \\
+\hline
+\end{tabular}}
+\end{table*}
+
+\emph{Metodologias de desenvolvimento seguro.} Mouratidis et al.~\cite{mouratidis2005} estendem a metodologia Tropos, orientada a agentes, com os conceitos de restrição de segurança e de entidades seguras, e acompanham essas restrições dos requisitos iniciais até o projeto detalhado de um sistema de assistência social e de saúde. No projeto arquitetural, escolhem o estilo de arquitetura por uma análise probabilística que estima quanto cada estilo contribui para os requisitos não funcionais, entre eles os de segurança. As restrições, porém, partem das necessidades dos atores e não de uma análise de ameaças, e o trabalho não avalia riscos nem trata a implementação. Fernandez et al.~\cite{fernandez2007} propõem uma metodologia baseada em padrões que aplica princípios de segurança em todas as etapas do ciclo de vida. Cada ação de um caso de uso é examinada em busca dos ataques possíveis, os ataques indicam as políticas necessárias, e padrões de segurança realizam essas políticas nas camadas da arquitetura. Um dos exemplos é uma instituição financeira de investimentos, mas os próprios autores reconhecem que a metodologia ainda precisava ser avaliada em um ambiente real, e a análise de riscos é recomendada sem ser realizada. Liu et al.~\cite{liu2009} propõem o Secure-i*, que trata cada ator do modelo i* como um possível atacante, procura vulnerabilidades nas dependências entre os atores, escolhe contramedidas por avaliação qualitativa de metas e verifica as políticas de controle de acesso por verificação de modelos. O exemplo é um sistema eletrônico de informações de saúde. A análise de dependências é a que mais se aproxima da preocupação deste trabalho com as relações entre riscos, embora trate as dependências entre atores, e não entre controles.
+
+\emph{Verificação formal.} Heitmeyer et al.~\cite{heitmeyer2008} verificam formalmente o núcleo de separação de um dispositivo embarcado para uma avaliação Common Criteria. Os autores constroem uma especificação de alto nível com apenas o necessário para a propriedade de separação de dados, provam mecanicamente que ela satisfaz essa propriedade e dividem o código em três categorias, das quais só a primeira, com menos de 10\% do código, exige prova formal. O trabalho leva a propriedade de segurança até o código com evidência rigorosa, mas parte de uma propriedade já definida e de uma arquitetura existente. Não identifica ameaças, não avalia riscos e não propõe decisões de projeto.
+
+\emph{Mapeamentos e revisões.} Khan et al. publicaram dois mapeamentos sistemáticos sobre o tema, ambos com 116 estudos primários. No primeiro~\cite{khan2020}, identificam 37 paradigmas, modelos e \textit{frameworks}, dos quais os mais citados são o SDL da Microsoft, os casos de uso indevido e de abuso, o KAOS, o SSE-CMM e o Secure Tropos. No segundo~\cite{khan2021}, classificam os métodos por fase do ciclo de vida e por análise SWOT, observam que o projeto é a fase mais tratada, com 32\% dos estudos, e concluem que a área ainda é imatura e carece de soluções avaliadas empiricamente. Gollapudi Venkata~\cite{gollapudi2025} discute a integração de protocolos criptográficos ao ciclo de desenvolvimento, do projeto à implantação, e apresenta de forma conceitual a modelagem de ameaças com STRIDE, a avaliação de riscos por probabilidade e impacto e as categorias do OWASP Top 10:2025, sem aplicá-las a um sistema. Esses trabalhos organizam o campo, mas não percorrem o processo em um caso concreto.
+
+A Tabela~\ref{tab:trabalhos} compara os trabalhos segundo as dimensões que definem este estudo. \emph{Sistema concreto} indica a aplicação do método a um sistema real, e não apenas a um exemplo ilustrativo; \emph{Modelagem de ameaças}, a identificação sistemática de ameaças ou ataques, por STRIDE, casos de abuso ou técnica equivalente; \emph{Riscos por probabilidade e impacto}, a avaliação e a ordenação dos riscos por essas duas grandezas; \emph{Dependências entre riscos}, uma priorização que considera quais riscos, se não tratados, anulam os controles de outros; \emph{Requisitos verificáveis}, requisitos de segurança acompanhados de um critério objetivo de verificação, como um teste ou uma prova; \emph{Decisões de arquitetura}, decisões de projeto justificadas a partir dos requisitos de segurança; \emph{CWE e OWASP}, a ligação dos requisitos a vulnerabilidades catalogadas; \emph{Rastreabilidade ponta a ponta}, a ligação explícita entre ameaça, risco, requisito, vulnerabilidade e controle; e \emph{Domínio financeiro}, a aplicação a sistemas financeiros ou de faturamento. A marca parcial indica que só parte da dimensão é coberta, por exemplo quando um mapeamento ou uma revisão apenas descreve a técnica, quando o método é demonstrado em um exemplo ilustrativo ou quando a ligação entre etapas existe, mas não chega aos controles. A tabela reflete a nossa leitura de cada trabalho e não cobre todo o campo.
+
+\emph{Lacuna e contribuição.} As metodologias de desenvolvimento seguro levam a segurança dos requisitos ao projeto, mas nenhuma delas avalia os riscos por probabilidade e impacto, e a análise de riscos, quando aparece, é recomendada e não realizada. A verificação formal oferece a evidência mais forte, mas começa depois que a propriedade e a arquitetura já foram escolhidas. Os mapeamentos e a revisão descrevem as técnicas e apontam a falta de avaliações empíricas, sem aplicá-las. Nenhum dos trabalhos analisados reúne (i)~a modelagem de ameaças aplicada a um sistema em uso; (ii)~a avaliação dos riscos por probabilidade e impacto, com uma ordem de tratamento que considera as dependências entre eles; (iii)~requisitos verificáveis ligados a vulnerabilidades do CWE e do OWASP Top 10; e (iv)~decisões de arquitetura rastreáveis até a ameaça que as motivou. Nenhum deles trata, ainda, de um sistema de faturamento. Essa combinação define o escopo deste artigo. A afirmação vale para os trabalhos analisados aqui, e um único estudo de caso não mostra como o processo se comportaria em outros domínios.
+
+\section{Sistema Estudado}
+\label{sec:sistema}
 \subsection{Domínio de Negócio e Perfis de Usuário}
 Descrever o processo de faturamento e os perfis Administrador, Analista e Gestor, sem dados reais da empresa.
 \subsection{Arquitetura e Tecnologias}
@@ -122,7 +174,8 @@ Apresentar os 14 ativos e a superfície exposta (endpoints, callbacks e WebSocke
 \subsection{Controles de Segurança Existentes}
 Listar os controles já presentes, que definem o risco atual.
 
-\section{Metodologia}\label{sec:metodologia}
+\section{Metodologia}
+\label{sec:metodologia}
 \subsection{Visão Geral do Processo}
 Apresentar as etapas do processo e como a saída de cada uma alimenta a seguinte, de preferência com uma figura.
 \subsection{Modelagem de Ameaças e Casos de Abuso}
@@ -134,7 +187,8 @@ Explicar a ordenação em estágios, as estratégias de tratamento e as dependê
 \subsection{Mapeamento dos Controles às Funções do NIST CSF 2.0}
 Descrever como os controles foram associados às funções do NIST CSF 2.0 e como o risco residual foi estimado.
 
-\section{Resultados da Análise de Riscos}\label{sec:resultados}
+\section{Resultados da Análise de Riscos}
+\label{sec:resultados}
 \subsection{Riscos Identificados e sua Distribuição}
 Apresentar os 29 riscos e a distribuição por nível (3 Críticos, 15 Altos e 11 Médios) e comentar os de maior pontuação.
 \subsection{Priorização e Ordem de Implementação}
@@ -144,19 +198,170 @@ Comparar o risco atual com o residual esperado (18 Médios e 11 Baixos), reforç
 \subsection{Aceitação do Risco Residual}
 Descrever a regra de aceitação do risco residual e por que os Médios exigem aceitação formal.
 
-\section{Projeto da Arquitetura Segura}\label{sec:arquitetura}
+\section{Projeto da Arquitetura Segura}
+\label{sec:arquitetura}
 \subsection{Requisitos de Segurança}
-Apresentar os requisitos RS01 a RS03, derivados de R01, R02 e R03, com o critério de verificação de cada um.
-\subsection{Mapeamento para Vulnerabilidades Catalogadas}
-Mostrar a ligação de cada requisito a uma vulnerabilidade catalogada e sua relação com o sistema.
-\subsection{Diagrama da Arquitetura Segura}
-Inserir o diagrama da arquitetura segura e descrever o fluxo e a posição dos principais controles.
-\subsection{Decisões de Arquitetura}
-Descrever as decisões D01 a D03 com problema, decisão, motivo, componente afetado e resultado esperado.
-\subsection{Rastreabilidade entre Riscos e Controles}
-Mostrar em uma tabela como cada requisito se liga ao risco, à vulnerabilidade, à decisão e ao controle do plano.
+\label{subsec:requisitos}
 
-\section{Discussão}\label{sec:discussao}
+Os riscos tratados pela arquitetura foram escolhidos em duas rodadas. A primeira selecionou os riscos centrais, de três categorias STRIDE diferentes, para que as decisões não se repetissem. R01, alteração ou remoção de lançamentos, e R02, captura de conta ou perfil no SSO, estão entre os riscos Críticos (3$\times$4). R03, acesso não autorizado a dados restritos, é o Alto de maior pontuação (3$\times$3) e a base da extração em volume e da fraude. R18, em que o administrador cria, envia e aprova o próprio lançamento, também é Crítico, mas atinge o mesmo ativo e a mesma máquina de estados de R01. Por isso não recebeu decisão própria, e a segregação de funções que ele exige entrou como premissa de R01: quem aprova deve ser diferente de quem criou, enviou ou alterou o lançamento.
+
+A segunda rodada partiu das suposições dos controles da primeira. Conferir o perfil e o MFA dentro do \textit{token} supõe que ele não pode ser forjado (R06 e R07). Exigir rastreabilidade supõe que a auditoria é de fato gravada (R26). Os controles executados pelos \textit{guards} supõem que um erro na verificação nega o acesso (R28). Restringir a carga à versão aprovada supõe que o ERP importa o arquivo que o gerador produziu (R23). Conferir quem está autenticado supõe que a requisição foi feita de propósito pelo usuário (R29). Os cinco são riscos Altos dos estágios 1 e 2 do plano e completam as categorias Repudiation e Elevation of Privilege, de modo que a arquitetura cobre cinco das seis categorias STRIDE. Denial of Service ficou de fora porque os seus controles, como limites de conexão e \textit{rate limit} no \textit{gateway}, são de infraestrutura e não de arquitetura da aplicação.
+
+Cada risco, ou par de riscos, gerou um requisito verificável, apresentado na Tabela~\ref{tab:requisitos}. Nos requisitos, \textit{enviado} significa enviado para aprovação, ou seja, o lançamento saiu do estado \texttt{Rascunho}. O envio ao ERP é outra etapa do fluxo.
+
+\begin{table*}[!t]
+\centering
+\caption{Requisitos de segurança e critérios de verificação}
+\label{tab:requisitos}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}l l Y Y@{}}
+\hline
+\textbf{ID} & \textbf{Risco} & \textbf{Requisito} & \textbf{Critério de verificação} \\
+\hline
+RS01 & R01 &
+Depois do envio para aprovação, o servidor recusa a alteração ou a exclusão direta do lançamento. A mudança só ocorre pela transição ``reabrir'', que o devolve a \texttt{Rascunho} e o retira da carga do ERP até nova aprovação. O ERP recebe apenas a última versão aprovada. &
+Em teste automatizado, \texttt{PATCH} e \texttt{DELETE} sobre lançamento enviado ou aprovado são recusados. O lançamento reaberto só volta à carga após novo envio e nova aprovação. Cada tentativa e transição fica em \texttt{audit\_logs}, e tentativas recusadas geram alerta. \\
+RS02 & R02 &
+Administradores e gestores só obtêm sessão depois de confirmar um segundo fator no SSO. A API recusa, nesses perfis, todo \textit{token} sem a indicação de MFA concluído. &
+O login sem o segundo fator não gera sessão. Um \textit{token} desses perfis sem indicação de MFA recebe \texttt{401}. Falhas repetidas no segundo fator geram alerta. \\
+RS03 & R03 &
+Em toda rota de lançamentos, anexos e consultas, a API verifica no servidor a permissão do usuário sobre o recurso (cliente, período e responsável), e não apenas o perfil. Identificadores não sequenciais servem de defesa em profundidade. &
+Para cada rota, o identificador de um recurso fora do escopo recebe \texttt{404}, a mesma resposta de um identificador inexistente. A negação fica em \texttt{audit\_logs}, negações repetidas geram alerta e a suíte de autorização cobre todas as rotas no CI. \\
+RS04 & R06, R07 &
+O \textit{token} de sessão é assinado com chave assimétrica cuja parte privada fica no cofre, sem exportação, e só o emissor a usa. A API e os \textit{workers} conhecem apenas a chave pública, aceitam um único algoritmo e conferem \texttt{iss}, \texttt{aud}, \texttt{exp}, \texttt{kid} e se o \texttt{sid} está ativo. &
+A varredura do Gitleaks e a inspeção de variáveis, imagens e configuração não encontram a chave privada nem o \texttt{JWT\_SECRET}. \textit{Tokens} com \texttt{alg} \texttt{none} ou \texttt{HS256}, de outra chave, com \texttt{iss} ou \texttt{aud} incorretos, expirados ou de sessão revogada recebem \texttt{401}. A troca da chave é testada sem interrupção. \\
+RS05 & R26 &
+Toda operação que altera lançamentos, regras de serviço, perfis ou estado de aprovação grava a auditoria na mesma transação que a efetiva. Se a auditoria falhar, a operação é desfeita. Os eventos ao monitoramento saem de uma \textit{outbox} gravada na mesma transação. &
+Com falha simulada na gravação de \texttt{audit\_logs}, a operação não é efetivada. A reconciliação periódica entre versões, transições e \texttt{audit\_logs} não encontra lacunas, e a reentrega de um evento não o duplica. \\
+RS06 & R28 &
+Os \textit{guards} negam por padrão. Exceção, tempo esgotado ou dependência indisponível durante a verificação resulta em negação, sem efetivar a operação. Toda rota declara a sua política de acesso, e rota sem política não é servida. &
+No CI, a injeção de falha em cada rota restrita resulta em erro, sem alteração persistida. Um teste enumera as rotas e falha se alguma não tiver política, e a aplicação não inicia nessa condição. \\
+RS07 & R23 &
+A carga do ERP exporta todo campo textual como texto, sem interpretar como fórmula valores iniciados por \texttt{=}, \texttt{+}, \texttt{-} ou \texttt{@}. Cada arquivo sai com um manifesto (\textit{hash}, versões aprovadas e total) assinado com chave exclusiva do gerador, em área imutável. A entrega confere o manifesto antes da importação. &
+Campos iniciados por esses caracteres saem como texto. Arquivo alterado, assinatura inválida ou total diferente da soma das versões aprovadas bloqueiam a importação e geram alerta. A API e os usuários não conseguem gravar na área de cargas. \\
+RS08 & R29 &
+Rotas que alteram dados e aceitam o \textit{cookie} de sessão exigem um \textit{token} anti-CSRF vinculado ao \texttt{sid}, em cabeçalho próprio, e \texttt{Origin} igual à origem do \textit{frontend}. Os \textit{cookies} têm \texttt{SameSite=Strict}, \texttt{Secure} e \texttt{HttpOnly}, o CORS aceita só essa origem e o corpo aceito é \texttt{application/json}. &
+No CI, requisições sem \textit{token}, com \textit{token} de outra sessão, com \texttt{Origin} de outro site (inclusive outro subdomínio corporativo) ou com corpo de formulário recebem \texttt{403}, sem alteração persistida, e o fluxo legítimo continua funcionando. \\
+\hline
+\end{tabularx}
+\end{table*}
+
+Os requisitos não são independentes. RS04 depende de RS02, porque o emissor do \textit{token} precisa copiar a indicação de MFA recebida do Keycloak, que é o que a API confere. RS05 e RS06 sustentam os critérios de verificação dos demais: sem RS05, o registro em \texttt{audit\_logs} exigido por RS01, RS03 e RS06 pode falhar sem que ninguém perceba, e sem RS06 um erro no \textit{guard} libera justamente as operações que RS01, RS02 e RS03 restringem. RS07 estende RS01 até o ERP, pois RS01 decide qual versão pode sair do sistema e RS07 garante que é essa versão que chega. RS08 usa o \texttt{sid} de RS04 para vincular o \textit{token} anti-CSRF à sessão. O MFA de RS02 foi limitado a administradores e gestores, que controlam as aprovações. O analista não aprova e fica coberto por RS01 e RS03, e estender o MFA a todos os perfis fica para quando o impacto operacional estiver avaliado.
+\subsection{Mapeamento para Vulnerabilidades Catalogadas}
+\label{subsec:vulnerabilidades}
+
+Para nomear a falha que cada requisito deve fechar, os requisitos foram ligados a entradas do CWE e a categorias do OWASP Top 10:2025, como mostra a Tabela~\ref{tab:vulnerabilidades}. Os \textit{cheat sheets} da OWASP correspondentes, como os de lógica de negócio, MFA, IDOR, JWT, \textit{logging}, autorização e CSRF, serviram de referência para os critérios de verificação. Essas vulnerabilidades são condições de projeto derivadas dos riscos, e não achados confirmados no código.
+
+\begin{table*}[!t]
+\centering
+\caption{Ligação dos requisitos a vulnerabilidades catalogadas}
+\label{tab:vulnerabilidades}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}l >{\raggedright\arraybackslash}p{4.3cm} >{\raggedright\arraybackslash}p{2.9cm} Y@{}}
+\hline
+\textbf{Req.} & \textbf{Vulnerabilidade (CWE)} & \textbf{OWASP Top 10:2025} & \textbf{Relação com o sistema} \\
+\hline
+RS01 & CWE-841, imposição incorreta do fluxo de trabalho & A06, Insecure Design &
+O analista já escreve nos lançamentos. Se a API aceitar alteração ou exclusão depois do envio, o valor adulterado segue para o ERP sem nova aprovação. \\
+RS02 & CWE-308, autenticação de fator único & A07, Authentication Failures &
+Phishing ou reuso de credenciais entrega a conta de administrador ou gestor e, com ela, o controle das aprovações. \\
+RS03 & CWE-639, contorno de autorização por chave controlada pelo usuário; CWE-862, autorização ausente & A01, Broken Access Control &
+Uma rota, um anexo ou uma consulta que confere só o perfil deixa o usuário ler dados de outro cliente ou período trocando o identificador. \\
+RS04 & CWE-522, credencial insuficientemente protegida; CWE-347, verificação incorreta de assinatura & A04, Cryptographic Failures &
+O \texttt{JWT\_SECRET} é simétrico e está em toda instância que valida \textit{tokens}. Se vazar, o atacante assina um \textit{token} de administrador com indicação de MFA, aceito pela API sem passar pelo SSO. \\
+RS05 & CWE-778, registro insuficiente; CWE-223, omissão de informação de segurança & A09, Security Logging and Alerting Failures &
+O \texttt{AuditMiddleware} grava em segundo plano depois de a operação ser confirmada. Uma falha nesse intervalo deixa uma alteração financeira sem registro e sem alerta. \\
+RS06 & CWE-636, falha aberta; CWE-755, tratamento incorreto de condições excepcionais & A10, Mishandling of Exceptional Conditions &
+Um \textit{guard} que captura a exceção e segue adiante, ou libera o acesso quando uma dependência não responde, deixa um usuário limitado executar ação administrativa. \\
+RS07 & CWE-345, autenticidade insuficiente; CWE-353, ausência de verificação de integridade; CWE-1236, injeção de fórmula em CSV & A08, Software or Data Integrity Failures &
+O arquivo de carga fica no \textit{storage} sem \textit{hash} nem assinatura até a importação, e um nome de cliente iniciado por \texttt{=} vira fórmula ao abrir a planilha. \\
+RS08 & CWE-352, falsificação de requisição entre sites & A01, Broken Access Control &
+O \textit{cookie} \texttt{access\_token} tem precedência sobre o cabeçalho \texttt{Authorization}, e uma página de outro site induz o navegador do analista a enviar um \texttt{PATCH} atribuído a ele. \\
+\hline
+\end{tabularx}
+\end{table*}
+
+O mapeamento usa a edição de 2025 do OWASP Top 10, que reorganizou parte das categorias da edição de 2021. Insecure Design passou de A04 para A06~\cite{owasp2025a06}, Cryptographic Failures passou de A02 para A04, e a categoria A10, Mishandling of Exceptional Conditions, é nova e inclui a falha aberta de RS06. O CSRF de RS08 continua em A01, junto com o IDOR de RS03. O CWE-1236, de RS07, não está mapeado em nenhuma categoria do Top 10:2025 e aparece apenas como CWE.
+\subsection{Diagrama da Arquitetura Segura}
+\label{subsec:diagrama}
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=\textwidth]{figuras/arquitetura-segura.pdf}
+    \caption{Arquitetura segura proposta para o sistema de faturamento. As caixas tracejadas são as fronteiras de confiança (F1 a F5), e os componentes destacados contêm os controles C1 a C14. As setas contínuas numeradas indicam o fluxo principal, e as tracejadas indicam ligações auxiliares e eventos enviados ao monitoramento. Os controles são propostos e ainda não estão implementados.}
+    \label{fig:arquitetura-segura}
+\end{figure*}
+
+A Fig.~\ref{fig:arquitetura-segura} mostra a arquitetura proposta. Ela parte da arquitetura em camadas descrita na Seção~\ref{sec:sistema} e acrescenta os controles que tratam os nove riscos selecionados nas duas rodadas, R01, R02, R03, R06, R07, R23, R26, R28 e R29. Os componentes estão distribuídos em cinco fronteiras de confiança. A primeira (F1) reúne o usuário e a aplicação web no navegador e é tratada como não confiável. A segunda (F2) concentra a identidade, com o SSO corporativo, o emissor do \textit{token} de sessão, o cofre de chaves e o \textit{gateway}. A terceira (F3) é a API, com as camadas de apresentação, aplicação e domínio, e a quarta (F4) é a persistência. A quinta (F5) agrupa o monitoramento e o \textit{pipeline} de integração contínua (CI), que observam e verificam o sistema sem fazer parte do fluxo de uma requisição. Cada controle recebe um identificador, de C1 a C14, que a Seção~\ref{subsec:rastreabilidade} liga ao requisito, à decisão e ao risco correspondentes.
+
+O fluxo começa no login \passo{1}. A aplicação web autentica o usuário no SSO, formado pelo Keycloak e por um serviço OAuth em .NET, com OpenID Connect e PKCE. Para administradores e gestores, o SSO só confirma a identidade depois do segundo fator (C1), com WebAuthn/FIDO2 como fator preferencial. O emissor recebe essa identidade com a indicação de MFA \passo{2}, registra a sessão e assina o \textit{token} com uma chave assimétrica cuja parte privada não sai do cofre (C9). O \textit{token} volta à aplicação web \passo{3}, e as requisições seguintes passam pelo \textit{gateway} \passo{4} até a API \passo{5}. Ali, cada requisição atravessa três verificações antes de qualquer acesso a dados. O \textit{middleware} recusa as que alteram dados sem o \textit{token} anti-CSRF vinculado à sessão ou vindas de outra origem (C14). Os \textit{guards} validam o \textit{token} apenas com a chave pública, com algoritmo fixo e conferência do emissor, da audiência, da expiração e da sessão ativa (C10). Também recusam \textit{token} de perfil privilegiado sem MFA (C2) e negam o acesso sempre que a própria verificação falha (C12). Por fim, o caso de uso confere se o usuário tem permissão sobre aquele registro, considerando cliente, período e responsável, antes de ler ou gravar \passo{6} (C3).
+
+A partir daí, o diagrama mostra como o valor é protegido até chegar ao ERP. Qualquer mudança em um lançamento já enviado para aprovação passa pela máquina de estados do domínio, que é a única via de alteração e recusa \texttt{PATCH} e \texttt{DELETE} diretos (C4). A transição, o registro de auditoria e o evento para o monitoramento são gravados na mesma transação \passo{7} (C11), em uma tabela que só aceita inserções e encadeia os registros por \textit{hash} (C6). Assim, nenhuma operação é efetivada sem registro, e quem compromete a API não apaga o próprio rastro sem quebrar o encadeamento. Na saída, o gerador da carga lê apenas a última versão aprovada de cada lançamento (C5), exporta os campos de texto sem avaliação de fórmula e grava o arquivo com um manifesto assinado em uma área imutável do \textit{storage} (C13). A entrega confere a assinatura, o \textit{hash} e o total antes de liberar a importação, e o ERP recebe apenas a carga verificada \passo{8}.
+
+A posição de cada controle segue um mesmo critério. O controle fica no ponto em que a informação necessária para a decisão existe e por onde todo caminho passa. A autorização por recurso fica no caso de uso, e não na rota, porque só ali o registro carregado é conhecido, e um \textit{endpoint} novo não tem como omiti-la. O MFA é exigido no SSO, mas é conferido de novo nos \textit{guards}, porque um \textit{token} emitido por outro fluxo, como o provedor local de desenvolvimento, chegaria à API sem o segundo fator. A verificação anti-CSRF fica antes dos \textit{guards}, que veem um \textit{token} válido e não distinguem a requisição induzida da legítima. Na saída, a restrição à versão aprovada se repete no gerador mesmo com a máquina de estados, e a carga é conferida no último ponto antes da fronteira com o ERP, porque o arquivo atravessa o \textit{storage}. A chave que assina o manifesto é diferente da que assina os \textit{tokens}, para que o comprometimento de uma não alcance a outra.
+
+Dois controles ficam fora das fronteiras da aplicação. O monitoramento (C7) recebe eventos de três fontes, os logins do SSO, os usos da chave no cofre e os eventos de auditoria entregues pela \textit{outbox}, além das divergências encontradas na carga. Mantê-lo fora da API impede que um comprometimento dela silencie os alertas. O \textit{pipeline} de CI (C8) é o último ponto antes do \textit{deploy} e transforma os requisitos em testes de autorização por rota, da máquina de estados, de \textit{tokens} inválidos, de falha nos \textit{guards} e na auditoria, de requisições entre origens e de carga alterada. Se algum teste falha, o \textit{deploy} é bloqueado. As funções Responder e Recuperar do NIST CSF 2.0, como encerrar sessões, congelar o período e recompor o valor pela auditoria, são processos operacionais. Elas dependem dos registros de C6 e dos alertas de C7, mas não aparecem como componentes no diagrama.
+\subsection{Decisões de Arquitetura}
+\label{subsec:decisoes}
+
+As decisões seguem a numeração dos requisitos: D01 a D03 atendem RS01 a RS03, D04 atende RS04 (R06 e R07), e assim por diante até D08. Para cada uma, descrevemos o problema, a decisão, o motivo, os componentes afetados e o resultado esperado. As reduções de probabilidade citadas são estimativas do plano de tratamento e só se confirmam com implementação, testes e evidências.
+
+\subsubsection{D01, máquina de estados como única via de mudança}
+O perfil analista já escreve nos lançamentos, e a alteração depois do envio chegaria ao ERP sem nova aprovação, sem exigir capacidade técnica. A decisão é aceitar a mudança de um lançamento enviado apenas pela transição ``reabrir'' da máquina de estados, que o devolve a \texttt{Rascunho}, retira-o da carga do ERP e registra a transição e o autor em uma tabela \texttt{audit\_logs} \textit{append-only} e encadeada por \textit{hash}. O motivo é manter a regra em um ponto único, que não depende da interface e garante que um segundo usuário veja a mudança antes de o valor sair do sistema. Bloquear a edição só na interface não impediria a chamada direta à API. Os componentes afetados são os casos de uso de alteração e de status, o objeto de valor \texttt{billing\_status}, a tabela de auditoria, o gerador da carga e o monitoramento. Espera-se que nenhuma alteração posterior ao envio chegue ao ERP sem nova aprovação, reduzindo a probabilidade de R01 de 3 para 1.
+
+\subsubsection{D02, MFA exigido no SSO e conferido na API}
+Uma conta de administrador ou gestor capturada dá controle sobre as aprovações, e hoje não há MFA. A decisão é configurar o MFA obrigatório para esses perfis no Keycloak, com WebAuthn/FIDO2 como fator preferencial por resistir a \textit{phishing}, e fazer a API conferir no \textit{token} a indicação de que o MFA foi concluído. O motivo é manter o MFA em um único ponto, sem reimplementá-lo na aplicação, e ainda assim fechar o desvio de um \textit{token} emitido por outro fluxo, como o provedor local de desenvolvimento. O TOTP fica como alternativa, com a limitação de poder ser capturado por um \textit{proxy} de \textit{phishing} em tempo real. Os componentes afetados são o Keycloak e o serviço OAuth, os \textit{guards} da API e o monitoramento. Espera-se que um atacante com apenas a senha não obtenha sessão privilegiada, reduzindo a probabilidade de R02 de 3 para 1.
+
+\subsubsection{D03, autorização por recurso nos casos de uso}
+O \textit{guard} atual confere só o perfil, e uma rota, um anexo ou uma consulta pode devolver dados de outro cliente se o identificador for trocado. A decisão é fazer cada caso de uso verificar, no servidor, a permissão sobre o recurso antes de ler ou gravar, usar identificadores não sequenciais como defesa em profundidade e cobrir todas as rotas com testes de autorização no CI. O motivo é que o perfil diz o que o usuário pode fazer, e não sobre quais registros, e só o caso de uso conhece o recurso carregado. O \textit{Row-Level Security} do PostgreSQL foi descartado como controle principal porque não cobre os anexos no \textit{Blob Storage}. Os componentes afetados são os casos de uso, os \textit{gateways} de leitura, os \textit{guards}, a auditoria e a suíte do CI. Espera-se que identificadores de outro escopo sejam negados em todas as rotas, reduzindo a probabilidade de R03 de 3 para 1.
+
+\subsubsection{D04, assinatura assimétrica com chave no cofre}
+O \texttt{JWT\_SECRET} é simétrico e está em toda instância da API, de modo que quem valida um \textit{token} também consegue assiná-lo. A decisão é substituí-lo por um par de chaves assimétricas, com a chave privada não exportável no cofre e usada só pelo emissor, a chave pública publicada com \texttt{kid} e uma validação que aceita um único algoritmo e confere \texttt{iss}, \texttt{aud}, \texttt{exp}, \texttt{kid} e o \texttt{sid} ativo. O motivo é reduzir o segredo a um ponto controlado e auditado, de forma que uma instância comprometida não guarde nada capaz de forjar \textit{tokens}, e o \texttt{sid} permite revogar sessões sem esperar a expiração. Manter o \texttt{JWT\_SECRET} no cofre com rotação foi descartado porque o segredo continuaria copiado para a memória de cada instância. Os componentes afetados são o emissor e os \textit{guards} (\texttt{src/core/auth}), os \textit{workers}, o WebSocket, o cofre e o registro de sessões. Espera-se reduzir a probabilidade de R06 e R07 de 2 para 1.
+
+\subsubsection{D05, auditoria na mesma transação e \textit{outbox}}
+O \texttt{AuditMiddleware} grava em segundo plano depois da confirmação, e uma falha nesse intervalo deixa a operação sem registro. A decisão é gravar a auditoria na mesma transação da operação, desfazendo-a se a gravação falhar, e entregar os eventos ao monitoramento por uma \textit{outbox} com repetição, identificador único e reconciliação periódica. O motivo é eliminar o estado em que a operação foi efetivada e o registro se perdeu. Publicar o evento direto na fila foi descartado porque a confirmação no banco e a publicação não são atômicas. Os componentes afetados são os casos de uso que alteram dados, a unidade de trabalho, as tabelas de auditoria e \textit{outbox} e o entregador de eventos. Espera-se que nenhuma operação mutante seja efetivada sem registro, reduzindo a probabilidade de R26 de 2 para 1.
+
+\subsubsection{D06, \textit{guards} que negam por padrão}
+Uma exceção na verificação de autorização pode ser tratada como permissão, por exemplo quando um serviço de identidade não responde. A decisão é centralizar a decisão de acesso em um mecanismo comum que só executa o caso de uso diante de uma permissão explícita, exigir política declarada em toda rota e impedir a inicialização da aplicação se alguma faltar. O motivo é que o erro não previsto é justamente o que gera a falha aberta, e só um padrão comum o cobre. A troca é intencional: uma dependência indisponível deixa as rotas restritas indisponíveis, em vez de abertas. Os componentes afetados são os \textit{guards} da camada \texttt{presentation}, a inicialização da aplicação e o tratador global de exceções. Espera-se reduzir a probabilidade de R28 de 2 para 1.
+
+\subsubsection{D07, carga do ERP com manifesto assinado}
+O arquivo de carga fica no \textit{storage} sem \textit{hash} nem assinatura, e um campo de texto pode virar fórmula ao abrir a planilha. A decisão é exportar os campos textuais como texto, gravar o arquivo com um manifesto assinado por chave exclusiva do gerador em área imutável e, na entrega, conferir a assinatura, o \textit{hash} e se o total bate com a soma das versões aprovadas no banco, bloqueando a importação quando houver divergência. O motivo é que só o gerador sabe quais campos são texto e quais versões entraram, e a conferência precisa ficar no último ponto antes do ERP. Um \textit{hash} sem assinatura foi descartado porque quem altera o arquivo pode recalculá-lo. Os componentes afetados são os geradores da carga, a área de cargas, a etapa de entrega e o cofre. Espera-se reduzir a probabilidade de R23 de 2 para 1.
+
+\subsubsection{D08, proteção contra CSRF antes dos \textit{guards}}
+O \textit{cookie} \texttt{access\_token} é enviado sozinho pelo navegador, e uma página de outro site pode induzir uma alteração com a sessão da vítima. A decisão é colocar antes dos \textit{guards} um \textit{middleware} que exige \textit{token} anti-CSRF vinculado ao \texttt{sid} e confere o \texttt{Origin}, com \textit{cookies} \texttt{SameSite=Strict}, \texttt{Secure} e \texttt{HttpOnly} e CORS restrito à origem da aplicação web. O motivo é que os \textit{guards} veem um \textit{token} válido e não distinguem a requisição induzida, e o \texttt{SameSite} sozinho não cobre outro sistema no mesmo domínio corporativo. Enviar o \textit{token} só no cabeçalho foi descartado porque o exporia ao JavaScript e a XSS. Os componentes afetados são o \textit{middleware} e o CORS da camada \texttt{presentation}, a emissão de \textit{cookies} e o cliente HTTP da aplicação web. Espera-se reduzir a probabilidade de R29 de 2 para 1.
+\subsection{Rastreabilidade entre Riscos e Controles}
+\label{subsec:rastreabilidade}
+
+A Tabela~\ref{tab:rastreabilidade} fecha a cadeia entre os artefatos das etapas. Cada requisito aparece ligado ao risco de origem, à vulnerabilidade catalogada, à decisão que o atende, aos controles posicionados na Fig.~\ref{fig:arquitetura-segura} e ao controle correspondente do plano de tratamento da análise de riscos. Os controles C6, C7 e C8, de auditoria, monitoramento e testes no CI, se repetem em quase todas as linhas porque servem a vários requisitos ao mesmo tempo.
+
+\begin{table*}[!t]
+\centering
+\caption{Rastreabilidade entre requisitos, riscos, vulnerabilidades, decisões e controles}
+\label{tab:rastreabilidade}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}l l >{\raggedright\arraybackslash}p{2.9cm} l >{\raggedright\arraybackslash}p{1.6cm} Y@{}}
+\hline
+\textbf{Req.} & \textbf{Risco} & \textbf{Vulnerabilidade} & \textbf{Decisão} & \textbf{Controles} & \textbf{Controle do plano de tratamento} \\
+\hline
+RS01 & R01 & CWE-841, A06 & D01 & C4, C5, C6, C7, C8 & Aprovação obrigatória após o envio, alertas e auditoria \\
+RS02 & R02 & CWE-308, A07 & D02 & C1, C2, C7 & MFA para administrador e gestor e monitoramento de acessos suspeitos \\
+RS03 & R03 & CWE-639, CWE-862, A01 & D03 & C3, C6, C7, C8 & Verificação de permissão por recurso e testes automatizados por rota \\
+RS04 & R06, R07 & CWE-522, CWE-347, A04 & D04 & C9, C10, C7, C8 & Chave de assinatura no cofre com rotação, validação de emissor, audiência e expiração e sessão registrada no servidor \\
+RS05 & R26 & CWE-778, CWE-223, A09 & D05 & C11, C6, C7, C8 & Persistência durável vinculada à operação, entrega com repetição e reconciliação \\
+RS06 & R28 & CWE-636, CWE-755, A10 & D06 & C12, C6, C7, C8 & Negação de acesso em falhas dos \textit{guards} e testes de falha no CI \\
+RS07 & R23 & CWE-345, CWE-353, CWE-1236, A08 & D07 & C13, C5, C7, C8 & Tratamento dos campos exportados, \textit{hash} ou assinatura do arquivo e bloqueio da importação divergente \\
+RS08 & R29 & CWE-352, A01 & D08 & C14, C6, C7, C8 & Proteção anti-CSRF, validação de origem, \textit{cookies} \texttt{SameSite}, \texttt{Secure} e \texttt{HttpOnly} e testes entre origens \\
+\hline
+\end{tabularx}
+\end{table*}
+
+Em um ponto, a arquitetura vai além do plano. Para R06 e R07, o plano previa manter o \texttt{JWT\_SECRET} no cofre com rotação, enquanto D04 o substitui por assinatura assimétrica, porque o cofre sozinho não impede o vazamento pela memória ou pelas imagens das instâncias. A rastreabilidade também mostrou uma dependência que a ordem do plano não refletia. O plano coloca R02, R06 e R07 no estágio 1, R01, R23, R26, R28 e R29 no estágio 2 e R03 no estágio 3, com R01 à frente dentro do estágio 2. Como os critérios de verificação de RS01 dependem de a auditoria ser gravada e de o \textit{guard} negar em caso de falha, propomos implementar C11 (R26) e C12 (R28) antes de C4 (R01). O ajuste não altera os estágios nem as pontuações da análise de riscos.
+
+\section{Discussão}
+\label{sec:discussao}
 \subsection{Lições Aprendidas}
 Discutir o que o processo mostrou ao ligar ameaças, riscos e arquitetura, e as dificuldades encontradas.
 \subsection{Implicações para Sistemas Financeiros}
@@ -164,7 +369,8 @@ Discutir o que os achados significam para sistemas financeiros e de faturamento 
 \subsection{Limitações e Ameaças à Validade}
 Declarar as limitações, como controles apenas propostos e risco residual sem validação.
 
-\section{Conclusão e Trabalhos Futuros}\label{sec:conclusao}
+\section{Conclusão e Trabalhos Futuros}
+\label{sec:conclusao}
 Retomar o problema e as contribuições, resumir os resultados e indicar os próximos passos.
 
 \section*{Agradecimentos}
