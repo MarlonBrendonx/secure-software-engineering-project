@@ -19,7 +19,7 @@ O frontend rodou em **modo de desenvolvimento** (`pnpm dev`). Isso muda a polít
 ## Ferramenta
 
 - ZAP (Zed Attack Proxy), versão 2.17.0.
-- Forma de execução: aplicação desktop, instalada localmente, com interface em português.
+- Forma de execução: aplicação desktop, instalada localmente.
 - Navegador: o Firefox aberto pelo próprio ZAP, já configurado para usar o proxy em `localhost:8080`.
 
 ## Como o ambiente foi subido
@@ -52,7 +52,10 @@ docker compose up --build
 | Política do Scan Ativo | Padrão                                                                                                                                                                                                              |
 | Modo do ZAP            | Protegido, para o ZAP atacar só URLs do contexto                                                                                                                                                                    |
 
-**Observação sobre perfis.** A varredura rodou só com `analyst`, que não exige MFA. `manager` e `admin` exigem MFA, e um token sem segundo fator recebe `401 mfa_necessario`. Por isso as rotas de escrita de `/v1/registry/.../service-rules`, que só o `admin` (com OTP) usa, **não foram alcançadas**.
+**Sessões de validação.** A etapa tem duas validações, uma por perfil.
+
+- **`analyst`:** não exige MFA. Deu origem às capturas 04a a 05b e ao CSV do scan ativo do frontend. Nessa sessão, as rotas de escrita de `service-rules` **não foram alcançadas**, porque `manager` e `admin` exigem MFA e um token sem segundo fator recebe `401 mfa_necessario`.
+- **`admin`:** o `admin` navegou pelo front com o proxy do ZAP ligado e passou pelo login com MFA, o que alcançou as rotas de escrita. O histórico do scan passivo está em [`scan-passivo-admin.csv`](../../evidencias/etapa-5/Backend/scan-passivo-admin.csv). O active scan do backend com esse perfil está em [`scan-ativo-admin.csv`](../../evidencias/etapa-5/Backend/scan-ativo-admin.csv).
 
 **Observação sobre o token.** O token de acesso do protótipo vale 15 minutos (Max-Age=900 no cookie). A regra do Replacer guarda um valor fixo. Depois que o token expira, as requisições do scanner passam a receber `401`. Esse ponto afeta a leitura do active scan e está detalhado em [Limitações](etapa-5-limitacoes.md).
 

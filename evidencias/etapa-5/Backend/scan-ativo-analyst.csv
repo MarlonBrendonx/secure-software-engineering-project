@@ -1,0 +1,26 @@
+ID,Origem,Requisição de Timestamp,Método,URL,Código,Motivo,RTT,Tamanho do Corpo da Resposta,Alerta Máximo,Nota,Marcadores (Tags)
+1,Manual,Tue Nov 10 21:43:50 BRT 2026,GET,http://localhost:8000/openapi.json,200,OK,67,28107,,false,JSON
+3,Manual,Tue Nov 10 21:43:50 BRT 2026,POST,http://localhost:8000/v1/auth/login,401,Unauthorized,8,245,,false,JSON
+6,Manual,Tue Nov 10 21:43:50 BRT 2026,POST,http://localhost:8000/v1/auth/refresh,401,Unauthorized,5,226,,false,JSON
+8,Manual,Tue Nov 10 21:43:50 BRT 2026,GET,http://localhost:8000/v1/auth/get-session,401,Unauthorized,3,238,,false,JSON
+9,Manual,Tue Nov 10 21:43:50 BRT 2026,GET,http://localhost:8000/v1/billing?year=10&month=10&client_name=&page=1&per_page=20,401,Unauthorized,11,238,,false,JSON
+10,Manual,Tue Nov 10 21:43:50 BRT 2026,GET,http://localhost:8000/v1/billing/clients/client_uuid/services?year=10&month=10,401,Unauthorized,5,238,,false,JSON
+14,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/billing/clients/client_uuid/average?year=10&month=10,401,Unauthorized,4,238,,false,JSON
+15,Manual,Tue Nov 10 21:43:51 BRT 2026,POST,http://localhost:8000/v1/billing/items,401,Unauthorized,5,238,,false,JSON
+16,Manual,Tue Nov 10 21:43:51 BRT 2026,POST,http://localhost:8000/v1/billing/items/replicate,401,Unauthorized,6,238,,false,JSON
+18,Manual,Tue Nov 10 21:43:51 BRT 2026,POST,http://localhost:8000/v1/billing/items/batch-status,401,Unauthorized,4,238,,false,JSON
+19,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,401,Unauthorized,4,238,,false,JSON
+20,Manual,Tue Nov 10 21:43:51 BRT 2026,DELETE,http://localhost:8000/v1/billing/items/item_uuid,401,Unauthorized,4,238,,false,JSON
+21,Manual,Tue Nov 10 21:43:51 BRT 2026,PATCH,http://localhost:8000/v1/billing/items/item_uuid,401,Unauthorized,3,238,,false,JSON
+22,Manual,Tue Nov 10 21:43:51 BRT 2026,PATCH,http://localhost:8000/v1/billing/items/item_uuid/status,401,Unauthorized,4,238,,false,JSON
+24,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/billing/billing_uuid/history,401,Unauthorized,4,238,,false,JSON
+26,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid/history?status=,401,Unauthorized,3,238,,false,JSON
+27,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/audit/events?limit=50,401,Unauthorized,5,238,,false,JSON
+29,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=20,401,Unauthorized,4,238,,false,JSON
+32,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,401,Unauthorized,3,238,,false,JSON
+33,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/programs,401,Unauthorized,3,238,,false,JSON
+35,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules?program_name=&service_name=&page=1&per_page=20,401,Unauthorized,3,238,,false,JSON
+36,Manual,Tue Nov 10 21:43:51 BRT 2026,POST,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,401,Unauthorized,3,238,,false,JSON
+37,Manual,Tue Nov 10 21:43:51 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/service_rule_uuid,401,Unauthorized,2,238,,false,JSON
+39,Manual,Tue Nov 10 21:43:51 BRT 2026,DELETE,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/service_rule_uuid,401,Unauthorized,3,238,,false,JSON
+40,Manual,Tue Nov 10 21:43:51 BRT 2026,PATCH,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/service_rule_uuid,422,Unprocessable Entity,2,203,,false,JSON

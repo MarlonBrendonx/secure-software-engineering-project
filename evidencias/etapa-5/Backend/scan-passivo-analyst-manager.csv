@@ -1,0 +1,80 @@
+ID,Origem,Requisição de Timestamp,Método,URL,Código,Motivo,RTT,Tamanho do Corpo da Resposta,Alerta Máximo,Nota,Marcadores (Tags)
+25453,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/,307,Temporary Redirect,4,22,Informativo,false,
+25455,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/login?callbackUrl=%2F,200,OK,4,13026,,false,"Script, Comment"
+25456,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/268u5fzz227pv.css,200,OK,5,75679,,false,
+25457,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/0cgtuh64mojii.js,200,OK,4,5362,,false,
+25461,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/1a58vmd1rvb37.js,200,OK,7,27320,,false,
+25462,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/0z6cgex-tktpt.js,200,OK,7,37226,,false,
+25463,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/1kqgfeyo78h9y.js,200,OK,11,44417,,false,
+25464,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/3lghig76hi20_.js,200,OK,12,138160,,false,
+25465,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/20e9ktxmyewrx.js,200,OK,11,9326,,false,
+25466,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/2c4pe-jmqdnqr.js,200,OK,13,18445,,false,
+25467,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/turbopack-41cm8ls3cmmu0.js,200,OK,17,10613,,false,
+25468,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/25v81hb824fjd.js,200,OK,23,30951,,false,
+25469,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/2i7jz2sdf08q9.js,200,OK,23,22292,,false,
+25470,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/3zuv080p-222z.js,200,OK,24,69525,,false,
+25471,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/3a-zw498i3shd.js,200,OK,25,276831,,false,
+25472,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/38_yhrl5-08wc.js,200,OK,25,54627,,false,
+25473,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:3000/_next/static/chunks/38y-hr_o9hsn1.js,200,OK,26,227542,,false,
+25474,Proxy,Tue Nov 10 22:06:09 BRT 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,4,129,,false,JSON
+25476,Proxy,Tue Nov 10 22:06:09 BRT 2026,POST,http://localhost:8000/v1/auth/refresh,401,Unauthorized,2,226,,false,
+25477,Proxy,Tue Nov 10 22:06:26 BRT 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,1,2,,false,
+25478,Proxy,Tue Nov 10 22:06:26 BRT 2026,POST,http://localhost:8000/v1/auth/login,200,OK,3,1029,,false,
+25479,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/psp,200,OK,10,14262,Médio,false,"Script, Comment"
+25480,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/_next/static/chunks/2gfm75lciz3iz.js,200,OK,2,18713,,false,
+25481,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/_next/static/chunks/1-wsq5y7mhqvg.js,200,OK,3,33558,,false,
+25482,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/_next/static/chunks/1-xn60kcnciyx.js,200,OK,3,50507,,false,
+25483,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/_next/static/chunks/2vjxh8ws_rvdm.js,200,OK,6,4737,,false,
+25484,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/_next/static/chunks/3eg00734-moz0.js,200,OK,6,128048,,false,
+25485,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/_next/static/chunks/20e9cz8ak714c.js,200,OK,6,76479,,false,
+25486,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,3,129,Baixo,false,JSON
+25487,Proxy,Tue Nov 10 22:06:26 BRT 2026,POST,http://localhost:8000/v1/auth/refresh,200,OK,4,504,,false,
+25488,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=1odh4,200,OK,3,390,,false,
+25489,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/psp?_rsc=1m1zb,200,OK,5,4020,,false,
+25490,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/psp?_rsc=1a77o,200,OK,12,1418,,false,
+25491,Proxy,Tue Nov 10 22:06:26 BRT 2026,GET,http://localhost:3000/psp?_rsc=1l725,200,OK,17,1768,,false,
+25492,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=1a77o,200,OK,9,1418,,false,
+25493,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=nzw4m,200,OK,11,764,,false,
+25494,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/psp?_rsc=hsal6,200,OK,6,764,,false,
+25495,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=1quuz,200,OK,12,1758,,false,
+25496,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/psp?_rsc=107gr,200,OK,6,1757,,false,
+25497,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/_next/static/chunks/27al928afmrfi.js,200,OK,2,4652,,false,
+25498,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/_next/static/chunks/3rqqyxze62r4l.js,200,OK,2,43795,,false,
+25499,Proxy,Tue Nov 10 22:06:27 BRT 2026,GET,http://localhost:3000/_next/static/chunks/3-zjcb6ndniuu.js,200,OK,13,128048,,false,Hidden
+25500,Proxy,Tue Nov 10 22:06:28 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,8,6189,,false,JSON
+25501,Proxy,Tue Nov 10 22:06:29 BRT 2026,GET,http://localhost:8000/v1/billing/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c/average?year=2026&month=10,200,OK,3,130,,false,JSON
+25505,Proxy,Tue Nov 10 22:06:38 BRT 2026,OPTIONS,http://localhost:8000/v1/billing/items,200,OK,2,2,,false,
+25506,Proxy,Tue Nov 10 22:06:38 BRT 2026,POST,http://localhost:8000/v1/billing/items,201,Created,11,912,,false,
+25507,Proxy,Tue Nov 10 22:06:38 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,13,6315,,false,JSON
+25508,Proxy,Tue Nov 10 22:06:38 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,13,6315,,false,
+25509,Proxy,Tue Nov 10 22:06:40 BRT 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,5,411,,false,JSON
+25510,Proxy,Tue Nov 10 22:06:42 BRT 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c/service-rules?page=1&per_page=10,200,OK,7,1399,,false,JSON
+25511,Proxy,Tue Nov 10 22:06:42 BRT 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c/programs,200,OK,7,277,,false,
+25512,Proxy,Tue Nov 10 22:06:57 BRT 2026,OPTIONS,http://localhost:8000/v1/billing/items/batch-status,200,OK,2,2,,false,
+25513,Proxy,Tue Nov 10 22:06:57 BRT 2026,POST,http://localhost:8000/v1/billing/items/batch-status,200,OK,9,957,,false,
+25515,Proxy,Tue Nov 10 22:06:57 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,15,6330,,false,JSON
+25516,Proxy,Tue Nov 10 22:06:57 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,15,6330,,false,
+25517,Proxy,Tue Nov 10 22:07:05 BRT 2026,POST,http://localhost:8000/v1/auth/logout,200,OK,5,24,,false,"SetCookie, JSON"
+25518,Proxy,Tue Nov 10 22:07:05 BRT 2026,GET,http://localhost:3000/login,200,OK,4,13026,,false,
+25519,Proxy,Tue Nov 10 22:07:05 BRT 2026,GET,http://localhost:8000/v1/auth/get-session,401,Unauthorized,2,220,,false,
+25520,Proxy,Tue Nov 10 22:07:23 BRT 2026,POST,http://localhost:8000/v1/auth/login,200,OK,4,1020,,false,"SetCookie, JSON"
+25521,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/psp,304,Not Modified,7,0,,false,
+25522,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,3,125,,false,
+25523,Proxy,Tue Nov 10 22:07:23 BRT 2026,POST,http://localhost:8000/v1/auth/refresh,200,OK,3,499,,false,"SetCookie, JSON"
+25524,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=1odh4,200,OK,4,390,,false,
+25525,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/psp?_rsc=1a77o,200,OK,9,1418,,false,
+25526,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/psp?_rsc=1m1zb,200,OK,13,4020,,false,
+25527,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/psp?_rsc=1l725,200,OK,19,1768,,false,
+25528,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=1a77o,200,OK,16,1418,,false,
+25529,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=nzw4m,200,OK,45,764,,false,
+25530,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/service-rules?_rsc=1quuz,200,OK,44,1758,,false,
+25531,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/psp?_rsc=hsal6,200,OK,43,764,,false,
+25532,Proxy,Tue Nov 10 22:07:23 BRT 2026,GET,http://localhost:3000/psp?_rsc=107gr,200,OK,11,1757,,false,
+25533,Proxy,Tue Nov 10 22:07:25 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,8,8249,,false,JSON
+25534,Proxy,Tue Nov 10 22:07:26 BRT 2026,GET,http://localhost:8000/v1/billing/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c/average?year=2026&month=10,200,OK,3,130,,false,JSON
+25535,Proxy,Tue Nov 10 22:07:30 BRT 2026,POST,http://localhost:8000/v1/billing/items/batch-status,200,OK,5,954,,false,JSON
+25536,Proxy,Tue Nov 10 22:07:30 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,15,8246,,false,
+25537,Proxy,Tue Nov 10 22:07:30 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,14,8246,,false,
+25538,Proxy,Tue Nov 10 22:07:35 BRT 2026,POST,http://localhost:8000/v1/billing/items/batch-status,200,OK,4,947,,false,JSON
+25539,Proxy,Tue Nov 10 22:07:35 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,14,8239,,false,
+25540,Proxy,Tue Nov 10 22:07:35 BRT 2026,GET,http://localhost:8000/v1/billing?year=2026&month=10&page=1&per_page=5,200,OK,15,8239,,false,JSON
