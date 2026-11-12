@@ -36,3 +36,6 @@ coverage/
 Thumbs.db
 .vscode/
 .idea/
+
+# Diretório de pentest local — não versionar (artefatos de teste de invasão)
+pentest/

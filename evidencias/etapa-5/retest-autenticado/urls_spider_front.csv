@@ -1,0 +1,61 @@
+Processado,Método,URI,Marcadores
+true,GET,http://localhost:3000,Semear
+true,GET,http://localhost:3000/robots.txt,Semear
+true,GET,http://localhost:3000/sitemap.xml,Semear
+true,GET,http://localhost:3000/login?callbackUrl=%2Frobots.txt,
+true,GET,http://localhost:3000/login?callbackUrl=%2Fsitemap.xml,
+true,GET,http://localhost:3000/login?callbackUrl=%2F,
+true,GET,http://localhost:3000/_next/static/chunks/268u5fzz227pv.css,
+true,GET,http://localhost:3000/_next/static/chunks/0cgtuh64mojii.js,
+true,GET,http://localhost:3000/_next/static/chunks/25v81hb824fjd.js,
+true,GET,http://localhost:3000/_next/static/chunks/38y-hr_o9hsn1.js,
+true,GET,http://localhost:3000/_next/static/chunks/3lghig76hi20_.js,
+true,GET,http://localhost:3000/_next/static/chunks/1kqgfeyo78h9y.js,
+true,GET,http://localhost:3000/_next/static/chunks/turbopack-41cm8ls3cmmu0.js,
+true,GET,http://localhost:3000/_next/static/chunks/20e9ktxmyewrx.js,
+true,GET,http://localhost:3000/_next/static/chunks/1a58vmd1rvb37.js,
+true,GET,http://localhost:3000/_next/static/chunks/0z6cgex-tktpt.js,
+true,GET,http://localhost:3000/_next/static/chunks/3a-zw498i3shd.js,
+true,GET,http://localhost:3000/_next/static/chunks/3zuv080p-222z.js,
+true,GET,http://localhost:3000/_next/static/chunks/38_yhrl5-08wc.js,
+true,GET,http://localhost:3000/_next/static/chunks/2c4pe-jmqdnqr.js,
+true,GET,http://localhost:3000/_next/static/chunks/2i7jz2sdf08q9.js,
+true,GET,http://localhost:3000/_next/static/chunks/0cz1d0mv5g_q7.js,
+false,GET,https://react.dev/errors/,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/public-next-folder-conflict,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/404-get-initial-props,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/gssp-export,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/gssp-component-member,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/non-standard-node-env,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/ssg-fallback-true-export,Fora do Escopo
+false,GET,http://www.w3.org/2000/svg,Fora do Escopo
+false,GET,https://nextjs.org/docs/app/api-reference/functions/use-search-params,Fora do Escopo
+false,GET,http://www.w3.org/1998/Math/MathML,Fora do Escopo
+false,GET,https://nuqs.dev/NUQS-$,Fora do Escopo
+false,GET,http://www.w3.org/1999/xlink,Fora do Escopo
+false,GET,http://www.w3.org/XML/1998/namespace,Fora do Escopo
+false,GET,http://n/,Fora do Escopo
+false,GET,https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE,Fora do Escopo
+false,GET,https://github.com/zloirock/core-js,Fora do Escopo
+false,GET,https://a/,Fora do Escopo
+false,GET,https://a/c%20d?a=1&c=3,Fora do Escopo
+false,GET,https://b/,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/failed-to-find-server-action%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/next-dynamic-api-wrong-context%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/dynamic-server-error%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/ppr-caught-error%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/ppr-caught-error,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/blocking-route%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/next-prerender-dynamic-metadata%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/next-prerender-dynamic-viewport%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/next-request-in-use-cache%60,Fora do Escopo
+false,GET,https://nextjs.org/docs/app/api-reference/functions/cookies,Fora do Escopo
+false,GET,https://nextjs.org/docs/app/api-reference/functions/headers,Fora do Escopo
+false,GET,https://x/,Fora do Escopo
+false,GET,https://nextjs.org/docs/messages/sync-dynamic-apis%60,Fora do Escopo
+true,GET,http://localhost:8000/,
+false,GET,https://base-ui.com/production-error,Fora do Escopo
+false,GET,https://json-schema.org/draft/2020-12/schema,Fora do Escopo
+false,GET,http://json-schema.org/draft-07/schema,Fora do Escopo
+false,GET,http://json-schema.org/draft-04/schema,Fora do Escopo

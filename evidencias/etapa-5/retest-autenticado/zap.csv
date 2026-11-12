@@ -1,0 +1,27 @@
+ID,Origem,Requisição de Timestamp,Método,URL,Código,Motivo,RTT,Tamanho do Corpo da Resposta,Alerta Máximo,Nota,Marcadores (Tags)
+1,Manual,Thu Nov 12 14:44:54 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,6,28107,Baixo,false,JSON
+3,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,401,Unauthorized,4,245,Informativo,false,JSON
+6,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/refresh,401,Unauthorized,3,226,,false,JSON
+7,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/logout,401,Unauthorized,2,237,,false,JSON
+8,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,401,Unauthorized,3,237,,false,JSON
+9,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=10&month=10&client_name=&page=1&per_page=20,401,Unauthorized,4,237,,false,JSON
+10,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients/client_uuid/services?year=10&month=10,401,Unauthorized,2,237,,false,JSON
+14,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients/client_uuid/average?year=10&month=10,401,Unauthorized,3,237,,false,JSON
+15,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,401,Unauthorized,3,237,,false,JSON
+16,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,401,Unauthorized,3,237,,false,JSON
+18,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,401,Unauthorized,4,237,,false,JSON
+19,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/item_uuid,401,Unauthorized,4,237,,false,JSON
+20,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/item_uuid,401,Unauthorized,2,237,,false,JSON
+21,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/item_uuid,401,Unauthorized,3,237,,false,JSON
+22,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/item_uuid/status,401,Unauthorized,4,237,,false,JSON
+24,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/billing_uuid/history,401,Unauthorized,3,237,,false,JSON
+26,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/item_uuid/history?status=,401,Unauthorized,4,237,,false,JSON
+27,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,401,Unauthorized,3,237,,false,JSON
+29,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=20,401,Unauthorized,3,237,,false,JSON
+32,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=&page=1&per_page=20,401,Unauthorized,3,237,,false,JSON
+33,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/programs,401,Unauthorized,3,237,,false,JSON
+35,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules?program_name=&service_name=&page=1&per_page=20,401,Unauthorized,3,237,,false,JSON
+36,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients/client_uuid/service-rules,401,Unauthorized,4,237,,false,JSON
+37,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/service_rule_uuid,401,Unauthorized,5,237,,false,JSON
+39,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/service_rule_uuid,401,Unauthorized,3,237,,false,JSON
+40,Manual,Thu Nov 12 14:44:55 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients/client_uuid/service-rules/service_rule_uuid,401,Unauthorized,3,237,,false,JSON

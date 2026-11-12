@@ -1,0 +1,24 @@
+Processado,Requisição de Timestamp,Método,URL,Código,Motivo,RTT,Tamanho do Cabeçalho da Resposta,Tamanho do Corpo da Resposta,Alerta Máximo,Marcadores (Tags)
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/sitemap.xml,307,Temporary Redirect,15,655,33,Informativo,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/robots.txt,307,Temporary Redirect,16,654,32,Informativo,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000,307,Temporary Redirect,15,644,22,Informativo,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/login?callbackUrl=%2Frobots.txt,200,OK,12,914,13026,Baixo,"Script, Comment"
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/login?callbackUrl=%2F,200,OK,6,914,13026,Médio,"Script, Comment"
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/login?callbackUrl=%2Fsitemap.xml,200,OK,18,914,13026,Informativo,"Script, Comment"
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/0cgtuh64mojii.js,200,OK,5,820,5362,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/268u5fzz227pv.css,200,OK,5,808,75679,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/25v81hb824fjd.js,200,OK,4,821,30951,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/3lghig76hi20_.js,200,OK,7,823,138160,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/38y-hr_o9hsn1.js,200,OK,8,823,227542,,Script
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/20e9ktxmyewrx.js,200,OK,10,820,9326,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/1kqgfeyo78h9y.js,200,OK,11,821,44417,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/turbopack-41cm8ls3cmmu0.js,200,OK,9,821,10613,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/0z6cgex-tktpt.js,200,OK,11,821,37226,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/1a58vmd1rvb37.js,200,OK,13,821,27320,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/38_yhrl5-08wc.js,200,OK,15,821,54627,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/3zuv080p-222z.js,200,OK,17,822,69525,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/3a-zw498i3shd.js,200,OK,17,823,276831,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/2c4pe-jmqdnqr.js,200,OK,17,821,18445,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/2i7jz2sdf08q9.js,200,OK,18,821,22292,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:3000/_next/static/chunks/0cz1d0mv5g_q7.js,200,OK,9,823,112594,,
+Com Sucesso,Thu Nov 12 15:45:39 GMT-03:00 2026,GET,http://localhost:8000/,404,Not Found,6,195,185,,JSON

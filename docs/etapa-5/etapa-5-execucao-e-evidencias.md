@@ -41,3 +41,21 @@ Todos os caminhos são relativos a `evidencias/etapa-5/`.
 | `Backend/scan-passivo-admin.csv`                 | histórico do passive scan como `admin`                                                |
 | `Backend/scan-passivo-analyst-manager.csv`       | histórico do passive scan como `analyst` e `manager`                                  |
 | `Frontend/scan-ativo-front.csv`                  | histórico das requisições do active scan no frontend                                  |
+
+## Retest autenticado
+
+A segunda rodada tem evidências próprias em `evidencias/etapa-5/retest-autenticado/`. Os detalhes estão em [Retest autenticado e achados](etapa-5-retest-autenticado.md).
+
+| Arquivo                                   | O que mostra                                                                 |
+| ----------------------------------------- | --------------------------------------------------------------------------- |
+| `zap-01-contexto-e-rotas.png`             | contexto `Pentest-STRIDE` e as rotas do OpenAPI na árvore do ZAP            |
+| `zap-02-replacer-token-admin.png`         | regra do Replacer que injeta o token de `admin` no cabeçalho `Authorization`|
+| `zap-03-active-scan.png`                  | active scan em andamento no backend                                          |
+| `zap-04-alertas.png`                      | alertas do retest (sem Alto; `X-Content-Type-Options` em Baixo)             |
+| `zap-05-rotas-escrita-atacadas.png`       | histórico com `POST`, `PATCH` e `DELETE` enviados às rotas de escrita        |
+| `zap-06-spider-passivo-front.png`         | spider e passive scan no frontend, com os alertas de CSP                     |
+| `zap-07-dependency-check.png`             | relatório do OWASP Dependency-Check com a CVE do `PyJWT`                     |
+| `active_scan.csv`, `zap.csv`              | histórico do active scan autenticado (muitos `401` e `429`)                 |
+| `spider_frontend.csv`, `urls_spider_front.csv` | histórico e URLs do spider do frontend                                 |
+| `dependency-check-report.html` / `.json`  | relatório completo do SCA (191 dependências, 9 CVE)                          |
+| `zap-desktop-report.html`                 | relatório HTML do ZAP do retest (0 Alto, 3 Médio, 2 Baixo)                   |

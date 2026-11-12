@@ -17,6 +17,7 @@ O scan passivo como `admin`, com MFA, percorreu login, cadastro e faturamento (6
 |  3  | [Análise dos achados](etapa-5-analise-dos-achados.md)         | Quais três alertas foram analisados e o que cada um significa                 |
 |  4  | [Correções propostas](etapa-5-correcoes-propostas.md)         | Como corrigir cada achado e como verificar a correção                         |
 |  5  | [Limitações e descartes](etapa-5-limitacoes.md)               | O que foi descartado, o que pode ser falso positivo e o que o teste não cobre |
+|  6  | [Retest autenticado e achados](etapa-5-retest-autenticado.md) | Segunda rodada (ZAP desktop, testes de API e Dependency-Check) e as vulnerabilidades V01 a V03 |
 
 As evidências ficam em [`evidencias/etapa-5/`](../../evidencias/etapa-5/).
 
@@ -29,6 +30,11 @@ A tabela liga cada achado à categoria OWASP, ao CWE e aos riscos e requisitos d
 | A01    | A05:2021 Security Misconfiguration / CWE-693           | sem risco dedicado; relacionado a R29 (defesa em profundidade) | sem requisito dedicado; relacionado a RS08 | CSP sem `'unsafe-inline'` e com `form-action` |
 | A02    | A05:2021 Security Misconfiguration / CWE-693           | sem risco dedicado | sem requisito dedicado | `X-Content-Type-Options: nosniff` na API    |
 | A03    | A05:2021 Security Misconfiguration / CWE-497           | sem risco dedicado | sem requisito dedicado | `poweredByHeader: false` no Next.js         |
+| V01    | A07:2021 Identification and Authentication Failures / CWE-613 | T33 / R25 (reuso de refresh token) | RS04 (sessão revogável) | rotacionar e revogar o refresh |
+| V02    | A04:2021 Insecure Design / CWE-522                     | relacionado a T15/T16 (exposição de credencial) | RS04 (token de sessão) | token só no cookie `HttpOnly` |
+| V03    | A06:2021 Vulnerable and Outdated Components / CWE-1395 | T37 (dependência vulnerável) | sem requisito dedicado; relacionado às decisões de cadeia de suprimentos (Trivy, cooldown) | atualizar o `PyJWT` |
+
+Os achados V01 a V03 vêm do [retest autenticado](etapa-5-retest-autenticado.md) e são vulnerabilidades, não só configuração. O V01 confirma, na prática, o risco **R25** já catalogado na [etapa 3](../etapa-3/etapa-3-requisitos.md).
 
 **Lacuna encontrada.** Nenhum risco das etapas 2 e 3 trata de cabeçalhos HTTP de segurança. Os três achados vieram de um tipo de problema que o nosso registro de riscos não cobria. Como encaminhamento, registrar um risco de "configuração insegura de cabeçalhos HTTP" na próxima revisão da etapa 2.
 
