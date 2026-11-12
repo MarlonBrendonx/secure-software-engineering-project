@@ -113,19 +113,45 @@ As principais contribuições deste artigo são:
 
 \subsection{Organização do Artigo}
 
-O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, as decisões e a rastreabilidade, e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
+O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, o diagrama, as decisões e a rastreabilidade, e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
 
 
 \section{Fundamentação Teórica e Trabalhos Relacionados}
 \label{sec:fundamentacao}
+
+O processo seguido neste artigo combina técnicas que a literatura costuma apresentar em separado. Cada uma responde a uma pergunta diferente, e a saída de uma é a entrada da seguinte. O ciclo de vida de engenharia de software seguro indica em que momento do desenvolvimento cada atividade acontece. A modelagem de ameaças e os casos de abuso dizem o que pode dar errado e como. A gestão de riscos diz o que tratar primeiro, e o NIST CSF 2.0 ajuda a escolher que tipo de controle aplicar. Os catálogos de vulnerabilidades dão nome à falha que cada requisito deve fechar e ajudam a escrever critérios que possam ser verificados. Esta seção apresenta esses conceitos na mesma ordem em que o processo os usa e, ao final, discute os trabalhos relacionados.
+
 \subsection{Ciclo de Vida de Engenharia de Software Seguro}
-Situar o artigo no ciclo de vida de engenharia de software seguro e nas etapas cobertas.
+
+A ideia central da engenharia de software seguro é que a segurança não é uma etapa, mas uma preocupação presente em todas as fases do desenvolvimento. McGraw organiza essa ideia em um conjunto de pontos de contato (\textit{touchpoints}) aplicados aos artefatos que o processo já produz, entre eles os casos de abuso, os requisitos de segurança, a análise de risco da arquitetura, a revisão de código e os testes de penetração~\cite{mcgraw2006}. O \textit{Security Development Lifecycle} (SDL) da Microsoft segue o mesmo princípio e associa atividades obrigatórias a cada fase, do treinamento e dos requisitos ao projeto, à implementação, à verificação, à liberação e à resposta a incidentes~\cite{howard2006}. Os dois aparecem entre os modelos mais citados no mapeamento de Khan et al.~\cite{khan2020}. Mais recentemente, o \textit{Secure Software Development Framework} (SSDF) do NIST reuniu práticas desses e de outros modelos em quatro grupos, a preparação da organização, a proteção do software, a produção de software bem protegido e a resposta a vulnerabilidades~\cite{nist2022ssdf}. O SSDF não impõe um ciclo de vida específico. Ele descreve resultados que podem ser incorporados ao processo que a equipe já usa, e entre eles está o uso da modelagem de ameaças para avaliar o risco do software ainda no projeto.
+
+Os três modelos dão às fases de requisitos e de projeto um peso que motiva este trabalho, porque é nelas que se decide o que o código terá de garantir antes de ele existir. Como discutido na introdução, uma falha de projeto, como uma verificação de permissão posta no lugar errado, não se corrige com um ajuste pontual no código~\cite{arce2014}. Por isso, este artigo cobre as fases iniciais do ciclo, da identificação das ameaças à arquitetura segura, passando pela análise de riscos e pelos requisitos. A implementação dos controles e a verificação por testes e varreduras são fases posteriores do mesmo ciclo e ficam fora do escopo aqui. Os requisitos e as decisões, contudo, foram escritos para alimentá-las, já que cada requisito traz o critério que a verificação deverá confirmar.
+
 \subsection{Modelagem de Ameaças e Casos de Abuso}
-Explicar o modelo STRIDE e o conceito de caso de abuso, e como os dois se complementam.
+
+A modelagem de ameaças é a análise sistemática de um sistema em busca do que pode dar errado do ponto de vista da segurança. Shostack a resume em quatro perguntas: o que estamos construindo, o que pode dar errado, o que vamos fazer a respeito e se fizemos um bom trabalho~\cite{shostack2014}. Para a segunda pergunta, o modelo STRIDE, criado na Microsoft~\cite{kohnfelder1999}, oferece seis categorias de ameaça, cada uma oposta a uma propriedade de segurança. \textit{Spoofing} viola a autenticidade, \textit{Tampering} a integridade, \textit{Repudiation} o não repúdio, \textit{Information Disclosure} a confidencialidade, \textit{Denial of Service} a disponibilidade e \textit{Elevation of Privilege} a autorização~\cite{shostack2014}. Ao percorrer cada componente, ponto de entrada e fluxo de dados perguntando qual dessas categorias se aplica, a equipe reduz a chance de esquecer uma classe inteira de ataques. A força do STRIDE está nessa cobertura. Sua limitação é que ele classifica a ameaça, mas não descreve quem a executa, com que objetivo e em que sequência de passos.
+
+Essa descrição é o papel dos casos de abuso. McDermott e Fox os definem como uma interação entre o sistema e um ou mais atores cujo resultado é prejudicial ao sistema, aos atores ou a outras partes interessadas~\cite{mcdermott1999}. Sindre e Opdahl propõem uma noção próxima, a de caso de uso indevido (\textit{misuse case}), que representa o ator hostil no próprio diagrama de casos de uso e liga cada caso indevido aos casos de uso que ele ameaça e aos que o mitigam~\cite{sindre2005}. Nos dois casos, o ataque é narrado com a mesma linguagem dos requisitos funcionais, o que facilita a conversa com quem conhece o negócio. Os casos de abuso também tornam visível um tipo de ameaça que a análise por componente tende a subestimar, a do usuário legítimo que usa as próprias permissões para fraudar. No sistema de faturamento, o administrador que cria, envia e aprova o próprio lançamento não precisa contornar nenhum controle técnico.
+
+As duas técnicas se complementam. O STRIDE dá amplitude e garante que cada componente foi examinado contra as seis categorias, enquanto os casos de abuso dão profundidade e mostram o ator, as condições necessárias, os passos e o impacto de cada ameaça relevante. Neste trabalho, o STRIDE foi aplicado sobre os componentes, os pontos de entrada e os 14 ativos do sistema. Cada ameaça registra a propriedade violada e o controle já existente, e as que se enquadram em duas categorias recebem uma categoria secundária. Os casos de abuso partiram dessas ameaças, e cada caso indica as ameaças que detalha. Essa ligação explícita é o primeiro elo da rastreabilidade que a Seção~\ref{subsec:rastreabilidade} completa.
+
 \subsection{Gestão de Riscos com o NIST CSF 2.0}
-Descrever as funções do NIST CSF 2.0 e como elas apoiam a escolha dos controles.
+
+Uma lista de ameaças não diz por onde começar. Para isso, cada ameaça precisa ser expressa como um risco, cuja grandeza combina a probabilidade de o evento ocorrer e o impacto que ele causaria. O guia de avaliação de riscos do NIST adota essa formulação e admite escalas qualitativas ou semiquantitativas quando não há dados para estimar frequências~\cite{nist2012risk}, situação comum em um sistema interno sem histórico de incidentes. Avaliados os riscos, a organização escolhe para cada um uma estratégia de tratamento: evitar a condição que o origina, reduzir a probabilidade ou o impacto, compartilhar as consequências com um terceiro ou aceitá-lo de forma consciente. O que resta depois do tratamento é o risco residual, que também precisa ser avaliado e, quando não é desprezível, formalmente aceito.
+
+O NIST \textit{Cybersecurity Framework} (CSF) 2.0 organiza os resultados de segurança que uma organização deve alcançar em seis funções~\cite{nist2024csf}. \emph{Governar} (GV) estabelece a estratégia, as políticas, os papéis e a supervisão da gestão de riscos, inclusive na cadeia de suprimentos, e é a novidade da versão 2.0 em relação à anterior. \emph{Identificar} (ID) trata do entendimento dos ativos e dos riscos atuais. \emph{Proteger} (PR) reúne as salvaguardas que previnem ou reduzem os incidentes, como a gestão de identidades e a proteção dos dados. \emph{Detectar} (DE) cobre o monitoramento capaz de revelar ataques e falhas. \emph{Responder} (RS) e \emph{Recuperar} (RC) tratam da contenção de um incidente e da restauração das operações afetadas. As funções se desdobram em categorias e subcategorias, como PR.AA, de gestão de identidades, autenticação e controle de acesso, e DE.CM, de monitoramento contínuo. O CSF descreve resultados e não prescreve controles, e por isso não substitui a análise de riscos do sistema. Ele serve como uma lista de verificação que mostra se o tratamento de um risco se limita a impedir o ataque ou se também prevê como percebê-lo, contê-lo e recuperar o que foi afetado.
+
+Neste trabalho, os riscos foram avaliados por probabilidade e impacto em escalas de 1 a 4, e a pontuação, dada pelo produto dos dois, define o nível do risco. A pontuação, porém, é só o ponto de partida da priorização, que considera também as dependências entre os riscos. Em seguida, o tratamento de cada risco foi mapeado às funções e categorias do CSF 2.0. A função Identificar é transversal, pois o inventário de ativos e o próprio registro de riscos valem para todos eles. As demais funções mostraram, para cada risco, se o tratamento ia além da proteção e quando o risco exigia uma política própria, e não só um controle técnico, como a segregação de funções entre quem cria e quem aprova um lançamento. A Seção~\ref{sec:metodologia} detalha os critérios, e a Seção~\ref{sec:resultados} apresenta a priorização e o risco residual estimado.
+
 \subsection{Catálogos de Vulnerabilidades e Requisitos de Segurança}
-Apresentar CWE, OWASP Top 10 e cheat sheets da OWASP como base para requisitos de segurança verificáveis.
+
+Um risco descreve um evento indesejado, mas não diz qual falha do software o torna possível. Para nomear essa falha, a área conta com catálogos mantidos pela comunidade. O \textit{Common Weakness Enumeration} (CWE), mantido pelo MITRE, é uma lista hierárquica de tipos de fraqueza de software e hardware, isto é, de condições que, em certas circunstâncias, podem levar a uma vulnerabilidade~\cite{mitrecwe}. Cada entrada descreve a fraqueza, suas consequências e as formas de mitigá-la, e as entradas se relacionam por níveis de abstração, das classes gerais às variantes específicas. Diferentemente de um registro de vulnerabilidade em um produto, uma entrada do CWE descreve um tipo de erro, o que permite usá-la no projeto, antes de existir código para analisar. O OWASP Top 10 é um documento de conscientização sobre os riscos mais críticos de segurança em aplicações web~\cite{owasp2025top10}. Cada uma de suas dez categorias agrupa um conjunto de entradas do CWE, e a edição de 2025 criou a categoria de tratamento incorreto de condições excepcionais e ampliou a de componentes vulneráveis, que passou a tratar das falhas na cadeia de suprimentos de software.
+
+Os dois catálogos dizem o que evitar, mas não como verificar que foi evitado. Essa lacuna é coberta por outros recursos da OWASP. A série de \textit{cheat sheets} reúne orientações curtas e práticas por tema, como autorização, autenticação multifator, JWT e CSRF, com as defesas recomendadas e os erros comuns de implementação~\cite{owaspcheatsheets}. O \textit{Application Security Verification Standard} (ASVS) vai além e organiza requisitos de segurança escritos para serem testados, em níveis de rigor crescentes~\cite{owaspasvs2025}. A ideia de requisito verificável que este artigo adota segue a mesma linha. Um requisito de segurança só é útil se vier acompanhado de um critério objetivo, como um teste automatizado, uma inspeção ou uma evidência de configuração, que permita dizer se ele foi atendido.
+
+Neste trabalho, os catálogos cumprem dois papéis. O CWE e o OWASP Top 10 nomeiam a fraqueza que cada requisito deve impedir, o que liga um risco descrito no vocabulário do negócio, como a alteração de um lançamento já enviado, a uma classe de falha conhecida, como a imposição incorreta do fluxo de trabalho (CWE-841). Os \textit{cheat sheets} serviram de referência para escrever os critérios de verificação. As fraquezas apontadas são condições de projeto derivadas dos riscos, e não achados confirmados no código, como discute a Seção~\ref{subsec:vulnerabilidades}.
+
+
 \subsection{Trabalhos Relacionados}
 \label{subsec:trabalhos}
 
@@ -176,16 +202,86 @@ Listar os controles já presentes, que definem o risco atual.
 
 \section{Metodologia}
 \label{sec:metodologia}
+
 \subsection{Visão Geral do Processo}
-Apresentar as etapas do processo e como a saída de cada uma alimenta a seguinte, de preferência com uma figura.
+\label{subsec:processo}
+
+O processo tem cinco etapas, resumidas na Tabela~\ref{tab:processo}, e cada uma usa como entrada o que a anterior produziu. A primeira caracteriza o sistema. Ela descreve o domínio e os perfis de usuário, inventaria os ativos, identifica os pontos de entrada e registra os controles já existentes. A segunda aplica o STRIDE a esses componentes e detalha as ameaças em casos de abuso. A terceira transforma as ameaças em riscos, avalia cada um por probabilidade e impacto e define a ordem de tratamento. A quarta escolhe a estratégia de cada risco, mapeia o tratamento às funções do NIST CSF 2.0 e estima o risco residual. A quinta, apresentada na Seção~\ref{sec:arquitetura}, seleciona os riscos que a arquitetura trata, deriva deles os requisitos e as decisões de projeto e fecha a rastreabilidade.
+
+\begin{table}[!t]
+\centering
+\caption{Etapas do processo e artefatos produzidos}
+\label{tab:processo}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\columnwidth}{@{}l Y Y@{}}
+\hline
+\textbf{Etapa} & \textbf{Atividade} & \textbf{Saída} \\
+\hline
+1 & Caracterização do sistema & Ativos A1 a A14, pontos de entrada e controles existentes \\
+2 & Modelagem de ameaças & Ameaças T01 a T37 e casos de abuso CA01 a CA29 \\
+3 & Avaliação e priorização dos riscos & Riscos R01 a R29, pontuações e estágios de tratamento \\
+4 & Tratamento e NIST CSF 2.0 & Estratégias, mapeamento às funções, plano e risco residual \\
+5 & Arquitetura segura & Requisitos RS01 a RS08, decisões D01 a D08 e controles C1 a C14 \\
+\hline
+\end{tabularx}
+\end{table}
+
+Os identificadores formam a cadeia que liga as etapas. Cada ameaça indica os ativos que atinge, cada caso de abuso indica as ameaças que detalha, cada risco indica a ameaça e o caso de abuso de origem, e cada requisito indica o risco que trata. Por isso, uma lacuna encontrada em uma etapa leva à revisão da anterior, e não só da seguinte. Os artefatos de todas as etapas foram mantidos em um repositório versionado, o que permitiu registrar essas revisões. A análise partiu do sistema como ele foi projetado e implementado, com base no código, na configuração e nos diagramas de arquitetura e de sequência, e não incluiu a execução de ataques.
+
 \subsection{Modelagem de Ameaças e Casos de Abuso}
-Explicar como foram obtidas as 37 ameaças STRIDE e os 29 casos de abuso e como foram revisados.
+\label{subsec:met-ameacas}
+
+A modelagem partiu do inventário de ativos e dos pontos de entrada da etapa anterior, como as rotas REST, o login pelo SSO, os \textit{callbacks} internos do processamento assíncrono, o canal WebSocket, o armazenamento de anexos, o arquivo de carga do ERP e o \textit{pipeline} de entrega. Para cada componente e ponto de entrada, perguntamos quais das seis categorias do STRIDE se aplicavam aos ativos que ele manipula. Cada ameaça foi registrada com a categoria principal, uma categoria secundária quando a ameaça se enquadra em duas, os ativos afetados, o componente, a propriedade violada, o controle já existente e o impacto. Para não repetir a mesma consequência em várias linhas, os impactos foram agrupados em sete classes, como o uso por usuário não autorizado, a fraude por usuário autorizado, o vazamento de dados, o comprometimento da integridade do cálculo e a perda de rastreabilidade.
+
+Os casos de abuso detalham as ameaças. Cada caso registra o ator, o objetivo, as condições necessárias, a sequência de ações, o impacto esperado e a relação com o STRIDE. A correspondência entre ameaças e casos não é de um para um. Um caso pode reunir ameaças que levam ao mesmo abuso por caminhos diferentes, como o CA03, que agrupa cinco ameaças de acesso indevido a lançamentos, anexos e outros dados restritos. No sentido inverso, uma ameaça pode ser dividida quando o mesmo componente admite abusos distintos, como a sobrecarga da máquina de estados e a falha aberta dos seus \textit{guards}, registradas como T14a e T14b.
+
+A modelagem passou por duas revisões. A primeira versão continha as ameaças T01 a T23. Na revisão, cada componente foi confrontado de novo com as seis categorias, o que acrescentou as ameaças T24 a T37, entre elas a autoaprovação pelo administrador, a requisição forjada entre sites, a adulteração da carga do ERP e a dependência maliciosa na cadeia de suprimentos. Também verificamos se toda ameaça tinha ao menos um caso de abuso, e as que não tinham receberam um. A segunda revisão aconteceu na etapa de riscos, quando o cruzamento entre casos de abuso e riscos mostrou casos sem risco correspondente e deu origem aos riscos R24 a R29. O resultado final são 37 ameaças e 29 casos de abuso sobre os 14 ativos.
+
 \subsection{Critérios de Avaliação de Riscos}
-Definir as escalas de probabilidade e impacto, os níveis de risco e a regra do risco atual.
+\label{subsec:criterios}
+
+Cada risco deriva de uma ou mais ameaças e descreve um evento indesejado, a vulnerabilidade ou condição que o torna possível e os ativos afetados. Quando uma ameaça tem consequências distintas, ela origina mais de um risco. O vazamento do segredo que assina os \textit{tokens} e o seu uso para forjar um \textit{token} são riscos separados, R06 e R07, porque têm probabilidade, impacto e tratamento diferentes.
+
+A probabilidade e o impacto são avaliados em escalas de 1 a 4, descritas na Tabela~\ref{tab:escalas}. No impacto, consideramos o prejuízo financeiro, medido pelo valor que chega ao faturamento, o vazamento de dados de terceiros, como CNPJs, anexos e e-mails, à luz da LGPD, e a interrupção do serviço. A pontuação é o produto das duas grandezas e define quatro níveis: Baixo (1 a 3), Médio (4 a 7), Alto (8 a 11) e Crítico (12 a 16). Cada avaliação é acompanhada de uma justificativa escrita da probabilidade e do impacto, que cita os ativos, os componentes e os controles considerados.
+
+\begin{table}[!t]
+\centering
+\caption{Escalas de probabilidade e impacto}
+\label{tab:escalas}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\columnwidth}{@{}c Y Y@{}}
+\hline
+\textbf{Valor} & \textbf{Probabilidade} & \textbf{Impacto} \\
+\hline
+1 & Baixa: depende de condições incomuns, acesso muito específico ou grande capacidade técnica & Baixo: pequeno transtorno, corrigido rapidamente \\
+2 & Média-baixa: possível, mas depende de uma vulnerabilidade ou condição específica & Moderado: interrupção ou inconsistência limitada, com recuperação possível \\
+3 & Média-alta: plausível em situações comuns de uso ou ataque & Alto: prejuízo relevante aos usuários, ao negócio ou à privacidade \\
+4 & Alta: ocorre com facilidade, com frequência ou em condições previsíveis & Muito alto: afeta muitos usuários, compromete operações críticas ou causa prejuízo grave \\
+\hline
+\end{tabularx}
+\end{table}
+
+Os riscos são avaliados como \emph{risco atual}, isto é, considerando os controles que o sistema já possui, como o SSO corporativo, os \textit{guards} por perfil e o registro de auditoria. Essa regra tem duas consequências. A primeira é que a pontuação reflete o sistema como ele está, e não um sistema sem defesa alguma. A segunda é que a diferença entre o risco atual e o residual mede apenas o efeito dos controles novos propostos no plano de tratamento.
+
 \subsection{Priorização e Estratégias de Tratamento}
-Explicar a ordenação em estágios, as estratégias de tratamento e as dependências entre riscos.
+\label{subsec:priorizacao}
+
+A pontuação é o ponto de partida da priorização, mas não a decide sozinha. A ordem de tratamento considera também cinco critérios: a gravidade e a escala da consequência, como o dano financeiro e a dificuldade de reverter; a importância do ativo atingido para o propósito do sistema; as dependências entre riscos, em que o risco que é pré-condição de outro é tratado primeiro; o efeito habilitador, em que um risco que abre caminho para vários outros sobe na fila; e a facilidade de detecção e de recuperação, em que a consequência silenciosa e difícil de reverter é mais urgente. Cada posição da ordem registra os critérios que a justificam. São esses critérios que permitem a um risco Médio passar à frente de vários Altos, como a adulteração do motor de cálculo (R10), cuja probabilidade é baixa, mas cujo efeito seria silencioso e atingiria todos os valores calculados.
+
+Vários riscos se resolvem com o mesmo controle. O vazamento do segredo dos \textit{tokens} e o do segredo dos \textit{callbacks}, por exemplo, são tratados pelo mesmo cofre. Por isso, a ordem foi organizada em estágios de implementação, cada um com um tema e um conjunto de controles comuns, para que o mesmo problema não seja tratado duas vezes. Dentro de cada estágio, os riscos seguem a ordem de prioridade, respeitando as dependências diretas, como R06 antes de R07. Entre os estágios, o critério também é de dependência. O estágio de identidade e segredos vem primeiro porque uma conta capturada ou um segredo vazado contornam os controles dos estágios seguintes.
+
+Para cada risco foi escolhida uma estratégia de tratamento entre as quatro apresentadas na Seção~\ref{sec:fundamentacao}: evitar, reduzir, compartilhar ou aceitar. A aceitação foi reservada ao que sobra depois do tratamento. A redução foi a estratégia de 28 dos 29 riscos, porque quase todos decorrem de funções legítimas do negócio, como escrever lançamentos ou consultar dados, que não podem ser eliminadas. A exceção é R20, o provedor de autenticação local ou o modo de depuração habilitados em produção. Esse risco foi evitado, já que essas opções são dispensáveis em produção e podem ser bloqueadas no \textit{deploy}.
+
 \subsection{Mapeamento dos Controles às Funções do NIST CSF 2.0}
-Descrever como os controles foram associados às funções do NIST CSF 2.0 e como o risco residual foi estimado.
+\label{subsec:met-csf}
+
+O tratamento de cada risco foi mapeado às funções do NIST CSF 2.0 por meio das categorias do \textit{framework}, e não apenas das funções, para que o mapeamento indicasse o tipo de resultado esperado. Em Governar foram usadas, por exemplo, as categorias de política (GV.PO), de papéis e responsabilidades (GV.RR) e de cadeia de suprimentos (GV.SC). Em Proteger, as de identidade e controle de acesso (PR.AA), segurança de dados (PR.DS), segurança de plataforma (PR.PS) e resiliência da infraestrutura (PR.IR). Em Detectar, as de monitoramento contínuo (DE.CM) e de análise de eventos adversos (DE.AE). Para cada risco, o mapeamento registra o que cada função faz por ele. Em R01, por exemplo, a matriz de quem pode escrever lançamentos (GV.RR), o mínimo privilégio na escrita (PR.AA), o alerta de alteração fora do padrão (DE.CM), o bloqueio do usuário com o congelamento do período (RS.MA) e a recomposição do valor pela auditoria antes do envio ao ERP (RC.RP).
+
+Três regras orientaram as omissões, que são intencionais. Identificar não aparece em nenhum risco porque é transversal, já que o inventário de ativos e o próprio registro de riscos valem para todos eles. Governar só é marcado quando o risco exige política ou atribuição de responsabilidade própria, como a segregação entre quem cria e quem aprova um lançamento, e os demais riscos seguem a política geral de segredos e de aceitação de riscos. Detectar, Responder e Recuperar ficam sem marcação quando o controle preventivo basta para o nível residual pretendido ou quando o evento se revela pela própria falha, como a queda do banco de dados.
+
+Com as estratégias e o mapeamento definidos, cada risco recebeu um plano de tratamento com os controles propostos e uma estimativa do risco residual. A estimativa segue uma regra única: o impacto é mantido, e a probabilidade é reduzida a 1, o mínimo da escala. O impacto não muda porque a consequência continua possível se o controle falhar, e a probabilidade não chega a zero porque nenhum controle elimina o evento. Quando a probabilidade atual já era 1, como em R10, o residual coincide com o risco atual. Cada estimativa vem acompanhada da condição que precisa ser comprovada para que o residual valha, como um teste, uma configuração verificada ou um alerta ativo. Enquanto a condição não for atendida, vale a pontuação atual. As estimativas, portanto, não são resultados medidos, e só se confirmam com a implementação dos controles e as evidências correspondentes.
 
 \section{Resultados da Análise de Riscos}
 \label{sec:resultados}
@@ -205,7 +301,7 @@ Descrever a regra de aceitação do risco residual e por que os Médios exigem a
 
 Os riscos tratados pela arquitetura foram escolhidos em duas rodadas. A primeira selecionou os riscos centrais, de três categorias STRIDE diferentes, para que as decisões não se repetissem. R01, alteração ou remoção de lançamentos, e R02, captura de conta ou perfil no SSO, estão entre os riscos Críticos (3$\times$4). R03, acesso não autorizado a dados restritos, é o Alto de maior pontuação (3$\times$3) e a base da extração em volume e da fraude. R18, em que o administrador cria, envia e aprova o próprio lançamento, também é Crítico, mas atinge o mesmo ativo e a mesma máquina de estados de R01. Por isso não recebeu decisão própria, e a segregação de funções que ele exige entrou como premissa de R01: quem aprova deve ser diferente de quem criou, enviou ou alterou o lançamento.
 
-A segunda rodada partiu das suposições dos controles da primeira. Conferir o perfil e o MFA dentro do \textit{token} supõe que ele não pode ser forjado (R06 e R07). Exigir rastreabilidade supõe que a auditoria é de fato gravada (R26). Os controles executados pelos \textit{guards} supõem que um erro na verificação nega o acesso (R28). Restringir a carga à versão aprovada supõe que o ERP importa o arquivo que o gerador produziu (R23). Conferir quem está autenticado supõe que a requisição foi feita de propósito pelo usuário (R29). Os cinco são riscos Altos dos estágios 1 e 2 do plano e completam as categorias Repudiation e Elevation of Privilege, de modo que a arquitetura cobre cinco das seis categorias STRIDE. Denial of Service ficou de fora porque os seus controles, como limites de conexão e \textit{rate limit} no \textit{gateway}, são de infraestrutura e não de arquitetura da aplicação.
+A segunda rodada partiu das suposições dos controles da primeira. Conferir o perfil e o MFA dentro do \textit{token} supõe que ele não pode ser forjado (R06 e R07). Exigir rastreabilidade supõe que a auditoria é de fato gravada (R26). Os controles executados pelos \textit{guards} supõem que um erro na verificação nega o acesso (R28). Restringir a carga à versão aprovada supõe que o ERP importa o arquivo que o gerador produziu (R23). Conferir quem está autenticado supõe que a requisição foi feita de propósito pelo usuário (R29). Os seis são riscos Altos dos estágios 1 e 2 do plano e completam as categorias Repudiation e Elevation of Privilege, de modo que a arquitetura cobre cinco das seis categorias STRIDE. Denial of Service ficou de fora porque os seus controles, como limites de conexão e \textit{rate limit} no \textit{gateway}, são de infraestrutura e não de arquitetura da aplicação.
 
 Cada risco, ou par de riscos, gerou um requisito verificável, apresentado na Tabela~\ref{tab:requisitos}. Nos requisitos, \textit{enviado} significa enviado para aprovação, ou seja, o lançamento saiu do estado \texttt{Rascunho}. O envio ao ERP é outra etapa do fluxo.
 
@@ -251,7 +347,7 @@ Os requisitos não são independentes. RS04 depende de RS02, porque o emissor do
 \subsection{Mapeamento para Vulnerabilidades Catalogadas}
 \label{subsec:vulnerabilidades}
 
-Para nomear a falha que cada requisito deve fechar, os requisitos foram ligados a entradas do CWE e a categorias do OWASP Top 10:2025, como mostra a Tabela~\ref{tab:vulnerabilidades}. Os \textit{cheat sheets} da OWASP correspondentes, como os de lógica de negócio, MFA, IDOR, JWT, \textit{logging}, autorização e CSRF, serviram de referência para os critérios de verificação. Essas vulnerabilidades são condições de projeto derivadas dos riscos, e não achados confirmados no código.
+Para nomear a falha que cada requisito deve fechar, os requisitos foram ligados a entradas do CWE e a categorias do OWASP Top 10:2025, como mostra a Tabela~\ref{tab:vulnerabilidades}. Os \textit{cheat sheets} da OWASP correspondentes, como os de lógica de negócio, MFA, IDOR, JWT, \textit{logging}, autorização e CSRF~\cite{owaspcheatsheets}, serviram de referência para os critérios de verificação. Essas vulnerabilidades são condições de projeto derivadas dos riscos, e não achados confirmados no código.
 
 \begin{table*}[!t]
 \centering
