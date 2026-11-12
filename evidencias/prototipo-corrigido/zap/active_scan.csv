@@ -1,0 +1,1000 @@
+ID,Requisição de Timestamp,Timestamp de Resposta,Método,URL,Código,Motivo,RTT,Tamanho do Cabeçalho da Resposta,Tamanho do Corpo da Resposta
+22797,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%40&page=1&per_page=20,200,OK,11,188,222
+22798,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%40&per_page=10,422,Unprocessable Content,9,299,257
+22799,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%7C/programs,422,Unprocessable Content,8,299,263
+22800,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%2B&per_page=100,422,Unprocessable Content,8,299,257
+22801,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%2B&per_page=10,422,Unprocessable Content,3,299,257
+22802,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%00&per_page=100,422,Unprocessable Content,3,299,257
+22803,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%7C&month=11&page=1&per_page=5,422,Unprocessable Content,6,299,257
+22804,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%2B&page=1&per_page=20,200,OK,5,188,222
+22805,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%00&per_page=10,422,Unprocessable Content,3,299,257
+22806,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%7C&per_page=100,422,Unprocessable Content,3,299,257
+22807,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%00&page=1&per_page=20,200,OK,5,188,222
+22808,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%7C&per_page=10,422,Unprocessable Content,4,299,257
+22809,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,6,280,503
+22810,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%7C&page=1&per_page=20,200,OK,7,188,222
+22811,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,12,281,8108
+22812,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&=,200,OK,6,280,502
+22813,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,9,281,3562
+22814,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,6,188,222
+22815,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&=&page=1&per_page=5,422,Unprocessable Content,5,299,203
+22816,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=,422,Unprocessable Content,3,299,261
+22817,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&=,200,OK,6,281,3562
+22818,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=&page=1&per_page=5,422,Unprocessable Content,4,299,258
+22819,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%40,422,Unprocessable Content,5,299,261
+22820,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&=&per_page=20,200,OK,5,188,222
+22821,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=,422,Unprocessable Content,3,299,261
+22822,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%2B,422,Unprocessable Content,3,299,261
+22823,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=&per_page=20,422,Unprocessable Content,2,207,257
+22824,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%40&page=1&per_page=5,422,Unprocessable Content,5,299,258
+22825,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%40,422,Unprocessable Content,4,299,261
+22826,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%00,422,Unprocessable Content,4,299,261
+22827,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%40&per_page=20,422,Unprocessable Content,4,207,257
+22828,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%2B,422,Unprocessable Content,4,299,261
+22829,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%2B&page=1&per_page=5,422,Unprocessable Content,4,299,258
+22830,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%2B&per_page=20,422,Unprocessable Content,4,207,257
+22831,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%7C,422,Unprocessable Content,4,299,261
+22832,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%00,422,Unprocessable Content,3,299,261
+22833,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%00&page=1&per_page=5,422,Unprocessable Content,3,299,258
+22834,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%00&per_page=20,422,Unprocessable Content,2,207,257
+22835,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%7C,422,Unprocessable Content,3,299,261
+22836,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%7C&page=1&per_page=5,422,Unprocessable Content,3,299,258
+22837,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%7C&per_page=20,422,Unprocessable Content,2,207,257
+22838,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,4,188,222
+22839,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,7,281,3562
+22840,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?page=1&per_page=10,404,Not Found,1,287,185
+22841,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?page=1&per_page=10,404,Not Found,2,287,185
+22842,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,10,281,8108
+22843,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&=,200,OK,6,188,222
+22844,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%40/service-rules?page=1&per_page=10,422,Unprocessable Content,2,299,263
+22845,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=,422,Unprocessable Content,2,207,261
+22846,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&=&per_page=5,200,OK,7,281,8108
+22847,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=%40,422,Unprocessable Content,2,207,261
+22848,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%2B/service-rules?page=1&per_page=10,422,Unprocessable Content,3,299,263
+22849,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=%2B,422,Unprocessable Content,2,207,261
+22850,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=&per_page=5,422,Unprocessable Content,3,299,257
+22851,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%00/service-rules?page=1&per_page=10,422,Unprocessable Content,4,299,268
+22852,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=%00,422,Unprocessable Content,3,207,261
+22853,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=%40&per_page=5,422,Unprocessable Content,2,299,257
+22854,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=%7C,422,Unprocessable Content,3,207,261
+22855,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%7C/service-rules?page=1&per_page=10,422,Unprocessable Content,4,299,263
+22856,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=%2B&per_page=5,422,Unprocessable Content,3,299,257
+22857,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=%00&per_page=5,422,Unprocessable Content,1,299,257
+22858,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=%7C&per_page=5,422,Unprocessable Content,2,299,257
+22859,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,6,281,8108
+22860,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&=,200,OK,6,281,8109
+22861,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=,422,Unprocessable Content,2,299,261
+22862,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=%40,422,Unprocessable Content,1,299,261
+22863,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=%2B,422,Unprocessable Content,2,299,261
+22864,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=%00,422,Unprocessable Content,2,299,261
+22865,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=%7C,422,Unprocessable Content,1,299,261
+22866,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/elmah.axd,404,Not Found,1,195,185
+22867,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/trace.axd,404,Not Found,1,287,185
+22868,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/trace.axd,404,Not Found,1,287,185
+22869,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/trace.axd,404,Not Found,2,195,185
+22870,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//trace.axd,404,Not Found,1,195,185
+22871,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/trace.axd,404,Not Found,0,195,185
+22872,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//trace.axd,404,Not Found,1,195,185
+22873,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+22874,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/trace.axd,422,Unprocessable Content,4,207,261
+22875,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/trace.axd,404,Not Found,0,195,185
+22876,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,1,195,185
+22877,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,1,195,185
+22878,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/trace.axd,404,Not Found,1,195,185
+22879,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/trace.axd,404,Not Found,1,195,185
+22880,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+22881,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,1,207,273
+22882,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,0,195,185
+22883,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//trace.axd,404,Not Found,0,195,185
+22884,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//trace.axd,404,Not Found,0,195,185
+22885,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,0,195,185
+22886,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+22887,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/trace.axd,404,Not Found,1,195,185
+22888,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,0,195,185
+22889,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/trace.axd,404,Not Found,0,195,185
+22890,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,1,287,185
+22891,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/trace.axd,404,Not Found,0,287,185
+22892,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/.htaccess,404,Not Found,1,287,185
+22893,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/.htaccess,404,Not Found,1,195,185
+22894,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.htaccess,422,Unprocessable Content,2,207,261
+22895,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//.htaccess,404,Not Found,1,195,185
+22896,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/.htaccess,404,Not Found,1,195,185
+22897,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+22898,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//.htaccess,404,Not Found,1,195,185
+22899,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/.htaccess,404,Not Found,0,195,185
+22900,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,0,195,185
+22901,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,0,195,185
+22902,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/.htaccess,404,Not Found,1,195,185
+22903,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+22904,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/.htaccess,404,Not Found,1,195,185
+22905,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,2,207,273
+22906,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,1,195,185
+22907,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//.htaccess,404,Not Found,0,195,185
+22908,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//.htaccess,404,Not Found,1,195,185
+22909,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,1,195,185
+22910,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+22911,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/.htaccess,404,Not Found,0,195,185
+22912,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,0,195,185
+22913,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/.htaccess,404,Not Found,0,195,185
+22914,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,1,287,185
+22915,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/.htaccess,404,Not Found,0,287,185
+22916,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/.env,404,Not Found,1,287,185
+22917,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/.env,404,Not Found,1,195,185
+22918,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.env,422,Unprocessable Content,2,207,261
+22919,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//.env,404,Not Found,1,195,185
+22920,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/.env,404,Not Found,2,195,185
+22921,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+22922,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//.env,404,Not Found,1,195,185
+22923,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/.env,404,Not Found,0,195,185
+22924,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,0,195,185
+22925,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,0,195,185
+22926,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/.env,404,Not Found,0,195,185
+22927,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/.env,404,Not Found,1,195,185
+22928,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+22929,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,1,207,273
+22930,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,0,195,185
+22931,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//.env,404,Not Found,0,195,185
+22932,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//.env,404,Not Found,1,195,185
+22933,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,1,195,185
+22934,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+22935,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/.env,404,Not Found,0,195,185
+22936,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,0,195,185
+22937,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/.env,404,Not Found,0,195,185
+22938,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,0,287,185
+22939,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/.env,404,Not Found,0,287,185
+22940,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/actuator/health,404,Not Found,1,195,185
+22941,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/zap7700071562506934634,422,Unprocessable Content,2,207,261
+22942,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/actuator/health,404,Not Found,1,195,185
+22943,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.zap8702855466223424820,422,Unprocessable Content,2,207,261
+22944,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/lfm.php,422,Unprocessable Content,1,207,261
+22945,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+22946,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.idea/WebServers.xml,404,Not Found,0,195,185
+22947,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/config/databases.yml,404,Not Found,0,195,185
+22948,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,1,195,185
+22949,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/config/database.yml,404,Not Found,1,195,185
+22950,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,0,195,185
+22951,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.git/config,404,Not Found,1,195,185
+22952,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.svn/entries,404,Not Found,1,195,185
+22953,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+22954,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.svn/wc.db,404,Not Found,0,195,185
+22955,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/CVS/root,404,Not Found,0,195,185
+22956,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,2,207,273
+22957,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/server-status,422,Unprocessable Content,2,207,261
+22958,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,0,195,185
+22959,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/core,422,Unprocessable Content,1,207,261
+22960,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/sftp-config.json,422,Unprocessable Content,1,207,261
+22961,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,1,195,185
+22962,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/WS_FTP.ini,422,Unprocessable Content,2,207,261
+22963,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/ws_ftp.ini,422,Unprocessable Content,2,207,261
+22964,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,3,188,637
+22965,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,0,195,185
+22966,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/WS_FTP.INI,422,Unprocessable Content,1,207,261
+22967,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/filezilla.xml,422,Unprocessable Content,1,207,261
+22968,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,0,287,185
+22969,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/sitemanager.xml,422,Unprocessable Content,1,207,261
+22970,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/FileZilla.xml,422,Unprocessable Content,1,207,261
+22971,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/winscp.ini,422,Unprocessable Content,1,207,261
+22972,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/WinSCP.ini,422,Unprocessable Content,1,207,261
+22973,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.DS_Store,422,Unprocessable Content,1,207,261
+22974,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.php_cs.cache,422,Unprocessable Content,2,207,261
+22975,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/DEADJOE,422,Unprocessable Content,1,207,261
+22976,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/sites/default/private/files/backup_migrate/scheduled/test.txt,404,Not Found,1,195,185
+22977,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/app/etc/local.xml,404,Not Found,0,195,185
+22978,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/server.key,422,Unprocessable Content,1,207,261
+22979,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/privatekey.key,422,Unprocessable Content,1,207,261
+22980,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/myserver.key,422,Unprocessable Content,1,207,261
+22981,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/key.pem,422,Unprocessable Content,1,207,261
+22982,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/id_rsa,422,Unprocessable Content,1,207,261
+22983,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/id_dsa,422,Unprocessable Content,2,207,261
+22984,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.ssh/id_rsa,404,Not Found,0,195,185
+22985,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.ssh/id_dsa,404,Not Found,1,195,185
+22986,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/adminer.php,422,Unprocessable Content,1,207,261
+22987,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/vb_test.php,422,Unprocessable Content,1,207,261
+22988,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/CHANGELOG.txt,422,Unprocessable Content,1,207,261
+22989,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/sites/default/files/.ht.sqlite,404,Not Found,0,195,185
+22990,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/composer.json,422,Unprocessable Content,1,207,261
+22991,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/composer.lock,422,Unprocessable Content,1,207,261
+22992,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/vim_settings.xml,422,Unprocessable Content,1,207,261
+22993,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/server-info,422,Unprocessable Content,1,207,261
+22994,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/phpinfo.php,422,Unprocessable Content,2,207,261
+22995,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/info.php,422,Unprocessable Content,2,207,261
+22996,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/i.php,422,Unprocessable Content,1,207,261
+22997,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/test.php,422,Unprocessable Content,1,207,261
+22998,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/_wpeprivate/config.json,404,Not Found,1,195,185
+22999,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/_framework/blazor.boot.json,404,Not Found,0,195,185
+23000,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.hg,422,Unprocessable Content,1,207,261
+23001,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/.bzr,422,Unprocessable Content,1,207,261
+23002,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/._darcs,422,Unprocessable Content,1,207,261
+23003,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/BitKeeper,422,Unprocessable Content,1,207,261
+23004,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,4,195,185
+23005,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,3,217,195
+23006,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,4,195,185
+23007,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,4,195,185
+23008,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,4,195,185
+23009,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,3,217,195
+23010,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,3,195,185
+23011,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,3,217,195
+23012,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,3,195,185
+23013,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,3,195,185
+23014,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,3,195,185
+23015,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,9,220,211
+23016,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,9,220,211
+23017,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,10,312,211
+23018,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,10,220,211
+23019,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,3,195,185
+23020,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,3,217,195
+23021,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,4,195,185
+23022,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,4,195,185
+23023,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,3,195,185
+23024,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,2,217,195
+23025,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,2,195,185
+23026,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,2,217,195
+23027,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,3,195,185
+23028,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,3,195,185
+23029,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,3,195,185
+23030,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,4,195,185
+23031,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,3,217,195
+23032,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,2,195,185
+23033,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,2,195,185
+23034,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,3,217,195
+23035,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,11,220,211
+23036,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,11,220,211
+23037,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,10,220,211
+23038,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,11,312,211
+23039,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,3,195,185
+23040,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,3,217,195
+23041,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,3,195,185
+23042,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,4,195,185
+23043,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%3C,422,Unprocessable Content,11,207,258
+23044,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,4,195,185
+23045,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,4,217,195
+23046,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,3,195,185
+23047,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,3,217,195
+23048,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,3,195,185
+23049,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,2,195,185
+23050,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,2,217,195
+23051,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,8,220,211
+23052,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,8,312,211
+23053,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,8,220,211
+23054,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,8,220,211
+23055,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,12,207,273
+23056,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,3,195,185
+23057,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,3,195,185
+23058,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,422,Unprocessable Content,9,207,258
+23059,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,3,195,185
+23060,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,3,217,195
+23061,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,3,195,185
+23062,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,2,217,195
+23063,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,3,195,185
+23064,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,4,195,185
+23065,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,4,195,185
+23066,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,4,217,195
+23067,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%3C&month=,404,Not Found,5,195,185
+23068,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%3C&month=,404,Not Found,4,195,185
+23069,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%3C,404,Not Found,5,195,185
+23070,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,5,195,185
+23071,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,5,195,185
+23072,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,5,195,185
+23073,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,5,195,185
+23074,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,4,217,195
+23075,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,14,220,211
+23076,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&month=,404,Not Found,5,195,185
+23077,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&month=,404,Not Found,5,195,185
+23078,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,14,220,211
+23079,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,15,312,211
+23080,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,15,220,211
+23081,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,4,217,195
+23082,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,404,Not Found,6,195,185
+23083,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,5,195,185
+23084,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,5,195,185
+23085,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,5,195,185
+23086,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,6,217,195
+23087,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=system-property%28%27xsl%3Avendor%27%29%2F%3E&month=,404,Not Found,5,195,185
+23088,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=system-property%28%27xsl%3Avendor%27%29%2F%3E&month=,404,Not Found,5,195,185
+23089,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=system-property%28%27xsl%3Avendor%27%29%2F%3E,422,Unprocessable Content,16,207,258
+23090,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=system-property%28%27xsl%3Avendor%27%29%2F%3E,404,Not Found,5,195,185
+23091,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,4,195,185
+23092,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,4,217,195
+23093,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,4,195,185
+23094,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=,404,Not Found,4,195,185
+23095,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=,404,Not Found,4,195,185
+23096,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,404,Not Found,4,195,185
+23097,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3C&month=11&page=1&per_page=5,422,Unprocessable Content,20,299,257
+23098,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3C&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,20,207,486
+23099,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,14,220,211
+23100,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=,404,Not Found,4,195,185
+23101,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=,404,Not Found,4,195,185
+23102,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,15,220,211
+23103,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,14,220,211
+23104,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,404,Not Found,4,195,185
+23105,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,16,312,211
+23106,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,3,217,195
+23107,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&month=,404,Not Found,4,195,185
+23108,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,23,188,637
+23109,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&month=,404,Not Found,4,195,185
+23110,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,422,Unprocessable Content,13,207,258
+23111,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E,404,Not Found,4,195,185
+23112,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&month=,404,Not Found,4,195,185
+23113,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&month=,404,Not Found,4,195,185
+23114,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,4,195,185
+23115,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E,404,Not Found,3,195,185
+23116,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,3,217,195
+23117,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&month=,404,Not Found,4,195,185
+23118,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&month=,404,Not Found,4,195,185
+23119,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,12,220,211
+23120,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%3C&service_name=&page=1&per_page=20,404,Not Found,4,195,185
+23121,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,4,287,185
+23122,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&month=11&page=1&per_page=5,422,Unprocessable Content,16,299,257
+23123,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,16,207,486
+23124,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,12,220,211
+23125,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:51 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,12,220,211
+23126,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,12,312,211
+23127,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E,404,Not Found,5,195,185
+23128,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=%3C,404,Not Found,4,195,185
+23129,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=%3C,404,Not Found,5,195,185
+23130,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&service_name=&page=1&per_page=20,404,Not Found,5,195,185
+23131,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,422,Unprocessable Content,14,207,258
+23132,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,4,217,195
+23133,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,404,Not Found,4,195,185
+23134,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,404,Not Found,3,195,185
+23135,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=system-property%28%27xsl%3Avendor%27%29%2F%3E&service_name=&page=1&per_page=20,404,Not Found,3,195,185
+23136,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%3C&per_page=100,422,Unprocessable Content,13,299,257
+23137,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=system-property%28%27xsl%3Avendor%27%29%2F%3E,404,Not Found,3,195,185
+23138,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=system-property%28%27xsl%3Avendor%27%29%2F%3E,404,Not Found,5,195,185
+23139,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&service_name=&page=1&per_page=20,404,Not Found,6,195,185
+23140,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,15,220,211
+23141,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%3C/programs,422,Unprocessable Content,15,299,263
+23142,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,2,217,195
+23143,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,14,312,211
+23144,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,16,220,211
+23145,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,17,220,211
+23146,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,404,Not Found,5,195,185
+23147,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,404,Not Found,4,195,185
+23148,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=system-property%28%27xsl%3Avendor%27%29%2F%3E&month=11&page=1&per_page=5,422,Unprocessable Content,17,299,257
+23149,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%3C&per_page=10,422,Unprocessable Content,16,299,257
+23150,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&service_name=&page=1&per_page=20,404,Not Found,4,195,185
+23151,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=system-property%28%27xsl%3Avendor%27%29%2F%3E&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,18,207,486
+23152,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E,422,Unprocessable Content,13,207,258
+23153,Thu Nov 12 19:57:51 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%3C&page=1&per_page=20,200,OK,18,188,222
+23154,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&per_page=100,422,Unprocessable Content,11,299,257
+23155,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,5,220,211
+23156,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E/programs,404,Not Found,2,287,185
+23157,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&service_name=&page=1&per_page=20,404,Not Found,4,195,185
+23158,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,1,217,195
+23159,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/system-property%28%27xsl%3Avendor%27%29%2F%3E/programs,404,Not Found,4,287,185
+23160,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&service_name=&page=1&per_page=20,404,Not Found,3,195,185
+23161,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--/programs,404,Not Found,3,287,185
+23162,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,11,312,211
+23163,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,11,220,211
+23164,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&service_name=&page=1&per_page=20,404,Not Found,4,195,185
+23165,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,12,220,211
+23166,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&per_page=10,422,Unprocessable Content,11,299,257
+23167,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=system-property%28%27xsl%3Avendor%27%29%2F%3E&per_page=100,422,Unprocessable Content,11,299,257
+23168,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--/programs,404,Not Found,5,287,185
+23169,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E,422,Unprocessable Content,13,207,258
+23170,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,13,220,211
+23171,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,14,207,486
+23172,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=%3C&page=1&per_page=20,404,Not Found,4,195,185
+23173,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=11&page=1&per_page=5,422,Unprocessable Content,15,299,257
+23174,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E/programs,404,Not Found,3,287,185
+23175,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&page=1&per_page=20,200,OK,16,188,222
+23176,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=system-property%28%27xsl%3Avendor%27%29%2F%3E&per_page=10,422,Unprocessable Content,8,299,257
+23177,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&per_page=100,422,Unprocessable Content,8,299,257
+23178,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,7,220,211
+23179,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,10,220,211
+23180,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E,422,Unprocessable Content,8,207,258
+23181,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,11,312,211
+23182,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,10,220,211
+23183,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&page=1&per_page=20,404,Not Found,3,195,185
+23184,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E/programs,404,Not Found,4,287,185
+23185,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=system-property%28%27xsl%3Avendor%27%29%2F%3E&page=1&per_page=20,404,Not Found,2,195,185
+23186,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E/programs,404,Not Found,2,287,185
+23187,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&page=1&per_page=20,404,Not Found,3,195,185
+23188,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,9,220,211
+23189,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,9,312,211
+23190,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&per_page=10,422,Unprocessable Content,10,299,257
+23191,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,9,220,211
+23192,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,12,207,486
+23193,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&month=11&page=1&per_page=5,422,Unprocessable Content,11,299,257
+23194,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,9,220,211
+23195,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&per_page=100,422,Unprocessable Content,11,299,257
+23196,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=system-property%28%27xsl%3Avendor%27%29%2F%3E&page=1&per_page=20,200,OK,14,188,222
+23197,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,7,220,211
+23198,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&per_page=100,422,Unprocessable Content,6,299,257
+23199,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&per_page=10,422,Unprocessable Content,7,299,257
+23200,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,8,312,211
+23201,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,8,220,211
+23202,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,7,220,211
+23203,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,9,207,486
+23204,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&month=11&page=1&per_page=5,422,Unprocessable Content,8,299,257
+23205,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&page=1&per_page=20,200,OK,7,188,222
+23206,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&per_page=100,422,Unprocessable Content,5,299,257
+23207,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,4,220,211
+23208,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,4,312,211
+23209,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,5,220,211
+23210,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&per_page=10,422,Unprocessable Content,6,299,257
+23211,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&month=11&page=1&per_page=5,422,Unprocessable Content,7,299,257
+23212,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,7,207,486
+23213,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&page=1&per_page=20,200,OK,8,188,222
+23214,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&per_page=100,422,Unprocessable Content,5,299,257
+23215,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&per_page=10,422,Unprocessable Content,4,299,257
+23216,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%3C,422,Unprocessable Content,4,299,261
+23217,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&month=11&page=1&per_page=5,422,Unprocessable Content,6,299,257
+23218,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,6,207,486
+23219,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%3Cxsl%3Avalue-of+select%3D%22document%28%27http%3A%2F%2Flocalhost%3A22%27%29%22%2F%3E&page=1&per_page=20,200,OK,7,188,222
+23220,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&per_page=10,422,Unprocessable Content,5,299,257
+23221,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,422,Unprocessable Content,5,299,261
+23222,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%3C&page=1&per_page=5,422,Unprocessable Content,6,299,258
+23223,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=%3C&client_name=&page=1&per_page=20,422,Unprocessable Content,6,207,486
+23224,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%3C,422,Unprocessable Content,5,299,261
+23225,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%3Cxsl%3Avariable+name%3D%22rtobject%22+select%3D%22runtime%3AgetRuntime%28%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22process%22+select%3D%22runtime%3Aexec%28%24rtobject%2C%27erroneous_command%27%29%22%2F%3E%0A%3Cxsl%3Avariable+name%3D%22waiting%22+select%3D%22process%3AwaitFor%28%24process%29%22%2F%3E%0A%3Cxsl%3Avalue-of+select%3D%22%24process%22%2F%3E&page=1&per_page=20,422,Unprocessable Content,6,207,231
+23226,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=system-property%28%27xsl%3Avendor%27%29%2F%3E,422,Unprocessable Content,3,299,261
+23227,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,422,Unprocessable Content,3,299,261
+23228,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E,422,Unprocessable Content,4,299,261
+23229,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&page=1&per_page=5,422,Unprocessable Content,6,299,258
+23230,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=%3Cxsl%3Avalue-of+select%3D%22php%3Afunction%28%27exec%27%2C%27erroneous_command+2%3E%26amp%3B1%27%29%22%2F%3E&page=1&per_page=20,200,OK,5,188,222
+23231,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&client_name=&page=1&per_page=20,422,Unprocessable Content,7,207,486
+23232,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=system-property%28%27xsl%3Avendor%27%29%2F%3E,422,Unprocessable Content,4,299,261
+23233,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%3C&per_page=20,422,Unprocessable Content,3,207,257
+23234,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=system-property%28%27xsl%3Avendor%27%29%2F%3E&page=1&per_page=5,422,Unprocessable Content,5,299,258
+23235,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=system-property%28%27xsl%3Avendor%27%29%2F%3E&client_name=&page=1&per_page=20,422,Unprocessable Content,5,207,486
+23236,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--,422,Unprocessable Content,4,299,261
+23237,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E&per_page=20,422,Unprocessable Content,3,207,257
+23238,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&client_name=&page=1&per_page=20,422,Unprocessable Content,4,207,486
+23239,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&page=1&per_page=5,422,Unprocessable Content,5,299,258
+23240,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=system-property%28%27xsl%3Avendor%27%29%2F%3E&per_page=20,422,Unprocessable Content,3,207,257
+23241,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=%22%2F%3E%3Cxsl%3Avalue-of+select%3D%22system-property%28%27xsl%3Avendor%27%29%22%2F%3E%3C%21--&per_page=20,422,Unprocessable Content,1,207,257
+23242,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+23243,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,0,195,185
+23244,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,0,195,185
+23245,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+23246,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,2,207,273
+23247,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,0,195,185
+23248,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,1,195,185
+23249,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+23250,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,1,195,185
+23251,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,1,287,185
+23252,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+23253,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,0,195,185
+23254,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,1,195,185
+23255,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,0,195,185
+23256,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,2,207,273
+23257,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,1,195,185
+23258,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,0,195,185
+23259,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+23260,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,1,195,185
+23261,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,0,287,185
+23262,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23263,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,4,217,195
+23264,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,1,217,195
+23265,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,4,195,185
+23269,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,4,217,195
+23270,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,4,195,185
+23271,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,4,195,185
+23272,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,4,195,185
+23273,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,4,195,185
+23278,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,4,577,2
+23279,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,3,217,195
+23280,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,4,217,195
+23281,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,2,195,185
+23283,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,3,190,28107
+23284,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,9,312,211
+23285,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,1,195,185
+23286,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,9,220,211
+23287,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,8,220,211
+23289,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,10,220,211
+23295,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,1,577,2
+23296,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,1,190,28107
+23297,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,1,195,185
+23298,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,1,195,185
+23300,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23301,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,2,190,28107
+23302,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,2,195,185
+23303,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,2,195,185
+23305,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23306,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,2,190,28107
+23307,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,2,195,185
+23309,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23310,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,2,190,28107
+23311,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,2,217,195
+23313,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23314,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,5,280,119
+23315,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,9,189,2538
+23317,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,3,190,28107
+23318,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23319,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,2,190,28107
+23320,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,9,207,273
+23321,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23322,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,4,280,119
+23323,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,2,190,28107
+23324,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,2,577,2
+23325,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,2,195,185
+23326,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,3,207,273
+23328,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,2,190,28107
+23329,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,3,577,2
+23330,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,4,195,185
+23331,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,4,195,185
+23332,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,4,195,185
+23333,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,4,217,195
+23338,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,5,217,195
+23339,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,5,195,185
+23340,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,5,195,185
+23344,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,4,195,185
+23345,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,4,190,28107
+23346,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,OPTIONS,http://localhost:8000/v1/auth/login,200,OK,3,577,2
+23347,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,7,280,119
+23348,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,3,195,185
+23350,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,5,190,28107
+23351,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,5,195,185
+23352,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,5,195,185
+23353,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,5,217,195
+23354,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,5,195,185
+23359,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,6,195,185
+23360,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,5,195,185
+23363,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,7,195,185
+23364,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/openapi.json,200,OK,5,190,28107
+23365,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,5,217,195
+23366,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,4,217,195
+23367,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,6,195,185
+23368,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,13,280,119
+23369,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,7,195,185
+23370,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,21,207,486
+23374,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,7,195,185
+23378,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,7,195,185
+23379,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,6,195,185
+23380,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,6,217,195
+23385,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,6,195,185
+23386,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,9,217,195
+23387,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,6,195,185
+23388,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,6,195,185
+23393,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,5,217,195
+23395,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,10,195,185
+23397,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,21,312,211
+23398,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,22,220,211
+23399,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,21,220,211
+23400,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,22,220,211
+23401,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,12,195,185
+23407,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,13,195,185
+23409,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,8,195,185
+23410,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,15,195,185
+23411,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,9,195,185
+23412,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,8,195,185
+23413,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,9,195,185
+23414,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,9,195,185
+23415,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,9,217,195
+23416,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,9,195,185
+23417,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,17,217,195
+23427,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,10,195,185
+23428,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,19,195,185
+23430,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,33,188,637
+23432,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,12,217,195
+23434,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,7,217,195
+23435,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,9,195,185
+23436,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,9,195,185
+23439,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,14,195,185
+23440,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,18,280,119
+23443,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,7,217,195
+23445,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,14,195,185
+23446,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,28,189,2538
+23449,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,16,195,185
+23451,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,7,217,195
+23453,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,10,195,185
+23454,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,10,217,195
+23456,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,10,195,185
+23457,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,10,195,185
+23458,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,10,195,185
+23459,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,10,195,185
+23460,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,9,195,185
+23467,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,11,195,185
+23468,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,11,195,185
+23469,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,11,195,185
+23470,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,11,195,185
+23471,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,11,217,195
+23476,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,11,195,185
+23477,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,11,195,185
+23478,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,10,195,185
+23479,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,13,195,185
+23484,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,12,195,185
+23485,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,10,195,185
+23486,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,15,217,195
+23487,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,39,207,273
+23491,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,9,195,185
+23494,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,10,217,195
+23495,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,11,195,185
+23496,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,11,195,185
+23497,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,11,195,185
+23498,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,11,195,185
+23499,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,11,195,185
+23501,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,10,195,185
+23503,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,10,195,185
+23504,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,10,195,185
+23512,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,9,217,195
+23513,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,12,287,185
+23514,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,11,217,195
+23515,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,11,217,195
+23519,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,36,312,211
+23520,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,36,220,211
+23521,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,36,220,211
+23523,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,14,195,185
+23525,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,41,207,486
+23529,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,9,217,195
+23530,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,38,220,211
+23532,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,10,195,185
+23533,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,16,195,185
+23534,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,27,280,119
+23538,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,6,183,0
+23539,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,13,195,185
+23540,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,13,195,185
+23541,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,14,195,185
+23542,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,13,195,185
+23543,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,13,195,185
+23544,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,13,217,195
+23545,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,20,195,185
+23553,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,14,217,195
+23554,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,13,195,185
+23555,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,13,195,185
+23556,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,13,195,185
+23557,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,12,195,185
+23558,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,12,195,185
+23559,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,12,195,185
+23560,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,12,287,185
+23561,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,12,195,185
+23562,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,12,195,185
+23563,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,16,195,185
+23574,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,9,183,0
+23576,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,13,195,185
+23578,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,12,195,185
+23579,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,12,195,185
+23580,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,39,189,2538
+23584,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,12,195,185
+23585,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,12,195,185
+23586,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,12,195,185
+23587,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,12,195,185
+23588,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,12,195,185
+23590,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,3,183,0
+23591,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,11,195,185
+23592,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,11,217,195
+23593,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,20,217,195
+23601,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,5,183,0
+23602,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,92,281,8108
+23604,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,9,217,195
+23605,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,13,217,195
+23608,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,16,217,195
+23609,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,15,217,195
+23610,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,15,195,185
+23612,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,15,195,185
+23613,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,15,195,185
+23614,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,15,195,185
+23615,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,15,195,185
+23616,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,15,287,185
+23617,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,15,195,185
+23618,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,14,195,185
+23619,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,14,195,185
+23621,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,14,195,185
+23622,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,14,195,185
+23623,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,58,188,637
+23624,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,14,195,185
+23625,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,7,183,0
+23626,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,30,280,119
+23627,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,13,195,185
+23628,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,13,195,185
+23629,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,13,217,195
+23630,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,13,195,185
+23631,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,13,195,185
+23632,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,13,195,185
+23633,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,13,217,195
+23634,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,16,195,185
+23635,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,13,195,185
+23636,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,35,220,211
+23637,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,43,207,273
+23638,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,36,312,211
+23639,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,35,220,211
+23640,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,34,220,211
+23641,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,52,280,503
+23642,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,39,280,419
+23644,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,41,188,222
+23645,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,37,207,486
+23646,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,22,189,2538
+23647,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,43,281,3562
+23648,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,18,281,8108
+23669,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,0,217,195
+23676,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,1,183,0
+23681,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,1,217,195
+23686,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+23687,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,1,217,195
+23688,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,4,280,119
+23692,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,3,183,0
+23693,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,11,195,185
+23694,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,11,217,195
+23695,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,10,195,185
+23696,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,10,195,185
+23697,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,10,195,185
+23698,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,10,195,185
+23705,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,12,195,185
+23706,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,12,195,185
+23707,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,12,195,185
+23708,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,12,195,185
+23710,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,12,217,195
+23711,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,12,195,185
+23712,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,12,195,185
+23713,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,12,195,185
+23715,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,12,195,185
+23716,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,12,287,185
+23717,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,12,195,185
+23718,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,12,195,185
+23719,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,12,195,185
+23720,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,12,217,195
+23721,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,12,195,185
+23722,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,10,183,0
+23723,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,13,195,185
+23738,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,11,217,195
+23739,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,7,217,195
+23740,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,7,195,185
+23741,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,7,195,185
+23742,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,7,195,185
+23743,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,7,195,185
+23744,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,7,195,185
+23745,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,20,220,211
+23753,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,3,183,0
+23755,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,11,217,195
+23757,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,5,183,0
+23758,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,13,217,195
+23759,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,10,195,185
+23762,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,11,195,185
+23763,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,27,280,119
+23765,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,13,195,185
+23766,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,12,195,185
+23767,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,12,195,185
+23768,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,12,217,195
+23769,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,12,195,185
+23771,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,12,195,185
+23772,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,12,217,195
+23773,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,12,195,185
+23774,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,12,195,185
+23776,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,12,195,185
+23777,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,12,195,185
+23779,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,12,195,185
+23781,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,12,287,185
+23782,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,12,195,185
+23785,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,8,183,0
+23786,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,13,195,185
+23787,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,13,217,195
+23788,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,13,195,185
+23789,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,13,195,185
+23790,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,13,195,185
+23791,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,13,195,185
+23795,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,35,220,211
+23798,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,35,312,211
+23800,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,9,195,185
+23801,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,35,189,2538
+23810,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,37,220,211
+23812,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,8,195,185
+23813,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,8,217,195
+23818,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/ws,101,Switching Protocols,2,183,0
+23821,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,11,217,195
+23823,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,41,280,419
+23824,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,41,207,273
+23827,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,13,217,195
+23828,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,43,207,486
+23831,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,8,217,195
+23832,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,10,195,185
+23833,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,10,195,185
+23834,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,10,195,185
+23839,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,11,195,185
+23840,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,11,195,185
+23841,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,10,195,185
+23842,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,10,217,195
+23843,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,10,195,185
+23844,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,10,195,185
+23845,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,10,195,185
+23847,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,49,188,637
+23848,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,48,280,503
+23849,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,48,188,222
+23859,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,13,195,185
+23860,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,13,195,185
+23861,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items,405,Method Not Allowed,13,217,195
+23862,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,13,195,185
+23863,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,13,195,185
+23864,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,13,195,185
+23865,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,13,195,185
+23866,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,13,195,185
+23867,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,13,287,185
+23868,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,12,217,195
+23869,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,12,195,185
+23870,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,24,280,119
+23871,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items//status,404,Not Found,14,195,185
+23880,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,9,195,185
+23881,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/registry/clients//service-rules,404,Not Found,9,195,185
+23883,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,9,195,185
+23888,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,9,217,195
+23891,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,9,195,185
+23892,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,9,195,185
+23893,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,9,195,185
+23894,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,9,195,185
+23895,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,9,195,185
+23897,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,9,195,185
+23902,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,40,220,211
+23906,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,11,217,195
+23908,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,10,217,195
+23910,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,8,217,195
+23912,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//average?year=&month=,404,Not Found,10,195,185
+23913,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,10,195,185
+23914,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients//services?year=&month=,404,Not Found,10,195,185
+23915,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,11,195,185
+23916,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,11,195,185
+23917,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,10,195,185
+23918,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,10,195,185
+23920,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,10,195,185
+23921,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,70,281,3562
+23930,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items,405,Method Not Allowed,13,217,195
+23931,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,13,287,185
+23932,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,12,195,185
+23933,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items//history?status=,404,Not Found,12,195,185
+23934,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items,405,Method Not Allowed,11,217,195
+23935,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing//history,404,Not Found,11,195,185
+23936,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/registry/clients//service-rules/,404,Not Found,11,195,185
+23937,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,11,195,185
+23938,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,13,195,185
+23939,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,36,220,211
+23940,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,36,220,211
+23941,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,36,312,211
+23942,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,36,189,2538
+23943,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,7,195,185
+23944,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,7,195,185
+23945,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,7,195,185
+23946,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,7,195,185
+23947,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,21,280,119
+23948,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,10,217,195
+23949,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,37,207,273
+23950,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,9,217,195
+23952,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,38,280,419
+23959,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,9,217,195
+23966,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,37,207,486
+23977,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,33,280,503
+23978,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,33,188,222
+23979,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,24,220,211
+23983,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,37,188,637
+23985,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,6,195,185
+23986,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,6,287,185
+23987,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,89,281,8108
+23991,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,7,195,185
+23992,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,7,195,185
+23993,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,8,195,185
+23997,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,7,195,185
+23998,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth/get-session,200,OK,12,280,119
+24000,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,5,195,185
+24001,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,5,287,185
+24004,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,7,217,195
+24005,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,7,217,195
+24006,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,6,217,195
+24010,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,6,195,185
+24011,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,6,195,185
+24012,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,6,195,185
+24016,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//programs,404,Not Found,7,195,185
+24017,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,7,287,185
+24020,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,22,220,211
+24021,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,22,220,211
+24022,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,21,312,211
+24026,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,22,189,2538
+24028,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,22,220,211
+24029,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules/service_rule_uuid,404,Not Found,7,195,185
+24030,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients//service-rules?program_name=&service_name=&page=1&per_page=20,404,Not Found,7,195,185
+24031,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,7,195,185
+24036,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,7,287,185
+24037,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,DELETE,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,5,217,195
+24038,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,PATCH,http://localhost:8000/v1/billing/items/,405,Method Not Allowed,5,217,195
+24039,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,26,280,419
+24040,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,28,207,273
+24041,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,26,207,486
+24042,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,43,281,3562
+24044,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,28,188,637
+24050,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,28,188,222
+24052,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,28,280,503
+24056,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,10,220,211
+24057,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,12,220,211
+24058,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,12,220,211
+24059,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,3,287,185
+24064,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,13,312,211
+24066,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,14,189,2538
+24068,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,4,287,185
+24070,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,13,207,486
+24072,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,14,207,273
+24074,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,41,281,8108
+24075,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,16,280,419
+24076,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,12,220,211
+24077,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,17,188,637
+24078,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,12,220,211
+24079,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,12,312,211
+24080,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,12,220,211
+24081,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,17,188,222
+24083,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,17,280,503
+24086,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,14,189,2538
+24093,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,20,281,3562
+24095,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,7,207,486
+24098,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,8,207,273
+24100,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,9,220,211
+24101,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,9,220,211
+24102,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,9,220,211
+24103,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,9,312,211
+24108,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,11,189,2538
+24110,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,13,280,419
+24112,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,13,207,486
+24113,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,11,207,273
+24114,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,16,280,503
+24118,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,18,188,637
+24120,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,19,188,222
+24122,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/replicate,429,Too Many Requests,11,220,211
+24123,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,11,220,211
+24125,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,11,312,211
+24128,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,12,220,211
+24130,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,23,281,3562
+24132,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,12,189,2538
+24134,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,14,280,419
+24136,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,30,281,8108
+24138,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,13,207,486
+24140,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items,429,Too Many Requests,10,220,211
+24141,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/auth/login,429,Too Many Requests,10,312,211
+24144,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,POST,http://localhost:8000/v1/billing/items/batch-status,429,Too Many Requests,11,220,211
+24145,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,15,207,273
+24146,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,16,280,503
+24147,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit/events?limit=50,200,OK,11,189,2538
+24148,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,17,188,637
+24149,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,17,188,222
+24153,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,10,280,419
+24157,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,7,207,486
+24160,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,17,281,3562
+24162,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,9,280,419
+24163,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=&month=&client_name=&page=1&per_page=20,422,Unprocessable Content,9,207,486
+24166,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,11,207,273
+24167,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,11,280,503
+24170,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,20,281,8108
+24171,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,11,188,637
+24174,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,11,188,222
+24176,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,7,280,419
+24177,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,16,281,3562
+24178,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,7,207,273
+24179,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,8,280,503
+24180,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,9,188,637
+24181,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,8,188,222
+24188,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,13,281,8108
+24190,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,6,280,503
+24192,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,7,280,419
+24194,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,9,188,637
+24196,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,9,188,222
+24197,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,11,281,3562
+24200,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/programs,200,OK,9,280,419
+24201,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,9,280,503
+24204,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,17,281,8108
+24206,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,8,188,637
+24208,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,8,188,222
+24210,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,12,281,3562
+24212,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/summary?page=1&per_page=100,200,OK,8,280,503
+24214,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,7,188,637
+24216,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients?search=ZAP&page=1&per_page=20,200,OK,7,188,222
+24218,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,11,281,8108
+24219,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,6,281,3562
+24222,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,4,281,3562
+24224,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,8,281,8108
+24226,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/333ee0c5-782b-51fa-aeab-96e03ff8231b/service-rules?page=1&per_page=10,200,OK,5,281,3562
+24228,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,6,281,8108
+24230,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing?year=2026&month=11&page=1&per_page=5,200,OK,4,281,8108
+24232,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,0,195,185
+24233,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,0,195,185
+24234,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,0,195,185
+24235,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+24236,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,1,207,273
+24237,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,0,195,185
+24238,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,1,195,185
+24239,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+24240,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,0,195,185
+24241,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,1,287,185
+24242,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000,404,Not Found,1,195,185
+24243,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1,404,Not Found,0,195,185
+24244,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/audit,404,Not Found,1,195,185
+24245,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/auth,404,Not Found,1,195,185
+24246,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing,422,Unprocessable Content,2,207,273
+24247,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/billing/clients,404,Not Found,0,195,185
+24248,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry,404,Not Found,0,195,185
+24249,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients,200,OK,2,188,637
+24250,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/service-rules,404,Not Found,1,195,185
+24251,Thu Nov 12 19:57:52 GMT-03:00 2026,Thu Nov 12 19:57:52 GMT-03:00 2026,GET,http://localhost:8000/v1/registry/clients/79e6fdfa-f4ba-584c-b712-a0483f6bf85c,404,Not Found,0,287,185

@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.2.0, pluggy-1.7.0 -- extra/prototipo-psp-corrigido/backend/.venv/bin/python
+rootdir: extra/prototipo-psp-corrigido/backend
+configfile: pyproject.toml
+plugins: anyio-4.16.0, asyncio-1.5.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 15 items
+
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs01_patch_e_delete_apos_envio_sao_recusados[etapa0] PASSED [  6%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs01_patch_e_delete_apos_envio_sao_recusados[etapa1] PASSED [ 13%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs01_rascunho_e_reprovado_continuam_editaveis PASSED [ 20%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs01_reabrir_exige_novo_envio_e_nova_aprovacao PASSED [ 26%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs01_aprovado_nao_reabre PASSED [ 33%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_r18_admin_nao_aprova_o_proprio_lancamento PASSED [ 40%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_r18_admin_que_alterou_o_lancamento_nao_o_aprova PASSED [ 46%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_r18_admin_aprova_lancamento_de_outra_pessoa PASSED [ 53%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_r18_lote_com_autoaprovacao_nao_muda_nenhum_item PASSED [ 60%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs05_alteracao_grava_item_timeline_e_auditoria_juntos PASSED [ 66%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs05_falha_na_auditoria_desfaz_a_operacao[alterar] PASSED [ 73%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs05_falha_na_auditoria_desfaz_a_operacao[mudar_status] PASSED [ 80%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs05_falha_na_auditoria_desfaz_a_operacao[excluir] PASSED [ 86%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs04_assinatura_assimetrica XFAIL [ 93%]
+tests/test_rs01_r18_rs05_integridade_do_lancamento.py::test_rs08_requisicao_so_com_cookie_e_origem_externa_e_recusada XFAIL [100%]
+
+======================== 13 passed, 2 xfailed in 0.50s =========================

@@ -28,6 +28,12 @@ login mock, em [`extra/prototipo-psp`](extra/prototipo-psp/README.md), com teste
 para as duas práticas da etapa 4. O protótipo não cobre o sistema completo nem prova o risco residual
 em produção.
 
+Esse protótipo fica como estava nas etapas 4 e 5, para mostrar as falhas encontradas. Uma cópia com
+parte dos controles da arquitetura segura implementados (RS01, a segregação de funções de R18 e RS05)
+está em [`extra/prototipo-psp-corrigido`](extra/prototipo-psp-corrigido/README.md). A
+[verificação das correções](docs/prototipo-corrigido/verificacao-das-correcoes.md) compara as duas
+versões com os mesmos testes e ataques.
+
 ### Visão geral
 
 | Documento                                                   | Status | O que responde                                                                       |
@@ -46,15 +52,16 @@ em produção.
 | 4. Código seguro e testes de segurança | Práticas de código seguro e testes de segurança definidos antes da implementação          | [Índice da Etapa 4](docs/etapa-4/etapa-4-codigo-seguro.md), [Prática 1: Autorização por recurso](docs/etapa-4/etapa-4-pratica-1-autorizacao-por-recurso.md), [Prática 2: Validação de token e MFA](docs/etapa-4/etapa-4-pratica-2-validacao-de-token-e-mfa.md)                                                         |
 | 5. Verificação de vulnerabilidades     | Varredura do protótipo com o ZAP, análise de três alertas, retest autenticado e correções propostas | [Índice da Etapa 5](docs/etapa-5/etapa-5-verificacao-vulnerabilidades.md), [Ambiente e configuração](docs/etapa-5/etapa-5-ambiente-e-configuracao.md), [Execução e evidências](docs/etapa-5/etapa-5-execucao-e-evidencias.md), [Análise dos achados](docs/etapa-5/etapa-5-analise-dos-achados.md), [Correções propostas](docs/etapa-5/etapa-5-correcoes-propostas.md), [Limitações](docs/etapa-5/etapa-5-limitacoes.md), [Retest autenticado](docs/etapa-5/etapa-5-retest-autenticado.md) |
 | 6. Monitoramento, detecção e resposta  | Eventos a registrar, regras de detecção D01 a D14, roteiro de resposta a incidentes e validação das regras | [Índice da Etapa 6](docs/etapa-6/etapa-6-deteccao-de-intrusoes.md), [Objetivos, eventos e fontes](docs/etapa-6/etapa-6-objetivos-e-eventos.md), [Regras de detecção](docs/etapa-6/etapa-6-regras-de-deteccao.md), [Resposta a incidentes](docs/etapa-6/etapa-6-resposta-a-incidentes.md), [Validação das regras](docs/etapa-6/etapa-6-validacao-das-regras.md), [Limitações](docs/etapa-6/etapa-6-limitacoes.md) |
+| Extra. Protótipo corrigido             | Implementação de RS01, R18 e RS05 e verificação do antes e depois, com testes, ataques à API, ZAP e Dependency-Check | [Verificação das correções](docs/prototipo-corrigido/verificacao-das-correcoes.md), [Protótipo corrigido](extra/prototipo-psp-corrigido/README.md), [Evidências](evidencias/prototipo-corrigido/) |
 
 ## Organização do repositório
 
 ```text
 .
 ├── README.md      # este índice
-├── extra/         # documentações extras ou complementares e o protótipo (extra/prototipo-psp)
-├── docs/          # documentações md de cada etapa
+├── extra/         # documentações extras ou complementares e os protótipos (extra/prototipo-psp e extra/prototipo-psp-corrigido)
+├── docs/          # documentações md de cada etapa e da verificação do protótipo corrigido (docs/prototipo-corrigido/)
 ├── diagramas/     # diagramas e fluxos de cada etapa
-├── evidencias/    # capturas de tela e relatórios de cada etapa (etapa-5/)
+├── evidencias/    # capturas de tela e relatórios (etapa-5/ e prototipo-corrigido/)
 └── imgs/          # imagens no geral
 ```

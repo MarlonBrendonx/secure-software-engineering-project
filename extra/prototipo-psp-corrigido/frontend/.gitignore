@@ -1,0 +1,18 @@
+# Dependências e saída de build
+node_modules
+.next
+out
+*.tsbuildinfo
+
+# Variáveis de ambiente reais ficam fora do git; o modelo .env.example é versionado
+.env*
+!.env.example
+
+# Testes e logs
+coverage
+*.log
+
+# Sistema operacional e editor
+.DS_Store
+.vscode/
+.idea/

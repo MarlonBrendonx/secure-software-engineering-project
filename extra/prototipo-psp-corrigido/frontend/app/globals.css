@@ -1,0 +1,377 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(
+    .dark,
+    .dark *,
+    [data-theme="dark"],
+    [data-theme="dark"] *
+  ));
+
+/* ═══════════════════════════════════════════════════════════════
+   Fontes: pilha do sistema. A fonte corporativa não faz parte do protótipo.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   BRAND RAW — PANTONE oficial. Invariante nos dois temas.
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --ep-chumbo: #363c42; /* PANTONE 432 C */
+  --ep-azul: #94e8e8; /* PANTONE 304 C */
+  --ep-pink: #f20a76;
+  --ep-laranja: #ffa600;
+  --ep-verde: #aeff45;
+
+  --ep-ff-body: ui-sans-serif, system-ui, Arial, sans-serif;
+  --ep-ff-mono: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LIGHT THEME (padrão)
+   ═══════════════════════════════════════════════════════════════ */
+:root,
+[data-theme="light"] {
+  --bg-app: #f6f8fa;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f6f8fa;
+  --bg-hover: #eef1f4;
+  --bg-sidebar: #ffffff;
+  --bg-sidebar-active: #d5f4f4;
+  --bg-input: #f6f8fa;
+
+  --fg-primary: #363c42;
+  --fg-secondary: #5a636b;
+  --fg-muted: #8892a0;
+  --fg-inverse: #ffffff;
+  --fg-on-accent: #363c42;
+  --fg-sidebar: #5a636b;
+  --fg-sidebar-active: #363c42;
+
+  --border-default: #dde2e7;
+  --border-strong: #b8c0c8;
+
+  --accent: #94e8e8;
+  --accent-hover: #3fb8b8;
+  --accent-soft: #d5f4f4;
+
+  --btn-primary-bg: #363c42;
+  --btn-primary-fg: #ffffff;
+  --btn-primary-hover: #2a2f34;
+
+  --focus-ring: #3fb8b8;
+
+  --ep-shadow-sm: 0 1px 2px rgba(54, 60, 66, 0.04);
+  --ep-shadow-md: 0 2px 8px rgba(54, 60, 66, 0.06);
+  --ep-shadow-lg: 0 20px 40px rgba(54, 60, 66, 0.18);
+
+  --badge-ativo-bg: #d5f4f4;
+  --badge-ativo-fg: #1a6e6e;
+  --badge-pub-bg: #e8fbd2;
+  --badge-pub-fg: #3e7a16;
+  --badge-rasc-bg: #fff3d6;
+  --badge-rasc-fg: #8a5a00;
+  --badge-arq-bg: #eef1f4;
+  --badge-arq-fg: #5a636b;
+  --badge-pend-bg: #fde2ee;
+  --badge-pend-fg: #f20a76;
+  --badge-admin-bg: #d5f4f4;
+  --badge-admin-fg: #1a6e6e;
+  --badge-client-bg: #eef1f4;
+  --badge-client-fg: #363c42;
+
+  --badge-cliente-bg: #ede4fb;
+  --badge-cliente-fg: #6b3fa0;
+  --badge-fin-bg: #dceef5;
+  --badge-fin-fg: #1f5c7a;
+
+  --scrollbar-thumb: #c4ccd4;
+  --scrollbar-thumb-hover: #a8b2bc;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK THEME
+   ═══════════════════════════════════════════════════════════════ */
+.dark,
+[data-theme="dark"] {
+  --bg-app: #1a1d20;
+  --bg-surface: #24282c;
+  --bg-surface-2: #1f2226;
+  --bg-hover: #2a2f34;
+  --bg-sidebar: #15181b;
+  --bg-sidebar-active: #2a4848;
+  --bg-input: #1f2226;
+
+  --fg-primary: #f2f4f6;
+  --fg-secondary: #b8c0c8;
+  --fg-muted: #8892a0;
+  --fg-inverse: #363c42;
+  --fg-on-accent: #363c42;
+  --fg-sidebar: #b8c0c8;
+  --fg-sidebar-active: #94e8e8;
+
+  --border-default: #343a40;
+  --border-strong: #434a50;
+
+  --accent: #94e8e8;
+  --accent-hover: #b8f0f0;
+  --accent-soft: #2a4848;
+
+  /* Botão primário inverte no dark: azul bg + chumbo texto */
+  --btn-primary-bg: #94e8e8;
+  --btn-primary-fg: #363c42;
+  --btn-primary-hover: #b8f0f0;
+
+  --focus-ring: #94e8e8;
+
+  --ep-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --ep-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --ep-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+  --badge-ativo-bg: #1f3d3d;
+  --badge-ativo-fg: #94e8e8;
+  --badge-pub-bg: #2d3e1a;
+  --badge-pub-fg: #aeff45;
+  --badge-rasc-bg: #3d2f15;
+  --badge-rasc-fg: #ffa600;
+  --badge-arq-bg: #2a2f34;
+  --badge-arq-fg: #b8c0c8;
+  --badge-pend-bg: #3d1b2b;
+  --badge-pend-fg: #f20a76;
+  --badge-admin-bg: #1f3d3d;
+  --badge-admin-fg: #94e8e8;
+  --badge-client-bg: #2a2f34;
+  --badge-client-fg: #b8c0c8;
+
+  --badge-cliente-bg: #2e2440;
+  --badge-cliente-fg: #c4a7f0;
+  --badge-fin-bg: #17323f;
+  --badge-fin-fg: #7fc4e0;
+
+  --scrollbar-thumb: #3d444b;
+  --scrollbar-thumb-hover: #4d555d;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BRIDGE shadcn/ui → tokens do tema
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --background: var(--bg-app);
+  --foreground: var(--fg-primary);
+
+  --card: var(--bg-surface);
+  --card-foreground: var(--fg-primary);
+
+  --popover: var(--bg-surface);
+  --popover-foreground: var(--fg-primary);
+
+  --primary: var(--btn-primary-bg);
+  --primary-foreground: var(--btn-primary-fg);
+
+  --secondary: var(--bg-surface-2);
+  --secondary-foreground: var(--fg-primary);
+
+  --muted: var(--bg-surface-2);
+  --muted-foreground: var(--fg-muted);
+
+  --accent-foreground: var(--fg-on-accent);
+
+  --destructive: var(--badge-pend-fg);
+  --destructive-foreground: #ffffff;
+  --success: var(--badge-pub-fg);
+  --success-foreground: var(--fg-inverse);
+  --warning: var(--badge-rasc-fg);
+  --warning-foreground: var(--fg-inverse);
+  --info: var(--badge-ativo-fg);
+  --info-foreground: var(--fg-inverse);
+
+  --border: var(--border-default);
+  --input: var(--border-default);
+  --ring: var(--focus-ring);
+
+  --radius: 0.5rem;
+
+  --sidebar: var(--bg-sidebar);
+  --sidebar-foreground: var(--fg-sidebar);
+  --sidebar-primary: var(--btn-primary-bg);
+  --sidebar-primary-foreground: var(--btn-primary-fg);
+  --sidebar-accent: var(--bg-sidebar-active);
+  --sidebar-accent-foreground: var(--fg-sidebar-active);
+  --sidebar-border: var(--border-default);
+  --sidebar-ring: var(--focus-ring);
+  --sidebar-muted: var(--fg-muted);
+
+  /* ERP Integration — destaque de coluna (verde suave da marca) */
+  --erp-highlight: var(--badge-pub-bg);
+
+  /* Charts — paleta do tema. chart-5 é neutro e acompanha o tema. */
+  --chart-1: var(--ep-azul);
+  --chart-2: var(--ep-verde);
+  --chart-3: var(--ep-laranja);
+  --chart-4: var(--ep-pink);
+  --chart-5: var(--fg-secondary);
+}
+
+@theme inline {
+  /* Tipografia */
+  --font-display: var(--ep-ff-body);
+  --font-sans: var(--ep-ff-body);
+  --font-mono: var(--ep-ff-mono);
+
+  /* Marca — utilitários diretos: bg-ep-azul, text-ep-pink, ... */
+  --color-ep-chumbo: var(--ep-chumbo);
+  --color-ep-azul: var(--ep-azul);
+  --color-ep-pink: var(--ep-pink);
+  --color-ep-laranja: var(--ep-laranja);
+  --color-ep-verde: var(--ep-verde);
+
+  /* Superfícies */
+  --color-bg-app: var(--bg-app);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-surface-2: var(--bg-surface-2);
+  --color-surface-hover: var(--bg-hover);
+  --color-bg-input: var(--bg-input);
+
+  /* Texto */
+  --color-fg-primary: var(--fg-primary);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-inverse: var(--fg-inverse);
+
+  /* Bordas / accent */
+  --color-border-strong: var(--border-strong);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+
+  /* Badges de status */
+  --color-badge-ativo: var(--badge-ativo-bg);
+  --color-badge-ativo-fg: var(--badge-ativo-fg);
+  --color-badge-pub: var(--badge-pub-bg);
+  --color-badge-pub-fg: var(--badge-pub-fg);
+  --color-badge-rasc: var(--badge-rasc-bg);
+  --color-badge-rasc-fg: var(--badge-rasc-fg);
+  --color-badge-arq: var(--badge-arq-bg);
+  --color-badge-arq-fg: var(--badge-arq-fg);
+  --color-badge-pend: var(--badge-pend-bg);
+  --color-badge-pend-fg: var(--badge-pend-fg);
+  --color-badge-admin: var(--badge-admin-bg);
+  --color-badge-admin-fg: var(--badge-admin-fg);
+  --color-badge-client: var(--badge-client-bg);
+  --color-badge-client-fg: var(--badge-client-fg);
+  --color-badge-cliente: var(--badge-cliente-bg);
+  --color-badge-cliente-fg: var(--badge-cliente-fg);
+  --color-badge-fin: var(--badge-fin-bg);
+  --color-badge-fin-fg: var(--badge-fin-fg);
+
+  /* Bridge shadcn (mantido — os componentes ui/ dependem destes) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-erp-highlight: var(--erp-highlight);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE
+   ═══════════════════════════════════════════════════════════════ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    font-family: var(--ep-ff-body);
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Scrollbar — tokenizada, acompanha o tema */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface-2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Shimmer animation for skeleton */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-chart-shimmer {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@layer components {
+  /* Header de seção — padrão tipográfico */
+  .ep-section-header {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fg-muted);
+  }
+
+  /* Data table row */
+  .table-row-interactive {
+    @apply transition-colors hover:bg-surface-hover cursor-pointer;
+  }
+}

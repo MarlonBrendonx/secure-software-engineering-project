@@ -1,0 +1,93 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.2.0, pluggy-1.7.0 -- extra/prototipo-psp/backend/.venv/bin/python
+rootdir: extra/prototipo-psp/backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.16.0, asyncio-1.5.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collecting ... collected 75 items
+
+tests/test_psp_lancamentos.py::test_servidor_recalcula_o_valor_e_avisa PASSED [  1%]
+tests/test_psp_lancamentos.py::test_regras_percentual_e_faixa PASSED     [  2%]
+tests/test_psp_lancamentos.py::test_valor_zero_e_recusado_e_descricao_padrao_e_montada PASSED [  4%]
+tests/test_psp_lancamentos.py::test_bloqueio_otimista_devolve_409_e_registra_diff PASSED [  5%]
+tests/test_psp_lancamentos.py::test_fluxo_completo_de_aprovacao_com_segregacao_de_perfis PASSED [  6%]
+tests/test_psp_lancamentos.py::test_reprovacao_exige_motivo_e_so_guarda_enquanto_reprovado PASSED [  8%]
+tests/test_psp_lancamentos.py::test_aprovacao_do_cliente_exige_contrato_habilitado PASSED [  9%]
+tests/test_psp_lancamentos.py::test_lote_e_tudo_ou_nada PASSED           [ 10%]
+tests/test_psp_lancamentos.py::test_exclusao_do_ultimo_lancamento_remove_o_faturamento PASSED [ 12%]
+tests/test_psp_lancamentos.py::test_replicacao_e_listagem_com_resumo PASSED [ 13%]
+tests/test_regras_de_servico.py::test_admin_cria_regra_e_ela_aparece_como_sem_lancamento PASSED [ 14%]
+tests/test_regras_de_servico.py::test_analista_e_gestor_nao_escrevem_regras PASSED [ 16%]
+tests/test_regras_de_servico.py::test_admin_sem_mfa_nao_escreve_regras PASSED [ 17%]
+tests/test_regras_de_servico.py::test_sem_login_nao_le_nem_escreve PASSED [ 18%]
+tests/test_regras_de_servico.py::test_analista_le_regras_do_seu_cliente PASSED [ 20%]
+tests/test_regras_de_servico.py::test_analista_nao_le_regras_de_cliente_fora_do_escopo PASSED [ 21%]
+tests/test_regras_de_servico.py::test_analista_nao_lista_programas_nem_clientes_de_fora_do_escopo PASSED [ 22%]
+tests/test_regras_de_servico.py::test_busca_de_clientes_filtra_por_nome PASSED [ 24%]
+tests/test_regras_de_servico.py::test_nao_aceita_campo_desconhecido PASSED [ 25%]
+tests/test_regras_de_servico.py::test_faixas_sobrepostas_sao_recusadas PASSED [ 26%]
+tests/test_regras_de_servico.py::test_regra_de_faixa_valida_e_gravada_em_ordem PASSED [ 28%]
+tests/test_regras_de_servico.py::test_tipo_exige_os_seus_campos PASSED   [ 29%]
+tests/test_regras_de_servico.py::test_nome_e_programas_repetidos_no_cliente_dao_409 PASSED [ 30%]
+tests/test_regras_de_servico.py::test_programa_de_outro_cliente_e_recusado PASSED [ 32%]
+tests/test_regras_de_servico.py::test_versao_desatualizada_da_409 PASSED [ 33%]
+tests/test_regras_de_servico.py::test_trocar_o_tipo_limpa_o_que_nao_pertence_ao_novo_tipo PASSED [ 34%]
+tests/test_regras_de_servico.py::test_regra_sem_lancamento_pode_ser_editada_e_excluida PASSED [ 36%]
+tests/test_regras_de_servico.py::test_regra_com_lancamento_nao_pode_ser_excluida PASSED [ 37%]
+tests/test_regras_de_servico.py::test_regra_com_lancamento_so_muda_o_status PASSED [ 38%]
+tests/test_regras_de_servico.py::test_regra_de_faixa_com_lancamento_aceita_reenvio_das_mesmas_faixas PASSED [ 40%]
+tests/test_regras_de_servico.py::test_regra_do_seed_com_lancamento_e_protegida PASSED [ 41%]
+tests/test_regras_de_servico.py::test_criar_editar_e_excluir_ficam_na_auditoria PASSED [ 42%]
+tests/test_rotas_e_falhas_seguras.py::test_toda_rota_com_identificador_tem_teste_de_autorizacao PASSED [ 44%]
+tests/test_rotas_e_falhas_seguras.py::test_toda_rota_declara_politica_de_acesso PASSED [ 45%]
+tests/test_rotas_e_falhas_seguras.py::test_rota_sem_politica_impede_a_inicializacao PASSED [ 46%]
+tests/test_rotas_e_falhas_seguras.py::test_marcador_de_politica_existe_nas_dependencias PASSED [ 48%]
+tests/test_rotas_e_falhas_seguras.py::test_sem_token_e_negado PASSED     [ 49%]
+tests/test_rotas_e_falhas_seguras.py::test_falha_do_redis_na_verificacao_nega_e_nao_grava PASSED [ 50%]
+tests/test_rotas_e_falhas_seguras.py::test_login_com_senha_errada_nao_revela_se_o_usuario_existe PASSED [ 52%]
+tests/test_rotas_e_falhas_seguras.py::test_limite_de_login_por_ip PASSED [ 53%]
+tests/test_tempo_real_websocket.py::test_analista_autentica_e_recebe_aviso_do_proprio_escopo PASSED [ 54%]
+tests/test_tempo_real_websocket.py::test_origem_fora_da_lista_e_recusada PASSED [ 56%]
+tests/test_tempo_real_websocket.py::test_sem_origem_e_recusada PASSED    [ 57%]
+tests/test_tempo_real_websocket.py::test_token_invalido_fecha_com_4003 PASSED [ 58%]
+tests/test_tempo_real_websocket.py::test_perfil_privilegiado_sem_otp_e_recusado PASSED [ 60%]
+tests/test_tempo_real_websocket.py::test_primeira_mensagem_que_nao_e_auth_fecha_com_4001 PASSED [ 61%]
+tests/test_tempo_real_websocket.py::test_analista_nao_recebe_aviso_de_cliente_fora_do_escopo PASSED [ 62%]
+tests/test_tempo_real_websocket.py::test_logout_derruba_a_conexao PASSED [ 64%]
+tests/test_tempo_real_websocket.py::test_rota_websocket_sem_politica_derruba_a_inicializacao PASSED [ 65%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[notifications:me] PASSED [ 66%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[billing:me] PASSED [ 68%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[billing:2026-13] PASSED [ 69%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[billing:2026-00] PASSED [ 70%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[billing:2026-9] PASSED [ 72%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[billing:2026-09:x] PASSED [ 73%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[billing:2026-09\n] PASSED [ 74%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[] PASSED [ 76%]
+tests/test_tempo_real_websocket.py::test_hub_so_aceita_canal_de_periodo_bem_formado[*] PASSED [ 77%]
+tests/test_tempo_real_websocket.py::test_hub_nega_inscricao_em_periodo_fora_do_escopo PASSED [ 78%]
+tests/test_tempo_real_websocket.py::test_hub_limita_canais_e_conexoes_por_usuario PASSED [ 80%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_ts01_analista_le_lancamento_do_proprio_escopo PASSED [ 81%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_ts02_analista_nao_le_lancamento_de_outro_cliente PASSED [ 82%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_analista_nao_altera_nem_exclui_nem_muda_status_de_outro_cliente PASSED [ 84%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_analista_nao_cria_lancamento_em_cliente_fora_do_escopo PASSED [ 85%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_listagem_so_traz_clientes_do_escopo PASSED [ 86%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_rotas_por_cliente_e_faturamento_negam_com_404_identico_ao_inexistente PASSED [ 88%]
+tests/test_ts01_ts02_autorizacao_por_recurso.py::test_escopo_por_periodo PASSED [ 89%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_ts03_gestor_com_mfa_aprova_lancamento PASSED [ 90%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_ts04_token_de_gestor_sem_mfa_e_recusado PASSED [ 92%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_falhas_repetidas_de_mfa_geram_alerta PASSED [ 93%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_otp_errado_no_login_e_recusado_e_conta_como_falha PASSED [ 94%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_claim_mfa_forjado_nao_basta_sem_mfa_na_sessao PASSED [ 96%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_token_invalido_e_recusado PASSED [ 97%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_logout_revoga_a_sessao_mesmo_com_token_ainda_valido PASSED [ 98%]
+tests/test_ts03_ts04_validacao_de_token_e_mfa.py::test_refresh_nao_promove_login_sem_mfa PASSED [100%]
+
+=============================== warnings summary ===============================
+tests/test_tempo_real_websocket.py:16
+  extra/prototipo-psp/backend/tests/test_tempo_real_websocket.py:16: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: evidencias/prototipo-corrigido/testes/junit-original.xml -
+======================== 75 passed, 1 warning in 1.79s =========================

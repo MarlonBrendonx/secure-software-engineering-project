@@ -1,0 +1,71 @@
+{
+  "prototipo": "original",
+  "base": "http://localhost:8000",
+  "executado_em": "2026-11-12T22:10:16+00:00",
+  "resultados": [
+    {
+      "id": "V-01",
+      "requisito": "RS01",
+      "ataque": "PATCH em lançamento enviado para aprovação",
+      "esperado": "422",
+      "obtido": 200,
+      "atende": false
+    },
+    {
+      "id": "V-02",
+      "requisito": "RS01",
+      "ataque": "DELETE em lançamento enviado para aprovação",
+      "esperado": "422",
+      "obtido": 204,
+      "atende": false
+    },
+    {
+      "id": "V-03",
+      "requisito": "RS01",
+      "ataque": "Reabrir lançamento enviado (status New)",
+      "esperado": "200",
+      "obtido": 422,
+      "atende": false
+    },
+    {
+      "id": "V-04",
+      "requisito": "R18",
+      "ataque": "Admin aprova o próprio lançamento",
+      "esperado": "403",
+      "obtido": 200,
+      "atende": false
+    },
+    {
+      "id": "V-05",
+      "requisito": "RS03",
+      "ataque": "Analista lê lançamento de cliente fora do escopo",
+      "esperado": "404",
+      "obtido": 404,
+      "atende": true
+    },
+    {
+      "id": "V-06",
+      "requisito": "RS02",
+      "ataque": "Admin sem MFA escreve regra de serviço",
+      "esperado": "401",
+      "obtido": 401,
+      "atende": true
+    },
+    {
+      "id": "V-07",
+      "requisito": "RS04",
+      "ataque": "Token com alg=none",
+      "esperado": "401",
+      "obtido": 401,
+      "atende": true
+    },
+    {
+      "id": "V-08",
+      "requisito": "RS08",
+      "ataque": "PATCH só com cookie e Origin de outro site",
+      "esperado": "403",
+      "obtido": 200,
+      "atende": false
+    }
+  ]
+}

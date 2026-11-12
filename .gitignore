@@ -39,3 +39,5 @@ Thumbs.db
 
 # Diretório de pentest local — não versionar (artefatos de teste de invasão)
 pentest/
+odc-data/
+odc-report/
