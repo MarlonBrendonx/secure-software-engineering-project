@@ -108,12 +108,13 @@ As principais contribuições deste artigo são:
     \item um registro de 29 riscos avaliados por probabilidade e impacto, ordenados em cinco estágios de implementação segundo critérios que vão além da pontuação, como as dependências entre riscos, e mapeados às funções do NIST CSF 2.0, com plano de tratamento e estimativa do risco residual;
     \item um critério de seleção em duas rodadas, que acrescenta aos riscos centrais aqueles sem os quais os controles desses riscos deixam de funcionar;
     \item oito requisitos de segurança verificáveis (RS01 a RS08), ligados a vulnerabilidades catalogadas no CWE e no OWASP Top 10;
-    \item uma arquitetura segura proposta, com diagrama, oito decisões de arquitetura (D01 a D08) e uma tabela de rastreabilidade entre requisitos, riscos, vulnerabilidades, decisões e controles.
+    \item uma arquitetura segura proposta, com diagrama, oito decisões de arquitetura (D01 a D08) e uma tabela de rastreabilidade entre requisitos, riscos, vulnerabilidades, decisões e controles;
+    \item uma verificação parcial em protótipo, em que os critérios de verificação de seis dos oito requisitos foram executados, dois deles em parte, e os ataques que motivaram RS01, aceitos na versão original, passaram a ser recusados depois das correções.
 \end{itemize}
 
 \subsection{Organização do Artigo}
 
-O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, o diagrama, as decisões e a rastreabilidade, e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
+O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, o diagrama, as decisões e a rastreabilidade, verifica parte dos requisitos em um protótipo e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
 
 
 \section{Fundamentação Teórica e Trabalhos Relacionados}
@@ -125,7 +126,7 @@ O processo seguido neste artigo combina técnicas que a literatura costuma apres
 
 A ideia central da engenharia de software seguro é que a segurança não é uma etapa, mas uma preocupação presente em todas as fases do desenvolvimento. McGraw organiza essa ideia em um conjunto de pontos de contato (\textit{touchpoints}) aplicados aos artefatos que o processo já produz, entre eles os casos de abuso, os requisitos de segurança, a análise de risco da arquitetura, a revisão de código e os testes de penetração~\cite{mcgraw2006}. O \textit{Security Development Lifecycle} (SDL) da Microsoft segue o mesmo princípio e associa atividades obrigatórias a cada fase, do treinamento e dos requisitos ao projeto, à implementação, à verificação, à liberação e à resposta a incidentes~\cite{howard2006}. Os dois aparecem entre os modelos mais citados no mapeamento de Khan et al.~\cite{khan2020}. Mais recentemente, o \textit{Secure Software Development Framework} (SSDF) do NIST reuniu práticas desses e de outros modelos em quatro grupos, a preparação da organização, a proteção do software, a produção de software bem protegido e a resposta a vulnerabilidades~\cite{nist2022ssdf}. O SSDF não impõe um ciclo de vida específico. Ele descreve resultados que podem ser incorporados ao processo que a equipe já usa, e entre eles está o uso da modelagem de ameaças para avaliar o risco do software ainda no projeto.
 
-Os três modelos dão às fases de requisitos e de projeto um peso que motiva este trabalho, porque é nelas que se decide o que o código terá de garantir antes de ele existir. Como discutido na introdução, uma falha de projeto, como uma verificação de permissão posta no lugar errado, não se corrige com um ajuste pontual no código~\cite{arce2014}. Por isso, este artigo cobre as fases iniciais do ciclo, da identificação das ameaças à arquitetura segura, passando pela análise de riscos e pelos requisitos. A implementação dos controles e a verificação por testes e varreduras são fases posteriores do mesmo ciclo e ficam fora do escopo aqui. Os requisitos e as decisões, contudo, foram escritos para alimentá-las, já que cada requisito traz o critério que a verificação deverá confirmar.
+Os três modelos dão às fases de requisitos e de projeto um peso que motiva este trabalho, porque é nelas que se decide o que o código terá de garantir antes de ele existir. Como discutido na introdução, uma falha de projeto, como uma verificação de permissão posta no lugar errado, não se corrige com um ajuste pontual no código~\cite{arce2014}. Por isso, este artigo cobre as fases iniciais do ciclo, da identificação das ameaças à arquitetura segura, passando pela análise de riscos e pelos requisitos. A implementação completa dos controles e a verificação do sistema em produção são fases posteriores do mesmo ciclo e ficam fora do escopo. Os requisitos e as decisões, contudo, foram escritos para alimentá-las, já que cada requisito traz o critério que a verificação deverá confirmar, e a Seção~\ref{subsec:verificacao} mostra parte desses critérios executados em um protótipo.
 
 \subsection{Modelagem de Ameaças e Casos de Abuso}
 
@@ -316,8 +317,8 @@ Cada risco, ou par de riscos, gerou um requisito verificável, apresentado na Ta
 \textbf{ID} & \textbf{Risco} & \textbf{Requisito} & \textbf{Critério de verificação} \\
 \hline
 RS01 & R01 &
-Depois do envio para aprovação, o servidor recusa a alteração ou a exclusão direta do lançamento. A mudança só ocorre pela transição ``reabrir'', que o devolve a \texttt{Rascunho} e o retira da carga do ERP até nova aprovação. O ERP recebe apenas a última versão aprovada. &
-Em teste automatizado, \texttt{PATCH} e \texttt{DELETE} sobre lançamento enviado ou aprovado são recusados. O lançamento reaberto só volta à carga após novo envio e nova aprovação. Cada tentativa e transição fica em \texttt{audit\_logs}, e tentativas recusadas geram alerta. \\
+Depois do envio para aprovação, o servidor recusa a alteração ou a exclusão direta do lançamento. A mudança só ocorre pela transição ``reabrir'', que o devolve a \texttt{Rascunho} e o retira da carga do ERP até nova aprovação. O ERP recebe apenas a última versão aprovada. Quem aprova deve ser diferente de quem criou, enviou ou alterou o lançamento, mesmo que seja administrador (R18). &
+Em teste automatizado, \texttt{PATCH} e \texttt{DELETE} sobre lançamento enviado ou aprovado são recusados. O lançamento reaberto só volta à carga após novo envio e nova aprovação. A aprovação pelo autor de uma dessas ações é recusada. Cada tentativa e transição fica em \texttt{audit\_logs}, e tentativas recusadas geram alerta. \\
 RS02 & R02 &
 Administradores e gestores só obtêm sessão depois de confirmar um segundo fator no SSO. A API recusa, nesses perfis, todo \textit{token} sem a indicação de MFA concluído. &
 O login sem o segundo fator não gera sessão. Um \textit{token} desses perfis sem indicação de MFA recebe \texttt{401}. Falhas repetidas no segundo fator geram alerta. \\
@@ -386,7 +387,7 @@ O mapeamento usa a edição de 2025 do OWASP Top 10, que reorganizou parte das c
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=\textwidth]{figuras/arquitetura-segura.pdf}
-    \caption{Arquitetura segura proposta para o sistema de faturamento. As caixas tracejadas são as fronteiras de confiança (F1 a F5), e os componentes destacados contêm os controles C1 a C14. As setas contínuas numeradas indicam o fluxo principal, e as tracejadas indicam ligações auxiliares e eventos enviados ao monitoramento. Os controles são propostos e ainda não estão implementados.}
+    \caption{Arquitetura segura proposta para o sistema de faturamento. As caixas tracejadas são as fronteiras de confiança (F1 a F5), e os componentes destacados contêm os controles C1 a C14. As setas contínuas numeradas indicam o fluxo principal, e as tracejadas indicam ligações auxiliares e eventos enviados ao monitoramento. Os controles são propostos para o sistema; os que foram implementados em protótipo estão na Seção~\ref{subsec:verificacao}.}
     \label{fig:arquitetura-segura}
 \end{figure*}
 
@@ -456,14 +457,68 @@ RS08 & R29 & CWE-352, A01 & D08 & C14, C6, C7, C8 & Proteção anti-CSRF, valida
 
 Em um ponto, a arquitetura vai além do plano. Para R06 e R07, o plano previa manter o \texttt{JWT\_SECRET} no cofre com rotação, enquanto D04 o substitui por assinatura assimétrica, porque o cofre sozinho não impede o vazamento pela memória ou pelas imagens das instâncias. A rastreabilidade também mostrou uma dependência que a ordem do plano não refletia. O plano coloca R02, R06 e R07 no estágio 1, R01, R23, R26, R28 e R29 no estágio 2 e R03 no estágio 3, com R01 à frente dentro do estágio 2. Como os critérios de verificação de RS01 dependem de a auditoria ser gravada e de o \textit{guard} negar em caso de falha, propomos implementar C11 (R26) e C12 (R28) antes de C4 (R01). O ajuste não altera os estágios nem as pontuações da análise de riscos.
 
+\subsection{Verificação Parcial em Protótipo}
+\label{subsec:verificacao}
+
+Os critérios de verificação da Tabela~\ref{tab:requisitos} foram escritos para serem executados. Para mostrar que isso é possível e que os controles bloqueiam os ataques que os motivaram, implementamos parte deles em um protótipo do sistema. O protótipo replica o fluxo de lançamentos e o cadastro de regras de serviço com a mesma organização em camadas da API, mas usa o Redis como armazenamento e um provedor de identidade simulado no lugar do SSO. A primeira versão já continha a autorização por recurso (RS03), a conferência do MFA no \textit{token} (RS02), os \textit{guards} que negam por padrão (RS06) e a validação de algoritmo, emissor, audiência, expiração e sessão do \textit{token}, que é parte de RS04. Uma segunda versão, mantida em separado para preservar a primeira como referência, acrescenta RS01, com a segregação de funções de R18, e RS05, restrito aos lançamentos. A implementação seguiu a ordem proposta na Seção~\ref{subsec:rastreabilidade}: a negação em caso de falha (C12) já existia, e a auditoria na mesma transação (C11) entrou junto com a máquina de estados (C4). Ficaram de fora a assinatura assimétrica de RS04, RS07 e RS08.
+
+A verificação combinou três meios. Primeiro, os critérios de RS01, R18 e RS05 viraram 13 testes automatizados, que passam na segunda versão, ao lado dos 75 testes que a primeira já tinha. Para RS05, o teste injeta uma falha na gravação da auditoria e confere que a alteração, a mudança de status e a exclusão não são efetivadas, uma situação que não se provoca por uma requisição externa. Segundo, um roteiro de ataques foi executado contra a API em funcionamento, nas duas versões e com o mesmo estado inicial, como mostra a Tabela~\ref{tab:verificacao}. Terceiro, uma varredura com o ZAP~\cite{zaproxy}, autenticada como administrador, conferiu se as mudanças introduziram novas falhas, e os ataques V-01 e V-04 foram repetidos à mão na mesma ferramenta.
+
+\begin{table}[!t]
+\centering
+\caption{Ataques contra a API do protótipo, antes (1ª versão) e depois (2ª versão) das correções}
+\label{tab:verificacao}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\columnwidth}{@{}l l Y c c c@{}}
+\hline
+\textbf{ID} & \textbf{Req.} & \textbf{Ataque} & \textbf{Esp.} & \textbf{1ª} & \textbf{2ª} \\
+\hline
+V-01 & RS01 & \texttt{PATCH} em lançamento enviado & 422 & 200 & 422 \\
+V-02 & RS01 & \texttt{DELETE} em lançamento enviado & 422 & 204 & 422 \\
+V-03 & RS01 & Reabrir lançamento enviado & 200 & 422 & 200 \\
+V-04 & R18 & Administrador aprova o próprio lançamento & 403 & 200 & 403 \\
+V-05 & RS03 & Leitura de cliente fora do escopo & 404 & 404 & 404 \\
+V-06 & RS02 & Escrita privilegiada sem MFA & 401 & 401 & 401 \\
+V-07 & RS04 & \textit{Token} com \texttt{alg} \texttt{none} & 401 & 401 & 401 \\
+V-08 & RS08 & Alteração só com o \textit{cookie}, vinda de outra origem & 403 & 200 & 200 \\
+\hline
+\end{tabularx}
+\end{table}
+
+Nas quatro primeiras linhas, o ataque é aceito na primeira versão e recusado na segunda, com as respostas que os critérios exigem. As três seguintes mostram que as mudanças não afetaram os controles que já existiam. A última continua aceita nas duas versões, porque RS08 não foi implementado. O cliente do roteiro não aplica o \texttt{SameSite=Strict} do \textit{cookie}, como faria um navegador, e o resultado mostra que o servidor aceita a requisição sempre que o navegador não a barra, como no caso de outro subdomínio corporativo considerado em D08. A varredura não encontrou alertas de risco alto, e os alertas de risco médio e baixo, ligados a cabeçalhos HTTP e à política de conteúdo do \textit{frontend}, são os mesmos da primeira versão. O ZAP, porém, não testa regras de negócio como a segregação de funções, e por isso a evidência de RS01 e R18 vem dos testes e do roteiro de ataques. Do critério de RS01, ficou sem verificação o alerta para as tentativas recusadas, porque o protótipo não tem o monitoramento (C7).
+
+Esses resultados mostram que os critérios são executáveis e que, no protótipo, os controles bloqueiam os ataques previstos. Eles não medem a probabilidade dos riscos nem confirmam o risco residual estimado na Seção~\ref{sec:resultados}, que depende do sistema em produção, do monitoramento e dos processos de resposta. Os testes, o roteiro de ataques e as evidências da varredura estão no repositório do projeto.
+
 \section{Discussão}
 \label{sec:discussao}
+
 \subsection{Lições Aprendidas}
-Discutir o que o processo mostrou ao ligar ameaças, riscos e arquitetura, e as dificuldades encontradas.
+\label{subsec:licoes}
+
+A lição principal é que a modelagem de ameaças encontrou as falhas mais graves do sistema, e que essas falhas não apareceriam em uma varredura automática. Os dois riscos Críticos ligados ao valor faturado, a alteração de um lançamento depois do envio (R01) e a aprovação pelo próprio autor (R18), vieram das ameaças T01 e T24 e se confirmaram como ataques reais no protótipo, nos casos V-01 a V-04 da Tabela~\ref{tab:verificacao}. Nenhum deles depende de uma entrada malformada ou de um cabeçalho ausente. São requisições válidas, feitas por um usuário autenticado e com o perfil certo, que a regra de negócio deveria recusar. A varredura com o ZAP, feita antes e depois das correções, apontou apenas cabeçalhos HTTP e a política de conteúdo do \textit{frontend}. As falhas só foram identificadas porque o STRIDE e os casos de abuso perguntaram quem pode fazer o quê e em que estado do fluxo. As duas abordagens encontram tipos diferentes de falha e se complementam: a varredura cobre a configuração e a superfície exposta, e a modelagem cobre as regras que dão sentido ao sistema.
+
+A segunda lição é que a arquitetura não só indicou o controle, mas também o lugar dele. D01 coloca a regra na máquina de estados do domínio, e não na interface nem na rota. No protótipo, essa escolha fez o mesmo controle valer para a rota individual, para a rota de lote usada pela tela e para a chamada direta à API. O ataque V-04 feito no ZAP passou justamente pela rota de lote e foi recusado, sem que essa rota tivesse recebido um tratamento próprio. Um controle posto na tela, ou só na rota individual, teria deixado esse caminho aberto.
+
+A terceira lição é que a modelagem precisa de revisão. A autoaprovação pelo administrador, origem do risco R18, não estava na primeira versão da modelagem e só apareceu quando cada componente foi confrontado de novo com as seis categorias do STRIDE. Do mesmo modo, os riscos R24 a R29 surgiram quando os casos de abuso foram cruzados com o registro de riscos. Uma modelagem feita em uma única passada teria deixado de fora um dos três riscos Críticos.
+
+Por fim, a rastreabilidade mostrou o seu valor prático em dois momentos. No projeto, ela revelou que os critérios de RS01 dependem de RS05 e RS06, o que mudou a ordem de implementação proposta. Na verificação, ela permitiu ligar cada resposta da Tabela~\ref{tab:verificacao} a uma ameaça, um risco, um requisito e uma decisão, e mostrou que o único ataque ainda aceito, o V-08, corresponde a um requisito que não foi implementado. Esses resultados não medem uma redução de risco, como discutido na Seção~\ref{subsec:verificacao}. Eles mostram que as ameaças priorizadas eram reais no protótipo e que os controles derivados delas as bloquearam.
+
 \subsection{Implicações para Sistemas Financeiros}
 Discutir o que os achados significam para sistemas financeiros e de faturamento em geral.
+
 \subsection{Limitações e Ameaças à Validade}
-Declarar as limitações, como controles apenas propostos e risco residual sem validação.
+\label{subsec:limitacoes}
+
+Como limitações e ameaças à validade desse trabalho, listamos as 4 seguintes:
+
+\emph{Escopo da verificação.} Os controles foram verificados em um protótipo, e não no sistema em produção. O protótipo usa o Redis no lugar do banco relacional, e a ``mesma transação'' de RS05 corresponde a um bloco atômico do Redis. Ele também usa um provedor de identidade simulado no lugar do SSO e não tem o monitoramento (C7). RS05 foi aplicado só aos lançamentos, e a assinatura assimétrica de RS04, RS07 e RS08 não foram implementados. A redução de probabilidade e o risco residual da Seção~\ref{sec:resultados} continuam sendo estimativas, válidas apenas se os controles forem implementados e verificados no sistema real.
+
+\emph{Validade interna.} A mesma equipe modelou as ameaças, escreveu os requisitos, implementou os controles e executou os ataques. Há, portanto, um risco de circularidade. O roteiro de ataques testa os cenários que a própria modelagem previu e não revela ameaças que ela deixou de identificar. A varredura com o ZAP é independente da modelagem e reduz esse risco, mas apenas em parte, porque cobriu as rotas de escrita de forma rasa: as requisições atingiram o limite de taxa da API ou foram montadas com identificadores vazios. Também não houve uma versão do sistema desenvolvida sem a modelagem de ameaças para servir de comparação. O que a Tabela~\ref{tab:verificacao} compara é o mesmo protótipo antes e depois dos controles.
+
+\emph{Validade de construto.} Probabilidade e impacto foram avaliados em escalas qualitativas, com justificativas escritas, mas sem dados históricos de incidentes, e outra equipe poderia atribuir valores diferentes. A priorização por dependências reduz o peso dessas pontuações, mas não o elimina. Na verificação, o critério de sucesso é o código de resposta da API, que indica se o ataque foi recusado, mas não se o controle resistiria a variações que o roteiro não exercitou.
+
+\emph{Validade externa.} O estudo trata de um único sistema, de um domínio específico, e os resultados não se generalizam diretamente para outros sistemas financeiros. O processo em si, com a modelagem, a avaliação de riscos, os requisitos verificáveis e a rastreabilidade, não depende do domínio. Já as ameaças, os riscos e as decisões dependem do fluxo de aprovação e da integração com o ERP deste sistema.
 
 \section{Conclusão e Trabalhos Futuros}
 \label{sec:conclusao}
