@@ -39,7 +39,7 @@ Os eventos que precisam existir, por grupo:
 7. **Plataforma:** requisição recusada por origem ou por token anti-CSRF, conexão WebSocket recusada, limite de requisições excedido, erro interno (`500`), falha na gravação da auditoria, atraso da outbox e divergência na reconciliação.
 8. **Carga do ERP:** geração do arquivo, conferência do manifesto e bloqueio da importação.
 
-Os grupos 1 (exceto renovação, reuso e revogação), 3 (só a negação por escopo), 4 (só as operações efetivadas) e 5 já são gravados pelo protótipo. Os demais dependem de controles ainda não implementados ou do registro de eventos que hoje só aparecem no log ou na resposta HTTP.
+Os grupos 1 (exceto renovação, reuso e revogação), 3 (só a negação por escopo), 4 (só as operações efetivadas) e 5 já são gravados pelo protótipo. No [protótipo corrigido](../../extra/prototipo-psp-corrigido/README.md), o grupo 4 inclui também a autoaprovação recusada (`autoaprovacao_negada`). Os demais dependem de controles ainda não implementados ou do registro de eventos que hoje só aparecem no log ou na resposta HTTP.
 
 O registro não deve conter senha, código OTP, token nem valor de campo sensível. O protótipo já segue essa regra: `regra_servico_atualizada` grava só os nomes dos campos alterados.
 
@@ -57,6 +57,32 @@ O registro não deve conter senha, código OTP, token nem valor de campo sensív
 | Entrega da carga ao ERP (RS07)                             | Assinatura inválida, hash divergente, total diferente da soma aprovada                                        | D14                                                                                    |
 | Pipeline de CI (Gitleaks, Dependency-Check)                | Segredo no repositório, dependência com CVE (como o `PyJWT` do V03)                                           | Não é detecção em execução; abre incidente quando há segredo exposto ou CVE explorável |
 
-A auditoria do protótipo fica em uma lista do Redis limitada a 5.000 entradas (`_AUDIT_MAX_ENTRIES`), sem encadeamento por hash. Ela serve para testar as regras, mas não é a trilha protegida de C6 e não guarda histórico suficiente para uma investigação.
+A auditoria do protótipo fica em uma lista do Redis limitada a 5.000 entradas (`_AUDIT_MAX_ENTRIES`), sem encadeamento por hash. Ela serve para testar as regras, mas não é a trilha protegida de C6 e não guarda histórico suficiente para uma investigação. No protótipo corrigido, os eventos de lançamento são gravados no mesmo `MULTI/EXEC` da operação (RS05), mas a lista continua limitada e sem encadeamento.
+
+## Código proposto
+
+O diretório [`etapa-6-objetivos-e-eventos/`](etapa-6-objetivos-e-eventos/) traz os arquivos que passam a gravar os campos de correlação em todos os eventos. Os caminhos espelham o `backend/` do protótipo, e cada arquivo substitui o de mesmo caminho. Os arquivos substituídos são iguais no protótipo original e no corrigido, então o código serve para os dois.
+
+| Arquivo                                          | O que muda                                                                                                                                                           |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/core/request_context.py` (novo)             | Guarda, durante a requisição, `request_id`, origem, método, rota, usuário, sessão e perfil                                                                           |
+| `src/presentation/api/main.py`                   | O middleware que já gerava o `request_id` abre o contexto da requisição                                                                                              |
+| `src/application/authenticator.py`               | Depois de validar token e sessão, acrescenta usuário, `sid` e perfil ao contexto                                                                                     |
+| `src/domain/entities/audit.py`                   | `AuditEvent` ganha `method`, `role`, `sid`, `request_id` e `result`, e completa pelo contexto os campos que o caso de uso não informa, inclusive `origin` e `route` |
+| `src/infrastructure/persistence/redis/codec.py`  | A leitura da auditoria não completa nada: o evento volta como foi gravado, e os eventos antigos ficam com os campos novos vazios                                     |
+| `src/presentation/api/routes/audit.py`           | A consulta `GET /v1/audit/events` devolve os campos novos                                                                                                            |
+
+Com esse código, a tabela de campos fica assim:
+
+| Campo                   | Com o código proposto                                                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Usuário e perfil        | Perfil gravado quando o evento é do próprio usuário autenticado; um login recusado não herda o perfil de ninguém       |
+| Sessão (`sid`)          | Gravada nas mesmas condições do perfil                                                                                 |
+| Origem (IP)             | Gravada em todos os eventos feitos dentro de uma requisição HTTP                                                       |
+| Rota e método           | Gravados em todos os eventos feitos dentro de uma requisição HTTP                                                      |
+| Operação e resultado    | `result` com `sucesso` ou `negado` nos eventos de login e nos gravados pelo `SecurityMonitor` (MFA, negação de escopo de item, token recusado, reuso de refresh, WebSocket recusado); nos demais fica vazio, inclusive na negação de período da listagem |
+| `request_id`            | Gravado e igual ao `X-Request-ID` devolvido ao cliente                                                                 |
+
+Os eventos que faltavam nos grupos 1, 2 e 7 (reuso de refresh, token recusado, WebSocket recusado por origem) são gerados pelo código das [regras de detecção](etapa-6-regras-de-deteccao.md#código-proposto) e da [resposta a incidentes](etapa-6-resposta-a-incidentes.md#código-proposto). Continuam sem evento: negação por perfil (`403`), falha do guard (`503`), erro interno (`500`), leituras e exportações com volume (grupo 6), outbox e carga do ERP (grupo 8).
 
 ---
