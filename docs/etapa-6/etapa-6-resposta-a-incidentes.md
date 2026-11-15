@@ -9,7 +9,7 @@ Este documento descreve o roteiro a seguir depois que uma das [regras de detecç
 Ao receber um alerta:
 
 - abrir um registro de incidente com número, regra, severidade, horário do alerta e responsável pela triagem;
-- copiar imediatamente os eventos de auditoria e o trecho de log do período, a partir do `request_id`, do usuário e da origem. No protótipo isso é urgente, porque a lista `psp:audit` descarta as entradas mais antigas depois de 5.000 eventos;
+- copiar imediatamente os eventos de auditoria e o trecho de log do período, a partir do `request_id`, do usuário e da origem. No protótipo isso é urgente, porque a lista `psp:audit` descarta as entradas mais antigas depois de 5.000 eventos. O script `exportar_evidencias.py` do [código proposto](#código-proposto) faz essa cópia;
 - guardar a cópia com hash e horário, fora do ambiente afetado, para preservar a evidência caso o incidente envolva quem tem acesso ao servidor;
 - não avisar o usuário suspeito antes da triagem, para não destruir evidências.
 
@@ -28,7 +28,7 @@ A triagem deve responder também se há dado pessoal envolvido, o que define a c
 
 A contenção deve ser proporcional ao risco e pode incluir:
 
-- **revogar a sessão** (`sid`) da conta suspeita. O protótipo revoga uma sessão por vez (`SessionGateway.revoke`); a revogação de todas as sessões de um usuário ainda precisa ser criada;
+- **revogar a sessão** (`sid`) da conta suspeita. O protótipo revoga uma sessão por vez (`SessionGateway.revoke`); a revogação de todas as sessões de um usuário ainda precisa ser criada. No reuso de refresh token (D05), o código proposto já revoga a sessão no momento da detecção;
 - **bloquear a conta** no SSO até a confirmação do titular;
 - **congelar o período** do cliente afetado, impedindo novos envios ao ERP, como previsto no tratamento de R01 e R02 na Etapa 2;
 - **bloquear a origem** no gateway ou no APIM;
@@ -53,7 +53,7 @@ O resultado é a lista dos registros lidos ou alterados pelo atacante, que defin
 
 A correção trata a causa, e não só o efeito do incidente. Exemplos ligados aos achados das etapas anteriores:
 
-- reuso de refresh token (D05, V01): implementar a rotação a cada uso, guardar o identificador do refresh e recusar o reaproveitamento, conforme o plano de R25;
+- reuso de refresh token (D05, V01): implementar a rotação a cada uso, guardar o identificador do refresh e recusar o reaproveitamento, conforme o plano de R25. Está no [código proposto](#código-proposto);
 - token também no corpo da resposta (V02): retirar o `access_token` do corpo do login e do refresh;
 - biblioteca vulnerável (V03): atualizar o `PyJWT` e confirmar no Dependency-Check;
 - regra que não disparou: criar o evento que faltou e um teste que o comprove.
@@ -97,5 +97,24 @@ Após o encerramento:
 | Infraestrutura                          | Mantém os logs do gateway, do SSO e do cofre, bloqueia origens, troca chaves, restaura backups e responde a D10 e D13           |
 | Negócio (gestor da área de faturamento) | Confirma se uma alteração ou consulta é legítima, decide o congelamento do período e valida a recomposição dos valores          |
 | Encarregado de dados                    | Avalia o incidente com dado pessoal e conduz a comunicação à ANPD e aos titulares                                               |
+
+## Código proposto
+
+O diretório [`etapa-6-resposta-a-incidentes/`](etapa-6-resposta-a-incidentes/) traz a correção do V01, que também gera o evento de D05, e o script do passo 1. Ele depende dos códigos de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto) e de [regras de detecção](etapa-6-regras-de-deteccao.md#código-proposto), que devem ser aplicados antes.
+
+| Arquivo                                         | O que muda                                                                                                                                                                         |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/domain/entities/session.py`                | A sessão guarda o `jti` do único refresh token aceito (`refresh_jti`)                                                                                                              |
+| `src/application/use_cases/auth/login.py`       | O login grava o `jti` do refresh emitido. A renovação troca o `jti` a cada uso; um refresh com `jti` antigo revoga a sessão e responde `401 refresh_reutilizado`. A renovação não estende o prazo da sessão |
+| `src/infrastructure/persistence/redis/codec.py` | Lê e grava o `refresh_jti` da sessão. Inclui a mudança de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto) e a substitui                                       |
+| `scripts/exportar_evidencias.py` (novo)         | Copia `psp:audit` e `psp:alerts` para um JSON com o hash SHA-256 ao lado, com filtro opcional por usuário, origem ou `request_id`. Só lê o Redis e não sobrescreve cópia anterior |
+
+As sessões abertas antes da troca não têm `refresh_jti`. A primeira renovação delas é aceita e já grava o valor, então ninguém precisa entrar de novo.
+
+Ficaram fora do código:
+
+- **V02 (token no corpo da resposta).** O frontend lê o `access_token` do corpo do login e do refresh, inclusive para autenticar o WebSocket por mensagem. Tirar o token do corpo exige mudar o frontend e a autenticação do WebSocket, o que vai além desta etapa.
+- **V03 (`PyJWT` com CVE).** A correção é atualizar a dependência e confirmar no Dependency-Check, não mudar código.
+- **Revogação de todas as sessões de um usuário.** Exige indexar as sessões por usuário no `security_gateways.py`, que é diferente no protótipo original e no corrigido. Fica para depois do consenso sobre qual protótipo segue.
 
 ---
