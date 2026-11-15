@@ -61,7 +61,7 @@ A auditoria do protótipo fica em uma lista do Redis limitada a 5.000 entradas (
 
 ## Código proposto
 
-O diretório [`etapa-6-objetivos-e-eventos/`](etapa-6-objetivos-e-eventos/) traz os arquivos que passam a gravar os campos de correlação em todos os eventos. Os caminhos espelham o `backend/` do protótipo, e cada arquivo substitui o de mesmo caminho. Os arquivos substituídos são iguais no protótipo original e no corrigido, então o código serve para os dois.
+O diretório [`etapa-6-objetivos-e-eventos/`](correções%20sugeridas/etapa-6-objetivos-e-eventos/) traz os arquivos que passam a gravar os campos de correlação em todos os eventos. Os caminhos espelham o `backend/` do protótipo, e cada arquivo substitui o de mesmo caminho. Os arquivos substituídos são iguais no protótipo original e no corrigido, então o código serve para os dois.
 
 | Arquivo                                          | O que muda                                                                                                                                                           |
 | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

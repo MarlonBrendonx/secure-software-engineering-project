@@ -52,7 +52,7 @@ A severidade segue a escala da [Etapa 2](../etapa-2/etapa-2-criterios-e-registro
 
 ## Código proposto
 
-O diretório [`etapa-6-regras-de-deteccao/`](etapa-6-regras-de-deteccao/) implementa dez das catorze regras. Ele depende do código de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto), que deve ser aplicado antes.
+O diretório [`etapa-6-regras-de-deteccao/`](correções%20sugeridas/etapa-6-regras-de-deteccao/) implementa dez das catorze regras. Ele depende do código de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto), que deve ser aplicado antes.
 
 A contagem e os alertas saem do `SecurityMonitor`, que passa só a gravar eventos, e vão para um motor de regras (`DetectionEngine`). Esse motor envolve o gateway de auditoria (`DetectingAuditLog`): cada evento gravado é entregue às regras logo depois da gravação. Uma falha nas regras fica no log e não desfaz a operação. Cada alerta dispara uma vez por janela, quando a contagem atinge o limite, e leva a regra, a severidade inicial e o destino da tabela acima.
 

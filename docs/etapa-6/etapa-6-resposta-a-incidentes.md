@@ -100,7 +100,7 @@ Após o encerramento:
 
 ## Código proposto
 
-O diretório [`etapa-6-resposta-a-incidentes/`](etapa-6-resposta-a-incidentes/) traz a correção do V01, que também gera o evento de D05, e o script do passo 1. Ele depende dos códigos de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto) e de [regras de detecção](etapa-6-regras-de-deteccao.md#código-proposto), que devem ser aplicados antes.
+O diretório [`etapa-6-resposta-a-incidentes/`](correções%20sugeridas/etapa-6-resposta-a-incidentes/) traz a correção do V01, que também gera o evento de D05, e o script do passo 1. Ele depende dos códigos de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto) e de [regras de detecção](etapa-6-regras-de-deteccao.md#código-proposto), que devem ser aplicados antes.
 
 | Arquivo                                         | O que muda                                                                                                                                                                         |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

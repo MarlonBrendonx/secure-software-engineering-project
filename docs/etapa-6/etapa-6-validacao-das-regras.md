@@ -23,7 +23,7 @@ A aplicação já permite gerar parte dos eventos de entrada das [regras de dete
 
 ## Testes escritos
 
-O diretório [`etapa-6-validacao-das-regras/`](etapa-6-validacao-das-regras/) traz os testes no formato da suíte do protótipo (pytest, `fakeredis`, mesmos fixtures de `tests/conftest.py`). Eles dependem do código de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto), [regras de detecção](etapa-6-regras-de-deteccao.md#código-proposto) e [resposta a incidentes](etapa-6-resposta-a-incidentes.md#código-proposto).
+O diretório [`etapa-6-validacao-das-regras/`](correções%20sugeridas/etapa-6-validacao-das-regras/) traz os testes no formato da suíte do protótipo (pytest, `fakeredis`, mesmos fixtures de `tests/conftest.py`). Eles dependem do código de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto), [regras de detecção](etapa-6-regras-de-deteccao.md#código-proposto) e [resposta a incidentes](etapa-6-resposta-a-incidentes.md#código-proposto).
 
 | Regra ou controle     | Testes (`tests/test_etapa6_deteccao.py`, salvo indicação)                                                                                               | Diferença em relação ao teste planejado                                                       |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |

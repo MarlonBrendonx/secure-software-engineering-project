@@ -4,7 +4,7 @@ Esta etapa continua a [Etapa 5, verificação de vulnerabilidades](../etapa-5/et
 
 Os documentos propõem 14 regras de detecção (D01 a D14) e um roteiro de resposta. Os identificadores D01 a D14 desta etapa são **regras de detecção** e não se confundem com as decisões de arquitetura D01 a D08 da Etapa 3. Quando uma regra cita uma decisão, ela aparece como "decisão D0x da Etapa 3".
 
-Ao lado de cada documento há um diretório de mesmo nome com o código que o põe em prática. O código não foi aplicado a nenhum dos dois protótipos: ele fica pronto para substituir os arquivos do [protótipo original](../../extra/prototipo-psp/) ou do [protótipo corrigido](../../extra/prototipo-psp-corrigido/), depois do consenso do grupo.
+Na pasta [`correções sugeridas/`](correções%20sugeridas/) há, para cada documento, um diretório de mesmo nome com o código que o põe em prática. O código não foi aplicado a nenhum dos dois protótipos: ele fica pronto para substituir os arquivos do [protótipo original](../../extra/prototipo-psp/) ou do [protótipo corrigido](../../extra/prototipo-psp-corrigido/), depois do consenso do grupo.
 
 ## Resultado em uma frase
 
@@ -14,10 +14,10 @@ Nos protótipos, só D01 tem alerta implementado e testado, e D02 tem alerta sem
 
 |  #  | Documento                                                     | O que responde                                                                            | Código                                                                 |
 | :-: | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-|  1  | [Objetivos, eventos e fontes](etapa-6-objetivos-e-eventos.md) | O que o monitoramento precisa perceber, quais eventos registrar e de onde vêm os dados    | [`etapa-6-objetivos-e-eventos/`](etapa-6-objetivos-e-eventos/)         |
-|  2  | [Regras de detecção](etapa-6-regras-de-deteccao.md)           | Quais são as regras D01 a D14, quando cada uma dispara e com qual severidade              | [`etapa-6-regras-de-deteccao/`](etapa-6-regras-de-deteccao/)           |
-|  3  | [Resposta a incidentes](etapa-6-resposta-a-incidentes.md)     | O que fazer depois de um alerta, da identificação ao pós-incidente, e quem faz cada parte | [`etapa-6-resposta-a-incidentes/`](etapa-6-resposta-a-incidentes/)     |
-|  4  | [Validação das regras](etapa-6-validacao-das-regras.md)       | Como comprovar que cada regra correlaciona os eventos e dispara o alerta                  | [`etapa-6-validacao-das-regras/`](etapa-6-validacao-das-regras/)       |
+|  1  | [Objetivos, eventos e fontes](etapa-6-objetivos-e-eventos.md) | O que o monitoramento precisa perceber, quais eventos registrar e de onde vêm os dados    | [`etapa-6-objetivos-e-eventos/`](correções%20sugeridas/etapa-6-objetivos-e-eventos/)         |
+|  2  | [Regras de detecção](etapa-6-regras-de-deteccao.md)           | Quais são as regras D01 a D14, quando cada uma dispara e com qual severidade              | [`etapa-6-regras-de-deteccao/`](correções%20sugeridas/etapa-6-regras-de-deteccao/)           |
+|  3  | [Resposta a incidentes](etapa-6-resposta-a-incidentes.md)     | O que fazer depois de um alerta, da identificação ao pós-incidente, e quem faz cada parte | [`etapa-6-resposta-a-incidentes/`](correções%20sugeridas/etapa-6-resposta-a-incidentes/)     |
+|  4  | [Validação das regras](etapa-6-validacao-das-regras.md)       | Como comprovar que cada regra correlaciona os eventos e dispara o alerta                  | [`etapa-6-validacao-das-regras/`](correções%20sugeridas/etapa-6-validacao-das-regras/)       |
 |  5  | [Limitações](etapa-6-limitacoes.md)                           | O que esta etapa não cobre e o que falta para a detecção ser uma capacidade real          | —                                                                      |
 
 ## Situação das regras no protótipo
@@ -55,13 +55,13 @@ O V02 (token também no corpo da resposta) e o V03 (`PyJWT` com CVE) não têm r
 
 ## Como aplicar os códigos propostos
 
-Cada diretório é uma cópia do `backend/` do protótipo: um arquivo em `etapa-6-regras-de-deteccao/backend/src/application/detection.py` vai para `backend/src/application/detection.py`. 
+Cada diretório é uma cópia do `backend/` do protótipo: um arquivo em `correções sugeridas/etapa-6-regras-de-deteccao/backend/src/application/detection.py` vai para `backend/src/application/detection.py`. 
 Os arquivos marcados como novos não existem no protótipo; os demais o substituem por inteiro.
 
-1. Copiar [`etapa-6-objetivos-e-eventos/backend/`](etapa-6-objetivos-e-eventos/) sobre o `backend/` do protótipo.
-2. Copiar [`etapa-6-regras-de-deteccao/backend/`](etapa-6-regras-de-deteccao/).
-3. Copiar [`etapa-6-resposta-a-incidentes/backend/`](etapa-6-resposta-a-incidentes/). O `codec.py` daqui substitui o do passo 1 e já contém a mudança dele.
-4. Copiar [`etapa-6-validacao-das-regras/backend/`](etapa-6-validacao-das-regras/). No protótipo original, deixar de fora `tests/test_etapa6_d07_corrigido.py`.
+1. Copiar [`etapa-6-objetivos-e-eventos/backend/`](correções%20sugeridas/etapa-6-objetivos-e-eventos/) sobre o `backend/` do protótipo.
+2. Copiar [`etapa-6-regras-de-deteccao/backend/`](correções%20sugeridas/etapa-6-regras-de-deteccao/).
+3. Copiar [`etapa-6-resposta-a-incidentes/backend/`](correções%20sugeridas/etapa-6-resposta-a-incidentes/). O `codec.py` daqui substitui o do passo 1 e já contém a mudança dele.
+4. Copiar [`etapa-6-validacao-das-regras/backend/`](correções%20sugeridas/etapa-6-validacao-das-regras/). No protótipo original, deixar de fora `tests/test_etapa6_d07_corrigido.py`.
 5. Rodar a suíte completa (`.venv/bin/python -m pytest`).
 
 A ordem importa, porque cada diretório usa o anterior. Todos os arquivos substituídos são iguais no original e no corrigido, então o mesmo código serve para os dois. Também é possível parar depois do passo 1 ou do passo 2: a suíte existente continua passando.
