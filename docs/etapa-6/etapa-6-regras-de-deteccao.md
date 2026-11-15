@@ -27,7 +27,7 @@ As janelas e os limites são valores iniciais, a ajustar com o volume real de us
 
 D13 teria disparado durante o active scan do [retest da Etapa 5](../etapa-5/etapa-5-retest-autenticado.md), que recebeu 8.306 respostas `429` do backend. D06 teria disparado nos testes de JWT forjado do mesmo retest (`alg=none`, assinatura trocada e `role=admin` no corpo), que receberam `401` sem deixar registro na auditoria.
 
-Em D02, as negações de período feitas na listagem (`ListBillingsByPeriodUseCase`) gravam `acesso_negado` direto na auditoria, sem passar pelo `SecurityMonitor`, e por isso não entram no contador. A correção é usar o monitor também nesse caso.
+Em D02, as negações de período feitas na listagem (`ListBillingsByPeriodUseCase`) gravam `acesso_negado` direto na auditoria, sem passar pelo `SecurityMonitor`, e por isso não entram no contador. O [código proposto](#código-proposto) resolve isso sem mexer na listagem: as regras passam a avaliar os eventos na gravação da auditoria, venham de onde vierem.
 
 ## Severidade inicial dos alertas
 
@@ -49,6 +49,42 @@ A severidade segue a escala da [Etapa 2](../etapa-2/etapa-2-criterios-e-registro
 | D12   | Média                                                                                                           | A recusa mostra que a proteção funcionou. Sobe para Alta se a requisição de outra origem chegou a alterar dado.                                                                   |
 | D13   | Baixa                                                                                                           | O limite já conteve o excesso. Serve para identificar varreduras.                                                                                                                 |
 | D14   | Crítica                                                                                                         | Valor divergente às portas do ERP vira lançamento contábil se a importação for liberada (R23).                                                                                    |
+
+## Código proposto
+
+O diretório [`etapa-6-regras-de-deteccao/`](etapa-6-regras-de-deteccao/) implementa dez das catorze regras. Ele depende do código de [objetivos e eventos](etapa-6-objetivos-e-eventos.md#código-proposto), que deve ser aplicado antes.
+
+A contagem e os alertas saem do `SecurityMonitor`, que passa só a gravar eventos, e vão para um motor de regras (`DetectionEngine`). Esse motor envolve o gateway de auditoria (`DetectingAuditLog`): cada evento gravado é entregue às regras logo depois da gravação. Uma falha nas regras fica no log e não desfaz a operação. Cada alerta dispara uma vez por janela, quando a contagem atinge o limite, e leva a regra, a severidade inicial e o destino da tabela acima.
+
+| Arquivo                                                                | O que muda                                                                                       |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `src/application/detection.py` (novo)                                  | Motor das regras, limites iniciais e o gateway de auditoria que entrega os eventos às regras     |
+| `src/domain/ports/gateways/detection_gateway.py` (novo)                | Porta do estado das regras: valores distintos por janela, marcas temporárias e origens por conta |
+| `src/infrastructure/persistence/redis/detection_gateways.py` (novo)    | Implementação da porta no Redis, sob `psp:detect:*`                                              |
+| `src/application/security_monitor.py`                                  | Só grava eventos; ganha os eventos de token recusado, reuso de refresh e WebSocket recusado      |
+| `src/presentation/api/container.py`                                    | Liga o motor à auditoria e expõe o monitor                                                       |
+| `src/presentation/api/exceptions.py`                                   | Grava o token recusado (D06) e o reuso de refresh (D05) ao montar a resposta `401`               |
+| `src/presentation/api/deps.py`                                         | Cada `429` alimenta o contador de D13                                                            |
+| `src/presentation/api/routes/ws.py`                                    | Grava a recusa do WebSocket por origem (D12) antes de fechar a conexão                           |
+
+Situação de cada regra com o código aplicado:
+
+| Regra | Com o código proposto | Diferença em relação à tabela de regras                                                                                                                                                                 |
+| ----- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| D01   | Implementada          | Nenhuma                                                                                                                                                                                                 |
+| D02   | Implementada          | Passa a contar também as negações de período da listagem                                                                                                                                                |
+| D03   | Implementada          | O alerta por origem não lista os usuários, para não revelar quais contas existem                                                                                                                       |
+| D04   | Implementada          | "Depois de D03" vale por 1 hora após a última falha de senha (o roteiro não fixa o prazo). Sem histórico, o primeiro login da conta só registra a origem e não gera alerta                              |
+| D05   | Implementada          | O evento depende da rotação do refresh, que está no código da [resposta a incidentes](etapa-6-resposta-a-incidentes.md#código-proposto)                                                                |
+| D06   | Parcial               | Cobre assinatura inválida (contada por origem) e assinatura válida com sessão desconhecida. O uso da chave fora do emissor depende do cofre de chaves, que o protótipo não tem. Token expirado é gravado sem alerta |
+| D07   | Parcial, só no corrigido | Alerta na autoaprovação recusada. O `PATCH`/`DELETE` recusado após o envio e a transição recusada não são gravados pelos casos de uso, então não alimentam a regra. No original não há recusa para detectar |
+| D08   | Parcial               | Só a condição de volume (5 alterações em 1 hora). A alteração de campo de cálculo em regra com lançamentos já é recusada com `422` pelo protótipo e não chega a virar evento                           |
+| D09   | Não implementada      | Falta gravar as leituras e exportações com o volume                                                                                                                                                    |
+| D10   | Não implementada      | O guard falha justamente quando o Redis cai, e a regra gravaria no Redis. Precisa de uma fonte fora dele, como o log ou o gateway                                                                      |
+| D11   | Não implementada      | Não há outbox nem reconciliação                                                                                                                                                                         |
+| D12   | Parcial               | Só o WebSocket recusado por origem, contado por origem e não por usuário, porque a recusa acontece antes da autenticação. O token anti-CSRF ainda não existe (RS08)                                     |
+| D13   | Implementada          | Os `429` alimentam só o contador, sem evento na auditoria: uma varredura geraria milhares de eventos e empurraria para fora da lista os que interessam                                                  |
+| D14   | Não implementada      | Não há carga do ERP                                                                                                                                                                                     |
 
 O que fazer depois que um alerta dispara está em [resposta a incidentes](etapa-6-resposta-a-incidentes.md).
 
