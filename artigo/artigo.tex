@@ -245,7 +245,7 @@ A modelagem passou por duas revisões. A primeira versão tinha as ameaças T01 
 \subsection{Critérios de Avaliação de Riscos}
 \label{subsec:criterios}
 
-Cada risco deriva de uma ou mais ameaças e descreve o evento, a condição que o torna possível e os ativos afetados. Uma ameaça com consequências distintas origina mais de um risco, como o vazamento do segredo dos \textit{tokens} (R06) e o seu uso para forjar um \textit{token} (R07). A probabilidade e o impacto usam as escalas de 1 a 4 da Tabela~\ref{tab:escalas}. O impacto considera o prejuízo financeiro, o vazamento de dados de terceiros à luz da LGPD e a interrupção do serviço. A pontuação é o produto das duas grandezas e define os níveis Baixo (1 a 3), Médio (4 a 7), Alto (8 a 11) e Crítico (12 a 16). Cada avaliação traz uma justificativa escrita. Os riscos são avaliados como \emph{risco atual}, com os controles que o sistema já possui, de modo que a diferença para o residual mede só o efeito dos controles novos.
+Cada risco deriva de uma ou mais ameaças e descreve o evento, a condição que o torna possível e os ativos afetados. A Tabela~\ref{tab:riscos}, na Seção~\ref{sec:resultados}, lista os 29 riscos. Uma ameaça com consequências distintas origina mais de um risco, como o vazamento do segredo dos \textit{tokens} (R06) e o seu uso para forjar um \textit{token} (R07). A probabilidade e o impacto usam as escalas de 1 a 4 da Tabela~\ref{tab:escalas}. O impacto considera o prejuízo financeiro, o vazamento de dados de terceiros à luz da LGPD e a interrupção do serviço. A pontuação é o produto das duas grandezas e define os níveis Baixo (1 a 3), Médio (4 a 7), Alto (8 a 11) e Crítico (12 a 16). Cada avaliação traz uma justificativa escrita. Os riscos são avaliados como \emph{risco atual}, com os controles que o sistema já possui, de modo que a diferença para o residual mede só o efeito dos controles novos.
 
 \begin{table}[!t]
 \centering
@@ -283,7 +283,51 @@ O risco residual segue uma regra única: o impacto é mantido, porque a consequ�
 \subsection{Riscos Identificados e sua Distribuição}
 \label{subsec:distribuicao}
 
-As 37 ameaças e os 29 casos de abuso deram origem a 29 riscos: 3 Críticos, 15 Altos e 11 Médios, nenhum Baixo. A Tabela~\ref{tab:matriz} os posiciona na matriz de probabilidade e impacto.
+As 37 ameaças e os 29 casos de abuso deram origem aos 29 riscos da Tabela~\ref{tab:riscos}: 3 Críticos, 15 Altos e 11 Médios, nenhum Baixo. A Tabela~\ref{tab:matriz} os posiciona na matriz de probabilidade e impacto.
+
+\begin{table}[!t]
+\centering
+\caption{Registro de riscos (P$\times$I: probabilidade e impacto; C: Crítico; A: Alto; M: Médio)}
+\label{tab:riscos}
+\footnotesize
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\columnwidth}{@{}l Y c c@{}}
+\hline
+\textbf{ID} & \textbf{Risco} & \textbf{P$\times$I} & \textbf{Nível} \\
+\hline
+R01 & Alteração ou remoção de lançamentos por quem tem escrita & 3$\times$4 & C \\
+R02 & Captura de conta privilegiada no SSO & 3$\times$4 & C \\
+R03 & Acesso não autorizado a dados de outro cliente ou período & 3$\times$3 & A \\
+R04 & Acesso direto aos anexos no armazenamento & 2$\times$3 & M \\
+R05 & Extração de dados em volume & 2$\times$4 & A \\
+R06 & Vazamento do \texttt{JWT\_SECRET} & 2$\times$4 & A \\
+R07 & Falsificação de \textit{token} com o segredo vazado & 2$\times$4 & A \\
+R08 & Remoção ou adulteração da auditoria & 2$\times$4 & A \\
+R09 & Alteração indevida de regras de serviço & 2$\times$4 & A \\
+R10 & Adulteração do motor de cálculo & 1$\times$4 & M \\
+R11 & Sobrecarga do fluxo de aprovação & 2$\times$2 & M \\
+R12 & Vazamento do segredo dos \textit{callbacks} & 2$\times$4 & A \\
+R13 & Falsificação de \textit{callbacks} internos & 2$\times$3 & M \\
+R14 & Indisponibilidade do banco de dados & 2$\times$4 & A \\
+R15 & E-mail malicioso em nome da empresa & 2$\times$3 & M \\
+R16 & Sobrecarga do WebSocket & 3$\times$2 & M \\
+R17 & Inscrição indevida em canal do WebSocket & 2$\times$2 & M \\
+R18 & Autoaprovação sem segregação de funções & 3$\times$4 & C \\
+R19 & Injeção de SQL nas consultas ao Oracle & 2$\times$3 & M \\
+R20 & Provedor local ou depuração ativos em produção & 2$\times$4 & A \\
+R21 & Isolamento insuficiente entre ambientes & 2$\times$4 & A \\
+R22 & Anexo malicioso contra aprovadores & 2$\times$3 & M \\
+R23 & Adulteração ou injeção de fórmula na carga do ERP & 2$\times$4 & A \\
+R24 & Desvio de e-mail de aprovação & 2$\times$3 & M \\
+R25 & Reuso de \textit{refresh token} roubado & 2$\times$4 & A \\
+R26 & Perda de auditoria por falha na gravação & 2$\times$4 & A \\
+R27 & Repúdio de aprovação por evidência insuficiente & 2$\times$3 & M \\
+R28 & Falha aberta do \textit{guard} de autorização & 2$\times$4 & A \\
+R29 & Alteração de lançamento por CSRF & 2$\times$4 & A \\
+\hline
+\end{tabularx}
+\end{table}
 
 \begin{table}[!t]
 \centering
@@ -304,7 +348,7 @@ As 37 ameaças e os 29 casos de abuso deram origem a 29 riscos: 3 Críticos, 15 
 
 Os três Críticos (3$\times$4) atingem o valor faturado ou quem o controla. R01 é a alteração ou remoção de um lançamento por quem tem permissão de escrita, de modo que o valor adulterado chega ao ERP como legítimo. R02 é a captura de uma conta de administrador ou gestor no SSO, plausível porque não há segundo fator. R18 é a autoaprovação pelo administrador, que deixa uma trilha de auditoria aparentemente completa. Dois dos três não exigem capacidade técnica, só o uso de permissões que o sistema já concede. O Alto de maior pontuação é R03 (3$\times$3), o acesso a dados de outro cliente pela troca de identificadores, plausível porque os \textit{guards} conferem só o perfil.
 
-A Tabela~\ref{tab:matriz} mostra uma concentração que a contagem por nível esconde: 14 dos 15 Altos têm probabilidade 2 e impacto 4, e 18 dos 29 riscos têm impacto máximo. O sistema tem poucos eventos prováveis, porque já conta com SSO, \textit{guards}, auditoria e cofre, mas muitos eventos graves, porque quase tudo o que guarda vira valor faturado ou registro contábil. Já na modelagem de ameaças, a categoria STRIDE mais frequente entre as 37 ameaças é \textit{Information Disclosure} (13), seguida de \textit{Tampering} (10) e \textit{Spoofing} (7), mas os três Críticos são de \textit{Tampering} e \textit{Spoofing}. Em um sistema de faturamento, a integridade do valor pesa mais que a confidencialidade.
+A Tabela~\ref{tab:matriz} mostra uma concentração que a contagem por nível esconde: 14 dos 15 Altos têm probabilidade 2 e impacto 4, e 18 dos 29 riscos têm impacto máximo. O sistema tem poucos eventos prováveis, porque já conta com SSO, \textit{guards}, auditoria e cofre, mas muitos eventos graves, porque quase tudo o que guarda vira valor faturado ou registro contábil. Já na modelagem de ameaças, a categoria STRIDE mais frequente entre as 37 ameaças é \textit{Information Disclosure} (13), seguida de \textit{Tampering} (10) e \textit{Spoofing} (7), porém os três Críticos são de \textit{Tampering} e \textit{Spoofing}. Isso decorre do fato que em um sistema de faturamento, a integridade do valor pesa mais que a confidencialidade.
 
 \subsection{Priorização e Ordem de Implementação}
 \label{subsec:estagios}
