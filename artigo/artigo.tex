@@ -24,33 +24,47 @@
 
 \title{Engenharia de Software Seguro em um Sistema de Faturamento de Redes Farmacêuticas, da Modelagem de Ameaças à Arquitetura}
 
+%\author{
+%        \IEEEauthorblockN{Marlon Brendo}
+%        \IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
+%        \textit{Universidade Federal de Uberlândia (UFU)}\\
+%            Uberlândia, Brasil \\
+%            marlonbrendoramos@ufu.br}
+
+%    \and
+%        \IEEEauthorblockN{2\textsuperscript{o} Lucas Martins}
+%        \IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
+%        \textit{Universidade Federal de Uberlândia (UFU)}\\
+%            Uberlândia, Brasil \\
+%            lucas.martins@ufu.br}
+%
+%    \and
+%        \IEEEauthorblockN{3\textsuperscript{o} Ricardo Alves Faval}
+%        \IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
+%        \textit{Universidade Federal de Uberlândia (UFU)}\\
+%            Uberlândia, Brasil \\
+%            ricardo.faval@ufu.br}
+%
+%%        \IEEEauthorblockN{4\textsuperscript{o} Johnatas Freitas}
+%         \IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
+%         \textit{Universidade Federal de Uberlândia (UFU)}\\
+%             Uberlândia, Brasil \\
+%             johnatas@ufu.br}
+
+% }
+
 \author{
-    \IEEEauthorblockN{Marlon Brendo}
-    \IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
-    \textit{Universidade Federal de Uberlândia (UFU)}\\
-    Uberlândia, Brasil \\
-    marlonbrendoramos@ufu.br}
-
-\and
-\IEEEauthorblockN{2\textsuperscript{o} Lucas Martins}
-\IEEEauthorblockA{\textit{Faculdade de Computação (FACOM)} \\
-\textit{Universidade Federal de Uberlândia (UFU)}\\
-    Uberlândia, Brasil \\
-    lucas.martins@ufu.br}
-
-\and
-\IEEEauthorblockN{3\textsuperscript{o} Nome Sobrenome}
-\IEEEauthorblockA{\textit{departamento} \\
-\textit{instituição}\\
-Cidade, País \\
-e-mail ou ORCID}
-
-\and
-\IEEEauthorblockN{Johnatas Freitas}
-\IEEEauthorblockA{\textit{FACOM} \\
-\textit{UFU}\\
-Uberlândia, Brasil \\
-johnatas@ufu.br}
+    \IEEEauthorblockN{
+        Marlon Brendo Ramos, 
+        Lucas Martins, 
+        Ricardo Alves Faval e 
+        Johnatas Freitas
+    }
+    \IEEEauthorblockA{
+        \textit{Faculdade de Computação (FACOM) -- Universidade Federal de Uberlândia (UFU)} \\
+        Uberlândia, Minas Gerais, Brasil \\
+        marlonbrendoramos@ufu.br, lucas.martins@ufu.br, ricardo.faval@ufu.br, johnatas@ufu.br
+    }
 }
 
 \maketitle
@@ -114,8 +128,7 @@ As principais contribuições deste artigo são:
 
 \subsection{Organização do Artigo}
 
-O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, o diagrama, as decisões e a rastreabilidade, verifica parte dos requisitos em um protótipo e responde à questão QP2. A Seção~\ref{sec:discussao} discute as lições aprendidas, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
-
+O restante do artigo está organizado da seguinte forma. A Seção~\ref{sec:fundamentacao} apresenta a fundamentação teórica, que inclui o ciclo de vida de engenharia de software seguro, o modelo STRIDE, os casos de abuso, o NIST CSF 2.0 e os catálogos de vulnerabilidades, e discute os trabalhos relacionados. A Seção~\ref{sec:sistema} descreve o sistema estudado, com seu domínio de negócio, sua arquitetura, seus ativos e os controles já existentes. A Seção~\ref{sec:metodologia} detalha a metodologia, da modelagem de ameaças ao mapeamento dos controles às funções do NIST CSF 2.0. A Seção~\ref{sec:resultados} apresenta os resultados da análise de riscos, incluindo a priorização, o plano de tratamento e o risco residual esperado, e responde às questões QP1 e QP3. A Seção~\ref{sec:arquitetura} apresenta o projeto da arquitetura segura, com os requisitos, as vulnerabilidades catalogadas, o diagrama, as decisões e a rastreabilidade, verifica parte dos requisitos em um protótipo e responde à questão QP2. A Seção~\ref{sec:discussao} discute os insights obtidos, as implicações para sistemas financeiros e as limitações do trabalho. Por fim, a Seção~\ref{sec:conclusao} conclui o artigo e indica os trabalhos futuros.
 
 \section{Fundamentação Teórica e Trabalhos Relacionados}
 \label{sec:fundamentacao}
@@ -150,8 +163,7 @@ Um risco descreve um evento indesejado, mas não diz qual falha do software o to
 
 Os dois catálogos dizem o que evitar, mas não como verificar que foi evitado. Essa lacuna é coberta por outros recursos da OWASP. A série de \textit{cheat sheets} reúne orientações curtas e práticas por tema, como autorização, autenticação multifator, JWT e CSRF, com as defesas recomendadas e os erros comuns de implementação~\cite{owaspcheatsheets}. O \textit{Application Security Verification Standard} (ASVS) vai além e organiza requisitos de segurança escritos para serem testados, em níveis de rigor crescentes~\cite{owaspasvs2025}. A ideia de requisito verificável que este artigo adota segue a mesma linha. Um requisito de segurança só é útil se vier acompanhado de um critério objetivo, como um teste automatizado, uma inspeção ou uma evidência de configuração, que permita dizer se ele foi atendido.
 
-Neste trabalho, os catálogos cumprem dois papéis. O CWE e o OWASP Top 10 nomeiam a fraqueza que cada requisito deve impedir, o que liga um risco descrito no vocabulário do negócio, como a alteração de um lançamento já enviado, a uma classe de falha conhecida, como a imposição incorreta do fluxo de trabalho (CWE-841). Os \textit{cheat sheets} serviram de referência para escrever os critérios de verificação. As fraquezas apontadas são condições de projeto derivadas dos riscos, e não achados confirmados no código, como discute a Seção~\ref{subsec:vulnerabilidades}.
-
+Neste trabalho, os catálogos cumprem dois papéis. O CWE e o OWASP Top 10 nomeiam a fraqueza que cada requisito deve impedir, o que liga um risco descrito no vocabulário do negócio, como a alteração de um lançamento já enviado, a uma classe de falha conhecida, como a imposição incorreta do fluxo de trabalho (CWE-841). Os \textit{cheat sheets} serviram de referência para escrever os critérios de verificação. As fraquezas apontadas são condições de projeto derivadas dos riscos, e não fragilidades confirmadas no código, como discute a Seção~\ref{subsec:vulnerabilidades}.
 
 \subsection{Trabalhos Relacionados}
 \label{subsec:trabalhos}
@@ -348,7 +360,8 @@ Os requisitos não são independentes. RS04 depende de RS02, porque o emissor do
 \subsection{Mapeamento para Vulnerabilidades Catalogadas}
 \label{subsec:vulnerabilidades}
 
-Para nomear a falha que cada requisito deve fechar, os requisitos foram ligados a entradas do CWE e a categorias do OWASP Top 10:2025, como mostra a Tabela~\ref{tab:vulnerabilidades}. Os \textit{cheat sheets} da OWASP correspondentes, como os de lógica de negócio, MFA, IDOR, JWT, \textit{logging}, autorização e CSRF~\cite{owaspcheatsheets}, serviram de referência para os critérios de verificação. Essas vulnerabilidades são condições de projeto derivadas dos riscos, e não achados confirmados no código.
+Para nomear a falha que cada requisito deve fechar, os requisitos foram ligados a entradas do CWE e a categorias do OWASP Top 10:2025, como mostra a Tabela~\ref{tab:vulnerabilidades}. Os \textit{cheat sheets} da OWASP correspondentes, como os de lógica de negócio, MFA, IDOR, JWT, \textit{logging}, autorização e CSRF~\cite{owaspcheatsheets}, serviram de referência para os critérios de verificação. Essas vulnerabilidades são condições de projeto derivadas dos riscos descritos, e não dados confirmados no código analisado.
+
 
 \begin{table*}[!t]
 \centering
@@ -490,22 +503,146 @@ Nas quatro primeiras linhas, o ataque é aceito na primeira versão e recusado n
 
 Esses resultados mostram que os critérios são executáveis e que, no protótipo, os controles bloqueiam os ataques previstos. Eles não medem a probabilidade dos riscos nem confirmam o risco residual estimado na Seção~\ref{sec:resultados}, que depende do sistema em produção, do monitoramento e dos processos de resposta. Os testes, o roteiro de ataques e as evidências da varredura estão no repositório do projeto.
 
+\section{Testes de Segurança com Ferramentas OWASP}
+\label{sec:testes-owasp}
+
+A Seção~\ref{subsec:verificacao} usou o ZAP depois das correções, para conferir que elas não introduziram falhas novas. Esta seção descreve o uso anterior, que motivou parte daquelas correções. Antes de alterar o protótipo, ele foi submetido a testes dinâmicos e a uma análise de dependências com duas ferramentas da OWASP, o ZAP~\cite{zaproxy} e o Dependency-Check~\cite{owaspdepcheck}. A pergunta era se as ferramentas encontrariam as falhas previstas pela modelagem e se encontrariam outras que ela não previu.
+
+\subsection{Papel dos Testes no Processo}
+\label{subsec:owasp-papel}
+
+O SDL da Microsoft associa a modelagem de ameaças à fase de projeto e os testes de segurança à fase de verificação~\cite{howard2006}. Na ferramenta de modelagem do SDL, cada elemento do diagrama de fluxo de dados recebe as categorias STRIDE que se aplicam a ele, e as ameaças sem mitigação viram itens de trabalho rastreados até serem resolvidos~\cite{shostack2009}. O relatório da ferramenta indica, ainda, quais pontos de entrada merecem testes dirigidos. Os testes, portanto, não substituem a modelagem. Eles conferem, no software em execução, se as mitigações previstas existem e se o modelo deixou passar alguma ameaça.
+
+O NIST CSF 2.0 dá a mesma função aos testes. Na função Identificar, a categoria de avaliação de riscos (ID.RA) prevê que as vulnerabilidades dos ativos sejam identificadas, validadas e registradas, e a de melhoria (ID.IM) prevê que os testes e exercícios de segurança gerem melhorias no próprio processo~\cite{nist2024csf}. Na função Proteger, a segurança de plataforma (PR.PS) cobre a configuração dos sistemas e a manutenção do software conforme o risco. A Seção~\ref{subsec:met-csf} deixou Identificar de fora do mapeamento dos riscos, por ser transversal. Os testes são o ponto em que ela aparece de forma concreta, porque cada vulnerabilidade encontrada volta ao registro de riscos.
+
+As vulnerabilidades ou riscos encontrados foram classificados pelo OWASP Top 10, que agrupa as falhas mais frequentes em aplicações web, como o controle de acesso quebrado, a configuração insegura, as falhas de autenticação e o uso de componentes vulneráveis~\cite{owasp2021top10,cloudflareowasp}. O relatório do projeto registrou os riscos pela edição de 2021, que é a usada pelas ferramentas e pelos materiais de referência na época dos testes. A Tabela~\ref{tab:owasp-resultados} apresenta também a categoria correspondente da edição de 2025, usada no restante deste artigo.
+
+\subsection{Ambiente e Procedimento}
+\label{subsec:owasp-ambiente}
+
+Os testes foram feitos apenas no protótipo, em execução local, com usuários e dados fictícios. Nenhum sistema de terceiros foi testado, e as falhas não foram exploradas além do necessário para confirmá-las. O alvo foi a primeira versão do protótipo (Seção~\ref{subsec:verificacao}), com a API em FastAPI na porta 8000, o \textit{frontend} em Next.js na porta 3000 e o Redis fora do escopo. O ZAP, na versão 2.17.0, rodou como aplicação \textit{desktop}, em modo protegido, para atacar só as URLs do contexto. As rotas da API foram importadas do documento OpenAPI, e a autenticação foi feita por uma regra do substituidor (\textit{Replacer}) que acrescenta o cabeçalho \texttt{Authorization} com o \textit{token} do perfil testado em todas as requisições, como mostra a Fig.~\ref{fig:zap-replacer}.
+
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=\columnwidth]{figuras/zap/zap-replacer-admin.png}
+    \caption{Configuração do ZAP no reteste autenticado. À esquerda, as rotas da API importadas do OpenAPI. À direita, a regra ``Token Admin'' do substituidor, que injeta o \textit{token} do administrador no cabeçalho \texttt{Authorization}. Fonte: o autor.}
+    \label{fig:zap-replacer}
+\end{figure}
+
+Os testes ocorreram em duas rodadas, resumidas na Tabela~\ref{tab:owasp-sessoes}. A primeira combinou a varredura passiva, que só observa o tráfego gerado pela navegação, com a varredura ativa, que envia requisições de ataque. Ela foi repetida com os perfis analista, gestor e administrador, porque as rotas de escrita exigem MFA e não seriam alcançadas só com o analista. A segunda rodada, um reteste autenticado, atacou as rotas de escrita, acrescentou o \textit{spider} do \textit{frontend} e a análise das dependências do \textit{backend}, e foi complementada por requisições manuais à API, com o \textit{token} renovado a cada chamada, para os casos que o \textit{scanner} não cobre, como \textit{token} forjado, reuso de \textit{refresh token} e leitura fora do escopo.
+
+\begin{table}[!t]
+\centering
+\caption{Rodadas de teste com as ferramentas OWASP}
+\label{tab:owasp-sessoes}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\columnwidth}{@{}l l Y@{}}
+\hline
+\textbf{Rodada} & \textbf{Perfil} & \textbf{Execução e resultado} \\
+\hline
+1 & Analista & Varredura passiva e ativa. 11 alertas: 3 Médios, 3 Baixos e 5 Informativos. A varredura ativa recebeu \texttt{401} nas rotas protegidas \\
+1 & Administrador & Varredura passiva de 64 mensagens, com login por MFA e rotas de escrita. Varredura ativa com 445 \texttt{GET}, sem \texttt{401}, 262 deles com \texttt{422} \\
+1 & Analista e gestor & Varredura passiva de 79 mensagens, sem alerta nas rotas de escrita \\
+2 & Administrador & Varredura ativa autenticada de 14.912 mensagens, das quais 8.306 com \texttt{429} e 5.632 com \texttt{401}. Relatório final com 0 Alto, 3 Médios e 2 Baixos \\
+2 & -- & Dependency-Check: 191 dependências, 9 registros de CVE \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Resultados da Varredura}
+\label{subsec:owasp-varredura}
+
+A varredura passiva da primeira rodada produziu os 11 alertas da Fig.~\ref{fig:zap-alertas}, nenhum de risco alto. Seis foram descartados ou agrupados. Os informativos de identificação de sessão, de autenticação, de aplicação moderna e de \texttt{Content-Type} ausente em respostas sem corpo não indicam falha, e dois dos três alertas de CSP foram tratados junto com o terceiro, por virem da mesma política. Os três restantes, de tipos diferentes, foram analisados e confirmados com requisições diretas aos cabeçalhos. O A01 é a política de conteúdo (CSP) do \textit{frontend} com \texttt{'unsafe-inline'} em \texttt{script-src} e \texttt{style-src} e sem \texttt{form-action}, o que tira da CSP a capacidade de barrar um \textit{script} injetado. O A02 é a ausência do cabeçalho \texttt{X-Content-Type-Options: nosniff} em todas as respostas da API, embora o \textit{frontend} já o enviasse. O A03 é o cabeçalho \texttt{X-Powered-By: Next.js}, que informa a tecnologia do servidor a quem faz reconhecimento.
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figuras/zap/zap-alertas-passivo.png}
+    \caption{Varredura passiva do ZAP no protótipo, sessão do analista. A árvore mostra o contexto \texttt{Faturamento} com o \textit{frontend} (\texttt{:3000}) e a API (\texttt{:8000}). O painel inferior lista os 11 alertas, sem nenhum de risco alto, e a barra de status resume 0 Alto, 3 Médios, 3 Baixos e 5 Informativos. Fonte: o autor.}
+    \label{fig:zap-alertas}
+\end{figure*}
+
+A Fig.~\ref{fig:zap-nosniff} mostra o detalhe do A02 na resposta de \texttt{POST /v1/auth/refresh}. A mesma captura revelou um problema que o ZAP não apontou. A resposta grava o \texttt{access\_token} em um \textit{cookie} \texttt{HttpOnly}, que o JavaScript da página não lê, mas devolve o mesmo \textit{token} no corpo JSON. Com isso, um \textit{script} injetado alcança o \textit{token} pela resposta, e a proteção do \textit{cookie} se perde.
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figuras/zap/zap-detalhe-nosniff.png}
+    \caption{Detalhe do alerta \texttt{X-Content-Type-Options Header Missing} (A02) na rota \texttt{/v1/auth/refresh}, com risco Baixo, confiança Média e CWE-693. No painel superior, a resposta traz o \texttt{access\_token} no \textit{cookie} \texttt{HttpOnly} e também no corpo JSON (V02). Fonte: o autor.}
+    \label{fig:zap-nosniff}
+\end{figure*}
+
+A varredura ativa não acrescentou alertas, e a Tabela~\ref{tab:owasp-sessoes} mostra o motivo. Como analista, as requisições às rotas protegidas receberam \texttt{401}, o que confirma que a API nega por padrão (RS06), mas não testa a lógica das rotas. Como administrador, o \textit{token} passou, mas o ZAP só enviou \texttt{GET} e a maioria dos parâmetros foi recusada pela validação. No reteste, o \textit{scanner} enviou \texttt{POST}, \texttt{PATCH} e \texttt{DELETE} às rotas de escrita (Fig.~\ref{fig:zap-escrita}), mas o \textit{token} de 15 minutos expirou durante a varredura e o limite de requisições da API respondeu com \texttt{429}. No relatório final, 99\% das respostas da API tiveram código 4xx. A varredura confirmou os alertas A01 a A03, mas não chegou à lógica das rotas de escrita.
+
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=\columnwidth]{figuras/zap/zap-rotas-escrita.png}
+    \caption{Histórico do reteste autenticado com \texttt{DELETE}, \texttt{GET}, \texttt{PATCH} e \texttt{POST} enviados às rotas de lançamentos e de cadastro. As respostas \texttt{401} mostram o \textit{token} expirado durante a varredura. Fonte: o autor.}
+    \label{fig:zap-escrita}
+\end{figure}
+
+\subsection{Observações do Reteste e das Dependências}
+\label{subsec:owasp-reteste}
+
+As requisições manuais e o Dependency-Check produziram três resultados pontuais que a varredura não trouxe. No V01, o mesmo \textit{refresh token} foi aceito duas vezes, com \texttt{200} nas duas chamadas, porque o protótipo não o rotaciona nem revoga o anterior. Um \textit{refresh} capturado continua válido depois que o dono renova a sessão. O V02 é o \textit{token} de acesso no corpo da resposta, descrito acima. No V03, o Dependency-Check associou à biblioteca PyJWT 2.15.1, que assina e valida os \textit{tokens} da sessão, a CVE-2025-45770, de severidade alta (Fig.~\ref{fig:depcheck}). Os demais registros eram do ferramental de \textit{build} do ambiente virtual, como \texttt{wheel} e \texttt{certifi}.
+
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=\columnwidth]{figuras/zap/dependency-check.png}
+    \caption{Resumo do relatório do OWASP Dependency-Check 13.0.0 para as dependências do \textit{backend}: 191 dependências únicas, 9 vulneráveis, com a PyJWT 2.15.1 na primeira linha. Fonte: o autor.}
+    \label{fig:depcheck}
+\end{figure}
+
+O V03 mostra por que o resultado de uma ferramenta precisa de triagem. A CVE foi associada à PyJWT pelo identificador de plataforma (CPE), mas a descrição e as referências no NVD tratam de uma biblioteca PHP de mesmo nome, e o registro está marcado como contestado~\cite{nvdcve202545770}. Na verificação da segunda versão, a anomalia foi reclassificada como falso positivo. Ele foi mantido na Tabela~\ref{tab:owasp-resultados} porque a ameaça que o motivou é real. O Dependency-Check deu um caso concreto para a ameaça T37, de dependência vulnerável ou maliciosa na cadeia de suprimentos, e a triagem passou a fazer parte do controle.
+
+Os mesmos testes mostraram controles que já funcionavam. \textit{Tokens} com \texttt{alg} \texttt{none}, com assinatura trocada ou com o perfil de administrador inserido no corpo receberam \texttt{401}. O analista recebeu \texttt{404} ao trocar o identificador por um cliente fora do seu escopo, o mesmo resultado de V-05 na Tabela~\ref{tab:verificacao}. O administrador autenticado só com senha recebeu \texttt{401} ao tentar escrever nas regras de serviço, e a décima primeira tentativa seguida de login recebeu \texttt{429}. Um \texttt{PATCH} com campos que só o servidor calcula foi recusado com \texttt{422}. Cada um desses resultados corresponde a uma ameaça da modelagem, respectivamente T02 e T16, T26, T02, T14a e T23, e T01 e T06.
+
+\subsection{Ligação com o STRIDE e o NIST CSF}
+\label{subsec:owasp-ligacao}
+
+A Tabela~\ref{tab:owasp-resultados} liga cada risco ou vulnerabilidade encontrado à categoria do OWASP Top 10, ao CWE, à categoria STRIDE, à ameaça e ao risco da modelagem, à categoria do NIST CSF 2.0 e à correção proposta. As vulnerabilidades encontradas se dividem em dois grupos. Os de configuração, A01 a A03, não estavam no registro de riscos. Nenhuma das 37 ameaças tratava de cabeçalhos HTTP, e a ferramenta encontrou uma classe de falha que a modelagem não cobria. O encaminhamento foi registrar um risco de configuração insegura de cabeçalhos na próxima revisão da análise de riscos, como prevê a categoria ID.IM. Os de autenticação e dependências, V01 a V03, já tinham ameaça correspondente. O V01 é o risco R25, Alto (2$\times$4), que a análise havia posto no primeiro estágio de tratamento com a rotação e a revogação do \textit{refresh token}. O teste não descobriu o risco, mas confirmou que ele existia no protótipo.
+
+\begin{table*}[!t]
+\centering
+\caption{Riscos encontrados dos testes com ferramentas OWASP e sua ligação com a modelagem de ameaças e o NIST CSF 2.0}
+\label{tab:owasp-resultados}
+\footnotesize
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{@{}l >{\raggedright\arraybackslash}p{2.7cm} >{\raggedright\arraybackslash}p{1.5cm} >{\raggedright\arraybackslash}p{2.5cm} l >{\raggedright\arraybackslash}p{2.2cm} >{\raggedright\arraybackslash}p{1.2cm} Y@{}}
+\hline
+\textbf{ID} & \textbf{Risco/Vulnerabilidade} & \textbf{Fonte} & \textbf{OWASP 2021 / 2025} & \textbf{CWE} & \textbf{STRIDE e modelagem} & \textbf{CSF} & \textbf{Correção proposta} \\
+\hline
+A01 & CSP com \texttt{'unsafe-inline'} e sem \texttt{form-action} & ZAP & A05 / A02, Security Misconfiguration & 693 & Information Disclosure; sem risco dedicado, ligado a R29 & PR.PS & \textit{Nonce} por requisição no lugar de \texttt{'unsafe-inline'} e \texttt{form-action 'self'} \\
+A02 & \texttt{X-Content-Type-Options} ausente na API & ZAP & A05 / A02, Security Misconfiguration & 693 & Tampering; sem risco dedicado & PR.PS & \textit{Middleware} que envia \texttt{nosniff} em todas as respostas, inclusive de erro \\
+A03 & \texttt{X-Powered-By} exposto no \textit{frontend} & ZAP & A05 / A02, Security Misconfiguration & 497 & Information Disclosure; sem risco dedicado & PR.PS & \texttt{poweredByHeader: false} no Next.js \\
+V01 & \textit{Refresh token} aceito de novo após o uso & Teste manual & A07 / A07, Authentication Failures & 613 & Spoofing; T33, R25 & PR.AA, DE.CM & Rotacionar o \textit{refresh} a cada uso e revogar a família em caso de reuso \\
+V02 & \texttt{access\_token} no corpo, além do \textit{cookie} \texttt{HttpOnly} & ZAP e teste manual & A04 / A06, Insecure Design & 522 & Information Disclosure; T15, T16, RS04 & PR.AA & Entregar o \textit{token} só no \textit{cookie} \\
+V03 & CVE-2025-45770 associada à PyJWT 2.15.1 (falso positivo após triagem) & Dependency-Check & A06 / A03, Vulnerable Components / Supply Chain Failures & 1395 & Tampering; T37 & ID.RA, PR.PS & Triagem da CVE e registro da supressão justificada \\
+\hline
+\end{tabularx}
+\end{table*}
+
+O quadro também mostra o que os testes não alcançaram. Nenhum resultado da busca do ZAP tocou os riscos Críticos ligados ao valor faturado, R01 e R18. As requisições de V-01 a V-04, que alteram um lançamento enviado e aprovam o próprio lançamento, são válidas, autenticadas e feitas pelo perfil certo, e um \textit{scanner} não tem como saber que a regra de negócio deveria recusá-las. Essas falhas vieram do STRIDE e dos casos de abuso e foram confirmadas pelo roteiro de ataques da Seção~\ref{subsec:verificacao}. Por outro lado, a modelagem não previu as falhas de configuração que o ZAP encontrou na primeira varredura. A modelagem cobre as regras do sistema, e as ferramentas cobrem a configuração e as dependências.
+
+Em conjunto, os testes fecharam o ciclo previsto pelo SDL e pelo CSF. A modelagem indicou o que testar. Os testes confirmaram as ameaças previstas, encontraram uma classe que faltava e devolveram ao registro de riscos um risco novo e uma triagem obrigatória para os riscos relativos as dependências. As correções propostas para A01 a A03 seguem o formato dos requisitos da Seção~\ref{subsec:requisitos}, com a medida e o critério de verificação, que é a repetição da varredura sem o alerta. Para que essas falhas não voltem a cada mudança, o passo seguinte é executar o ZAP e o Dependency-Check no \textit{pipeline} de integração contínua (C8), ao lado dos testes de autorização e de \textit{tokens}.
+
+
 \section{Discussão}
 \label{sec:discussao}
 
-\subsection{Lições Aprendidas}
+\subsection{Insights Obtidos}
 \label{subsec:licoes}
 
-A lição principal é que a modelagem de ameaças encontrou as falhas mais graves do sistema, e que essas falhas não apareceriam em uma varredura automática. Os dois riscos Críticos ligados ao valor faturado, a alteração de um lançamento depois do envio (R01) e a aprovação pelo próprio autor (R18), vieram das ameaças T01 e T24 e se confirmaram como ataques reais no protótipo, nos casos V-01 a V-04 da Tabela~\ref{tab:verificacao}. Nenhum deles depende de uma entrada malformada ou de um cabeçalho ausente. São requisições válidas, feitas por um usuário autenticado e com o perfil certo, que a regra de negócio deveria recusar. A varredura com o ZAP, feita antes e depois das correções, apontou apenas cabeçalhos HTTP e a política de conteúdo do \textit{frontend}. As falhas só foram identificadas porque o STRIDE e os casos de abuso perguntaram quem pode fazer o quê e em que estado do fluxo. As duas abordagens encontram tipos diferentes de falha e se complementam: a varredura cobre a configuração e a superfície exposta, e a modelagem cobre as regras que dão sentido ao sistema.
+O insight principal é que a modelagem de ameaças encontrou as falhas mais graves do sistema, e que essas falhas não apareceriam em uma varredura automática. Os dois riscos Críticos ligados ao valor faturado, a alteração de um lançamento depois do envio (R01) e a aprovação pelo próprio autor (R18), vieram das ameaças T01 e T24 e se confirmaram como ataques reais no protótipo, nos casos V-01 a V-04 da Tabela~\ref{tab:verificacao}. Nenhum deles depende de uma entrada malformada ou de um cabeçalho ausente. São requisições válidas, feitas por um usuário autenticado e com o perfil certo, que a regra de negócio deveria recusar. A varredura com o ZAP, feita antes e depois das correções, apontou apenas cabeçalhos HTTP e a política de conteúdo do \textit{frontend}. As falhas só foram identificadas porque o STRIDE e os casos de abuso perguntaram quem pode fazer o quê e em que estado do fluxo. As duas abordagens encontram tipos diferentes de falha e se complementam: a varredura cobre a configuração e a superfície exposta, e a modelagem cobre as regras que dão sentido ao sistema.
 
-A segunda lição é que a arquitetura não só indicou o controle, mas também o lugar dele. D01 coloca a regra na máquina de estados do domínio, e não na interface nem na rota. No protótipo, essa escolha fez o mesmo controle valer para a rota individual, para a rota de lote usada pela tela e para a chamada direta à API. O ataque V-04 feito no ZAP passou justamente pela rota de lote e foi recusado, sem que essa rota tivesse recebido um tratamento próprio. Um controle posto na tela, ou só na rota individual, teria deixado esse caminho aberto.
+O segundo insight é que a arquitetura não só indicou o controle, mas também o lugar dele. D01 coloca a regra na máquina de estados do domínio, e não na interface nem na rota. No protótipo, essa escolha fez o mesmo controle valer para a rota individual, para a rota de lote usada pela tela e para a chamada direta à API. O ataque V-04 feito no ZAP passou justamente pela rota de lote e foi recusado, sem que essa rota tivesse recebido um tratamento próprio. Um controle posto na tela, ou só na rota individual, teria deixado esse caminho aberto.
 
-A terceira lição é que a modelagem precisa de revisão. A autoaprovação pelo administrador, origem do risco R18, não estava na primeira versão da modelagem e só apareceu quando cada componente foi confrontado de novo com as seis categorias do STRIDE. Do mesmo modo, os riscos R24 a R29 surgiram quando os casos de abuso foram cruzados com o registro de riscos. Uma modelagem feita em uma única passada teria deixado de fora um dos três riscos Críticos.
+O terceiro insight é que a modelagem precisa de revisão. A autoaprovação pelo administrador, origem do risco R18, não estava na primeira versão da modelagem e só apareceu quando cada componente foi confrontado de novo com as seis categorias do STRIDE. Do mesmo modo, os riscos R24 a R29 surgiram quando os casos de abuso foram cruzados com o registro de riscos. Uma modelagem feita em uma única passada teria deixado de fora um dos três riscos Críticos.
 
 Por fim, a rastreabilidade mostrou o seu valor prático em dois momentos. No projeto, ela revelou que os critérios de RS01 dependem de RS05 e RS06, o que mudou a ordem de implementação proposta. Na verificação, ela permitiu ligar cada resposta da Tabela~\ref{tab:verificacao} a uma ameaça, um risco, um requisito e uma decisão, e mostrou que o único ataque ainda aceito, o V-08, corresponde a um requisito que não foi implementado. Esses resultados não medem uma redução de risco, como discutido na Seção~\ref{subsec:verificacao}. Eles mostram que as ameaças priorizadas eram reais no protótipo e que os controles derivados delas as bloquearam.
 
 \subsection{Implicações para Sistemas Financeiros}
-Discutir o que os achados significam para sistemas financeiros e de faturamento em geral.
+Discutir o que os riscos encontrados significam para sistemas financeiros e de faturamento em geral.
 
 \subsection{Limitações e Ameaças à Validade}
 \label{subsec:limitacoes}
@@ -519,6 +656,7 @@ Como limitações e ameaças à validade desse trabalho, listamos as 4 seguintes
 \emph{Validade de construto.} Probabilidade e impacto foram avaliados em escalas qualitativas, com justificativas escritas, mas sem dados históricos de incidentes, e outra equipe poderia atribuir valores diferentes. A priorização por dependências reduz o peso dessas pontuações, mas não o elimina. Na verificação, o critério de sucesso é o código de resposta da API, que indica se o ataque foi recusado, mas não se o controle resistiria a variações que o roteiro não exercitou.
 
 \emph{Validade externa.} O estudo trata de um único sistema, de um domínio específico, e os resultados não se generalizam diretamente para outros sistemas financeiros. O processo em si, com a modelagem, a avaliação de riscos, os requisitos verificáveis e a rastreabilidade, não depende do domínio. Já as ameaças, os riscos e as decisões dependem do fluxo de aprovação e da integração com o ERP deste sistema.
+
 
 \section{Conclusão e Trabalhos Futuros}
 \label{sec:conclusao}
