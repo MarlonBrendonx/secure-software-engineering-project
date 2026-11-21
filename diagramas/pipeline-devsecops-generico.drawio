@@ -1,14 +1,11 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Pipeline DevSecOps" id="devsecops-modelo-de-referencia">
-    <mxGraphModel dx="1943" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1940" pageHeight="1500" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="2332" dy="1139" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1940" pageHeight="1500" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="title" parent="1" style="text;html=1;fontSize=24;align=left;verticalAlign=middle;fontColor=#1F2937;fontFamily=Helvetica;" value="&lt;b&gt;Pipeline DevSecOps&lt;/b&gt; · Modelo de referência" vertex="1">
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=24;align=left;verticalAlign=middle;fontColor=#1F2937;fontFamily=Helvetica;" value="&lt;b&gt;Pipeline DevSecOps&lt;/b&gt;" vertex="1">
           <mxGeometry height="40" width="900" x="40" y="20" as="geometry" />
-        </mxCell>
-        <mxCell id="subtitle" parent="1" style="text;html=1;fontSize=13;align=left;verticalAlign=middle;fontColor=#6B7280;fontFamily=Helvetica;" value="Segurança em cada momento do ciclo, com evidência e quality gate (QG)&amp;nbsp;" vertex="1">
-          <mxGeometry height="24" width="900" x="40" y="56" as="geometry" />
         </mxCell>
         <mxCell id="lg0" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;fillColor=#FDECEA;strokeColor=#C5221F;fontFamily=Helvetica;" value="Segurança" vertex="1">
           <mxGeometry height="26" width="90" x="1000" y="24" as="geometry" />
@@ -70,7 +67,7 @@
         <mxCell id="ev1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontSize=11;align=left;spacingLeft=8;fillColor=#F1F5F9;strokeColor=#CBD5E1;fontColor=#1F2937;fontFamily=Helvetica;" value="&lt;b&gt;Evidência:&lt;/b&gt; Modelo de ameaças e registro de riscos" vertex="1">
           <mxGeometry height="34" width="390" x="110" y="508" as="geometry" />
         </mxCell>
-        <mxCell id="q1" parent="1" style="shape=hexagon;size=0.06;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#FDECEA;strokeColor=#C5221F;strokeWidth=2;fontColor=#8C1D18;fontFamily=Helvetica;" value="QG1 · Riscos críticos com dono e tratamento definido" vertex="1">
+        <mxCell id="q1" parent="1" style="shape=hexagon;size=0.06;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;fillColor=#FDECEA;strokeColor=#C5221F;strokeWidth=2;fontColor=#8C1D18;fontFamily=Helvetica;" value="QG1 · Riscos prioritários com responsável e&amp;nbsp;&lt;div&gt;tratamente definido&lt;/div&gt;" vertex="1">
           <mxGeometry height="70" width="390" x="110" y="565" as="geometry" />
         </mxCell>
         <mxCell id="h2" parent="1" style="rounded=1;arcSize=12;whiteSpace=wrap;html=1;fontSize=14;fontStyle=1;fillColor=#3949AB;strokeColor=#3949AB;fontColor=#FFFFFF;fontFamily=Helvetica;" value="2 · Requisitos e arquitetura" vertex="1">
