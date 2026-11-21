@@ -1,0 +1,540 @@
+<title>Mapa de Rastreabilidade</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: cabeçalho, quatro indicadores de cobertura, controles, painel de detalhe fixo
+   no topo ao rolar e, abaixo, o grafo em seis colunas (ameaça até quality gate). */
+:root {
+  --bg: #edf1f4;
+  --surface: #ffffff;
+  --surface-2: #f5f8fa;
+  --ink: #14202a;
+  --muted: #536472;
+  --line: #d3dbe2;
+  --accent: #0a6b7e;
+  --accent-soft: #d3edf2;
+  --crit: #b3261e;
+  --high: #c2590a;
+  --med: #9a7400;
+  --low: #5b8266;
+  --ok: #1d7a4a;
+  --warn: #b06800;
+  --none: #a8383a;
+  --info: #4a5f8c;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151a; --surface: #161f26; --surface-2: #1b262e; --ink: #e5edf2; --muted: #95a6b4;
+    --line: #2a3742; --accent: #5ec4d6; --accent-soft: #123a44;
+    --crit: #ff8a80; --high: #ffa05a; --med: #e3b93c; --low: #8fbf9b;
+    --ok: #62c58f; --warn: #f0b04a; --none: #ff8f8f; --info: #8fa6d6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151a; --surface: #161f26; --surface-2: #1b262e; --ink: #e5edf2; --muted: #95a6b4;
+  --line: #2a3742; --accent: #5ec4d6; --accent-soft: #123a44;
+  --crit: #ff8a80; --high: #ffa05a; --med: #e3b93c; --low: #8fbf9b;
+  --ok: #62c58f; --warn: #f0b04a; --none: #ff8f8f; --info: #8fa6d6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 14px; line-height: 1.5;
+}
+.page {
+  max-width: 1480px; margin-inline: auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 48px;
+  display: grid; gap: 20px;
+}
+h1, h2 { font-family: var(--font-display); font-weight: 600; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; letter-spacing: -0.01em; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lede { max-width: 66ch; color: var(--muted); margin: 8px 0 0; }
+.lede b { color: var(--ink); font-weight: 600; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.tile {
+  text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 12px 14px; display: grid; gap: 2px; align-content: start; min-width: 0;
+}
+.tile:hover { border-color: var(--accent); }
+.tile[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.tile .n { font-family: var(--font-display); font-size: 26px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tile .n small { font-size: 15px; color: var(--muted); font-weight: 500; }
+.tile .t { font-weight: 500; }
+.tile .h { font-size: 12.5px; color: var(--muted); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.group > span { font-size: 12px; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; background: var(--surface); }
+.seg button {
+  font: inherit; font-size: 13px; color: var(--ink); background: transparent; border: 0;
+  padding: 6px 12px; cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); font-weight: 600; }
+.search {
+  font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 7px; padding: 6px 10px; width: 190px;
+}
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--muted); align-items: center; }
+.legend i { display: inline-block; vertical-align: -2px; margin-right: 5px; }
+.sw { width: 4px; height: 12px; border-radius: 1px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; }
+.dash { width: 16px; height: 10px; border: 1.5px dashed var(--muted); border-radius: 2px; }
+
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 14px 16px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px 28px;
+  min-height: 176px;
+}
+@media (min-width: 1000px) {
+  .panel { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; box-shadow: 0 6px 18px -10px rgba(0,0,0,.35); }
+}
+@media (max-width: 820px) { .panel { grid-template-columns: minmax(0, 1fr); } }
+.p-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.p-id { font-family: var(--font-mono); font-weight: 600; font-size: 20px; }
+.p-kind { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.p-title { margin: 4px 0 8px; font-weight: 500; }
+.chip-st { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 1px 9px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface-2); }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 3px 12px; margin: 8px 0 0; font-size: 13px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts code, .mono { font-family: var(--font-mono); font-size: 12px; }
+.chain { display: grid; gap: 6px; align-content: start; max-height: 300px; overflow-y: auto; }
+.chain h2 { font-size: 13px; color: var(--muted); font-family: var(--font-body); font-weight: 500; }
+.chain-row { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.chain-row b { font-size: 12px; color: var(--muted); font-weight: 500; width: 100%; }
+.pill {
+  font-family: var(--font-mono); font-size: 11.5px; padding: 1px 7px; border-radius: 5px;
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); cursor: pointer;
+}
+.pill:hover { border-color: var(--accent); }
+
+.graph-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+svg.graph { display: block; width: 100%; min-width: 1060px; height: auto; font-family: var(--font-body); }
+.col-name { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+.col-sub { font-size: 11px; fill: var(--muted); }
+.col-line { stroke: var(--line); stroke-width: 1; }
+.edge { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .26; transition: opacity .12s; }
+.edge.faint { opacity: 0; }
+.edge.dim { opacity: .04; }
+.edge.hot { stroke: var(--accent); stroke-width: 1.8; opacity: .95; }
+.node { cursor: pointer; transition: opacity .12s; }
+.node .bg { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+.node:hover .bg { stroke: var(--accent); }
+.node .id { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; fill: var(--muted); }
+.node .lb { font-size: 11px; fill: var(--ink); }
+.node.off { opacity: .22; }
+.node.on .bg { stroke: var(--accent); stroke-width: 1.4; }
+.node.sel .bg { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.node.sel .id { fill: var(--accent); }
+.node.proposta .bg { stroke-dasharray: 3 2.5; }
+.node:focus-visible { outline: none; }
+.node:focus-visible .bg { stroke: var(--accent); stroke-width: 2.4; }
+.stripe-crit { fill: var(--crit); } .stripe-high { fill: var(--high); }
+.stripe-med { fill: var(--med); } .stripe-low { fill: var(--low); }
+.st-ok { fill: var(--ok); } .st-parcial { fill: var(--warn); }
+.st-ausente { fill: var(--none); } .st-achado { fill: var(--info); }
+.c-ok { background: var(--ok); } .c-parcial { background: var(--warn); }
+.c-ausente { background: var(--none); } .c-achado { background: var(--info); }
+.c-crit { background: var(--crit); } .c-high { background: var(--high); }
+.c-med { background: var(--med); } .c-low { background: var(--low); }
+
+.foot { font-size: 12.5px; color: var(--muted); max-width: 90ch; }
+.foot code { font-family: var(--font-mono); font-size: 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .node, .edge { transition: none; } }
+</style>
+
+<main class="page">
+  <header>
+    <div class="eyebrow">Faturamento de Redes · Engenharia de Software Seguro</div>
+    <h1>Mapa de rastreabilidade</h1>
+    <p class="lede">Cada ameaça do STRIDE até o controle que a trata, o teste que a verifica e a regra que a detecta. <b>Clique em um nó</b> para acender a cadeia dele. Os indicadores abaixo mostram onde a cadeia ainda tem buraco.</p>
+  </header>
+
+  <section class="tiles" id="tiles" aria-label="Cobertura"></section>
+
+  <section class="controls" aria-label="Controles do mapa">
+    <div class="group"><span>Vista</span>
+      <div class="seg" id="seg-vista">
+        <button type="button" data-v="prioridade" aria-pressed="true">Cadeia prioritária</button>
+        <button type="button" data-v="todos" aria-pressed="false">Todos os nós</button>
+      </div>
+    </div>
+    <div class="group"><span>Regras de detecção</span>
+      <div class="seg" id="seg-modo">
+        <button type="button" data-m="prototipo" aria-pressed="true">Nos protótipos</button>
+        <button type="button" data-m="proposta" aria-pressed="false">Com o código da Etapa 6</button>
+      </div>
+    </div>
+    <div class="group">
+      <label class="sr" for="busca">Ir para um nó</label>
+      <input class="search" id="busca" type="search" placeholder="Ir para R18, RS04, D07…" autocomplete="off">
+    </div>
+  </section>
+
+  <div class="legend" aria-label="Legenda">
+    <span><i class="sw c-crit"></i>Risco crítico</span>
+    <span><i class="sw c-high"></i>Alto</span>
+    <span><i class="sw c-med"></i>Médio</span>
+    <span><i class="sw c-low"></i>Baixo</span>
+    <span><i class="dot c-ok"></i>Verificado ou implementado</span>
+    <span><i class="dot c-parcial"></i>Parcial</span>
+    <span><i class="dot c-ausente"></i>Sem implementação</span>
+    <span><i class="dot c-achado"></i>Achado do ZAP ou Dependency-Check</span>
+    <span><i class="dash"></i>Proposta ou sem vínculo</span>
+  </div>
+
+  <section class="panel" id="panel" aria-live="polite"></section>
+
+  <div class="graph-wrap"><svg class="graph" id="graph" role="group" aria-label="Grafo de rastreabilidade"></svg></div>
+
+  <p class="foot">Ameaças, riscos, estágios e risco residual são lidos das tabelas em <code>docs/</code> por <code>extra/mapa-rastreabilidade/gerar_dados.py</code>. Os vínculos entre requisito, controle, verificação e regra de detecção estão declarados nesse script, com a fonte de cada um. Os quality gates são os da Etapa 7 e o mapa os trata como proposta. Os testes e os ataques vêm do protótipo corrigido. Nada aqui mede a probabilidade dos riscos nem confirma o risco residual esperado.</p>
+</main>
+
+<script>
+const DADOS = /*__DADOS__*/null;
+
+const COLS = [
+  { k: "ameaca",    nome: "Ameaça (STRIDE)",        sub: "Etapa 1",              w: 216, idw: 30 },
+  { k: "risco",     nome: "Risco",                  sub: "Etapa 2 · NIST CSF",   w: 216, idw: 30 },
+  { k: "requisito", nome: "Requisito · decisão",    sub: "Etapa 3",              w: 224, idw: 56 },
+  { k: "controle",  nome: "Controle",               sub: "Etapa 3",              w: 184, idw: 30 },
+  { k: "evidencia", nome: "Verificação e detecção", sub: "Etapas 4 a 6",         w: 232, idw: 52 },
+  { k: "gate",      nome: "Quality gate",           sub: "Etapa 7 · proposta",   w: 176, idw: 30 },
+];
+const GAP = 40, ROW = 31, NH = 25, TOP = 56, PADX = 10;
+COLS.forEach((c, i) => { c.i = i; c.x = PADX + COLS.slice(0, i).reduce((s, d) => s + d.w + GAP, 0); });
+const LARGURA = COLS[5].x + COLS[5].w + PADX;
+const NOME_COL = Object.fromEntries(COLS.map(c => [c.k, c]));
+const TRANSV = new Set(["C6", "C7", "C8"]);
+
+const porId = Object.fromEntries(DADOS.nos.map(n => [n.id, n]));
+const fw = {}, bw = {};
+DADOS.arestas.forEach(([a, b]) => { (fw[a] ||= []).push(b); (bw[b] ||= []).push(a); });
+
+function alcance(id, mapa) {
+  const visto = new Set(), pilha = [id];
+  while (pilha.length) for (const y of mapa[pilha.pop()] || []) if (!visto.has(y)) { visto.add(y); pilha.push(y); }
+  return visto;
+}
+// A cadeia de um nó junta seus ancestrais (só arestas para trás) e seus descendentes (só arestas
+// para frente). Buscar os descendentes dos ancestrais acenderia o grafo inteiro por causa dos
+// gates e dos controles transversais, que ligam quase tudo.
+function cadeia(id) {
+  const A = alcance(id, bw), D = alcance(id, fw);
+  return { A, D, todos: new Set([id, ...A, ...D]) };
+}
+
+// Riscos com requisito dedicado e a cadeia de cada um formam a vista prioritária.
+const riscosComReq = DADOS.nos.filter(n => n.col === "risco" && (fw[n.id] || []).some(t => porId[t].col === "requisito"));
+const prioridade = new Set();
+riscosComReq.forEach(r => cadeia(r.id).todos.forEach(x => prioridade.add(x)));
+
+const ROTULO_SIT = { ok: "Verificado no protótipo corrigido", parcial: "Parcial", ausente: "Sem implementação", achado: "Achado de varredura" };
+const ROTULO_SIT_D = { ok: "Implementada e testada", parcial: "Parcial", ausente: "Sem alerta" };
+const NOME_COL_PLURAL = { ameaca: "Ameaças", risco: "Riscos", requisito: "Requisitos", controle: "Controles", evidencia: "Verificações e regras", gate: "Quality gates" };
+
+const estado = { vista: "prioridade", modo: "prototipo", sel: "R18", hover: null, spot: null };
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const nivelClasse = n => ({ "Crítico": "crit", "Alto": "high", "Médio": "med", "Baixo": "low" }[n] || "low");
+const numId = id => parseInt(id.replace(/\D/g, ""), 10) || 0;
+
+function situacaoDe(n) {
+  if (n.tipo === "deteccao") return estado.modo === "proposta" ? n.situacao_proposta : n.situacao;
+  return n.situacao || null;
+}
+
+/* ---------- indicadores de cobertura ---------- */
+function indicadores() {
+  const riscos = DADOS.nos.filter(n => n.col === "risco");
+  const reqs = DADOS.nos.filter(n => n.col === "requisito");
+  const regras = DADOS.nos.filter(n => n.tipo === "deteccao");
+  const ameacas = DADOS.nos.filter(n => n.col === "ameaca");
+  const sem = riscos.filter(r => !riscosComReq.includes(r)).map(r => r.id);
+  const reqVerif = reqs.filter(r => r.situacao === "ok");
+  const reqNao = reqs.filter(r => r.situacao !== "ok").map(r => r.id);
+  const regOk = regras.filter(r => situacaoDe(r) === "ok");
+  const regNao = regras.filter(r => situacaoDe(r) !== "ok").map(r => r.id);
+  const comAlerta = new Set(regras.filter(r => ["ok", "parcial"].includes(situacaoDe(r))).map(r => r.id));
+  const semRegra = ameacas.filter(t => ![...alcance(t.id, fw)].some(x => comAlerta.has(x))).map(t => t.id);
+  const proposta = estado.modo === "proposta";
+  return [
+    { id: "t1", n: riscosComReq.length, de: riscos.length, t: "riscos com requisito dedicado",
+      h: `${sem.length} seguem só o plano de tratamento da Etapa 2.`, spot: sem, vista: "todos" },
+    { id: "t2", n: reqVerif.length, de: reqs.length, t: "requisitos verificados no protótipo",
+      h: "RS04 é parcial. RS07 e RS08 não foram implementados.", spot: reqNao },
+    { id: "t3", n: regOk.length, de: regras.length,
+      t: proposta ? "regras testadas com o código da Etapa 6" : "regras com alerta testado nos protótipos",
+      h: proposta ? "Esse código não foi aplicado a nenhum protótipo." : "D02 tem alerta, mas sem teste do alerta.", spot: regNao },
+    { id: "t4", n: ameacas.length - semRegra.length, de: ameacas.length, t: "ameaças ligadas a alguma regra de detecção",
+      h: `${semRegra.length} não têm regra, ${proposta ? "mesmo com o código proposto" : "e hoje só D01 e D02 têm alerta"}.`, spot: semRegra, vista: "todos" },
+  ];
+}
+
+function desenharIndicadores() {
+  const el = document.getElementById("tiles");
+  el.innerHTML = indicadores().map(t => `
+    <button type="button" class="tile" data-t="${t.id}" aria-pressed="${estado.spot && estado.spot.id === t.id}">
+      <span class="n">${t.n}<small> de ${t.de}</small></span>
+      <span class="t">${esc(t.t)}</span>
+      <span class="h">${esc(t.h)} Clique para destacar o que falta.</span>
+    </button>`).join("");
+  const ind = indicadores();
+  el.querySelectorAll(".tile").forEach(b => b.addEventListener("click", () => {
+    const t = ind.find(x => x.id === b.dataset.t);
+    if (estado.spot && estado.spot.id === t.id) { estado.spot = null; }
+    else { estado.spot = { id: t.id, ids: new Set(t.spot) }; estado.sel = null; if (t.vista) estado.vista = "todos"; }
+    desenhar();
+  }));
+}
+
+/* ---------- layout e desenho do grafo ---------- */
+function visiveis() {
+  return new Set(DADOS.nos.filter(n => estado.vista === "todos" || prioridade.has(n.id)).map(n => n.id));
+}
+
+function organizar(vis) {
+  const por = Object.fromEntries(COLS.map(c => [c.k, []]));
+  DADOS.nos.filter(n => vis.has(n.id)).forEach(n => por[n.col].push(n));
+  por.risco.sort((a, b) => numId(a.id) - numId(b.id));
+  por.requisito.sort((a, b) => numId(a.id) - numId(b.id));
+  por.controle.sort((a, b) => (TRANSV.has(a.id) - TRANSV.has(b.id)) || numId(a.id) - numId(b.id));
+  por.gate.sort((a, b) => numId(a.id) - numId(b.id));
+  const posRisco = Object.fromEntries(por.risco.map((r, i) => [r.id, i]));
+  por.ameaca.sort((a, b) => {
+    const ra = Math.min(...(fw[a.id] || []).filter(x => x in posRisco).map(x => posRisco[x]), 999);
+    const rb = Math.min(...(fw[b.id] || []).filter(x => x in posRisco).map(x => posRisco[x]), 999);
+    return ra - rb || a.id.localeCompare(b.id, "pt", { numeric: true });
+  });
+  // verificações primeiro, regras depois; dentro de cada grupo, a ordem do gerador
+  por.evidencia.sort((a, b) => (a.tipo === "deteccao") - (b.tipo === "deteccao"));
+  const pos = {};
+  COLS.forEach(c => por[c.k].forEach((n, i) => { pos[n.id] = { x: c.x, y: TOP + i * ROW, w: c.w, col: c }; }));
+  return { por, pos, linhas: Math.max(...COLS.map(c => por[c.k].length)) };
+}
+
+function corte(txt, max) { return txt.length > max ? txt.slice(0, max - 1) + "…" : txt; }
+function idMostrado(n) { return n.col === "requisito" ? `${n.id}·${n.decisao}` : n.id; }
+
+function arestaVisivelPorPadrao(a, b) {
+  const ca = porId[a].col, cb = porId[b].col;
+  if (TRANSV.has(a) || TRANSV.has(b)) return false;
+  if (cb === "gate") return false;
+  return Math.abs(NOME_COL[ca].i - NOME_COL[cb].i) === 1;
+}
+
+function caminho(pos, a, b) {
+  const pa = pos[a], pb = pos[b];
+  const x1 = pa.x + pa.w, y1 = pa.y + NH / 2, x2 = pb.x, y2 = pb.y + NH / 2;
+  const dx = Math.max(28, (x2 - x1) * 0.5);
+  return `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`;
+}
+
+// Uma aresta está na cadeia do nó ativo quando fica entre ancestrais ou entre descendentes dele.
+function arestaQuente(ch, ativo, a, b) {
+  return !!ch && ((ch.A.has(a) && (ch.A.has(b) || b === ativo)) || (ch.D.has(b) && (ch.D.has(a) || a === ativo)));
+}
+
+function htmlArestas(pos) {
+  const ativo = estado.hover || estado.sel;
+  const ch = ativo ? cadeia(ativo) : null;
+  let base = "", quentes = "";
+  DADOS.arestas.forEach(([a, b]) => {
+    if (!pos[a] || !pos[b]) return;
+    const d = caminho(pos, a, b);
+    if (arestaQuente(ch, ativo, a, b)) { quentes += `<path class="edge hot" d="${d}"/>`; return; }
+    let cls = arestaVisivelPorPadrao(a, b) ? "edge" : "edge faint";
+    if (ativo || estado.spot) cls = "edge dim";
+    base += `<path class="${cls}" d="${d}"/>`;
+  });
+  return base + quentes;
+}
+
+function desenhar() {
+  desenharIndicadores();
+  const vis = visiveis();
+  const { por, pos, linhas } = organizar(vis);
+  const alt = TOP + linhas * ROW + 10;
+  const ativo = estado.hover || estado.sel;
+  const ch = ativo ? cadeia(ativo) : null;
+  const spot = estado.spot ? estado.spot.ids : null;
+
+  let svg = `<g>`;
+  COLS.forEach(c => {
+    svg += `<text class="col-name" x="${c.x}" y="20">${esc(c.nome)}</text>
+            <text class="col-sub" x="${c.x}" y="36">${esc(c.sub)} · ${por[c.k].length}</text>
+            <line class="col-line" x1="${c.x}" x2="${c.x + c.w}" y1="44" y2="44"/>`;
+  });
+  svg += `</g><g>${htmlArestas(pos)}</g><g>`;
+
+  COLS.forEach(c => por[c.k].forEach(n => {
+    const p = pos[n.id];
+    const sit = situacaoDe(n);
+    const semReq = n.col === "risco" && !riscosComReq.includes(n);
+    const proposta = n.col === "gate" || sit === "ausente" || semReq;
+    let cls = "node" + (proposta ? " proposta" : "");
+    if (ativo && !ch.todos.has(n.id)) cls += " off";
+    else if (ativo && ch.todos.has(n.id)) cls += " on";
+    if (spot) cls += spot.has(n.id) ? " on" : " off";
+    if (estado.sel === n.id) cls += " sel";
+    const faixa = n.col === "risco" ? `<rect class="stripe-${nivelClasse(n.nivel)}" x="0" y="0" width="4" height="${NH}" rx="1.5"/>` : "";
+    const ponto = sit ? `<circle class="st-${sit}" cx="${p.w - 10}" cy="${NH / 2}" r="4.2"/>` : "";
+    const maxc = Math.floor((p.w - 14 - c.idw - 20) / 5.4);
+    svg += `<g class="${cls}" transform="translate(${p.x},${p.y})" data-id="${esc(n.id)}" tabindex="0" role="button" aria-pressed="${estado.sel === n.id}" aria-label="${esc(n.id + ": " + n.rotulo)}">
+      <title>${esc(n.id + " · " + n.rotulo)}</title>
+      <rect class="bg" width="${p.w}" height="${NH}" rx="4"/>${faixa}
+      <text class="id" x="${n.col === "risco" ? 11 : 9}" y="${NH / 2 + 3.6}">${esc(idMostrado(n))}</text>
+      <text class="lb" x="${(n.col === "risco" ? 11 : 9) + c.idw}" y="${NH / 2 + 3.8}">${esc(corte(n.rotulo, maxc))}</text>
+      ${ponto}</g>`;
+  }));
+  svg += `</g>`;
+
+  const g = document.getElementById("graph");
+  g.setAttribute("viewBox", `0 0 ${LARGURA} ${alt}`);
+  g.innerHTML = svg;
+  g.querySelectorAll(".node").forEach(el => {
+    const id = el.dataset.id;
+    el.addEventListener("click", () => selecionar(id));
+    el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selecionar(id); } });
+    el.addEventListener("mouseenter", () => { estado.hover = id; realcar(); });
+    el.addEventListener("mouseleave", () => { estado.hover = null; realcar(); });
+  });
+  desenharPainel();
+  document.querySelectorAll("#seg-vista button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === estado.vista));
+  document.querySelectorAll("#seg-modo button").forEach(b => b.setAttribute("aria-pressed", b.dataset.m === estado.modo));
+}
+
+// Ao passar o mouse só o destaque muda; os nós não são recriados, então o foco do teclado fica.
+let pendente = null;
+function realcar() {
+  if (pendente) return;
+  pendente = requestAnimationFrame(() => {
+    pendente = null;
+    const ativo = estado.hover || estado.sel;
+    const ch = ativo ? cadeia(ativo) : null;
+    const spot = !ativo && estado.spot ? estado.spot.ids : null;
+    document.querySelectorAll("#graph .node").forEach(el => {
+      el.classList.remove("on", "off");
+      if (ch) el.classList.add(ch.todos.has(el.dataset.id) ? "on" : "off");
+      else if (spot) el.classList.add(spot.has(el.dataset.id) ? "on" : "off");
+    });
+    const { pos } = organizar(visiveis());
+    document.querySelectorAll("#graph > g")[1].innerHTML = htmlArestas(pos);
+  });
+}
+
+/* ---------- painel de detalhe ---------- */
+function fato(rot, val) { return val ? `<dt>${esc(rot)}</dt><dd>${val}</dd>` : ""; }
+function chipSit(sit, tabela) { return sit ? `<span class="chip-st"><i class="dot c-${sit}"></i>${esc(tabela[sit] || sit)}</span>` : ""; }
+
+function desenharPainel() {
+  const p = document.getElementById("panel");
+  const n = estado.sel && porId[estado.sel];
+  if (!n) {
+    p.innerHTML = `<div><div class="p-head"><span class="p-kind">Nenhum nó selecionado</span></div>
+      <p class="p-title">${estado.spot ? "Os nós destacados no grafo são os que o indicador aponta." : "Clique em um nó do grafo, ou escolha um caso para começar."}</p>
+      <div class="chain-row"><button type="button" class="pill" data-go="R18">R18 autoaprovação do admin</button>
+      <button type="button" class="pill" data-go="RS04">RS04 token</button>
+      <button type="button" class="pill" data-go="T27">T27 CSRF</button></div></div><div></div>`;
+    p.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => selecionar(b.dataset.go)));
+    return;
+  }
+  const sit = situacaoDe(n);
+  const tipo = { ameaca: "Ameaça STRIDE", risco: "Risco", requisito: "Requisito de segurança", controle: "Controle",
+    gate: "Quality gate" }[n.col] || (n.tipo === "deteccao" ? "Regra de detecção" : n.situacao === "achado" ? "Achado de varredura" : "Verificação");
+  let fatos = "";
+  if (n.col === "ameaca") {
+    fatos = fato("Categoria", esc(n.stride)) + fato("Ativos", esc(n.ativos)) + fato("Ponto de entrada", esc(n.entrada)) +
+      fato("Controle existente", esc(n.controle_existente));
+  } else if (n.col === "risco") {
+    const temReq = riscosComReq.includes(n);
+    fatos = fato("Pontuação", `${n.p}×${n.i} = ${n.pontuacao}`) + fato("Estágio do plano", `${n.estagio} · ${esc(n.estrategia)}`) +
+      fato("Responsável", esc(n.responsavel) || "—") +
+      fato("Residual esperado", n.residual ? `${esc(n.residual.calculo)} (${esc(n.residual.nivel)}), só se a condição de aceite for cumprida` : "") +
+      fato("Condição", esc(n.condicao)) +
+      fato("Requisito", temReq ? "" : "Nenhum. Segue o plano de tratamento da Etapa 2.");
+  } else if (n.col === "requisito") {
+    fatos = fato("Decisão", `${esc(n.decisao)}. ${esc(n.detalhe)}`) + fato("Vulnerabilidade", esc(n.cwe));
+  } else if (n.col === "controle") {
+    fatos = fato("Papel", TRANSV.has(n.id) ? "Transversal: serve a quase todos os requisitos, por isso suas ligações só aparecem com ele selecionado." : "Controle específico de um requisito.");
+  } else if (n.tipo === "deteccao") {
+    fatos = fato("Severidade inicial", esc(n.severidade)) +
+      fato("Nos protótipos", `${esc(ROTULO_SIT_D[n.situacao])}. ${esc(n.nota)}`) +
+      fato("Com o código da Etapa 6", `${esc(ROTULO_SIT_D[n.situacao_proposta])}. Esse código não foi aplicado a nenhum protótipo.`);
+  } else if (n.col === "evidencia") {
+    fatos = fato("Evidência", esc(n.evidencia)) + (n.testes ? fato("Testes", `<span class="mono">${esc(n.testes)}</span>`) : "");
+  } else if (n.col === "gate") {
+    fatos = fato("Situação", "Condição de bloqueio definida na Etapa 7. O mapa a trata como proposta.");
+  }
+  const tit = n.col === "risco" ? n.titulo : n.col === "requisito" ? n.titulo : n.col === "ameaca" ? n.titulo : n.titulo || n.rotulo;
+  const chip = n.tipo === "deteccao" ? chipSit(sit, ROTULO_SIT_D) : chipSit(sit, ROTULO_SIT);
+  const nivel = n.col === "risco" ? `<span class="chip-st"><i class="sw c-${nivelClasse(n.nivel)}"></i>${esc(n.nivel)}</span>` : "";
+
+  const c = cadeia(n.id);
+  let cadeiaHtml = "";
+  COLS.forEach(col => {
+    const ids = [...c.todos].filter(x => x !== n.id && porId[x].col === col.k)
+      .sort((a, b) => a.localeCompare(b, "pt", { numeric: true }));
+    if (ids.length) cadeiaHtml += `<div class="chain-row"><b>${NOME_COL_PLURAL[col.k]} · ${ids.length}</b>${ids.map(x => `<button type="button" class="pill" data-go="${esc(x)}" title="${esc(porId[x].rotulo)}">${esc(x)}</button>`).join("")}</div>`;
+  });
+  p.innerHTML = `<div>
+      <div class="p-head"><span class="p-id">${esc(idMostrado(n))}</span><span class="p-kind">${esc(tipo)}</span>${nivel}${chip}</div>
+      <p class="p-title">${esc(tit)}</p><dl class="facts">${fatos}</dl></div>
+    <div class="chain"><h2>Cadeia: tudo o que leva a ${esc(n.id)} e tudo o que sai dele</h2>${cadeiaHtml || "<span class='p-kind'>Sem ligações no mapa</span>"}</div>`;
+  p.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => selecionar(b.dataset.go)));
+}
+
+/* ---------- interação ---------- */
+function selecionar(id) {
+  if (!porId[id]) return;
+  estado.spot = null;
+  estado.hover = null;
+  estado.sel = estado.sel === id ? null : id;
+  if (estado.sel && !visiveis().has(id)) estado.vista = "todos";
+  try { history.replaceState(null, "", estado.sel ? "#" + estado.sel : location.pathname + location.search); } catch (e) { /* o hash é só um atalho */ }
+  desenhar();
+}
+
+document.querySelectorAll("#seg-vista button").forEach(b => b.addEventListener("click", () => {
+  estado.vista = b.dataset.v;
+  if (estado.sel && !visiveis().has(estado.sel)) estado.sel = null;
+  desenhar();
+}));
+document.querySelectorAll("#seg-modo button").forEach(b => b.addEventListener("click", () => { estado.modo = b.dataset.m; desenhar(); }));
+document.getElementById("busca").addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const q = e.target.value.trim().toLowerCase();
+  const n = DADOS.nos.find(x => x.id.toLowerCase() === q || x.id.toLowerCase().replace("-", "") === q);
+  if (n) { estado.sel = null; selecionar(n.id); e.target.value = ""; }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && (estado.sel || estado.spot)) { estado.sel = null; estado.spot = null; desenhar(); }
+});
+
+(function iniciar() {
+  const h = decodeURIComponent((location.hash || "").slice(1));
+  if (porId[h]) { estado.sel = h; if (!visiveis().has(h)) estado.vista = "todos"; }
+  desenhar();
+  window.addEventListener("hashchange", () => {
+    const x = decodeURIComponent((location.hash || "").slice(1));
+    if (porId[x] && x !== estado.sel) { estado.spot = null; estado.sel = x; if (!visiveis().has(x)) estado.vista = "todos"; desenhar(); }
+  });
+})();
+</script>

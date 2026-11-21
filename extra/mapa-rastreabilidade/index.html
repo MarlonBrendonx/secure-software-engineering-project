@@ -1,0 +1,543 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa de Rastreabilidade</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Layout: cabeçalho, quatro indicadores de cobertura, controles, painel de detalhe fixo
+   no topo ao rolar e, abaixo, o grafo em seis colunas (ameaça até quality gate). */
+:root {
+  --bg: #edf1f4;
+  --surface: #ffffff;
+  --surface-2: #f5f8fa;
+  --ink: #14202a;
+  --muted: #536472;
+  --line: #d3dbe2;
+  --accent: #0a6b7e;
+  --accent-soft: #d3edf2;
+  --crit: #b3261e;
+  --high: #c2590a;
+  --med: #9a7400;
+  --low: #5b8266;
+  --ok: #1d7a4a;
+  --warn: #b06800;
+  --none: #a8383a;
+  --info: #4a5f8c;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e151a; --surface: #161f26; --surface-2: #1b262e; --ink: #e5edf2; --muted: #95a6b4;
+    --line: #2a3742; --accent: #5ec4d6; --accent-soft: #123a44;
+    --crit: #ff8a80; --high: #ffa05a; --med: #e3b93c; --low: #8fbf9b;
+    --ok: #62c58f; --warn: #f0b04a; --none: #ff8f8f; --info: #8fa6d6;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e151a; --surface: #161f26; --surface-2: #1b262e; --ink: #e5edf2; --muted: #95a6b4;
+  --line: #2a3742; --accent: #5ec4d6; --accent-soft: #123a44;
+  --crit: #ff8a80; --high: #ffa05a; --med: #e3b93c; --low: #8fbf9b;
+  --ok: #62c58f; --warn: #f0b04a; --none: #ff8f8f; --info: #8fa6d6;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 14px; line-height: 1.5;
+}
+.page {
+  max-width: 1480px; margin-inline: auto;
+  padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 48px;
+  display: grid; gap: 20px;
+}
+h1, h2 { font-family: var(--font-display); font-weight: 600; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; letter-spacing: -0.01em; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lede { max-width: 66ch; color: var(--muted); margin: 8px 0 0; }
+.lede b { color: var(--ink); font-weight: 600; }
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.tile {
+  text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 12px 14px; display: grid; gap: 2px; align-content: start; min-width: 0;
+}
+.tile:hover { border-color: var(--accent); }
+.tile[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.tile .n { font-family: var(--font-display); font-size: 26px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tile .n small { font-size: 15px; color: var(--muted); font-weight: 500; }
+.tile .t { font-weight: 500; }
+.tile .h { font-size: 12.5px; color: var(--muted); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+.group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.group > span { font-size: 12px; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; background: var(--surface); }
+.seg button {
+  font: inherit; font-size: 13px; color: var(--ink); background: transparent; border: 0;
+  padding: 6px 12px; cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); font-weight: 600; }
+.search {
+  font: inherit; font-size: 13px; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 7px; padding: 6px 10px; width: 190px;
+}
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; color: var(--muted); align-items: center; }
+.legend i { display: inline-block; vertical-align: -2px; margin-right: 5px; }
+.sw { width: 4px; height: 12px; border-radius: 1px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; }
+.dash { width: 16px; height: 10px; border: 1.5px dashed var(--muted); border-radius: 2px; }
+
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+  padding: 14px 16px; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px 28px;
+  min-height: 176px;
+}
+@media (min-width: 1000px) {
+  .panel { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; box-shadow: 0 6px 18px -10px rgba(0,0,0,.35); }
+}
+@media (max-width: 820px) { .panel { grid-template-columns: minmax(0, 1fr); } }
+.p-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.p-id { font-family: var(--font-mono); font-weight: 600; font-size: 20px; }
+.p-kind { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.p-title { margin: 4px 0 8px; font-weight: 500; }
+.chip-st { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 1px 9px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface-2); }
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 3px 12px; margin: 8px 0 0; font-size: 13px; }
+.facts dt { color: var(--muted); }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+.facts code, .mono { font-family: var(--font-mono); font-size: 12px; }
+.chain { display: grid; gap: 6px; align-content: start; max-height: 300px; overflow-y: auto; }
+.chain h2 { font-size: 13px; color: var(--muted); font-family: var(--font-body); font-weight: 500; }
+.chain-row { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.chain-row b { font-size: 12px; color: var(--muted); font-weight: 500; width: 100%; }
+.pill {
+  font-family: var(--font-mono); font-size: 11.5px; padding: 1px 7px; border-radius: 5px;
+  border: 1px solid var(--line); background: var(--surface-2); color: var(--ink); cursor: pointer;
+}
+.pill:hover { border-color: var(--accent); }
+
+.graph-wrap { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+svg.graph { display: block; width: 100%; min-width: 1060px; height: auto; font-family: var(--font-body); }
+.col-name { font-size: 12.5px; font-weight: 600; fill: var(--ink); }
+.col-sub { font-size: 11px; fill: var(--muted); }
+.col-line { stroke: var(--line); stroke-width: 1; }
+.edge { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .26; transition: opacity .12s; }
+.edge.faint { opacity: 0; }
+.edge.dim { opacity: .04; }
+.edge.hot { stroke: var(--accent); stroke-width: 1.8; opacity: .95; }
+.node { cursor: pointer; transition: opacity .12s; }
+.node .bg { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; }
+.node:hover .bg { stroke: var(--accent); }
+.node .id { font-family: var(--font-mono); font-size: 10.5px; font-weight: 600; fill: var(--muted); }
+.node .lb { font-size: 11px; fill: var(--ink); }
+.node.off { opacity: .22; }
+.node.on .bg { stroke: var(--accent); stroke-width: 1.4; }
+.node.sel .bg { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+.node.sel .id { fill: var(--accent); }
+.node.proposta .bg { stroke-dasharray: 3 2.5; }
+.node:focus-visible { outline: none; }
+.node:focus-visible .bg { stroke: var(--accent); stroke-width: 2.4; }
+.stripe-crit { fill: var(--crit); } .stripe-high { fill: var(--high); }
+.stripe-med { fill: var(--med); } .stripe-low { fill: var(--low); }
+.st-ok { fill: var(--ok); } .st-parcial { fill: var(--warn); }
+.st-ausente { fill: var(--none); } .st-achado { fill: var(--info); }
+.c-ok { background: var(--ok); } .c-parcial { background: var(--warn); }
+.c-ausente { background: var(--none); } .c-achado { background: var(--info); }
+.c-crit { background: var(--crit); } .c-high { background: var(--high); }
+.c-med { background: var(--med); } .c-low { background: var(--low); }
+
+.foot { font-size: 12.5px; color: var(--muted); max-width: 90ch; }
+.foot code { font-family: var(--font-mono); font-size: 12px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .node, .edge { transition: none; } }
+</style>
+
+<main class="page">
+  <header>
+    <div class="eyebrow">Faturamento de Redes · Engenharia de Software Seguro</div>
+    <h1>Mapa de rastreabilidade</h1>
+    <p class="lede">Cada ameaça do STRIDE até o controle que a trata, o teste que a verifica e a regra que a detecta. <b>Clique em um nó</b> para acender a cadeia dele. Os indicadores abaixo mostram onde a cadeia ainda tem buraco.</p>
+  </header>
+
+  <section class="tiles" id="tiles" aria-label="Cobertura"></section>
+
+  <section class="controls" aria-label="Controles do mapa">
+    <div class="group"><span>Vista</span>
+      <div class="seg" id="seg-vista">
+        <button type="button" data-v="prioridade" aria-pressed="true">Cadeia prioritária</button>
+        <button type="button" data-v="todos" aria-pressed="false">Todos os nós</button>
+      </div>
+    </div>
+    <div class="group"><span>Regras de detecção</span>
+      <div class="seg" id="seg-modo">
+        <button type="button" data-m="prototipo" aria-pressed="true">Nos protótipos</button>
+        <button type="button" data-m="proposta" aria-pressed="false">Com o código da Etapa 6</button>
+      </div>
+    </div>
+    <div class="group">
+      <label class="sr" for="busca">Ir para um nó</label>
+      <input class="search" id="busca" type="search" placeholder="Ir para R18, RS04, D07…" autocomplete="off">
+    </div>
+  </section>
+
+  <div class="legend" aria-label="Legenda">
+    <span><i class="sw c-crit"></i>Risco crítico</span>
+    <span><i class="sw c-high"></i>Alto</span>
+    <span><i class="sw c-med"></i>Médio</span>
+    <span><i class="sw c-low"></i>Baixo</span>
+    <span><i class="dot c-ok"></i>Verificado ou implementado</span>
+    <span><i class="dot c-parcial"></i>Parcial</span>
+    <span><i class="dot c-ausente"></i>Sem implementação</span>
+    <span><i class="dot c-achado"></i>Achado do ZAP ou Dependency-Check</span>
+    <span><i class="dash"></i>Proposta ou sem vínculo</span>
+  </div>
+
+  <section class="panel" id="panel" aria-live="polite"></section>
+
+  <div class="graph-wrap"><svg class="graph" id="graph" role="group" aria-label="Grafo de rastreabilidade"></svg></div>
+
+  <p class="foot">Ameaças, riscos, estágios e risco residual são lidos das tabelas em <code>docs/</code> por <code>extra/mapa-rastreabilidade/gerar_dados.py</code>. Os vínculos entre requisito, controle, verificação e regra de detecção estão declarados nesse script, com a fonte de cada um. Os quality gates são os da Etapa 7 e o mapa os trata como proposta. Os testes e os ataques vêm do protótipo corrigido. Nada aqui mede a probabilidade dos riscos nem confirma o risco residual esperado.</p>
+</main>
+
+<script>
+const DADOS = {"nos": [{"id": "T01", "col": "ameaca", "stride": "Tampering", "ativos": "A1", "titulo": "Usuário com escrita, ou conta indevidamente obtida, altera ou remove lançamentos", "entrada": "Rotas PATCH/DELETE de lançamentos", "controle_existente": "Guards require_role / require_any_role; AuditMiddleware; bloqueio otimista", "rotulo": "Alteração de lançamentos"}, {"id": "T02", "col": "ameaca", "stride": "Spoofing", "ativos": "A1, A2, A3", "titulo": "Usuário sem permissões para acesso obtém o controle de usuário com permissões", "entrada": "Login via Keycloak + OAuth Service (src/core/auth/)", "controle_existente": "SSO corporativo; rate limit de 10/min no login", "rotulo": "Conta privilegiada capturada"}, {"id": "T03", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A1", "titulo": "Usuário obtém dados de lançamentos sem autorização", "entrada": "Rotas GET de lançamentos", "controle_existente": "JWT válido e role diferente de none em toda rota de negócio; skill sec-route", "rotulo": "Leitura sem permissão"}, {"id": "T04", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A1", "titulo": "Usuário vaza lançamentos do sistema", "entrada": "Listagem e exportação de lançamentos", "controle_existente": "Guards de perfil; rate limit global de 60/min por IP", "rotulo": "Vazamento de lançamentos"}, {"id": "T05", "col": "ameaca", "stride": "Repudiation", "ativos": "A2", "titulo": "Perda do timeline impede a identificação do que cada usuário fez no sistema", "entrada": "Timeline de transições e tabela audit_logs", "controle_existente": "AuditMiddleware grava toda requisição mutante com o usuário do token", "rotulo": "Perda do timeline"}, {"id": "T06", "col": "ameaca", "stride": "Tampering", "ativos": "A3", "titulo": "Alteração não autorizada em regras de serviço", "entrada": "Rotas de CRUD de regras de serviço", "controle_existente": "Guards de perfil; AuditMiddleware", "rotulo": "Regra de serviço alterada"}, {"id": "T07", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A4", "titulo": "Acesso não autorizado a anexos", "entrada": "Endpoints de upload/download de anexos", "controle_existente": "Guards de perfil; URLs assinadas temporárias", "rotulo": "Acesso indevido a anexos"}, {"id": "T08", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A4", "titulo": "Vazamento de informações dos anexos", "entrada": "Download de anexos por URL assinada", "controle_existente": "URLs assinadas temporárias", "rotulo": "Vazamento de anexos"}, {"id": "T09", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A5", "titulo": "Acesso não autorizado a CNPJs", "entrada": "Rotas de cadastros (clientes, fornecedores)", "controle_existente": "Guards de perfil", "rotulo": "Acesso indevido a CNPJs"}, {"id": "T10", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A5", "titulo": "Vazamento de CNPJs", "entrada": "Consultas e exportações de cadastros", "controle_existente": "Guards de perfil; rate limit global de 60/min por IP", "rotulo": "Vazamento de CNPJs"}, {"id": "T11", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A6", "titulo": "Acesso não autorizado a endereços de e-mail dos aprovadores", "entrada": "Central de aprovações e logs de envio de e-mail", "controle_existente": "Guards de perfil", "rotulo": "Acesso a e-mails de aprovadores"}, {"id": "T12", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A6", "titulo": "Vazamento de endereços de e-mail dos aprovadores", "entrada": "Central de aprovações e logs de envio de e-mail", "controle_existente": "Guards de perfil", "rotulo": "Vazamento de e-mails"}, {"id": "T13", "col": "ameaca", "stride": "Tampering", "ativos": "A7", "titulo": "Alteração em código de cálculo de valores", "entrada": "src/application/use_cases/billing/billing/_shared.py, repositório e pipeline de CI", "controle_existente": "Mypy strict; ~2.900 testes; PR-Agent; Trivy; cooldown de dependências", "rotulo": "Código de cálculo alterado"}, {"id": "T14a", "col": "ameaca", "stride": "Denial of Service", "ativos": "A8", "titulo": "Saturação da máquina de estados impedindo o fluxo de autorização", "entrada": "Rotas de transição de status (change_item_status)", "controle_existente": "Rate limit global de 60/min por IP e de 10/min nas operações em lote", "rotulo": "Saturação da máquina de estados"}, {"id": "T14b", "col": "ameaca", "stride": "Elevation of Privilege", "ativos": "A8", "titulo": "Guard de autorização que falha aberto (exceção tratada como permitido)", "entrada": "Guards em src/presentation/api/routes/infra/auth.py", "controle_existente": "Skill sec-route; testes automatizados", "rotulo": "Guard que falha aberto"}, {"id": "T15", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A9", "titulo": "Vazamento de segredo gerador de token", "entrada": "Configuração (src/core/config.py), variáveis de ambiente, logs e repositório", "controle_existente": "Cofre corporativo; Gitleaks local e no CI; skill sec-secrets", "rotulo": "Vazamento do JWT_SECRET"}, {"id": "T16", "col": "ameaca", "stride": "Spoofing", "ativos": "A9", "titulo": "Uso de segredo vazado para impersonificar usuário válido", "entrada": "Validação de JWT em src/core/auth/", "controle_existente": "JWT_SECRET ≥ 32 bytes, cofre, Gitleaks no CI", "rotulo": "Token forjado com o segredo"}, {"id": "T17", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A10", "titulo": "Vazamento da chave de API interna", "entrada": "Configuração e variáveis de ambiente", "controle_existente": "Cofre corporativo; Gitleaks local e no CI; skill sec-secrets", "rotulo": "Vazamento da chave interna"}, {"id": "T18", "col": "ameaca", "stride": "Spoofing", "ativos": "A10", "titulo": "Código não autorizado impersonificando chamadas válidas", "entrada": "internal_router (20 callbacks internos)", "controle_existente": "Header X-Callback-Secret; rotas fora do OpenAPI", "rotulo": "Callback interno forjado"}, {"id": "T19", "col": "ameaca", "stride": "Elevation of Privilege", "ativos": "A11", "titulo": "Acesso não autorizado aos anexos extra sistema", "entrada": "Azure Blob / MinIO", "controle_existente": "URLs assinadas temporárias; credenciais no cofre", "rotulo": "Acesso direto ao storage"}, {"id": "T20", "col": "ameaca", "stride": "Denial of Service", "ativos": "A12", "titulo": "Ataque a infraestrutura, deixando o sistema inoperante", "entrada": "Instância PostgreSQL 16", "controle_existente": "Rede corporativa; rate limit global de 60/min por IP", "rotulo": "Ataque ao PostgreSQL"}, {"id": "T21", "col": "ameaca", "stride": "Spoofing", "ativos": "A13", "titulo": "Envio de e-mails impersonificando sender válido", "entrada": "Serviço de e-mail corporativo", "controle_existente": "Chave no cofre; Gitleaks local e no CI", "rotulo": "E-mail com remetente falso"}, {"id": "T22", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A14", "titulo": "Vazamento de informações sobre faturamento", "entrada": "WebSocket /ws, canal billing:{AAAA-MM}", "controle_existente": "Autenticação pela primeira mensagem do WebSocket", "rotulo": "Vazamento pelo WebSocket"}, {"id": "T23", "col": "ameaca", "stride": "Denial of Service", "ativos": "A14", "titulo": "Sobrecarga no EventBus impedindo operações válidas", "entrada": "WebSocket /ws e EventBus", "controle_existente": "Rate limit global de 60/min por IP (cobertura do /ws a confirmar)", "rotulo": "Sobrecarga do EventBus"}, {"id": "T24", "col": "ameaca", "stride": "Tampering", "ativos": "A1, A8", "titulo": "Ausência de segregação de funções: o mesmo usuário (admin) cria, envia e aprova o próprio lançamento", "entrada": "Máquina de estados de aprovação (change_item_status)", "controle_existente": "Nenhum: o admin executa todas as transições; AuditMiddleware registra as ações", "rotulo": "Admin aprova o próprio"}, {"id": "T25", "col": "ameaca", "stride": "Tampering", "ativos": "Oracle, A5", "titulo": "Injeção de SQL nas consultas cruas ao Oracle", "entrada": "src/infrastructure/persistence/queries/", "controle_existente": "Usuário Oracle somente leitura; skill sec-oracle", "rotulo": "Injeção de SQL no Oracle"}, {"id": "T26", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A1, A4", "titulo": "IDOR: acesso a lançamento ou anexo de outro cliente/período trocando o ID na URL", "entrada": "Rotas que recebem ID de lançamento ou anexo", "controle_existente": "Guards de perfil (sem verificação de escopo do recurso)", "rotulo": "IDOR em lançamento"}, {"id": "T27", "col": "ameaca", "stride": "Spoofing", "ativos": "A1", "titulo": "CSRF em rotas mutantes, já que o cookie access_token tem precedência sobre o header", "entrada": "Rotas mutantes autenticadas por cookie", "controle_existente": "Cookie HttpOnly (SameSite e proteção anti-CSRF a confirmar)", "rotulo": "CSRF em rota mutante"}, {"id": "T28", "col": "ameaca", "stride": "Spoofing", "ativos": "A8, A9", "titulo": "Configuração insegura em produção: provedor local habilitado ou DEBUG=true (expõe /docs)", "entrada": "src/core/config.py e variáveis de ambiente do deploy", "controle_existente": "/docs e /redoc só existem com DEBUG=true", "rotulo": "Provedor local em produção"}, {"id": "T29", "col": "ameaca", "stride": "Tampering", "ativos": "A4, aprovadores", "titulo": "Anexo malicioso (macro, polyglot, arquivo com conteúdo diferente da extensão) usado para atacar quem abre", "entrada": "Upload de anexos", "controle_existente": "Validação de MIME type e extensão, teto de 25 MB", "rotulo": "Anexo malicioso"}, {"id": "T30", "col": "ameaca", "stride": "Tampering", "ativos": "Arquivos ERP", "titulo": "Injeção de fórmula (CSV/Excel injection) em campos textuais exportados", "entrada": "Geradores de carga ERP (src/infrastructure/xlsx/)", "controle_existente": "Nenhum identificado", "rotulo": "Injeção de fórmula na carga"}, {"id": "T31", "col": "ameaca", "stride": "Tampering", "ativos": "Arquivos ERP, A11", "titulo": "Adulteração do arquivo de carga entre a geração e a importação no ERP", "entrada": "Azure Blob / MinIO", "controle_existente": "Credenciais de storage no cofre (sem hash ou assinatura do arquivo)", "rotulo": "Carga do ERP adulterada"}, {"id": "T32", "col": "ameaca", "stride": "Tampering", "ativos": "A12", "titulo": "Ambientes compartilhando a mesma instância PostgreSQL (schema por ambiente)", "entrada": "Instância PostgreSQL única, schema por POSTGRES_SCHEMA", "controle_existente": "Separação por schema", "rotulo": "Ambientes no mesmo banco"}, {"id": "T33", "col": "ameaca", "stride": "Spoofing", "ativos": "Sessão", "titulo": "Roubo ou reuso de refresh token", "entrada": "/v1/auth/refresh", "controle_existente": "Cookie de refresh com path restrito a /v1/auth/refresh (rotação a confirmar)", "rotulo": "Reuso de refresh token"}, {"id": "T34", "col": "ameaca", "stride": "Repudiation", "ativos": "A2", "titulo": "Perda de registros de auditoria por gravação em background (falha, reinício, exceção)", "entrada": "AuditMiddleware e tabela audit_logs", "controle_existente": "Gravação automática de toda requisição mutante", "rotulo": "Auditoria perdida"}, {"id": "T35", "col": "ameaca", "stride": "Repudiation", "ativos": "A1, A2", "titulo": "Aprovador nega ter aprovado, sem evidência suficiente de autoria", "entrada": "Timeline de transições", "controle_existente": "AuditMiddleware com usuário extraído do token", "rotulo": "Aprovador nega autoria"}, {"id": "T36", "col": "ameaca", "stride": "Information Disclosure", "ativos": "A1, A6", "titulo": "Envio de e-mail de aprovação a destinatário indevido pela funcionalidade legítima", "entrada": "Central de aprovações", "controle_existente": "Log de envio de e-mail preserva destinatários e valores", "rotulo": "E-mail ao destinatário errado"}, {"id": "T37", "col": "ameaca", "stride": "Tampering", "ativos": "A7", "titulo": "Dependência maliciosa na cadeia de suprimentos", "entrada": "Dependências Python e pipeline de CI", "controle_existente": "Cooldown de 7 dias; Renovate; Trivy", "rotulo": "Dependência maliciosa"}, {"id": "R01", "col": "risco", "titulo": "Usuário com escrita altera ou remove lançamentos e o valor adulterado chega ao ERP como legítimo", "condicao": "Perfil analista/admin com escrita, aprovação pode não detectar a adulteração", "p": 3, "i": 4, "pontuacao": 12, "nivel": "Crítico", "ameacas": ["T01"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend e segurança com gestão de negócio", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Alteração de lançamentos"}, {"id": "R02", "col": "risco", "titulo": "Atacante captura conta privilegiada (admin/gestor) via SSO e opera em nome da vítima", "condicao": "Phishing/sessão vazada, ausência de verificação adicional (MFA) e de detecção de sessão anômala", "p": 3, "i": 4, "pontuacao": 12, "nivel": "Crítico", "ameacas": ["T02"], "estrategia": "Reduzir", "estagio": 1, "responsavel": "Equipe de segurança e identidade (SSO)", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Captura de conta privilegiada"}, {"id": "R03", "col": "risco", "titulo": "Usuário lê dados restritos ao seu perfil (lançamentos, anexos, CNPJ, e-mails) por falha de autorização", "condicao": "Verificação de autorização ausente/inconsistente em rota, endpoint de anexo ou consulta (IDOR/BOLA)", "p": 3, "i": 3, "pontuacao": 9, "nivel": "Alto", "ameacas": ["T03", "T07", "T09", "T11", "T26"], "estrategia": "Reduzir", "estagio": 3, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Acesso a dados restritos"}, {"id": "R04", "col": "risco", "titulo": "Acesso direto aos anexos no storage, fora do controle da aplicação", "condicao": "URL assinada mal configurada (validade longa, sem escopo) ou vazamento de credencial de storage", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T19"], "estrategia": "Reduzir", "estagio": 3, "responsavel": "Equipe de infraestrutura e backend", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Acesso direto aos anexos"}, {"id": "R05", "col": "risco", "titulo": "Exfiltração em volume de dados críticos (lançamentos, anexos, CNPJ, e-mails)", "condicao": "Ator já com leitura (perfil, conta capturada ou R03) e ausência de limite/monitoração de extração", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T04", "T08", "T10", "T12"], "estrategia": "Reduzir", "estagio": 3, "responsavel": "", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Exfiltração em volume"}, {"id": "R06", "col": "risco", "titulo": "Vazamento do JWT_SECRET", "condicao": "Segredo em repositório, log, imagem ou variável de ambiente exposta, sem cofre/rotação", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T15"], "estrategia": "Reduzir", "estagio": 1, "responsavel": "Equipe de segurança e DevOps", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Vazamento do JWT_SECRET"}, {"id": "R07", "col": "risco", "titulo": "Uso do JWT_SECRET vazado para forjar token e impersonar usuário, inclusive admin", "condicao": "Assinatura de token depende só do segredo, sem verificação adicional de sessão/dispositivo", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T16"], "estrategia": "Reduzir", "estagio": 1, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Token forjado com o segredo"}, {"id": "R08", "col": "risco", "titulo": "Remoção ou adulteração da timeline de auditoria para apagar o rastro", "condicao": "Timeline mutável, operação capaz de remover/alterar registros, sem trilha imutável", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T05"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Timeline adulterada"}, {"id": "R09", "col": "risco", "titulo": "Alteração não autorizada de regra de serviço/faixa corrompe todos os cálculos futuros", "condicao": "Permissão de escrita em serviços, alteração se propaga de forma silenciosa aos cálculos", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T06"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend com gestão de negócio", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Regra de serviço alterada"}, {"id": "R10", "col": "risco", "titulo": "Adulteração do motor de cálculo via código/pipeline fatura errado em escala", "condicao": "Insider com acesso ao repositório ou cadeia de build comprometida, revisão/testes contornados", "p": 1, "i": 4, "pontuacao": 4, "nivel": "Médio", "ameacas": ["T13", "T37"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de desenvolvimento e DevOps", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Motor de cálculo adulterado"}, {"id": "R11", "col": "risco", "titulo": "Sobrecarga da máquina de estados/guards de autorização paralisa o fluxo de aprovação", "condicao": "Endpoints de transição sem limite de requisições, guards custosos por chamada", "p": 2, "i": 2, "pontuacao": 4, "nivel": "Médio", "ameacas": ["T14a"], "estrategia": "Reduzir", "estagio": 4, "responsavel": "Equipe de backend", "residual": {"calculo": "1×2=2", "nivel": "Baixo"}, "rotulo": "Sobrecarga da máquina"}, {"id": "R12", "col": "risco", "titulo": "Vazamento do CELERY_CALLBACK_SECRET", "condicao": "Segredo exposto em repositório/log/config, única barreira dos callbacks internos", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T17"], "estrategia": "Reduzir", "estagio": 1, "responsavel": "Equipe de segurança e DevOps", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Vazamento do segredo Celery"}, {"id": "R13", "col": "risco", "titulo": "Código malicioso forja callbacks internos com a chave vazada e injeta operações falsas", "condicao": "Callback validado só pela chave, sem verificação de origem (mTLS/rede) nem idempotência", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T18"], "estrategia": "Reduzir", "estagio": 1, "responsavel": "Equipe de backend e infraestrutura", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Callback interno forjado"}, {"id": "R14", "col": "risco", "titulo": "Indisponibilidade do PostgreSQL/infra deixa o sistema inoperante", "condicao": "Carga excessiva, exaustão de conexões ou ataque à infraestrutura, sem limites/isolamento", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T20"], "estrategia": "Reduzir", "estagio": 4, "responsavel": "Equipe de infraestrutura e DBA", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "PostgreSQL indisponível"}, {"id": "R15", "col": "risco", "titulo": "Envio de e-mails maliciosos em nome da empresa (phishing/fraude de cobrança) com a EMAIL_SERVICE_API_KEY vazada", "condicao": "Chave do serviço de e-mail exposta, ausência de proteção de remetente (SPF/DKIM/DMARC)", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T21"], "estrategia": "Reduzir", "estagio": 5, "responsavel": "Equipe de segurança com o provedor de e-mail", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "E-mail malicioso da empresa"}, {"id": "R16", "col": "risco", "titulo": "Sobrecarga do EventBus WebSocket impede a entrega de notificações de faturamento", "condicao": "Conexões/eventos sem limite, sem controle de taxa nem quota por conexão", "p": 3, "i": 2, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T23"], "estrategia": "Reduzir", "estagio": 4, "responsavel": "Equipe de backend e infraestrutura", "residual": {"calculo": "1×2=2", "nivel": "Baixo"}, "rotulo": "Sobrecarga do EventBus"}, {"id": "R17", "col": "risco", "titulo": "Subscrição indevida no canal billing:{AAAA-MM} vaza o estado de faturamento do período", "condicao": "Falta de validação de autorização por canal na inscrição do WebSocket", "p": 2, "i": 2, "pontuacao": 4, "nivel": "Médio", "ameacas": ["T22"], "estrategia": "Reduzir", "estagio": 3, "responsavel": "Equipe de backend", "residual": {"calculo": "1×2=2", "nivel": "Baixo"}, "rotulo": "Inscrição indevida no canal"}, {"id": "R18", "col": "risco", "titulo": "Usuário admin cria, envia e aprova o próprio lançamento, e o valor segue ao ERP como se tivesse passado por aprovação completa", "condicao": "Regra de segregação de funções inexistente: o admin executa todas as transições", "p": 3, "i": 4, "pontuacao": 12, "nivel": "Crítico", "ameacas": ["T24"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend com gestão de negócio", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Autoaprovação do admin"}, {"id": "R19", "col": "risco", "titulo": "Injeção de SQL nas consultas cruas ao Oracle expõe dados legados fora do escopo do usuário", "condicao": "SQL concatenado à mão em queries/, depende de disciplina contínua no uso de bindvars", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T25"], "estrategia": "Reduzir", "estagio": 3, "responsavel": "Equipe de backend", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Injeção de SQL no Oracle"}, {"id": "R20", "col": "risco", "titulo": "Provedor local habilitado ou DEBUG=true em produção reabre a autenticação por senha e expõe o mapa da API", "condicao": "Comportamento definido só por variável de ambiente, sem barreira adicional no deploy", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T28"], "estrategia": "Evitar", "estagio": 1, "responsavel": "Equipe de DevOps e backend", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Provedor local em produção"}, {"id": "R21", "col": "risco", "titulo": "Credencial ou carga de QA alcança o schema de produção na instância PostgreSQL compartilhada", "condicao": "Instância única, isolamento depende apenas da separação de usuários por schema", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T32"], "estrategia": "Reduzir", "estagio": 4, "responsavel": "Equipe de infraestrutura e DBA", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "QA alcança produção"}, {"id": "R22", "col": "risco", "titulo": "Anexo malicioso (macro, polyglot) compromete a estação de quem tem perfil de aprovação", "condicao": "Validação de MIME/extensão não detecta conteúdo malicioso, sem varredura antivírus", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T29"], "estrategia": "Reduzir", "estagio": 3, "responsavel": "Equipe de segurança e backend", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Anexo malicioso"}, {"id": "R23", "col": "risco", "titulo": "Fórmula injetada ou arquivo de carga adulterado vira lançamento contábil no ERP", "condicao": "Campos textuais exportados sem tratamento e arquivo armazenado sem hash ou assinatura", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T30", "T31"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend com a equipe do ERP", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Carga do ERP adulterada"}, {"id": "R24", "col": "risco", "titulo": "Desvio de e-mail de aprovação", "condicao": "Usuário com acesso à central pode indicar destinatário não autorizado, sem validação suficiente de vínculo com o cliente", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T36"], "estrategia": "Reduzir", "estagio": 5, "responsavel": "Equipe de backend e segurança com gestão de negócio", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Desvio de e-mail de aprovação"}, {"id": "R25", "col": "risco", "titulo": "Reuso de refresh token roubado", "condicao": "Atacante obtém refresh token ainda válido e o reuso não é impedido por rotação, revogação ou detecção suficiente; esses controles estão a confirmar", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T33"], "estrategia": "Reduzir", "estagio": 1, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Reuso de refresh token"}, {"id": "R26", "col": "risco", "titulo": "Perda de auditoria por falha na gravação", "condicao": "Operação de negócio é confirmada antes da persistência da auditoria em background, e interrupção pode descartar registros sem recuperação garantida", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T34"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Perda de auditoria"}, {"id": "R27", "col": "risco", "titulo": "Repúdio de aprovação por evidência insuficiente", "condicao": "Aprovação é associada ao usuário do token, mas as evidências disponíveis são insuficientes para esclarecer uma contestação de autoria", "p": 2, "i": 3, "pontuacao": 6, "nivel": "Médio", "ameacas": ["T35"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend e segurança com gestão de negócio", "residual": {"calculo": "1×3=3", "nivel": "Baixo"}, "rotulo": "Repúdio de aprovação"}, {"id": "R28", "col": "risco", "titulo": "Contorno de autorização por falha aberta do guard", "condicao": "Exceção na verificação de autorização é tratada como permissão, e usuário de privilégios limitados consegue provocar ou aproveitar essa falha", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T14b"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "Falha aberta do guard"}, {"id": "R29", "col": "risco", "titulo": "Alteração de lançamento por CSRF", "condicao": "Rota mutante aceita cookie de sessão enviado em requisição induzida; SameSite, validação de origem e proteção anti-CSRF são ausentes ou insuficientes, a confirmar", "p": 2, "i": 4, "pontuacao": 8, "nivel": "Alto", "ameacas": ["T27"], "estrategia": "Reduzir", "estagio": 2, "responsavel": "Equipe de backend e segurança", "residual": {"calculo": "1×4=4", "nivel": "Médio"}, "rotulo": "CSRF em lançamento"}, {"id": "RS01", "col": "requisito", "decisao": "D01", "titulo": "Depois do envio para aprovação, só a máquina de estados muda o lançamento", "detalhe": "Decisão D01: tratar a máquina de estados como única via de mudança. Inclui a segregação de funções de R18: quem criou, enviou ou alterou não aprova.", "cwe": "CWE-841 · OWASP A06 Insecure Design", "riscos": ["R01", "R18"], "situacao": "ok", "rotulo": "Imutável após o envio"}, {"id": "RS02", "col": "requisito", "decisao": "D02", "titulo": "MFA obrigatório para administrador e gestor, conferido no SSO e na API", "detalhe": "Decisão D02: exigir o MFA no SSO e conferi-lo também na API.", "cwe": "CWE-308 · OWASP A07 Authentication Failures", "riscos": ["R02"], "situacao": "ok", "rotulo": "MFA em admin e gestor"}, {"id": "RS03", "col": "requisito", "decisao": "D03", "titulo": "Autorização por recurso no servidor (cliente, período e responsável)", "detalhe": "Decisão D03: autorizar por recurso, na camada de casos de uso. Negação devolve 404, igual ao recurso inexistente.", "cwe": "CWE-639, CWE-862 · OWASP A01 Broken Access Control", "riscos": ["R03"], "situacao": "ok", "rotulo": "Autorização por recurso"}, {"id": "RS04", "col": "requisito", "decisao": "D04", "titulo": "Token assinado com chave assimétrica do cofre e validado de forma estrita", "detalhe": "Decisão D04: assinar o token de sessão com chave assimétrica guardada no cofre e validar o token de forma estrita.", "cwe": "CWE-522, CWE-347 · OWASP A04 Cryptographic Failures", "riscos": ["R06", "R07"], "situacao": "parcial", "rotulo": "JWT assimétrico e estrito"}, {"id": "RS05", "col": "requisito", "decisao": "D05", "titulo": "Auditoria gravada na mesma transação da operação", "detalhe": "Decisão D05: gravar a auditoria na mesma transação e entregar os eventos por uma outbox.", "cwe": "CWE-778, CWE-223 · OWASP A09 Logging and Alerting Failures", "riscos": ["R26"], "situacao": "ok", "rotulo": "Auditoria transacional"}, {"id": "RS06", "col": "requisito", "decisao": "D06", "titulo": "Guards negam por padrão e toda rota declara sua política", "detalhe": "Decisão D06: fazer os guards negarem por padrão e exigir política de acesso declarada em toda rota.", "cwe": "CWE-636, CWE-755 · OWASP A10 Mishandling of Exceptional Conditions", "riscos": ["R28"], "situacao": "ok", "rotulo": "Negar por padrão"}, {"id": "RS07", "col": "requisito", "decisao": "D07", "titulo": "Carga do ERP com manifesto assinado e campos neutralizados", "detalhe": "Decisão D07: assinar a carga do ERP com um manifesto e conferi-la antes da importação.", "cwe": "CWE-345, CWE-353, CWE-1236 · OWASP A08 Data Integrity Failures", "riscos": ["R23"], "situacao": "ausente", "rotulo": "Carga do ERP assinada"}, {"id": "RS08", "col": "requisito", "decisao": "D08", "titulo": "Proteção anti-CSRF antes dos guards", "detalhe": "Decisão D08: proteger as rotas autenticadas por cookie contra CSRF antes dos guards.", "cwe": "CWE-352 · OWASP A01 Broken Access Control", "riscos": ["R29"], "situacao": "ausente", "rotulo": "Proteção anti-CSRF"}, {"id": "C1", "col": "controle", "titulo": "Keycloak e OAuth Service: segundo fator no SSO", "transversal": false, "rotulo": "SSO com 2º fator"}, {"id": "C2", "col": "controle", "titulo": "Guards da API: recusa token privilegiado sem MFA", "transversal": false, "rotulo": "Guard exige MFA"}, {"id": "C3", "col": "controle", "titulo": "Casos de uso: permissão sobre o recurso", "transversal": false, "rotulo": "Permissão por recurso"}, {"id": "C4", "col": "controle", "titulo": "Máquina de estados (billing_status)", "transversal": false, "rotulo": "Máquina de estados"}, {"id": "C5", "col": "controle", "titulo": "Gerador da carga do ERP: só a versão aprovada", "transversal": false, "rotulo": "Carga: versão aprovada"}, {"id": "C6", "col": "controle", "titulo": "Tabela audit_logs", "transversal": true, "rotulo": "audit_logs"}, {"id": "C7", "col": "controle", "titulo": "Monitoramento e alertas", "transversal": true, "rotulo": "Monitoramento e alertas"}, {"id": "C8", "col": "controle", "titulo": "Pipeline de CI com testes de segurança", "transversal": true, "rotulo": "Testes de segurança"}, {"id": "C9", "col": "controle", "titulo": "Emissor do token e cofre (KMS)", "transversal": false, "rotulo": "Emissor e cofre (KMS)"}, {"id": "C10", "col": "controle", "titulo": "Guards: validação estrita do token", "transversal": false, "rotulo": "Validação do token"}, {"id": "C11", "col": "controle", "titulo": "Auditoria e outbox na mesma transação", "transversal": false, "rotulo": "Auditoria e outbox"}, {"id": "C12", "col": "controle", "titulo": "Guards: negar por padrão", "transversal": false, "rotulo": "Guard nega por padrão"}, {"id": "C13", "col": "controle", "titulo": "Carga do ERP: manifesto assinado", "transversal": false, "rotulo": "Manifesto da carga"}, {"id": "C14", "col": "controle", "titulo": "Middleware anti-CSRF", "transversal": false, "rotulo": "Anti-CSRF"}, {"id": "VF-RS01", "col": "evidencia", "tipo": "verificacao", "titulo": "RS01: alteração após o envio", "situacao": "ok", "evidencia": "V-01 PATCH 200→422 · V-02 DELETE 204→422 · V-03 reabrir 422→200", "testes": "test_rs01_patch_e_delete_apos_envio_sao_recusados, test_rs01_reabrir_exige_novo_envio_e_nova_aprovacao, test_rs01_aprovado_nao_reabre", "rotulo": "Alteração pós-envio recusada"}, {"id": "VF-R18", "col": "evidencia", "tipo": "verificacao", "titulo": "R18: autoaprovação recusada", "situacao": "ok", "evidencia": "V-04 admin aprova o próprio lançamento 200→403", "testes": "test_r18_admin_nao_aprova_o_proprio_lancamento, test_r18_lote_com_autoaprovacao_nao_muda_nenhum_item", "rotulo": "Autoaprovação recusada"}, {"id": "VF-RS02", "col": "evidencia", "tipo": "verificacao", "titulo": "RS02: token sem MFA recusado", "situacao": "ok", "evidencia": "V-06 escrita privilegiada sem MFA: 401", "testes": "test_ts04_token_de_gestor_sem_mfa_e_recusado, test_claim_mfa_forjado_nao_basta_sem_mfa_na_sessao", "rotulo": "Token sem MFA recusado"}, {"id": "VF-RS03", "col": "evidencia", "tipo": "verificacao", "titulo": "RS03: recurso fora do escopo", "situacao": "ok", "evidencia": "V-05 leitura de cliente fora do escopo: 404", "testes": "test_rotas_por_cliente_e_faturamento_negam_com_404_identico_ao_inexistente, test_escopo_por_periodo", "rotulo": "Fora do escopo: 404"}, {"id": "VF-RS04", "col": "evidencia", "tipo": "verificacao", "titulo": "RS04: validação do token (chave simétrica)", "situacao": "parcial", "evidencia": "V-07 token com alg none: 401. Assinatura assimétrica e cofre não implementados.", "testes": "test_token_invalido_e_recusado; test_rs04_assinatura_assimetrica está como xfail", "rotulo": "Validação de token"}, {"id": "VF-RS05", "col": "evidencia", "tipo": "verificacao", "titulo": "RS05: auditoria na mesma transação", "situacao": "ok", "evidencia": "Falha simulada na auditoria desfaz a operação (só para lançamentos)", "testes": "test_rs05_falha_na_auditoria_desfaz_a_operacao, test_rs05_alteracao_grava_item_timeline_e_auditoria_juntos", "rotulo": "Falha na auditoria desfaz"}, {"id": "VF-RS06", "col": "evidencia", "tipo": "verificacao", "titulo": "RS06: toda rota declara política", "situacao": "ok", "evidencia": "Teste enumera as rotas registradas; guard nega por padrão", "testes": "test_toda_rota_declara_politica_de_acesso, test_sem_token_e_negado", "rotulo": "Rotas com política"}, {"id": "VF-RS07", "col": "evidencia", "tipo": "verificacao", "titulo": "RS07: carga do ERP", "situacao": "ausente", "evidencia": "Sem protótipo da carga do ERP", "testes": "", "rotulo": "Sem verificação"}, {"id": "VF-RS08", "col": "evidencia", "tipo": "verificacao", "titulo": "RS08: anti-CSRF", "situacao": "ausente", "evidencia": "V-08 requisição só com cookie, de outra origem: 200 (esperado 403)", "testes": "test_rs08_requisicao_so_com_cookie_e_origem_externa_e_recusada está como xfail", "rotulo": "CSRF aceito (xfail)"}, {"id": "VF-V01", "col": "evidencia", "tipo": "verificacao", "titulo": "Achado V01: refresh token reaceito", "situacao": "achado", "evidencia": "ZAP, retest autenticado: POST /v1/auth/refresh. Correção proposta no código da Etapa 6 (rotação do refresh), ainda não aplicada aos protótipos.", "testes": "", "rotulo": "Refresh reaceito"}, {"id": "VF-V02", "col": "evidencia", "tipo": "verificacao", "titulo": "Achado V02: access_token no corpo", "situacao": "achado", "evidencia": "ZAP, retest autenticado: POST /v1/auth/login. Correção proposta: token só no cookie HttpOnly.", "testes": "", "rotulo": "Token no corpo"}, {"id": "VF-V03", "col": "evidencia", "tipo": "verificacao", "titulo": "Achado V03: PyJWT com CVE", "situacao": "achado", "evidencia": "Dependency-Check: dependência do backend. Correção proposta: atualizar o PyJWT.", "testes": "", "rotulo": "PyJWT com CVE"}, {"id": "D01", "col": "evidencia", "tipo": "deteccao", "titulo": "Falhas repetidas no segundo fator", "situacao": "ok", "nota": "SecurityMonitor dispara mfa_falhas_repetidas; teste test_falhas_repetidas_de_mfa_geram_alerta.", "situacao_proposta": "ok", "severidade": "Alta", "riscos": ["R02"], "requisito": "RS02", "rotulo": "Falhas repetidas de MFA"}, {"id": "D02", "col": "evidencia", "tipo": "deteccao", "titulo": "Negações repetidas por escopo", "situacao": "parcial", "nota": "Alerta implementado, mas sem teste do alerta.", "situacao_proposta": "ok", "severidade": "Alta", "riscos": ["R03", "R05"], "requisito": "RS03", "rotulo": "Negações repetidas"}, {"id": "D03", "col": "evidencia", "tipo": "deteccao", "titulo": "Falhas de login repetidas", "situacao": "ausente", "nota": "login_falha é registrado na auditoria, sem regra de alerta.", "situacao_proposta": "ok", "severidade": "Média", "riscos": ["R02"], "requisito": "RS02", "rotulo": "Falhas de login repetidas"}, {"id": "D04", "col": "evidencia", "tipo": "deteccao", "titulo": "Login privilegiado suspeito", "situacao": "ausente", "nota": "login_sucesso é registrado, sem regra de alerta.", "situacao_proposta": "ok", "severidade": "Crítica", "riscos": ["R02"], "requisito": "RS02", "rotulo": "Login privilegiado suspeito"}, {"id": "D05", "col": "evidencia", "tipo": "deteccao", "titulo": "Reuso de refresh token", "situacao": "ausente", "nota": "Evento não gerado: falta a rotação do refresh (achado V01).", "situacao_proposta": "ok", "severidade": "Alta", "riscos": ["R25"], "requisito": "RS04", "rotulo": "Reuso de refresh token"}, {"id": "D06", "col": "evidencia", "tipo": "deteccao", "titulo": "Token recusado ou chave usada fora do emissor", "situacao": "ausente", "nota": "O sinal fica só na resposta HTTP 401.", "situacao_proposta": "parcial", "severidade": "Crítica ou Média", "riscos": ["R06", "R07"], "requisito": "RS04", "rotulo": "Token recusado ou chave fora"}, {"id": "D07", "col": "evidencia", "tipo": "deteccao", "titulo": "Alteração após o envio ou autoaprovação", "situacao": "ausente", "nota": "No original o evento não é gerado. No corrigido, autoaprovacao_negada é registrada, sem regra de alerta.", "situacao_proposta": "parcial", "severidade": "Alta", "riscos": ["R01", "R18"], "requisito": "RS01", "rotulo": "Alteração pós-envio"}, {"id": "D08", "col": "evidencia", "tipo": "deteccao", "titulo": "Regra de serviço alterada", "situacao": "ausente", "nota": "Os eventos de regra de serviço são registrados, sem correlação.", "situacao_proposta": "parcial", "severidade": "Média", "riscos": ["R09"], "requisito": null, "rotulo": "Regra de serviço alterada"}, {"id": "D09", "col": "evidencia", "tipo": "deteccao", "titulo": "Consulta ou exportação em volume", "situacao": "ausente", "nota": "A leitura não é registrada.", "situacao_proposta": "ausente", "severidade": "Média", "riscos": ["R05"], "requisito": "RS03", "rotulo": "Consulta em volume"}, {"id": "D10", "col": "evidencia", "tipo": "deteccao", "titulo": "Falha na verificação de acesso (503)", "situacao": "ausente", "nota": "O sinal fica só no log.", "situacao_proposta": "ausente", "severidade": "Alta", "riscos": ["R28"], "requisito": "RS06", "rotulo": "Falha do guard (503)"}, {"id": "D11", "col": "evidencia", "tipo": "deteccao", "titulo": "Falha de auditoria ou da outbox", "situacao": "ausente", "nota": "Não há outbox, então o evento não é gerado.", "situacao_proposta": "ausente", "severidade": "Crítica", "riscos": ["R26", "R08"], "requisito": "RS05", "rotulo": "Falha de auditoria"}, {"id": "D12", "col": "evidencia", "tipo": "deteccao", "titulo": "Recusa por origem ou token anti-CSRF", "situacao": "ausente", "nota": "O sinal fica só no log (WebSocket 4403).", "situacao_proposta": "parcial", "severidade": "Média", "riscos": ["R29", "R17"], "requisito": "RS08", "rotulo": "Recusa de origem ou CSRF"}, {"id": "D13", "col": "evidencia", "tipo": "deteccao", "titulo": "Limite de requisições excedido (429)", "situacao": "ausente", "nota": "O sinal fica só na resposta HTTP 429.", "situacao_proposta": "ok", "severidade": "Baixa", "riscos": ["R11", "R16"], "requisito": null, "rotulo": "Limite excedido (429)"}, {"id": "D14", "col": "evidencia", "tipo": "deteccao", "titulo": "Divergência na carga do ERP", "situacao": "ausente", "nota": "Não há carga do ERP no protótipo.", "situacao_proposta": "ausente", "severidade": "Crítica", "riscos": ["R23"], "requisito": "RS07", "rotulo": "Divergência na carga"}, {"id": "QG1", "col": "gate", "titulo": "Riscos prioritários identificados e com responsável", "rotulo": "Riscos prioritários"}, {"id": "QG2", "col": "gate", "titulo": "Cada requisito rastreado a um risco", "rotulo": "Requisito rastreado"}, {"id": "QG3", "col": "gate", "titulo": "PR aprovado, lint e tipos limpos, sem segredo", "rotulo": "PR, lint e tipos"}, {"id": "QG4", "col": "gate", "titulo": "Todos os testes de segurança aprovados", "rotulo": "Testes de segurança"}, {"id": "QG5", "col": "gate", "titulo": "Sem segredo e sem CVE crítica ou alta sem análise", "rotulo": "Sem segredo ou CVE"}, {"id": "QG6", "col": "gate", "titulo": "Nenhum alerta alto ou crítico sem análise", "rotulo": "Alertas analisados"}, {"id": "QG7", "col": "gate", "titulo": "QG3 a QG6 aprovados e produção autorizada", "rotulo": "Deploy autorizado"}, {"id": "QG8", "col": "gate", "titulo": "Incidentes tratados e lições registradas", "rotulo": "Incidentes tratados"}], "arestas": [["T01", "R01"], ["T02", "R02"], ["T03", "R03"], ["T07", "R03"], ["T09", "R03"], ["T11", "R03"], ["T26", "R03"], ["T19", "R04"], ["T04", "R05"], ["T08", "R05"], ["T10", "R05"], ["T12", "R05"], ["T15", "R06"], ["T16", "R07"], ["T05", "R08"], ["T06", "R09"], ["T13", "R10"], ["T37", "R10"], ["T14a", "R11"], ["T17", "R12"], ["T18", "R13"], ["T20", "R14"], ["T21", "R15"], ["T23", "R16"], ["T22", "R17"], ["T24", "R18"], ["T25", "R19"], ["T28", "R20"], ["T32", "R21"], ["T29", "R22"], ["T30", "R23"], ["T31", "R23"], ["T36", "R24"], ["T33", "R25"], ["T34", "R26"], ["T35", "R27"], ["T14b", "R28"], ["T27", "R29"], ["R01", "RS01"], ["R18", "RS01"], ["RS01", "C4"], ["RS01", "C5"], ["RS01", "C6"], ["RS01", "C7"], ["RS01", "C8"], ["R02", "RS02"], ["RS02", "C1"], ["RS02", "C2"], ["RS02", "C7"], ["R03", "RS03"], ["RS03", "C3"], ["RS03", "C6"], ["RS03", "C7"], ["RS03", "C8"], ["R06", "RS04"], ["R07", "RS04"], ["RS04", "C9"], ["RS04", "C10"], ["RS04", "C7"], ["RS04", "C8"], ["R26", "RS05"], ["RS05", "C11"], ["RS05", "C6"], ["RS05", "C7"], ["RS05", "C8"], ["R28", "RS06"], ["RS06", "C12"], ["RS06", "C6"], ["RS06", "C7"], ["RS06", "C8"], ["R23", "RS07"], ["RS07", "C13"], ["RS07", "C5"], ["RS07", "C7"], ["RS07", "C8"], ["R29", "RS08"], ["RS08", "C14"], ["RS08", "C6"], ["RS08", "C7"], ["RS08", "C8"], ["C4", "VF-RS01"], ["C4", "VF-R18"], ["C1", "VF-RS02"], ["C2", "VF-RS02"], ["C3", "VF-RS03"], ["C10", "VF-RS04"], ["C11", "VF-RS05"], ["C12", "VF-RS06"], ["C13", "VF-RS07"], ["C14", "VF-RS08"], ["C10", "VF-V01"], ["T33", "VF-V01"], ["C10", "VF-V02"], ["T16", "VF-V02"], ["T37", "VF-V03"], ["C2", "D01"], ["R02", "D01"], ["C3", "D02"], ["R03", "D02"], ["R05", "D02"], ["C1", "D03"], ["R02", "D03"], ["C1", "D04"], ["R02", "D04"], ["C10", "D05"], ["R25", "D05"], ["C10", "D06"], ["R06", "D06"], ["R07", "D06"], ["C4", "D07"], ["R01", "D07"], ["R18", "D07"], ["R09", "D08"], ["C3", "D09"], ["R05", "D09"], ["C12", "D10"], ["R28", "D10"], ["C11", "D11"], ["R26", "D11"], ["R08", "D11"], ["C14", "D12"], ["R29", "D12"], ["R17", "D12"], ["R11", "D13"], ["R16", "D13"], ["C13", "D14"], ["R23", "D14"], ["R07", "QG1"], ["R26", "QG1"], ["R03", "QG1"], ["R29", "QG1"], ["R01", "QG1"], ["R23", "QG1"], ["R06", "QG1"], ["R28", "QG1"], ["R18", "QG1"], ["R02", "QG1"], ["RS01", "QG2"], ["RS02", "QG2"], ["RS03", "QG2"], ["RS04", "QG2"], ["RS05", "QG2"], ["RS06", "QG2"], ["RS07", "QG2"], ["RS08", "QG2"], ["VF-RS01", "QG4"], ["VF-R18", "QG4"], ["VF-RS02", "QG4"], ["VF-RS03", "QG4"], ["VF-RS04", "QG4"], ["VF-RS05", "QG4"], ["VF-RS06", "QG4"], ["VF-RS07", "QG4"], ["VF-RS08", "QG4"], ["VF-V01", "QG6"], ["VF-V02", "QG6"], ["VF-V03", "QG5"], ["D01", "QG8"], ["D02", "QG8"], ["D03", "QG8"], ["D04", "QG8"], ["D05", "QG8"], ["D06", "QG8"], ["D07", "QG8"], ["D08", "QG8"], ["D09", "QG8"], ["D10", "QG8"], ["D11", "QG8"], ["D12", "QG8"], ["D13", "QG8"], ["D14", "QG8"]]};
+
+const COLS = [
+  { k: "ameaca",    nome: "Ameaça (STRIDE)",        sub: "Etapa 1",              w: 216, idw: 30 },
+  { k: "risco",     nome: "Risco",                  sub: "Etapa 2 · NIST CSF",   w: 216, idw: 30 },
+  { k: "requisito", nome: "Requisito · decisão",    sub: "Etapa 3",              w: 224, idw: 56 },
+  { k: "controle",  nome: "Controle",               sub: "Etapa 3",              w: 184, idw: 30 },
+  { k: "evidencia", nome: "Verificação e detecção", sub: "Etapas 4 a 6",         w: 232, idw: 52 },
+  { k: "gate",      nome: "Quality gate",           sub: "Etapa 7 · proposta",   w: 176, idw: 30 },
+];
+const GAP = 40, ROW = 31, NH = 25, TOP = 56, PADX = 10;
+COLS.forEach((c, i) => { c.i = i; c.x = PADX + COLS.slice(0, i).reduce((s, d) => s + d.w + GAP, 0); });
+const LARGURA = COLS[5].x + COLS[5].w + PADX;
+const NOME_COL = Object.fromEntries(COLS.map(c => [c.k, c]));
+const TRANSV = new Set(["C6", "C7", "C8"]);
+
+const porId = Object.fromEntries(DADOS.nos.map(n => [n.id, n]));
+const fw = {}, bw = {};
+DADOS.arestas.forEach(([a, b]) => { (fw[a] ||= []).push(b); (bw[b] ||= []).push(a); });
+
+function alcance(id, mapa) {
+  const visto = new Set(), pilha = [id];
+  while (pilha.length) for (const y of mapa[pilha.pop()] || []) if (!visto.has(y)) { visto.add(y); pilha.push(y); }
+  return visto;
+}
+// A cadeia de um nó junta seus ancestrais (só arestas para trás) e seus descendentes (só arestas
+// para frente). Buscar os descendentes dos ancestrais acenderia o grafo inteiro por causa dos
+// gates e dos controles transversais, que ligam quase tudo.
+function cadeia(id) {
+  const A = alcance(id, bw), D = alcance(id, fw);
+  return { A, D, todos: new Set([id, ...A, ...D]) };
+}
+
+// Riscos com requisito dedicado e a cadeia de cada um formam a vista prioritária.
+const riscosComReq = DADOS.nos.filter(n => n.col === "risco" && (fw[n.id] || []).some(t => porId[t].col === "requisito"));
+const prioridade = new Set();
+riscosComReq.forEach(r => cadeia(r.id).todos.forEach(x => prioridade.add(x)));
+
+const ROTULO_SIT = { ok: "Verificado no protótipo corrigido", parcial: "Parcial", ausente: "Sem implementação", achado: "Achado de varredura" };
+const ROTULO_SIT_D = { ok: "Implementada e testada", parcial: "Parcial", ausente: "Sem alerta" };
+const NOME_COL_PLURAL = { ameaca: "Ameaças", risco: "Riscos", requisito: "Requisitos", controle: "Controles", evidencia: "Verificações e regras", gate: "Quality gates" };
+
+const estado = { vista: "prioridade", modo: "prototipo", sel: "R18", hover: null, spot: null };
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const nivelClasse = n => ({ "Crítico": "crit", "Alto": "high", "Médio": "med", "Baixo": "low" }[n] || "low");
+const numId = id => parseInt(id.replace(/\D/g, ""), 10) || 0;
+
+function situacaoDe(n) {
+  if (n.tipo === "deteccao") return estado.modo === "proposta" ? n.situacao_proposta : n.situacao;
+  return n.situacao || null;
+}
+
+/* ---------- indicadores de cobertura ---------- */
+function indicadores() {
+  const riscos = DADOS.nos.filter(n => n.col === "risco");
+  const reqs = DADOS.nos.filter(n => n.col === "requisito");
+  const regras = DADOS.nos.filter(n => n.tipo === "deteccao");
+  const ameacas = DADOS.nos.filter(n => n.col === "ameaca");
+  const sem = riscos.filter(r => !riscosComReq.includes(r)).map(r => r.id);
+  const reqVerif = reqs.filter(r => r.situacao === "ok");
+  const reqNao = reqs.filter(r => r.situacao !== "ok").map(r => r.id);
+  const regOk = regras.filter(r => situacaoDe(r) === "ok");
+  const regNao = regras.filter(r => situacaoDe(r) !== "ok").map(r => r.id);
+  const comAlerta = new Set(regras.filter(r => ["ok", "parcial"].includes(situacaoDe(r))).map(r => r.id));
+  const semRegra = ameacas.filter(t => ![...alcance(t.id, fw)].some(x => comAlerta.has(x))).map(t => t.id);
+  const proposta = estado.modo === "proposta";
+  return [
+    { id: "t1", n: riscosComReq.length, de: riscos.length, t: "riscos com requisito dedicado",
+      h: `${sem.length} seguem só o plano de tratamento da Etapa 2.`, spot: sem, vista: "todos" },
+    { id: "t2", n: reqVerif.length, de: reqs.length, t: "requisitos verificados no protótipo",
+      h: "RS04 é parcial. RS07 e RS08 não foram implementados.", spot: reqNao },
+    { id: "t3", n: regOk.length, de: regras.length,
+      t: proposta ? "regras testadas com o código da Etapa 6" : "regras com alerta testado nos protótipos",
+      h: proposta ? "Esse código não foi aplicado a nenhum protótipo." : "D02 tem alerta, mas sem teste do alerta.", spot: regNao },
+    { id: "t4", n: ameacas.length - semRegra.length, de: ameacas.length, t: "ameaças ligadas a alguma regra de detecção",
+      h: `${semRegra.length} não têm regra, ${proposta ? "mesmo com o código proposto" : "e hoje só D01 e D02 têm alerta"}.`, spot: semRegra, vista: "todos" },
+  ];
+}
+
+function desenharIndicadores() {
+  const el = document.getElementById("tiles");
+  el.innerHTML = indicadores().map(t => `
+    <button type="button" class="tile" data-t="${t.id}" aria-pressed="${estado.spot && estado.spot.id === t.id}">
+      <span class="n">${t.n}<small> de ${t.de}</small></span>
+      <span class="t">${esc(t.t)}</span>
+      <span class="h">${esc(t.h)} Clique para destacar o que falta.</span>
+    </button>`).join("");
+  const ind = indicadores();
+  el.querySelectorAll(".tile").forEach(b => b.addEventListener("click", () => {
+    const t = ind.find(x => x.id === b.dataset.t);
+    if (estado.spot && estado.spot.id === t.id) { estado.spot = null; }
+    else { estado.spot = { id: t.id, ids: new Set(t.spot) }; estado.sel = null; if (t.vista) estado.vista = "todos"; }
+    desenhar();
+  }));
+}
+
+/* ---------- layout e desenho do grafo ---------- */
+function visiveis() {
+  return new Set(DADOS.nos.filter(n => estado.vista === "todos" || prioridade.has(n.id)).map(n => n.id));
+}
+
+function organizar(vis) {
+  const por = Object.fromEntries(COLS.map(c => [c.k, []]));
+  DADOS.nos.filter(n => vis.has(n.id)).forEach(n => por[n.col].push(n));
+  por.risco.sort((a, b) => numId(a.id) - numId(b.id));
+  por.requisito.sort((a, b) => numId(a.id) - numId(b.id));
+  por.controle.sort((a, b) => (TRANSV.has(a.id) - TRANSV.has(b.id)) || numId(a.id) - numId(b.id));
+  por.gate.sort((a, b) => numId(a.id) - numId(b.id));
+  const posRisco = Object.fromEntries(por.risco.map((r, i) => [r.id, i]));
+  por.ameaca.sort((a, b) => {
+    const ra = Math.min(...(fw[a.id] || []).filter(x => x in posRisco).map(x => posRisco[x]), 999);
+    const rb = Math.min(...(fw[b.id] || []).filter(x => x in posRisco).map(x => posRisco[x]), 999);
+    return ra - rb || a.id.localeCompare(b.id, "pt", { numeric: true });
+  });
+  // verificações primeiro, regras depois; dentro de cada grupo, a ordem do gerador
+  por.evidencia.sort((a, b) => (a.tipo === "deteccao") - (b.tipo === "deteccao"));
+  const pos = {};
+  COLS.forEach(c => por[c.k].forEach((n, i) => { pos[n.id] = { x: c.x, y: TOP + i * ROW, w: c.w, col: c }; }));
+  return { por, pos, linhas: Math.max(...COLS.map(c => por[c.k].length)) };
+}
+
+function corte(txt, max) { return txt.length > max ? txt.slice(0, max - 1) + "…" : txt; }
+function idMostrado(n) { return n.col === "requisito" ? `${n.id}·${n.decisao}` : n.id; }
+
+function arestaVisivelPorPadrao(a, b) {
+  const ca = porId[a].col, cb = porId[b].col;
+  if (TRANSV.has(a) || TRANSV.has(b)) return false;
+  if (cb === "gate") return false;
+  return Math.abs(NOME_COL[ca].i - NOME_COL[cb].i) === 1;
+}
+
+function caminho(pos, a, b) {
+  const pa = pos[a], pb = pos[b];
+  const x1 = pa.x + pa.w, y1 = pa.y + NH / 2, x2 = pb.x, y2 = pb.y + NH / 2;
+  const dx = Math.max(28, (x2 - x1) * 0.5);
+  return `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`;
+}
+
+// Uma aresta está na cadeia do nó ativo quando fica entre ancestrais ou entre descendentes dele.
+function arestaQuente(ch, ativo, a, b) {
+  return !!ch && ((ch.A.has(a) && (ch.A.has(b) || b === ativo)) || (ch.D.has(b) && (ch.D.has(a) || a === ativo)));
+}
+
+function htmlArestas(pos) {
+  const ativo = estado.hover || estado.sel;
+  const ch = ativo ? cadeia(ativo) : null;
+  let base = "", quentes = "";
+  DADOS.arestas.forEach(([a, b]) => {
+    if (!pos[a] || !pos[b]) return;
+    const d = caminho(pos, a, b);
+    if (arestaQuente(ch, ativo, a, b)) { quentes += `<path class="edge hot" d="${d}"/>`; return; }
+    let cls = arestaVisivelPorPadrao(a, b) ? "edge" : "edge faint";
+    if (ativo || estado.spot) cls = "edge dim";
+    base += `<path class="${cls}" d="${d}"/>`;
+  });
+  return base + quentes;
+}
+
+function desenhar() {
+  desenharIndicadores();
+  const vis = visiveis();
+  const { por, pos, linhas } = organizar(vis);
+  const alt = TOP + linhas * ROW + 10;
+  const ativo = estado.hover || estado.sel;
+  const ch = ativo ? cadeia(ativo) : null;
+  const spot = estado.spot ? estado.spot.ids : null;
+
+  let svg = `<g>`;
+  COLS.forEach(c => {
+    svg += `<text class="col-name" x="${c.x}" y="20">${esc(c.nome)}</text>
+            <text class="col-sub" x="${c.x}" y="36">${esc(c.sub)} · ${por[c.k].length}</text>
+            <line class="col-line" x1="${c.x}" x2="${c.x + c.w}" y1="44" y2="44"/>`;
+  });
+  svg += `</g><g>${htmlArestas(pos)}</g><g>`;
+
+  COLS.forEach(c => por[c.k].forEach(n => {
+    const p = pos[n.id];
+    const sit = situacaoDe(n);
+    const semReq = n.col === "risco" && !riscosComReq.includes(n);
+    const proposta = n.col === "gate" || sit === "ausente" || semReq;
+    let cls = "node" + (proposta ? " proposta" : "");
+    if (ativo && !ch.todos.has(n.id)) cls += " off";
+    else if (ativo && ch.todos.has(n.id)) cls += " on";
+    if (spot) cls += spot.has(n.id) ? " on" : " off";
+    if (estado.sel === n.id) cls += " sel";
+    const faixa = n.col === "risco" ? `<rect class="stripe-${nivelClasse(n.nivel)}" x="0" y="0" width="4" height="${NH}" rx="1.5"/>` : "";
+    const ponto = sit ? `<circle class="st-${sit}" cx="${p.w - 10}" cy="${NH / 2}" r="4.2"/>` : "";
+    const maxc = Math.floor((p.w - 14 - c.idw - 20) / 5.4);
+    svg += `<g class="${cls}" transform="translate(${p.x},${p.y})" data-id="${esc(n.id)}" tabindex="0" role="button" aria-pressed="${estado.sel === n.id}" aria-label="${esc(n.id + ": " + n.rotulo)}">
+      <title>${esc(n.id + " · " + n.rotulo)}</title>
+      <rect class="bg" width="${p.w}" height="${NH}" rx="4"/>${faixa}
+      <text class="id" x="${n.col === "risco" ? 11 : 9}" y="${NH / 2 + 3.6}">${esc(idMostrado(n))}</text>
+      <text class="lb" x="${(n.col === "risco" ? 11 : 9) + c.idw}" y="${NH / 2 + 3.8}">${esc(corte(n.rotulo, maxc))}</text>
+      ${ponto}</g>`;
+  }));
+  svg += `</g>`;
+
+  const g = document.getElementById("graph");
+  g.setAttribute("viewBox", `0 0 ${LARGURA} ${alt}`);
+  g.innerHTML = svg;
+  g.querySelectorAll(".node").forEach(el => {
+    const id = el.dataset.id;
+    el.addEventListener("click", () => selecionar(id));
+    el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selecionar(id); } });
+    el.addEventListener("mouseenter", () => { estado.hover = id; realcar(); });
+    el.addEventListener("mouseleave", () => { estado.hover = null; realcar(); });
+  });
+  desenharPainel();
+  document.querySelectorAll("#seg-vista button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === estado.vista));
+  document.querySelectorAll("#seg-modo button").forEach(b => b.setAttribute("aria-pressed", b.dataset.m === estado.modo));
+}
+
+// Ao passar o mouse só o destaque muda; os nós não são recriados, então o foco do teclado fica.
+let pendente = null;
+function realcar() {
+  if (pendente) return;
+  pendente = requestAnimationFrame(() => {
+    pendente = null;
+    const ativo = estado.hover || estado.sel;
+    const ch = ativo ? cadeia(ativo) : null;
+    const spot = !ativo && estado.spot ? estado.spot.ids : null;
+    document.querySelectorAll("#graph .node").forEach(el => {
+      el.classList.remove("on", "off");
+      if (ch) el.classList.add(ch.todos.has(el.dataset.id) ? "on" : "off");
+      else if (spot) el.classList.add(spot.has(el.dataset.id) ? "on" : "off");
+    });
+    const { pos } = organizar(visiveis());
+    document.querySelectorAll("#graph > g")[1].innerHTML = htmlArestas(pos);
+  });
+}
+
+/* ---------- painel de detalhe ---------- */
+function fato(rot, val) { return val ? `<dt>${esc(rot)}</dt><dd>${val}</dd>` : ""; }
+function chipSit(sit, tabela) { return sit ? `<span class="chip-st"><i class="dot c-${sit}"></i>${esc(tabela[sit] || sit)}</span>` : ""; }
+
+function desenharPainel() {
+  const p = document.getElementById("panel");
+  const n = estado.sel && porId[estado.sel];
+  if (!n) {
+    p.innerHTML = `<div><div class="p-head"><span class="p-kind">Nenhum nó selecionado</span></div>
+      <p class="p-title">${estado.spot ? "Os nós destacados no grafo são os que o indicador aponta." : "Clique em um nó do grafo, ou escolha um caso para começar."}</p>
+      <div class="chain-row"><button type="button" class="pill" data-go="R18">R18 autoaprovação do admin</button>
+      <button type="button" class="pill" data-go="RS04">RS04 token</button>
+      <button type="button" class="pill" data-go="T27">T27 CSRF</button></div></div><div></div>`;
+    p.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => selecionar(b.dataset.go)));
+    return;
+  }
+  const sit = situacaoDe(n);
+  const tipo = { ameaca: "Ameaça STRIDE", risco: "Risco", requisito: "Requisito de segurança", controle: "Controle",
+    gate: "Quality gate" }[n.col] || (n.tipo === "deteccao" ? "Regra de detecção" : n.situacao === "achado" ? "Achado de varredura" : "Verificação");
+  let fatos = "";
+  if (n.col === "ameaca") {
+    fatos = fato("Categoria", esc(n.stride)) + fato("Ativos", esc(n.ativos)) + fato("Ponto de entrada", esc(n.entrada)) +
+      fato("Controle existente", esc(n.controle_existente));
+  } else if (n.col === "risco") {
+    const temReq = riscosComReq.includes(n);
+    fatos = fato("Pontuação", `${n.p}×${n.i} = ${n.pontuacao}`) + fato("Estágio do plano", `${n.estagio} · ${esc(n.estrategia)}`) +
+      fato("Responsável", esc(n.responsavel) || "—") +
+      fato("Residual esperado", n.residual ? `${esc(n.residual.calculo)} (${esc(n.residual.nivel)}), só se a condição de aceite for cumprida` : "") +
+      fato("Condição", esc(n.condicao)) +
+      fato("Requisito", temReq ? "" : "Nenhum. Segue o plano de tratamento da Etapa 2.");
+  } else if (n.col === "requisito") {
+    fatos = fato("Decisão", `${esc(n.decisao)}. ${esc(n.detalhe)}`) + fato("Vulnerabilidade", esc(n.cwe));
+  } else if (n.col === "controle") {
+    fatos = fato("Papel", TRANSV.has(n.id) ? "Transversal: serve a quase todos os requisitos, por isso suas ligações só aparecem com ele selecionado." : "Controle específico de um requisito.");
+  } else if (n.tipo === "deteccao") {
+    fatos = fato("Severidade inicial", esc(n.severidade)) +
+      fato("Nos protótipos", `${esc(ROTULO_SIT_D[n.situacao])}. ${esc(n.nota)}`) +
+      fato("Com o código da Etapa 6", `${esc(ROTULO_SIT_D[n.situacao_proposta])}. Esse código não foi aplicado a nenhum protótipo.`);
+  } else if (n.col === "evidencia") {
+    fatos = fato("Evidência", esc(n.evidencia)) + (n.testes ? fato("Testes", `<span class="mono">${esc(n.testes)}</span>`) : "");
+  } else if (n.col === "gate") {
+    fatos = fato("Situação", "Condição de bloqueio definida na Etapa 7. O mapa a trata como proposta.");
+  }
+  const tit = n.col === "risco" ? n.titulo : n.col === "requisito" ? n.titulo : n.col === "ameaca" ? n.titulo : n.titulo || n.rotulo;
+  const chip = n.tipo === "deteccao" ? chipSit(sit, ROTULO_SIT_D) : chipSit(sit, ROTULO_SIT);
+  const nivel = n.col === "risco" ? `<span class="chip-st"><i class="sw c-${nivelClasse(n.nivel)}"></i>${esc(n.nivel)}</span>` : "";
+
+  const c = cadeia(n.id);
+  let cadeiaHtml = "";
+  COLS.forEach(col => {
+    const ids = [...c.todos].filter(x => x !== n.id && porId[x].col === col.k)
+      .sort((a, b) => a.localeCompare(b, "pt", { numeric: true }));
+    if (ids.length) cadeiaHtml += `<div class="chain-row"><b>${NOME_COL_PLURAL[col.k]} · ${ids.length}</b>${ids.map(x => `<button type="button" class="pill" data-go="${esc(x)}" title="${esc(porId[x].rotulo)}">${esc(x)}</button>`).join("")}</div>`;
+  });
+  p.innerHTML = `<div>
+      <div class="p-head"><span class="p-id">${esc(idMostrado(n))}</span><span class="p-kind">${esc(tipo)}</span>${nivel}${chip}</div>
+      <p class="p-title">${esc(tit)}</p><dl class="facts">${fatos}</dl></div>
+    <div class="chain"><h2>Cadeia: tudo o que leva a ${esc(n.id)} e tudo o que sai dele</h2>${cadeiaHtml || "<span class='p-kind'>Sem ligações no mapa</span>"}</div>`;
+  p.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => selecionar(b.dataset.go)));
+}
+
+/* ---------- interação ---------- */
+function selecionar(id) {
+  if (!porId[id]) return;
+  estado.spot = null;
+  estado.hover = null;
+  estado.sel = estado.sel === id ? null : id;
+  if (estado.sel && !visiveis().has(id)) estado.vista = "todos";
+  try { history.replaceState(null, "", estado.sel ? "#" + estado.sel : location.pathname + location.search); } catch (e) { /* o hash é só um atalho */ }
+  desenhar();
+}
+
+document.querySelectorAll("#seg-vista button").forEach(b => b.addEventListener("click", () => {
+  estado.vista = b.dataset.v;
+  if (estado.sel && !visiveis().has(estado.sel)) estado.sel = null;
+  desenhar();
+}));
+document.querySelectorAll("#seg-modo button").forEach(b => b.addEventListener("click", () => { estado.modo = b.dataset.m; desenhar(); }));
+document.getElementById("busca").addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const q = e.target.value.trim().toLowerCase();
+  const n = DADOS.nos.find(x => x.id.toLowerCase() === q || x.id.toLowerCase().replace("-", "") === q);
+  if (n) { estado.sel = null; selecionar(n.id); e.target.value = ""; }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && (estado.sel || estado.spot)) { estado.sel = null; estado.spot = null; desenhar(); }
+});
+
+(function iniciar() {
+  const h = decodeURIComponent((location.hash || "").slice(1));
+  if (porId[h]) { estado.sel = h; if (!visiveis().has(h)) estado.vista = "todos"; }
+  desenhar();
+  window.addEventListener("hashchange", () => {
+    const x = decodeURIComponent((location.hash || "").slice(1));
+    if (porId[x] && x !== estado.sel) { estado.spot = null; estado.sel = x; if (!visiveis().has(x)) estado.vista = "todos"; desenhar(); }
+  });
+})();
+</script>

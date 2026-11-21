@@ -1,0 +1,2276 @@
+{
+ "nos": [
+  {
+   "id": "T01",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A1",
+   "titulo": "Usuário com escrita, ou conta indevidamente obtida, altera ou remove lançamentos",
+   "entrada": "Rotas PATCH/DELETE de lançamentos",
+   "controle_existente": "Guards require_role / require_any_role; AuditMiddleware; bloqueio otimista",
+   "rotulo": "Alteração de lançamentos"
+  },
+  {
+   "id": "T02",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "A1, A2, A3",
+   "titulo": "Usuário sem permissões para acesso obtém o controle de usuário com permissões",
+   "entrada": "Login via Keycloak + OAuth Service (src/core/auth/)",
+   "controle_existente": "SSO corporativo; rate limit de 10/min no login",
+   "rotulo": "Conta privilegiada capturada"
+  },
+  {
+   "id": "T03",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A1",
+   "titulo": "Usuário obtém dados de lançamentos sem autorização",
+   "entrada": "Rotas GET de lançamentos",
+   "controle_existente": "JWT válido e role diferente de none em toda rota de negócio; skill sec-route",
+   "rotulo": "Leitura sem permissão"
+  },
+  {
+   "id": "T04",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A1",
+   "titulo": "Usuário vaza lançamentos do sistema",
+   "entrada": "Listagem e exportação de lançamentos",
+   "controle_existente": "Guards de perfil; rate limit global de 60/min por IP",
+   "rotulo": "Vazamento de lançamentos"
+  },
+  {
+   "id": "T05",
+   "col": "ameaca",
+   "stride": "Repudiation",
+   "ativos": "A2",
+   "titulo": "Perda do timeline impede a identificação do que cada usuário fez no sistema",
+   "entrada": "Timeline de transições e tabela audit_logs",
+   "controle_existente": "AuditMiddleware grava toda requisição mutante com o usuário do token",
+   "rotulo": "Perda do timeline"
+  },
+  {
+   "id": "T06",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A3",
+   "titulo": "Alteração não autorizada em regras de serviço",
+   "entrada": "Rotas de CRUD de regras de serviço",
+   "controle_existente": "Guards de perfil; AuditMiddleware",
+   "rotulo": "Regra de serviço alterada"
+  },
+  {
+   "id": "T07",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A4",
+   "titulo": "Acesso não autorizado a anexos",
+   "entrada": "Endpoints de upload/download de anexos",
+   "controle_existente": "Guards de perfil; URLs assinadas temporárias",
+   "rotulo": "Acesso indevido a anexos"
+  },
+  {
+   "id": "T08",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A4",
+   "titulo": "Vazamento de informações dos anexos",
+   "entrada": "Download de anexos por URL assinada",
+   "controle_existente": "URLs assinadas temporárias",
+   "rotulo": "Vazamento de anexos"
+  },
+  {
+   "id": "T09",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A5",
+   "titulo": "Acesso não autorizado a CNPJs",
+   "entrada": "Rotas de cadastros (clientes, fornecedores)",
+   "controle_existente": "Guards de perfil",
+   "rotulo": "Acesso indevido a CNPJs"
+  },
+  {
+   "id": "T10",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A5",
+   "titulo": "Vazamento de CNPJs",
+   "entrada": "Consultas e exportações de cadastros",
+   "controle_existente": "Guards de perfil; rate limit global de 60/min por IP",
+   "rotulo": "Vazamento de CNPJs"
+  },
+  {
+   "id": "T11",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A6",
+   "titulo": "Acesso não autorizado a endereços de e-mail dos aprovadores",
+   "entrada": "Central de aprovações e logs de envio de e-mail",
+   "controle_existente": "Guards de perfil",
+   "rotulo": "Acesso a e-mails de aprovadores"
+  },
+  {
+   "id": "T12",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A6",
+   "titulo": "Vazamento de endereços de e-mail dos aprovadores",
+   "entrada": "Central de aprovações e logs de envio de e-mail",
+   "controle_existente": "Guards de perfil",
+   "rotulo": "Vazamento de e-mails"
+  },
+  {
+   "id": "T13",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A7",
+   "titulo": "Alteração em código de cálculo de valores",
+   "entrada": "src/application/use_cases/billing/billing/_shared.py, repositório e pipeline de CI",
+   "controle_existente": "Mypy strict; ~2.900 testes; PR-Agent; Trivy; cooldown de dependências",
+   "rotulo": "Código de cálculo alterado"
+  },
+  {
+   "id": "T14a",
+   "col": "ameaca",
+   "stride": "Denial of Service",
+   "ativos": "A8",
+   "titulo": "Saturação da máquina de estados impedindo o fluxo de autorização",
+   "entrada": "Rotas de transição de status (change_item_status)",
+   "controle_existente": "Rate limit global de 60/min por IP e de 10/min nas operações em lote",
+   "rotulo": "Saturação da máquina de estados"
+  },
+  {
+   "id": "T14b",
+   "col": "ameaca",
+   "stride": "Elevation of Privilege",
+   "ativos": "A8",
+   "titulo": "Guard de autorização que falha aberto (exceção tratada como permitido)",
+   "entrada": "Guards em src/presentation/api/routes/infra/auth.py",
+   "controle_existente": "Skill sec-route; testes automatizados",
+   "rotulo": "Guard que falha aberto"
+  },
+  {
+   "id": "T15",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A9",
+   "titulo": "Vazamento de segredo gerador de token",
+   "entrada": "Configuração (src/core/config.py), variáveis de ambiente, logs e repositório",
+   "controle_existente": "Cofre corporativo; Gitleaks local e no CI; skill sec-secrets",
+   "rotulo": "Vazamento do JWT_SECRET"
+  },
+  {
+   "id": "T16",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "A9",
+   "titulo": "Uso de segredo vazado para impersonificar usuário válido",
+   "entrada": "Validação de JWT em src/core/auth/",
+   "controle_existente": "JWT_SECRET ≥ 32 bytes, cofre, Gitleaks no CI",
+   "rotulo": "Token forjado com o segredo"
+  },
+  {
+   "id": "T17",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A10",
+   "titulo": "Vazamento da chave de API interna",
+   "entrada": "Configuração e variáveis de ambiente",
+   "controle_existente": "Cofre corporativo; Gitleaks local e no CI; skill sec-secrets",
+   "rotulo": "Vazamento da chave interna"
+  },
+  {
+   "id": "T18",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "A10",
+   "titulo": "Código não autorizado impersonificando chamadas válidas",
+   "entrada": "internal_router (20 callbacks internos)",
+   "controle_existente": "Header X-Callback-Secret; rotas fora do OpenAPI",
+   "rotulo": "Callback interno forjado"
+  },
+  {
+   "id": "T19",
+   "col": "ameaca",
+   "stride": "Elevation of Privilege",
+   "ativos": "A11",
+   "titulo": "Acesso não autorizado aos anexos extra sistema",
+   "entrada": "Azure Blob / MinIO",
+   "controle_existente": "URLs assinadas temporárias; credenciais no cofre",
+   "rotulo": "Acesso direto ao storage"
+  },
+  {
+   "id": "T20",
+   "col": "ameaca",
+   "stride": "Denial of Service",
+   "ativos": "A12",
+   "titulo": "Ataque a infraestrutura, deixando o sistema inoperante",
+   "entrada": "Instância PostgreSQL 16",
+   "controle_existente": "Rede corporativa; rate limit global de 60/min por IP",
+   "rotulo": "Ataque ao PostgreSQL"
+  },
+  {
+   "id": "T21",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "A13",
+   "titulo": "Envio de e-mails impersonificando sender válido",
+   "entrada": "Serviço de e-mail corporativo",
+   "controle_existente": "Chave no cofre; Gitleaks local e no CI",
+   "rotulo": "E-mail com remetente falso"
+  },
+  {
+   "id": "T22",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A14",
+   "titulo": "Vazamento de informações sobre faturamento",
+   "entrada": "WebSocket /ws, canal billing:{AAAA-MM}",
+   "controle_existente": "Autenticação pela primeira mensagem do WebSocket",
+   "rotulo": "Vazamento pelo WebSocket"
+  },
+  {
+   "id": "T23",
+   "col": "ameaca",
+   "stride": "Denial of Service",
+   "ativos": "A14",
+   "titulo": "Sobrecarga no EventBus impedindo operações válidas",
+   "entrada": "WebSocket /ws e EventBus",
+   "controle_existente": "Rate limit global de 60/min por IP (cobertura do /ws a confirmar)",
+   "rotulo": "Sobrecarga do EventBus"
+  },
+  {
+   "id": "T24",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A1, A8",
+   "titulo": "Ausência de segregação de funções: o mesmo usuário (admin) cria, envia e aprova o próprio lançamento",
+   "entrada": "Máquina de estados de aprovação (change_item_status)",
+   "controle_existente": "Nenhum: o admin executa todas as transições; AuditMiddleware registra as ações",
+   "rotulo": "Admin aprova o próprio"
+  },
+  {
+   "id": "T25",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "Oracle, A5",
+   "titulo": "Injeção de SQL nas consultas cruas ao Oracle",
+   "entrada": "src/infrastructure/persistence/queries/",
+   "controle_existente": "Usuário Oracle somente leitura; skill sec-oracle",
+   "rotulo": "Injeção de SQL no Oracle"
+  },
+  {
+   "id": "T26",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A1, A4",
+   "titulo": "IDOR: acesso a lançamento ou anexo de outro cliente/período trocando o ID na URL",
+   "entrada": "Rotas que recebem ID de lançamento ou anexo",
+   "controle_existente": "Guards de perfil (sem verificação de escopo do recurso)",
+   "rotulo": "IDOR em lançamento"
+  },
+  {
+   "id": "T27",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "A1",
+   "titulo": "CSRF em rotas mutantes, já que o cookie access_token tem precedência sobre o header",
+   "entrada": "Rotas mutantes autenticadas por cookie",
+   "controle_existente": "Cookie HttpOnly (SameSite e proteção anti-CSRF a confirmar)",
+   "rotulo": "CSRF em rota mutante"
+  },
+  {
+   "id": "T28",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "A8, A9",
+   "titulo": "Configuração insegura em produção: provedor local habilitado ou DEBUG=true (expõe /docs)",
+   "entrada": "src/core/config.py e variáveis de ambiente do deploy",
+   "controle_existente": "/docs e /redoc só existem com DEBUG=true",
+   "rotulo": "Provedor local em produção"
+  },
+  {
+   "id": "T29",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A4, aprovadores",
+   "titulo": "Anexo malicioso (macro, polyglot, arquivo com conteúdo diferente da extensão) usado para atacar quem abre",
+   "entrada": "Upload de anexos",
+   "controle_existente": "Validação de MIME type e extensão, teto de 25 MB",
+   "rotulo": "Anexo malicioso"
+  },
+  {
+   "id": "T30",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "Arquivos ERP",
+   "titulo": "Injeção de fórmula (CSV/Excel injection) em campos textuais exportados",
+   "entrada": "Geradores de carga ERP (src/infrastructure/xlsx/)",
+   "controle_existente": "Nenhum identificado",
+   "rotulo": "Injeção de fórmula na carga"
+  },
+  {
+   "id": "T31",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "Arquivos ERP, A11",
+   "titulo": "Adulteração do arquivo de carga entre a geração e a importação no ERP",
+   "entrada": "Azure Blob / MinIO",
+   "controle_existente": "Credenciais de storage no cofre (sem hash ou assinatura do arquivo)",
+   "rotulo": "Carga do ERP adulterada"
+  },
+  {
+   "id": "T32",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A12",
+   "titulo": "Ambientes compartilhando a mesma instância PostgreSQL (schema por ambiente)",
+   "entrada": "Instância PostgreSQL única, schema por POSTGRES_SCHEMA",
+   "controle_existente": "Separação por schema",
+   "rotulo": "Ambientes no mesmo banco"
+  },
+  {
+   "id": "T33",
+   "col": "ameaca",
+   "stride": "Spoofing",
+   "ativos": "Sessão",
+   "titulo": "Roubo ou reuso de refresh token",
+   "entrada": "/v1/auth/refresh",
+   "controle_existente": "Cookie de refresh com path restrito a /v1/auth/refresh (rotação a confirmar)",
+   "rotulo": "Reuso de refresh token"
+  },
+  {
+   "id": "T34",
+   "col": "ameaca",
+   "stride": "Repudiation",
+   "ativos": "A2",
+   "titulo": "Perda de registros de auditoria por gravação em background (falha, reinício, exceção)",
+   "entrada": "AuditMiddleware e tabela audit_logs",
+   "controle_existente": "Gravação automática de toda requisição mutante",
+   "rotulo": "Auditoria perdida"
+  },
+  {
+   "id": "T35",
+   "col": "ameaca",
+   "stride": "Repudiation",
+   "ativos": "A1, A2",
+   "titulo": "Aprovador nega ter aprovado, sem evidência suficiente de autoria",
+   "entrada": "Timeline de transições",
+   "controle_existente": "AuditMiddleware com usuário extraído do token",
+   "rotulo": "Aprovador nega autoria"
+  },
+  {
+   "id": "T36",
+   "col": "ameaca",
+   "stride": "Information Disclosure",
+   "ativos": "A1, A6",
+   "titulo": "Envio de e-mail de aprovação a destinatário indevido pela funcionalidade legítima",
+   "entrada": "Central de aprovações",
+   "controle_existente": "Log de envio de e-mail preserva destinatários e valores",
+   "rotulo": "E-mail ao destinatário errado"
+  },
+  {
+   "id": "T37",
+   "col": "ameaca",
+   "stride": "Tampering",
+   "ativos": "A7",
+   "titulo": "Dependência maliciosa na cadeia de suprimentos",
+   "entrada": "Dependências Python e pipeline de CI",
+   "controle_existente": "Cooldown de 7 dias; Renovate; Trivy",
+   "rotulo": "Dependência maliciosa"
+  },
+  {
+   "id": "R01",
+   "col": "risco",
+   "titulo": "Usuário com escrita altera ou remove lançamentos e o valor adulterado chega ao ERP como legítimo",
+   "condicao": "Perfil analista/admin com escrita, aprovação pode não detectar a adulteração",
+   "p": 3,
+   "i": 4,
+   "pontuacao": 12,
+   "nivel": "Crítico",
+   "ameacas": [
+    "T01"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend e segurança com gestão de negócio",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Alteração de lançamentos"
+  },
+  {
+   "id": "R02",
+   "col": "risco",
+   "titulo": "Atacante captura conta privilegiada (admin/gestor) via SSO e opera em nome da vítima",
+   "condicao": "Phishing/sessão vazada, ausência de verificação adicional (MFA) e de detecção de sessão anômala",
+   "p": 3,
+   "i": 4,
+   "pontuacao": 12,
+   "nivel": "Crítico",
+   "ameacas": [
+    "T02"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 1,
+   "responsavel": "Equipe de segurança e identidade (SSO)",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Captura de conta privilegiada"
+  },
+  {
+   "id": "R03",
+   "col": "risco",
+   "titulo": "Usuário lê dados restritos ao seu perfil (lançamentos, anexos, CNPJ, e-mails) por falha de autorização",
+   "condicao": "Verificação de autorização ausente/inconsistente em rota, endpoint de anexo ou consulta (IDOR/BOLA)",
+   "p": 3,
+   "i": 3,
+   "pontuacao": 9,
+   "nivel": "Alto",
+   "ameacas": [
+    "T03",
+    "T07",
+    "T09",
+    "T11",
+    "T26"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 3,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Acesso a dados restritos"
+  },
+  {
+   "id": "R04",
+   "col": "risco",
+   "titulo": "Acesso direto aos anexos no storage, fora do controle da aplicação",
+   "condicao": "URL assinada mal configurada (validade longa, sem escopo) ou vazamento de credencial de storage",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T19"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 3,
+   "responsavel": "Equipe de infraestrutura e backend",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Acesso direto aos anexos"
+  },
+  {
+   "id": "R05",
+   "col": "risco",
+   "titulo": "Exfiltração em volume de dados críticos (lançamentos, anexos, CNPJ, e-mails)",
+   "condicao": "Ator já com leitura (perfil, conta capturada ou R03) e ausência de limite/monitoração de extração",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T04",
+    "T08",
+    "T10",
+    "T12"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 3,
+   "responsavel": "",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Exfiltração em volume"
+  },
+  {
+   "id": "R06",
+   "col": "risco",
+   "titulo": "Vazamento do JWT_SECRET",
+   "condicao": "Segredo em repositório, log, imagem ou variável de ambiente exposta, sem cofre/rotação",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T15"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 1,
+   "responsavel": "Equipe de segurança e DevOps",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Vazamento do JWT_SECRET"
+  },
+  {
+   "id": "R07",
+   "col": "risco",
+   "titulo": "Uso do JWT_SECRET vazado para forjar token e impersonar usuário, inclusive admin",
+   "condicao": "Assinatura de token depende só do segredo, sem verificação adicional de sessão/dispositivo",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T16"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 1,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Token forjado com o segredo"
+  },
+  {
+   "id": "R08",
+   "col": "risco",
+   "titulo": "Remoção ou adulteração da timeline de auditoria para apagar o rastro",
+   "condicao": "Timeline mutável, operação capaz de remover/alterar registros, sem trilha imutável",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T05"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Timeline adulterada"
+  },
+  {
+   "id": "R09",
+   "col": "risco",
+   "titulo": "Alteração não autorizada de regra de serviço/faixa corrompe todos os cálculos futuros",
+   "condicao": "Permissão de escrita em serviços, alteração se propaga de forma silenciosa aos cálculos",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T06"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend com gestão de negócio",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Regra de serviço alterada"
+  },
+  {
+   "id": "R10",
+   "col": "risco",
+   "titulo": "Adulteração do motor de cálculo via código/pipeline fatura errado em escala",
+   "condicao": "Insider com acesso ao repositório ou cadeia de build comprometida, revisão/testes contornados",
+   "p": 1,
+   "i": 4,
+   "pontuacao": 4,
+   "nivel": "Médio",
+   "ameacas": [
+    "T13",
+    "T37"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de desenvolvimento e DevOps",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Motor de cálculo adulterado"
+  },
+  {
+   "id": "R11",
+   "col": "risco",
+   "titulo": "Sobrecarga da máquina de estados/guards de autorização paralisa o fluxo de aprovação",
+   "condicao": "Endpoints de transição sem limite de requisições, guards custosos por chamada",
+   "p": 2,
+   "i": 2,
+   "pontuacao": 4,
+   "nivel": "Médio",
+   "ameacas": [
+    "T14a"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 4,
+   "responsavel": "Equipe de backend",
+   "residual": {
+    "calculo": "1×2=2",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Sobrecarga da máquina"
+  },
+  {
+   "id": "R12",
+   "col": "risco",
+   "titulo": "Vazamento do CELERY_CALLBACK_SECRET",
+   "condicao": "Segredo exposto em repositório/log/config, única barreira dos callbacks internos",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T17"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 1,
+   "responsavel": "Equipe de segurança e DevOps",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Vazamento do segredo Celery"
+  },
+  {
+   "id": "R13",
+   "col": "risco",
+   "titulo": "Código malicioso forja callbacks internos com a chave vazada e injeta operações falsas",
+   "condicao": "Callback validado só pela chave, sem verificação de origem (mTLS/rede) nem idempotência",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T18"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 1,
+   "responsavel": "Equipe de backend e infraestrutura",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Callback interno forjado"
+  },
+  {
+   "id": "R14",
+   "col": "risco",
+   "titulo": "Indisponibilidade do PostgreSQL/infra deixa o sistema inoperante",
+   "condicao": "Carga excessiva, exaustão de conexões ou ataque à infraestrutura, sem limites/isolamento",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T20"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 4,
+   "responsavel": "Equipe de infraestrutura e DBA",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "PostgreSQL indisponível"
+  },
+  {
+   "id": "R15",
+   "col": "risco",
+   "titulo": "Envio de e-mails maliciosos em nome da empresa (phishing/fraude de cobrança) com a EMAIL_SERVICE_API_KEY vazada",
+   "condicao": "Chave do serviço de e-mail exposta, ausência de proteção de remetente (SPF/DKIM/DMARC)",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T21"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 5,
+   "responsavel": "Equipe de segurança com o provedor de e-mail",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "E-mail malicioso da empresa"
+  },
+  {
+   "id": "R16",
+   "col": "risco",
+   "titulo": "Sobrecarga do EventBus WebSocket impede a entrega de notificações de faturamento",
+   "condicao": "Conexões/eventos sem limite, sem controle de taxa nem quota por conexão",
+   "p": 3,
+   "i": 2,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T23"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 4,
+   "responsavel": "Equipe de backend e infraestrutura",
+   "residual": {
+    "calculo": "1×2=2",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Sobrecarga do EventBus"
+  },
+  {
+   "id": "R17",
+   "col": "risco",
+   "titulo": "Subscrição indevida no canal billing:{AAAA-MM} vaza o estado de faturamento do período",
+   "condicao": "Falta de validação de autorização por canal na inscrição do WebSocket",
+   "p": 2,
+   "i": 2,
+   "pontuacao": 4,
+   "nivel": "Médio",
+   "ameacas": [
+    "T22"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 3,
+   "responsavel": "Equipe de backend",
+   "residual": {
+    "calculo": "1×2=2",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Inscrição indevida no canal"
+  },
+  {
+   "id": "R18",
+   "col": "risco",
+   "titulo": "Usuário admin cria, envia e aprova o próprio lançamento, e o valor segue ao ERP como se tivesse passado por aprovação completa",
+   "condicao": "Regra de segregação de funções inexistente: o admin executa todas as transições",
+   "p": 3,
+   "i": 4,
+   "pontuacao": 12,
+   "nivel": "Crítico",
+   "ameacas": [
+    "T24"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend com gestão de negócio",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Autoaprovação do admin"
+  },
+  {
+   "id": "R19",
+   "col": "risco",
+   "titulo": "Injeção de SQL nas consultas cruas ao Oracle expõe dados legados fora do escopo do usuário",
+   "condicao": "SQL concatenado à mão em queries/, depende de disciplina contínua no uso de bindvars",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T25"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 3,
+   "responsavel": "Equipe de backend",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Injeção de SQL no Oracle"
+  },
+  {
+   "id": "R20",
+   "col": "risco",
+   "titulo": "Provedor local habilitado ou DEBUG=true em produção reabre a autenticação por senha e expõe o mapa da API",
+   "condicao": "Comportamento definido só por variável de ambiente, sem barreira adicional no deploy",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T28"
+   ],
+   "estrategia": "Evitar",
+   "estagio": 1,
+   "responsavel": "Equipe de DevOps e backend",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Provedor local em produção"
+  },
+  {
+   "id": "R21",
+   "col": "risco",
+   "titulo": "Credencial ou carga de QA alcança o schema de produção na instância PostgreSQL compartilhada",
+   "condicao": "Instância única, isolamento depende apenas da separação de usuários por schema",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T32"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 4,
+   "responsavel": "Equipe de infraestrutura e DBA",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "QA alcança produção"
+  },
+  {
+   "id": "R22",
+   "col": "risco",
+   "titulo": "Anexo malicioso (macro, polyglot) compromete a estação de quem tem perfil de aprovação",
+   "condicao": "Validação de MIME/extensão não detecta conteúdo malicioso, sem varredura antivírus",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T29"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 3,
+   "responsavel": "Equipe de segurança e backend",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Anexo malicioso"
+  },
+  {
+   "id": "R23",
+   "col": "risco",
+   "titulo": "Fórmula injetada ou arquivo de carga adulterado vira lançamento contábil no ERP",
+   "condicao": "Campos textuais exportados sem tratamento e arquivo armazenado sem hash ou assinatura",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T30",
+    "T31"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend com a equipe do ERP",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Carga do ERP adulterada"
+  },
+  {
+   "id": "R24",
+   "col": "risco",
+   "titulo": "Desvio de e-mail de aprovação",
+   "condicao": "Usuário com acesso à central pode indicar destinatário não autorizado, sem validação suficiente de vínculo com o cliente",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T36"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 5,
+   "responsavel": "Equipe de backend e segurança com gestão de negócio",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Desvio de e-mail de aprovação"
+  },
+  {
+   "id": "R25",
+   "col": "risco",
+   "titulo": "Reuso de refresh token roubado",
+   "condicao": "Atacante obtém refresh token ainda válido e o reuso não é impedido por rotação, revogação ou detecção suficiente; esses controles estão a confirmar",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T33"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 1,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Reuso de refresh token"
+  },
+  {
+   "id": "R26",
+   "col": "risco",
+   "titulo": "Perda de auditoria por falha na gravação",
+   "condicao": "Operação de negócio é confirmada antes da persistência da auditoria em background, e interrupção pode descartar registros sem recuperação garantida",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T34"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Perda de auditoria"
+  },
+  {
+   "id": "R27",
+   "col": "risco",
+   "titulo": "Repúdio de aprovação por evidência insuficiente",
+   "condicao": "Aprovação é associada ao usuário do token, mas as evidências disponíveis são insuficientes para esclarecer uma contestação de autoria",
+   "p": 2,
+   "i": 3,
+   "pontuacao": 6,
+   "nivel": "Médio",
+   "ameacas": [
+    "T35"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend e segurança com gestão de negócio",
+   "residual": {
+    "calculo": "1×3=3",
+    "nivel": "Baixo"
+   },
+   "rotulo": "Repúdio de aprovação"
+  },
+  {
+   "id": "R28",
+   "col": "risco",
+   "titulo": "Contorno de autorização por falha aberta do guard",
+   "condicao": "Exceção na verificação de autorização é tratada como permissão, e usuário de privilégios limitados consegue provocar ou aproveitar essa falha",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T14b"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "Falha aberta do guard"
+  },
+  {
+   "id": "R29",
+   "col": "risco",
+   "titulo": "Alteração de lançamento por CSRF",
+   "condicao": "Rota mutante aceita cookie de sessão enviado em requisição induzida; SameSite, validação de origem e proteção anti-CSRF são ausentes ou insuficientes, a confirmar",
+   "p": 2,
+   "i": 4,
+   "pontuacao": 8,
+   "nivel": "Alto",
+   "ameacas": [
+    "T27"
+   ],
+   "estrategia": "Reduzir",
+   "estagio": 2,
+   "responsavel": "Equipe de backend e segurança",
+   "residual": {
+    "calculo": "1×4=4",
+    "nivel": "Médio"
+   },
+   "rotulo": "CSRF em lançamento"
+  },
+  {
+   "id": "RS01",
+   "col": "requisito",
+   "decisao": "D01",
+   "titulo": "Depois do envio para aprovação, só a máquina de estados muda o lançamento",
+   "detalhe": "Decisão D01: tratar a máquina de estados como única via de mudança. Inclui a segregação de funções de R18: quem criou, enviou ou alterou não aprova.",
+   "cwe": "CWE-841 · OWASP A06 Insecure Design",
+   "riscos": [
+    "R01",
+    "R18"
+   ],
+   "situacao": "ok",
+   "rotulo": "Imutável após o envio"
+  },
+  {
+   "id": "RS02",
+   "col": "requisito",
+   "decisao": "D02",
+   "titulo": "MFA obrigatório para administrador e gestor, conferido no SSO e na API",
+   "detalhe": "Decisão D02: exigir o MFA no SSO e conferi-lo também na API.",
+   "cwe": "CWE-308 · OWASP A07 Authentication Failures",
+   "riscos": [
+    "R02"
+   ],
+   "situacao": "ok",
+   "rotulo": "MFA em admin e gestor"
+  },
+  {
+   "id": "RS03",
+   "col": "requisito",
+   "decisao": "D03",
+   "titulo": "Autorização por recurso no servidor (cliente, período e responsável)",
+   "detalhe": "Decisão D03: autorizar por recurso, na camada de casos de uso. Negação devolve 404, igual ao recurso inexistente.",
+   "cwe": "CWE-639, CWE-862 · OWASP A01 Broken Access Control",
+   "riscos": [
+    "R03"
+   ],
+   "situacao": "ok",
+   "rotulo": "Autorização por recurso"
+  },
+  {
+   "id": "RS04",
+   "col": "requisito",
+   "decisao": "D04",
+   "titulo": "Token assinado com chave assimétrica do cofre e validado de forma estrita",
+   "detalhe": "Decisão D04: assinar o token de sessão com chave assimétrica guardada no cofre e validar o token de forma estrita.",
+   "cwe": "CWE-522, CWE-347 · OWASP A04 Cryptographic Failures",
+   "riscos": [
+    "R06",
+    "R07"
+   ],
+   "situacao": "parcial",
+   "rotulo": "JWT assimétrico e estrito"
+  },
+  {
+   "id": "RS05",
+   "col": "requisito",
+   "decisao": "D05",
+   "titulo": "Auditoria gravada na mesma transação da operação",
+   "detalhe": "Decisão D05: gravar a auditoria na mesma transação e entregar os eventos por uma outbox.",
+   "cwe": "CWE-778, CWE-223 · OWASP A09 Logging and Alerting Failures",
+   "riscos": [
+    "R26"
+   ],
+   "situacao": "ok",
+   "rotulo": "Auditoria transacional"
+  },
+  {
+   "id": "RS06",
+   "col": "requisito",
+   "decisao": "D06",
+   "titulo": "Guards negam por padrão e toda rota declara sua política",
+   "detalhe": "Decisão D06: fazer os guards negarem por padrão e exigir política de acesso declarada em toda rota.",
+   "cwe": "CWE-636, CWE-755 · OWASP A10 Mishandling of Exceptional Conditions",
+   "riscos": [
+    "R28"
+   ],
+   "situacao": "ok",
+   "rotulo": "Negar por padrão"
+  },
+  {
+   "id": "RS07",
+   "col": "requisito",
+   "decisao": "D07",
+   "titulo": "Carga do ERP com manifesto assinado e campos neutralizados",
+   "detalhe": "Decisão D07: assinar a carga do ERP com um manifesto e conferi-la antes da importação.",
+   "cwe": "CWE-345, CWE-353, CWE-1236 · OWASP A08 Data Integrity Failures",
+   "riscos": [
+    "R23"
+   ],
+   "situacao": "ausente",
+   "rotulo": "Carga do ERP assinada"
+  },
+  {
+   "id": "RS08",
+   "col": "requisito",
+   "decisao": "D08",
+   "titulo": "Proteção anti-CSRF antes dos guards",
+   "detalhe": "Decisão D08: proteger as rotas autenticadas por cookie contra CSRF antes dos guards.",
+   "cwe": "CWE-352 · OWASP A01 Broken Access Control",
+   "riscos": [
+    "R29"
+   ],
+   "situacao": "ausente",
+   "rotulo": "Proteção anti-CSRF"
+  },
+  {
+   "id": "C1",
+   "col": "controle",
+   "titulo": "Keycloak e OAuth Service: segundo fator no SSO",
+   "transversal": false,
+   "rotulo": "SSO com 2º fator"
+  },
+  {
+   "id": "C2",
+   "col": "controle",
+   "titulo": "Guards da API: recusa token privilegiado sem MFA",
+   "transversal": false,
+   "rotulo": "Guard exige MFA"
+  },
+  {
+   "id": "C3",
+   "col": "controle",
+   "titulo": "Casos de uso: permissão sobre o recurso",
+   "transversal": false,
+   "rotulo": "Permissão por recurso"
+  },
+  {
+   "id": "C4",
+   "col": "controle",
+   "titulo": "Máquina de estados (billing_status)",
+   "transversal": false,
+   "rotulo": "Máquina de estados"
+  },
+  {
+   "id": "C5",
+   "col": "controle",
+   "titulo": "Gerador da carga do ERP: só a versão aprovada",
+   "transversal": false,
+   "rotulo": "Carga: versão aprovada"
+  },
+  {
+   "id": "C6",
+   "col": "controle",
+   "titulo": "Tabela audit_logs",
+   "transversal": true,
+   "rotulo": "audit_logs"
+  },
+  {
+   "id": "C7",
+   "col": "controle",
+   "titulo": "Monitoramento e alertas",
+   "transversal": true,
+   "rotulo": "Monitoramento e alertas"
+  },
+  {
+   "id": "C8",
+   "col": "controle",
+   "titulo": "Pipeline de CI com testes de segurança",
+   "transversal": true,
+   "rotulo": "Testes de segurança"
+  },
+  {
+   "id": "C9",
+   "col": "controle",
+   "titulo": "Emissor do token e cofre (KMS)",
+   "transversal": false,
+   "rotulo": "Emissor e cofre (KMS)"
+  },
+  {
+   "id": "C10",
+   "col": "controle",
+   "titulo": "Guards: validação estrita do token",
+   "transversal": false,
+   "rotulo": "Validação do token"
+  },
+  {
+   "id": "C11",
+   "col": "controle",
+   "titulo": "Auditoria e outbox na mesma transação",
+   "transversal": false,
+   "rotulo": "Auditoria e outbox"
+  },
+  {
+   "id": "C12",
+   "col": "controle",
+   "titulo": "Guards: negar por padrão",
+   "transversal": false,
+   "rotulo": "Guard nega por padrão"
+  },
+  {
+   "id": "C13",
+   "col": "controle",
+   "titulo": "Carga do ERP: manifesto assinado",
+   "transversal": false,
+   "rotulo": "Manifesto da carga"
+  },
+  {
+   "id": "C14",
+   "col": "controle",
+   "titulo": "Middleware anti-CSRF",
+   "transversal": false,
+   "rotulo": "Anti-CSRF"
+  },
+  {
+   "id": "VF-RS01",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS01: alteração após o envio",
+   "situacao": "ok",
+   "evidencia": "V-01 PATCH 200→422 · V-02 DELETE 204→422 · V-03 reabrir 422→200",
+   "testes": "test_rs01_patch_e_delete_apos_envio_sao_recusados, test_rs01_reabrir_exige_novo_envio_e_nova_aprovacao, test_rs01_aprovado_nao_reabre",
+   "rotulo": "Alteração pós-envio recusada"
+  },
+  {
+   "id": "VF-R18",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "R18: autoaprovação recusada",
+   "situacao": "ok",
+   "evidencia": "V-04 admin aprova o próprio lançamento 200→403",
+   "testes": "test_r18_admin_nao_aprova_o_proprio_lancamento, test_r18_lote_com_autoaprovacao_nao_muda_nenhum_item",
+   "rotulo": "Autoaprovação recusada"
+  },
+  {
+   "id": "VF-RS02",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS02: token sem MFA recusado",
+   "situacao": "ok",
+   "evidencia": "V-06 escrita privilegiada sem MFA: 401",
+   "testes": "test_ts04_token_de_gestor_sem_mfa_e_recusado, test_claim_mfa_forjado_nao_basta_sem_mfa_na_sessao",
+   "rotulo": "Token sem MFA recusado"
+  },
+  {
+   "id": "VF-RS03",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS03: recurso fora do escopo",
+   "situacao": "ok",
+   "evidencia": "V-05 leitura de cliente fora do escopo: 404",
+   "testes": "test_rotas_por_cliente_e_faturamento_negam_com_404_identico_ao_inexistente, test_escopo_por_periodo",
+   "rotulo": "Fora do escopo: 404"
+  },
+  {
+   "id": "VF-RS04",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS04: validação do token (chave simétrica)",
+   "situacao": "parcial",
+   "evidencia": "V-07 token com alg none: 401. Assinatura assimétrica e cofre não implementados.",
+   "testes": "test_token_invalido_e_recusado; test_rs04_assinatura_assimetrica está como xfail",
+   "rotulo": "Validação de token"
+  },
+  {
+   "id": "VF-RS05",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS05: auditoria na mesma transação",
+   "situacao": "ok",
+   "evidencia": "Falha simulada na auditoria desfaz a operação (só para lançamentos)",
+   "testes": "test_rs05_falha_na_auditoria_desfaz_a_operacao, test_rs05_alteracao_grava_item_timeline_e_auditoria_juntos",
+   "rotulo": "Falha na auditoria desfaz"
+  },
+  {
+   "id": "VF-RS06",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS06: toda rota declara política",
+   "situacao": "ok",
+   "evidencia": "Teste enumera as rotas registradas; guard nega por padrão",
+   "testes": "test_toda_rota_declara_politica_de_acesso, test_sem_token_e_negado",
+   "rotulo": "Rotas com política"
+  },
+  {
+   "id": "VF-RS07",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS07: carga do ERP",
+   "situacao": "ausente",
+   "evidencia": "Sem protótipo da carga do ERP",
+   "testes": "",
+   "rotulo": "Sem verificação"
+  },
+  {
+   "id": "VF-RS08",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "RS08: anti-CSRF",
+   "situacao": "ausente",
+   "evidencia": "V-08 requisição só com cookie, de outra origem: 200 (esperado 403)",
+   "testes": "test_rs08_requisicao_so_com_cookie_e_origem_externa_e_recusada está como xfail",
+   "rotulo": "CSRF aceito (xfail)"
+  },
+  {
+   "id": "VF-V01",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "Achado V01: refresh token reaceito",
+   "situacao": "achado",
+   "evidencia": "ZAP, retest autenticado: POST /v1/auth/refresh. Correção proposta no código da Etapa 6 (rotação do refresh), ainda não aplicada aos protótipos.",
+   "testes": "",
+   "rotulo": "Refresh reaceito"
+  },
+  {
+   "id": "VF-V02",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "Achado V02: access_token no corpo",
+   "situacao": "achado",
+   "evidencia": "ZAP, retest autenticado: POST /v1/auth/login. Correção proposta: token só no cookie HttpOnly.",
+   "testes": "",
+   "rotulo": "Token no corpo"
+  },
+  {
+   "id": "VF-V03",
+   "col": "evidencia",
+   "tipo": "verificacao",
+   "titulo": "Achado V03: PyJWT com CVE",
+   "situacao": "achado",
+   "evidencia": "Dependency-Check: dependência do backend. Correção proposta: atualizar o PyJWT.",
+   "testes": "",
+   "rotulo": "PyJWT com CVE"
+  },
+  {
+   "id": "D01",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Falhas repetidas no segundo fator",
+   "situacao": "ok",
+   "nota": "SecurityMonitor dispara mfa_falhas_repetidas; teste test_falhas_repetidas_de_mfa_geram_alerta.",
+   "situacao_proposta": "ok",
+   "severidade": "Alta",
+   "riscos": [
+    "R02"
+   ],
+   "requisito": "RS02",
+   "rotulo": "Falhas repetidas de MFA"
+  },
+  {
+   "id": "D02",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Negações repetidas por escopo",
+   "situacao": "parcial",
+   "nota": "Alerta implementado, mas sem teste do alerta.",
+   "situacao_proposta": "ok",
+   "severidade": "Alta",
+   "riscos": [
+    "R03",
+    "R05"
+   ],
+   "requisito": "RS03",
+   "rotulo": "Negações repetidas"
+  },
+  {
+   "id": "D03",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Falhas de login repetidas",
+   "situacao": "ausente",
+   "nota": "login_falha é registrado na auditoria, sem regra de alerta.",
+   "situacao_proposta": "ok",
+   "severidade": "Média",
+   "riscos": [
+    "R02"
+   ],
+   "requisito": "RS02",
+   "rotulo": "Falhas de login repetidas"
+  },
+  {
+   "id": "D04",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Login privilegiado suspeito",
+   "situacao": "ausente",
+   "nota": "login_sucesso é registrado, sem regra de alerta.",
+   "situacao_proposta": "ok",
+   "severidade": "Crítica",
+   "riscos": [
+    "R02"
+   ],
+   "requisito": "RS02",
+   "rotulo": "Login privilegiado suspeito"
+  },
+  {
+   "id": "D05",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Reuso de refresh token",
+   "situacao": "ausente",
+   "nota": "Evento não gerado: falta a rotação do refresh (achado V01).",
+   "situacao_proposta": "ok",
+   "severidade": "Alta",
+   "riscos": [
+    "R25"
+   ],
+   "requisito": "RS04",
+   "rotulo": "Reuso de refresh token"
+  },
+  {
+   "id": "D06",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Token recusado ou chave usada fora do emissor",
+   "situacao": "ausente",
+   "nota": "O sinal fica só na resposta HTTP 401.",
+   "situacao_proposta": "parcial",
+   "severidade": "Crítica ou Média",
+   "riscos": [
+    "R06",
+    "R07"
+   ],
+   "requisito": "RS04",
+   "rotulo": "Token recusado ou chave fora"
+  },
+  {
+   "id": "D07",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Alteração após o envio ou autoaprovação",
+   "situacao": "ausente",
+   "nota": "No original o evento não é gerado. No corrigido, autoaprovacao_negada é registrada, sem regra de alerta.",
+   "situacao_proposta": "parcial",
+   "severidade": "Alta",
+   "riscos": [
+    "R01",
+    "R18"
+   ],
+   "requisito": "RS01",
+   "rotulo": "Alteração pós-envio"
+  },
+  {
+   "id": "D08",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Regra de serviço alterada",
+   "situacao": "ausente",
+   "nota": "Os eventos de regra de serviço são registrados, sem correlação.",
+   "situacao_proposta": "parcial",
+   "severidade": "Média",
+   "riscos": [
+    "R09"
+   ],
+   "requisito": null,
+   "rotulo": "Regra de serviço alterada"
+  },
+  {
+   "id": "D09",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Consulta ou exportação em volume",
+   "situacao": "ausente",
+   "nota": "A leitura não é registrada.",
+   "situacao_proposta": "ausente",
+   "severidade": "Média",
+   "riscos": [
+    "R05"
+   ],
+   "requisito": "RS03",
+   "rotulo": "Consulta em volume"
+  },
+  {
+   "id": "D10",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Falha na verificação de acesso (503)",
+   "situacao": "ausente",
+   "nota": "O sinal fica só no log.",
+   "situacao_proposta": "ausente",
+   "severidade": "Alta",
+   "riscos": [
+    "R28"
+   ],
+   "requisito": "RS06",
+   "rotulo": "Falha do guard (503)"
+  },
+  {
+   "id": "D11",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Falha de auditoria ou da outbox",
+   "situacao": "ausente",
+   "nota": "Não há outbox, então o evento não é gerado.",
+   "situacao_proposta": "ausente",
+   "severidade": "Crítica",
+   "riscos": [
+    "R26",
+    "R08"
+   ],
+   "requisito": "RS05",
+   "rotulo": "Falha de auditoria"
+  },
+  {
+   "id": "D12",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Recusa por origem ou token anti-CSRF",
+   "situacao": "ausente",
+   "nota": "O sinal fica só no log (WebSocket 4403).",
+   "situacao_proposta": "parcial",
+   "severidade": "Média",
+   "riscos": [
+    "R29",
+    "R17"
+   ],
+   "requisito": "RS08",
+   "rotulo": "Recusa de origem ou CSRF"
+  },
+  {
+   "id": "D13",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Limite de requisições excedido (429)",
+   "situacao": "ausente",
+   "nota": "O sinal fica só na resposta HTTP 429.",
+   "situacao_proposta": "ok",
+   "severidade": "Baixa",
+   "riscos": [
+    "R11",
+    "R16"
+   ],
+   "requisito": null,
+   "rotulo": "Limite excedido (429)"
+  },
+  {
+   "id": "D14",
+   "col": "evidencia",
+   "tipo": "deteccao",
+   "titulo": "Divergência na carga do ERP",
+   "situacao": "ausente",
+   "nota": "Não há carga do ERP no protótipo.",
+   "situacao_proposta": "ausente",
+   "severidade": "Crítica",
+   "riscos": [
+    "R23"
+   ],
+   "requisito": "RS07",
+   "rotulo": "Divergência na carga"
+  },
+  {
+   "id": "QG1",
+   "col": "gate",
+   "titulo": "Riscos prioritários identificados e com responsável",
+   "rotulo": "Riscos prioritários"
+  },
+  {
+   "id": "QG2",
+   "col": "gate",
+   "titulo": "Cada requisito rastreado a um risco",
+   "rotulo": "Requisito rastreado"
+  },
+  {
+   "id": "QG3",
+   "col": "gate",
+   "titulo": "PR aprovado, lint e tipos limpos, sem segredo",
+   "rotulo": "PR, lint e tipos"
+  },
+  {
+   "id": "QG4",
+   "col": "gate",
+   "titulo": "Todos os testes de segurança aprovados",
+   "rotulo": "Testes de segurança"
+  },
+  {
+   "id": "QG5",
+   "col": "gate",
+   "titulo": "Sem segredo e sem CVE crítica ou alta sem análise",
+   "rotulo": "Sem segredo ou CVE"
+  },
+  {
+   "id": "QG6",
+   "col": "gate",
+   "titulo": "Nenhum alerta alto ou crítico sem análise",
+   "rotulo": "Alertas analisados"
+  },
+  {
+   "id": "QG7",
+   "col": "gate",
+   "titulo": "QG3 a QG6 aprovados e produção autorizada",
+   "rotulo": "Deploy autorizado"
+  },
+  {
+   "id": "QG8",
+   "col": "gate",
+   "titulo": "Incidentes tratados e lições registradas",
+   "rotulo": "Incidentes tratados"
+  }
+ ],
+ "arestas": [
+  [
+   "T01",
+   "R01"
+  ],
+  [
+   "T02",
+   "R02"
+  ],
+  [
+   "T03",
+   "R03"
+  ],
+  [
+   "T07",
+   "R03"
+  ],
+  [
+   "T09",
+   "R03"
+  ],
+  [
+   "T11",
+   "R03"
+  ],
+  [
+   "T26",
+   "R03"
+  ],
+  [
+   "T19",
+   "R04"
+  ],
+  [
+   "T04",
+   "R05"
+  ],
+  [
+   "T08",
+   "R05"
+  ],
+  [
+   "T10",
+   "R05"
+  ],
+  [
+   "T12",
+   "R05"
+  ],
+  [
+   "T15",
+   "R06"
+  ],
+  [
+   "T16",
+   "R07"
+  ],
+  [
+   "T05",
+   "R08"
+  ],
+  [
+   "T06",
+   "R09"
+  ],
+  [
+   "T13",
+   "R10"
+  ],
+  [
+   "T37",
+   "R10"
+  ],
+  [
+   "T14a",
+   "R11"
+  ],
+  [
+   "T17",
+   "R12"
+  ],
+  [
+   "T18",
+   "R13"
+  ],
+  [
+   "T20",
+   "R14"
+  ],
+  [
+   "T21",
+   "R15"
+  ],
+  [
+   "T23",
+   "R16"
+  ],
+  [
+   "T22",
+   "R17"
+  ],
+  [
+   "T24",
+   "R18"
+  ],
+  [
+   "T25",
+   "R19"
+  ],
+  [
+   "T28",
+   "R20"
+  ],
+  [
+   "T32",
+   "R21"
+  ],
+  [
+   "T29",
+   "R22"
+  ],
+  [
+   "T30",
+   "R23"
+  ],
+  [
+   "T31",
+   "R23"
+  ],
+  [
+   "T36",
+   "R24"
+  ],
+  [
+   "T33",
+   "R25"
+  ],
+  [
+   "T34",
+   "R26"
+  ],
+  [
+   "T35",
+   "R27"
+  ],
+  [
+   "T14b",
+   "R28"
+  ],
+  [
+   "T27",
+   "R29"
+  ],
+  [
+   "R01",
+   "RS01"
+  ],
+  [
+   "R18",
+   "RS01"
+  ],
+  [
+   "RS01",
+   "C4"
+  ],
+  [
+   "RS01",
+   "C5"
+  ],
+  [
+   "RS01",
+   "C6"
+  ],
+  [
+   "RS01",
+   "C7"
+  ],
+  [
+   "RS01",
+   "C8"
+  ],
+  [
+   "R02",
+   "RS02"
+  ],
+  [
+   "RS02",
+   "C1"
+  ],
+  [
+   "RS02",
+   "C2"
+  ],
+  [
+   "RS02",
+   "C7"
+  ],
+  [
+   "R03",
+   "RS03"
+  ],
+  [
+   "RS03",
+   "C3"
+  ],
+  [
+   "RS03",
+   "C6"
+  ],
+  [
+   "RS03",
+   "C7"
+  ],
+  [
+   "RS03",
+   "C8"
+  ],
+  [
+   "R06",
+   "RS04"
+  ],
+  [
+   "R07",
+   "RS04"
+  ],
+  [
+   "RS04",
+   "C9"
+  ],
+  [
+   "RS04",
+   "C10"
+  ],
+  [
+   "RS04",
+   "C7"
+  ],
+  [
+   "RS04",
+   "C8"
+  ],
+  [
+   "R26",
+   "RS05"
+  ],
+  [
+   "RS05",
+   "C11"
+  ],
+  [
+   "RS05",
+   "C6"
+  ],
+  [
+   "RS05",
+   "C7"
+  ],
+  [
+   "RS05",
+   "C8"
+  ],
+  [
+   "R28",
+   "RS06"
+  ],
+  [
+   "RS06",
+   "C12"
+  ],
+  [
+   "RS06",
+   "C6"
+  ],
+  [
+   "RS06",
+   "C7"
+  ],
+  [
+   "RS06",
+   "C8"
+  ],
+  [
+   "R23",
+   "RS07"
+  ],
+  [
+   "RS07",
+   "C13"
+  ],
+  [
+   "RS07",
+   "C5"
+  ],
+  [
+   "RS07",
+   "C7"
+  ],
+  [
+   "RS07",
+   "C8"
+  ],
+  [
+   "R29",
+   "RS08"
+  ],
+  [
+   "RS08",
+   "C14"
+  ],
+  [
+   "RS08",
+   "C6"
+  ],
+  [
+   "RS08",
+   "C7"
+  ],
+  [
+   "RS08",
+   "C8"
+  ],
+  [
+   "C4",
+   "VF-RS01"
+  ],
+  [
+   "C4",
+   "VF-R18"
+  ],
+  [
+   "C1",
+   "VF-RS02"
+  ],
+  [
+   "C2",
+   "VF-RS02"
+  ],
+  [
+   "C3",
+   "VF-RS03"
+  ],
+  [
+   "C10",
+   "VF-RS04"
+  ],
+  [
+   "C11",
+   "VF-RS05"
+  ],
+  [
+   "C12",
+   "VF-RS06"
+  ],
+  [
+   "C13",
+   "VF-RS07"
+  ],
+  [
+   "C14",
+   "VF-RS08"
+  ],
+  [
+   "C10",
+   "VF-V01"
+  ],
+  [
+   "T33",
+   "VF-V01"
+  ],
+  [
+   "C10",
+   "VF-V02"
+  ],
+  [
+   "T16",
+   "VF-V02"
+  ],
+  [
+   "T37",
+   "VF-V03"
+  ],
+  [
+   "C2",
+   "D01"
+  ],
+  [
+   "R02",
+   "D01"
+  ],
+  [
+   "C3",
+   "D02"
+  ],
+  [
+   "R03",
+   "D02"
+  ],
+  [
+   "R05",
+   "D02"
+  ],
+  [
+   "C1",
+   "D03"
+  ],
+  [
+   "R02",
+   "D03"
+  ],
+  [
+   "C1",
+   "D04"
+  ],
+  [
+   "R02",
+   "D04"
+  ],
+  [
+   "C10",
+   "D05"
+  ],
+  [
+   "R25",
+   "D05"
+  ],
+  [
+   "C10",
+   "D06"
+  ],
+  [
+   "R06",
+   "D06"
+  ],
+  [
+   "R07",
+   "D06"
+  ],
+  [
+   "C4",
+   "D07"
+  ],
+  [
+   "R01",
+   "D07"
+  ],
+  [
+   "R18",
+   "D07"
+  ],
+  [
+   "R09",
+   "D08"
+  ],
+  [
+   "C3",
+   "D09"
+  ],
+  [
+   "R05",
+   "D09"
+  ],
+  [
+   "C12",
+   "D10"
+  ],
+  [
+   "R28",
+   "D10"
+  ],
+  [
+   "C11",
+   "D11"
+  ],
+  [
+   "R26",
+   "D11"
+  ],
+  [
+   "R08",
+   "D11"
+  ],
+  [
+   "C14",
+   "D12"
+  ],
+  [
+   "R29",
+   "D12"
+  ],
+  [
+   "R17",
+   "D12"
+  ],
+  [
+   "R11",
+   "D13"
+  ],
+  [
+   "R16",
+   "D13"
+  ],
+  [
+   "C13",
+   "D14"
+  ],
+  [
+   "R23",
+   "D14"
+  ],
+  [
+   "R07",
+   "QG1"
+  ],
+  [
+   "R26",
+   "QG1"
+  ],
+  [
+   "R03",
+   "QG1"
+  ],
+  [
+   "R29",
+   "QG1"
+  ],
+  [
+   "R01",
+   "QG1"
+  ],
+  [
+   "R23",
+   "QG1"
+  ],
+  [
+   "R06",
+   "QG1"
+  ],
+  [
+   "R28",
+   "QG1"
+  ],
+  [
+   "R18",
+   "QG1"
+  ],
+  [
+   "R02",
+   "QG1"
+  ],
+  [
+   "RS01",
+   "QG2"
+  ],
+  [
+   "RS02",
+   "QG2"
+  ],
+  [
+   "RS03",
+   "QG2"
+  ],
+  [
+   "RS04",
+   "QG2"
+  ],
+  [
+   "RS05",
+   "QG2"
+  ],
+  [
+   "RS06",
+   "QG2"
+  ],
+  [
+   "RS07",
+   "QG2"
+  ],
+  [
+   "RS08",
+   "QG2"
+  ],
+  [
+   "VF-RS01",
+   "QG4"
+  ],
+  [
+   "VF-R18",
+   "QG4"
+  ],
+  [
+   "VF-RS02",
+   "QG4"
+  ],
+  [
+   "VF-RS03",
+   "QG4"
+  ],
+  [
+   "VF-RS04",
+   "QG4"
+  ],
+  [
+   "VF-RS05",
+   "QG4"
+  ],
+  [
+   "VF-RS06",
+   "QG4"
+  ],
+  [
+   "VF-RS07",
+   "QG4"
+  ],
+  [
+   "VF-RS08",
+   "QG4"
+  ],
+  [
+   "VF-V01",
+   "QG6"
+  ],
+  [
+   "VF-V02",
+   "QG6"
+  ],
+  [
+   "VF-V03",
+   "QG5"
+  ],
+  [
+   "D01",
+   "QG8"
+  ],
+  [
+   "D02",
+   "QG8"
+  ],
+  [
+   "D03",
+   "QG8"
+  ],
+  [
+   "D04",
+   "QG8"
+  ],
+  [
+   "D05",
+   "QG8"
+  ],
+  [
+   "D06",
+   "QG8"
+  ],
+  [
+   "D07",
+   "QG8"
+  ],
+  [
+   "D08",
+   "QG8"
+  ],
+  [
+   "D09",
+   "QG8"
+  ],
+  [
+   "D10",
+   "QG8"
+  ],
+  [
+   "D11",
+   "QG8"
+  ],
+  [
+   "D12",
+   "QG8"
+  ],
+  [
+   "D13",
+   "QG8"
+  ],
+  [
+   "D14",
+   "QG8"
+  ]
+ ]
+}
