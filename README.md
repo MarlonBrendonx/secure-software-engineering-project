@@ -36,7 +36,7 @@ versões com os mesmos testes e ataques.
 
 ### Mapa de rastreabilidade
 
-O [mapa de rastreabilidade](extra/mapa-rastreabilidade/index.html) mostra de forma interativa, como as ameaças, riscos, requisitos e controles das etapas se relacionam entre si.
+O [mapa de rastreabilidade](https://htmlpreview.github.io/?https://github.com/MarlonBrendonx/secure-software-engineering-project/blob/main/extra/mapa-rastreabilidade/index.html) mostra de forma interativa, como as ameaças, riscos, requisitos e controles das etapas se relacionam entre si.
 
 ### Visão geral
 
