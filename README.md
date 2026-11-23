@@ -34,6 +34,10 @@ está em [`extra/prototipo-psp-corrigido`](extra/prototipo-psp-corrigido/README.
 [verificação das correções](docs/prototipo-corrigido/verificacao-das-correcoes.md) compara as duas
 versões com os mesmos testes e ataques.
 
+### Mapa de rastreabilidade
+
+O [mapa de rastreabilidade](extra/mapa-rastreabilidade/index.html) mostra de forma interativa, como as ameaças, riscos, requisitos e controles das etapas se relacionam entre si.
+
 ### Visão geral
 
 | Documento                                                   | Status | O que responde                                                                       |
