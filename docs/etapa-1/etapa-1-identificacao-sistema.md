@@ -2,7 +2,7 @@
 
 ### Qual problema o sistema resolve
 
-O sistema centraliza o registro, o cálculo e a aprovação dos valores que a empresa fatura a cada cliente da rede, por período. Antes de existir um sistema autoritativo, o valor faturado dependia de
+Na visão geral do sistema, foram descritos vários módulos da aplicação. Porém, para o proposito desse projeto optamos por focar em todo motor de fluxo de aprovações e também na criação de serviços que entrarão nesse fluxo. Ou seja, registro, o cálculo e a aprovação dos valores que a empresa fatura a cada cliente da rede, por período. Antes de existir um sistema autoritativo, o valor faturado dependia de
 planilhas manuais, sujeitas a erro de cálculo, a falta de auditoria de quem alterou o quê e
 a ausência de um fluxo formal de aprovação antes de o valor chegar ao ERP. O software resolve
 isso ao tornar o **servidor a autoridade sobre o valor** (todo valor é recalculado a
@@ -73,22 +73,22 @@ Legenda: ✅ permitido · ❌ negado · ? a confirmar nos guards `require_role` 
 
 Legenda de criticidade: 🔴 alta · 🟡 média.
 
-| Identificador | Ativo                                                      | Tipo                 | Crít. | Por que importa (impacto se comprometido)                                      |
-| ------------- | ---------------------------------------------------------- | -------------------- | :---: | ------------------------------------------------------------------------------ |
-| A1            | Lançamentos e faturamentos (valores por cliente × período) | Dado                 |  🔴   | Adulteração muda o valor real faturado ao cliente.                             |
-| A2            | Timeline de transações e auditoria                         | Dado                 |  🔴   | Prova de quem fez o quê, sua perda inviabiliza auditoria e contestação.        |
-| A3            | Regras de serviço e faixas (base do cálculo)               | Dado                 |  🔴   | Erro/adulteração se propaga silenciosamente para todo valor calculado.         |
-| A4            | Anexos dos lançamentos                                     | Dado                 |  🟡   | Documentos de suporte ao faturamento, podem conter dados de negócio sensíveis. |
+| Identificador | Ativo                                                      | Tipo                                                 | Crít. | Por que importa (impacto se comprometido)                                      |
+| ------------- | ---------------------------------------------------------- | ---------------------------------------------------- | :---: | ------------------------------------------------------------------------------ |
+| A1            | Lançamentos e faturamentos (valores por cliente × período) | Dado                                                 |  🔴   | Adulteração muda o valor real faturado ao cliente.                             |
+| A2            | Timeline de transações e auditoria                         | Dado                                                 |  🔴   | Prova de quem fez o quê, sua perda inviabiliza auditoria e contestação.        |
+| A3            | Regras de serviço e faixas (base do cálculo)               | Dado                                                 |  🔴   | Erro/adulteração se propaga silenciosamente para todo valor calculado.         |
+| A4            | Anexos dos lançamentos                                     | Dado                                                 |  🟡   | Documentos de suporte ao faturamento, podem conter dados de negócio sensíveis. |
 | A5            | CNPJ de clientes e fornecedores                            | Dado de negócio (pode conter dado pessoal em MEI/EI) |  🟡   | Dado identificável de pessoa jurídica, exposição indevida e vazamento.         |
-| A6            | E-mails corporativos de aprovadores                        | Dado pessoal         |  🟡   | Alvo de phishing, usado no fluxo de aprovação por e-mail.                      |
-| A7            | Motor de cálculo de valores                                | Código               |  🔴   | Núcleo de todo cálculo, bug ou adulteração fatura errado em escala.              |
-| A8            | Máquina de estados com guards de autorização               | Código               |  🔴   | Único ponto entre o token e a mutação, falha pode burlar o fluxo de aprovação.  |
-| A9            | `JWT_SECRET`                                               | Segredo              |  🔴   | Vazamento permite forjar token com roles de `admin`.                           |
-| A10           | `CELERY_CALLBACK_SECRET`                                   | Chave                |  🔴   | Única barreira dos callbacks internos.                                         |
-| A11           | Credenciais/URLs de storage                                | Chave                |  🔴   | Acesso direto aos anexos fora do controle da aplicação.                        |
-| A12           | PostgreSQL                                                 | Infra                |  🔴   | Dados dos lançamentos, serviços e roles                                        |
-| A13           | `EMAIL_SERVICE_API_KEY`                                    | Chave                |  🔴   | Permite enviar e-mail em nome da empresa, spoofing de cobrança ao cliente.     |
-| A14           | EventBus WebSocket, validação canal `billing:{AAAA-MM}`    | Código / Infra       |  🟡   | inscrição indevida vaza o estado de faturamento do período.                    |
+| A6            | E-mails corporativos de aprovadores                        | Dado pessoal                                         |  🟡   | Alvo de phishing, usado no fluxo de aprovação por e-mail.                      |
+| A7            | Motor de cálculo de valores                                | Código                                               |  🔴   | Núcleo de todo cálculo, bug ou adulteração fatura errado em escala.            |
+| A8            | Máquina de estados com guards de autorização               | Código                                               |  🔴   | Único ponto entre o token e a mutação, falha pode burlar o fluxo de aprovação. |
+| A9            | `JWT_SECRET`                                               | Segredo                                              |  🔴   | Vazamento permite forjar token com roles de `admin`.                           |
+| A10           | `CELERY_CALLBACK_SECRET`                                   | Chave                                                |  🔴   | Única barreira dos callbacks internos.                                         |
+| A11           | Credenciais/URLs de storage                                | Chave                                                |  🔴   | Acesso direto aos anexos fora do controle da aplicação.                        |
+| A12           | PostgreSQL                                                 | Infra                                                |  🔴   | Dados dos lançamentos, serviços e roles                                        |
+| A13           | `EMAIL_SERVICE_API_KEY`                                    | Chave                                                |  🔴   | Permite enviar e-mail em nome da empresa, spoofing de cobrança ao cliente.     |
+| A14           | EventBus WebSocket, validação canal `billing:{AAAA-MM}`    | Código / Infra                                       |  🟡   | inscrição indevida vaza o estado de faturamento do período.                    |
 
 ---
 

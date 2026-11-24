@@ -14,14 +14,14 @@ Documento descritivo do sistema, extraído do código-fonte.
 | Atributo                   | Valor                                                                              |
 | -------------------------- | ---------------------------------------------------------------------------------- |
 | **Nome**                   | Network Billing Backend                                                            |
-| **Identificador técnico**  | `network-billing-backend` (pacote `src`, versão `0.1.0`)                           |
+| **Projeto**                | `network-billing-backend`                                                          |
 | **Classificação**          | Software proprietário, uso interno corporativo                                     |
-| **Tipo**                   | Backend de API HTTP (REST + WebSocket), com processamento assíncrono               |
+| **Tipo**                   | Backend de API (REST)                                                              |
 | **Domínio de negócio**     | Faturamento, provisionamento contábil, bases de rede credenciada e analytics       |
 | **Prefixo da API**         | `/v1`                                                                              |
 | **Runtime**                | Python 3.11+                                                                       |
 | **Framework**              | FastAPI + Uvicorn                                                                  |
-| **Rastreio de demandas**   | Jira (chave obrigatória na mensagem de commit)                                     |
+|                            |
 | **Consumidor principal**   | Frontend web de Faturamento (aplicação SPA)                                        |
 | **Provedor de identidade** | Keycloak corporativo via OAuth Service .NET; provedor `local` para desenvolvimento |
 
@@ -61,44 +61,37 @@ O sistema centraliza o ciclo financeiro da plataforma de Network Billing da epha
 Clean Architecture + DDD em quatro camadas, com a regra de dependência apontando sempre
 para dentro (`domain → application → infrastructure/presentation`):
 
-| Camada               | Responsabilidade                                                                                                       | Arquivos |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- |
-| `src/domain`         | Entidades (dataclasses puras), value objects, portas (Protocol), exceções, paginação. Zero dependência externa.        | 118      |
-| `src/application`    | Casos de uso — uma classe por operação, com Command DTO (dataclass) no mesmo arquivo.                                  | 295      |
-| `src/infrastructure` | Implementações concretas: gateways SQLAlchemy, SQL cru Oracle, storage, Celery tasks, geração de Excel, clientes HTTP. | 355      |
-| `src/presentation`   | Rotas FastAPI, schemas Pydantic, middleware, container de injeção de dependências (`deps.py`).                         | 127      |
-| `src/core`           | Transversal: configuração, logging, rate limit, autenticação, EventBus WebSocket, app Celery.                          | 18       |
-
-Números do código (excluindo testes): **623 arquivos Python, ~62 mil linhas**.
-São **38 portas de gateway** no domínio contra **33 implementações** na infraestrutura,
-e **113 migrations** Alembic.
+| Camada               | Responsabilidade                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `src/domain`         | Entidades (dataclasses puras), value objects, portas (Protocol), exceções, paginação. Zero dependência externa.           |
+| `src/application`    | Casos de uso, uma classe por operação, com Command DTO (dataclass) no mesmo arquivo.                                      |
+| `src/infrastructure` | Implementações concretas: gateways SQLAlchemy, SQL nativo Oracle, storage, Celery tasks, geração de Excel, clientes HTTP. |
+| `src/presentation`   | Rotas FastAPI, schemas Pydantic, middleware, container de injeção de dependências (`deps.py`).                            |
+| `src/core`           | configuração, logging, rate limit, autenticação, EventBus WebSocket, app Celery.                                          |
 
 **Pontos arquiteturais que valem atenção:**
 
-- **Persistência híbrida.** PostgreSQL é o banco transacional (SQLAlchemy 2.0 async,
-  Alembic). Oracle é **somente leitura**, acessado com SQL cru via `oracledb`, sem ORM —
-  é a fonte legada de dashboards e das sincronizações de rede.
-- **Mappers obrigatórios.** Gateways retornam entidades de domínio, nunca modelos ORM.
-  A conversão vive em `src/infrastructure/persistence/mappers/{entity}_mapper.py`.
-- **Cálculo no servidor.** Valores enviados pelo cliente HTTP são sempre recalculados a
-  partir da regra de serviço; divergência vira `warning` na resposta, não erro.
+- **Persistência híbrida.** PostgreSQL é utilizado nas operações transacionais, com SQLAlchemy 2.0 async e Alembic. O Oracle é somente leitura, acessado via SQL nativo com `oracledb`, atendendo aos dashboards legados e às sincronizações de rede.
 
+- **Mappers obrigatórios.** Gateways devem retornar entidades de domínio, nunca modelos ORM. As conversões ficam centralizadas em `src/infrastructure/persistence/mappers/{entity}_mapper.py`.
+
+- **Cálculos no servidor.** O servidor sempre recalcula os valores recebidos do cliente conforme as regras de negócio. Se houver divergência, retorna um `warning` na resposta, sem interromper a operação.
 
 ### 2.3 Superfície exposta
 
-| Interface               | Volume                                      | Observação                                                                               |
-| ----------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Endpoints HTTP públicos | ~183 (83 GET, 45 PATCH, 43 POST, 12 DELETE) | Todos sob `/v1`, com guard de autenticação                                               |
-| Callbacks internos      | 20                                          | `internal_router`, sem JWT, protegidos por `X-Callback-Secret`, fora do OpenAPI          |
-| WebSocket               | 1 (`/ws`)                                   | Autenticado pela primeira mensagem; canais `billing:{AAAA-MM}` e `notifications:{email}` |
+| Interface               | Observação                                                                               |
+| ----------------------- | ---------------------------------------------------------------------------------------- |
+| Endpoints HTTP públicos | Todos sob `/v1`, com guard de autenticação                                               |
+| Callbacks internos      | `internal_router`, sem JWT, protegidos por `X-Callback-Secret`, fora do OpenAPI          |
+| WebSocket               | Autenticado pela primeira mensagem; canais `billing:{AAAA-MM}` e `notifications:{email}` |
 
 ### 2.4 Processamento assíncrono
 
-**33 tarefas Celery** (broker RabbitMQ, result backend RPC) cobrem exportações Excel,
+**Tarefas Celery** (broker RabbitMQ, result backend RPC) cobrem exportações Excel,
 importações em massa, sincronizações de rede, aprovações em lote e sincronização de
 usuários do Keycloak. O agendamento não é estático: o `DatabaseBeatScheduler` lê as
 expressões cron da tabela `task_schedules` e **recarrega do banco a cada 60 segundos**,
-permitindo alterar horários sem reiniciar o Beat.
+permitindo alterar horários sem reiniciar.
 
 O padrão de conclusão é sempre o mesmo: o worker chama um callback HTTP interno, que
 persiste a notificação e publica `task_status_changed` no canal WebSocket do usuário.
@@ -109,17 +102,17 @@ persiste a notificação e publica `task_status_changed` no canal WebSocket do u
 
 ### 3.1 Ativos de dados (PostgreSQL)
 
-| Grupo | Conteúdo | Criticidade | Por quê |
-|-------|----------|-------------|---------|
-| **Faturamento** | Faturamentos por cliente × período, lançamentos, histórico de transições e anexos | **Alta** | Valores financeiros e sua trilha de aprovação. Perda ou adulteração afeta faturamento real ao cliente. |
-| **Cadastros contratuais** | Empresas, clientes, contratos, regras de serviço e suas faixas, programas, grupos econômicos, segmentos, centros de custo, unidades de negócio e fornecedores | **Alta** | Determinam o cálculo de todo valor. Erro aqui se propaga silenciosamente para o faturamento. |
-| **Bases de rede** | Pagar/receber, retido/recuperado, varejo, contraprestações (anual, mensal, entregas), sinistralidade e controle de execução dos syncs | **Alta** | Base de pagamento/recebimento da rede credenciada, com estado de aprovação por eixo. |
-| **Provisão** | Snapshots do fechamento, histórico de fecha/reabre, lançamentos de emissão, carga histórica estática e histórico de importações | **Alta** | Fechamento contábil. O histórico é *append-only* por exigência de auditoria. |
-| **Auditoria e identidade** | Trilha de requisições mutantes, auditoria de mudança de perfil, usuários do provedor local e cache/log de sincronização do Keycloak | **Alta** | Guarda hash bcrypt de senha e é a prova de quem fez o quê. |
-| **Operacional** | Logs de exportação e seus itens, logs de envio de e-mail de aprovação, notificações e agendamentos das tarefas | Média | O log de e-mail preserva o payload enviado ao cliente inclui destinatários e valores. |
+| Grupo                      | Conteúdo                                                                                                                                                      | Criticidade | Por quê                                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
+| **Faturamento**            | Faturamentos por cliente × período, lançamentos, histórico de transições e anexos                                                                             | **Alta**    | Valores financeiros e sua trilha de aprovação. Perda ou adulteração afeta faturamento real ao cliente. |
+| **Cadastros contratuais**  | Empresas, clientes, contratos, regras de serviço e suas faixas, programas, grupos econômicos, segmentos, centros de custo, unidades de negócio e fornecedores | **Alta**    | Determinam o cálculo de todo valor. Erro aqui se propaga silenciosamente para o faturamento.           |
+| **Bases de rede**          | Pagar/receber, retido/recuperado, varejo, contraprestações (anual, mensal, entregas), sinistralidade e controle de execução dos syncs                         | **Alta**    | Base de pagamento/recebimento da rede credenciada, com estado de aprovação por eixo.                   |
+| **Provisão**               | Snapshots do fechamento, histórico de fecha/reabre, lançamentos de emissão, carga histórica estática e histórico de importações                               | **Alta**    | Fechamento contábil. O histórico é _append-only_ por exigência de auditoria.                           |
+| **Auditoria e identidade** | Trilha de requisições mutantes, auditoria de mudança de perfil, usuários do provedor local e cache/log de sincronização do Keycloak                           | **Alta**    | Guarda hash bcrypt de senha e é a prova de quem fez o quê.                                             |
+| **Operacional**            | Logs de exportação e seus itens, logs de envio de e-mail de aprovação, notificações e agendamentos das tarefas                                                | Média       | O log de e-mail preserva o payload enviado ao cliente inclui destinatários e valores.                  |
 
 **Dados sensíveis identificados:** CNPJ de empresas, fornecedores e estabelecimentos da
-rede; valores financeiros por cliente; e-mails corporativos de aprovadores; hash de senha
+rede; valores financeiros por cliente, e-mails corporativos de aprovadores, hash de senha
 dos usuários do provedor local. Não há CPF nem dado de paciente no modelo de dados deste
 serviço.
 
@@ -130,15 +123,14 @@ serviço.
 | Motor de cálculo de valores     | `src/application/use_cases/billing/billing/_shared.py`                              | Autoridade sobre todo valor faturado (`fixed_value`, `multiplication`, `percentage`, `range`). |
 | Máquina de estados de aprovação | casos de uso de `change_item_status` + `src/domain/value_objects/billing_status.py` | Define quais transições são legais e quem pode executá-las.                                    |
 | Guards de autorização           | `src/presentation/api/routes/infra/auth.py` (`require_any_role`, `require_role`)    | Único ponto entre o token e os dados. Rota nova sem guard é exposição direta.                  |
-| Provedores de autenticação      | `src/core/auth/` (`local_provider`, `keycloak_provider`, `factory`)                 | Emissão e validação de token; troca de provedor por configuração.                              |
-| SQL cru Oracle                  | `src/infrastructure/persistence/queries/` (dashboard, network, psp)                 | Único lugar com SQL concatenado a mão — superfície de injeção se bindvars não forem usados.    |
-| Geradores de carga ERP          | `src/infrastructure/xlsx/` + `routes/billing/_erp_exporters.py`                     | O arquivo gerado é consumido pelo ERP; layout errado vira lançamento contábil errado.          |
-| Migrations                      | `alembic/versions/` (113)                                                           | Migration já aplicada nunca deve ser editada — o CI roda `upgrade head` no ambiente real.      |
+| Provedores de autenticação      | `src/core/auth/` (`local_provider`, `keycloak_provider`, `factory`)                 | Emissão e validação de token, troca de provedor por configuração.                              |
+| SQL nativo Oracle               | `src/infrastructure/persistence/queries/` (dashboard, network, psp)                 | Único lugar com SQL concatenado a mão, superfície de injeção se bindvars não forem usados.     |
+| Geradores de carga ERP          | `src/infrastructure/xlsx/` + `routes/billing/_erp_exporters.py`                     | O arquivo gerado é consumido pelo ERP, layout errado vira lançamento contábil errado.          |
+| Migrations                      | `alembic/versions/`                                                                 | Migration já aplicada nunca deve ser editada, o CI roda `upgrade head` no ambiente real.       |
 
-### 3.3 Ativos de configuração e segredos
+### 3.3 Ativos de configuração e chaves
 
-Todos carregados por variável de ambiente via `src/core/config.py` (Pydantic Settings).
-**Nenhum segredo deve existir no código** — o cofre corporativo é a fonte.
+Nenhuma chave é armazenada em hard code, todas chaves são armazenadas em ambiente corporativo de Key Vault
 
 | Segredo                | Variável                                                                   | Uso                                                                       |
 | ---------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
@@ -152,7 +144,6 @@ Todos carregados por variável de ambiente via `src/core/config.py` (Pydantic Se
 | Serviço de e-mail      | `EMAIL_SERVICE_API_KEY`                                                    | Envio de e-mail de aprovação em nome da epharma.                          |
 | Monitoramento          | `FLOWER_USER` / `FLOWER_PASSWORD`                                          | Painel do Celery.                                                         |
 
-
 ### 3.4 Ativos de infraestrutura e dependências externas
 
 | Recurso                         | Papel                                        | Efeito da indisponibilidade                                                  |
@@ -160,7 +151,7 @@ Todos carregados por variável de ambiente via `src/core/config.py` (Pydantic Se
 | PostgreSQL 16                   | Banco transacional                           | Sistema inoperante                                                           |
 | Oracle 11.2+                    | Leitura analítica e fonte das sincronizações | Dashboards e syncs de rede param; faturamento em PostgreSQL segue            |
 | RabbitMQ                        | Broker Celery                                | Exportações, importações e syncs param                                       |
-| Azure Blob / MinIO              | Anexos e arquivos gerados                    | Upload e download indisponíveis; o startup tolera e adia a criação do bucket |
+| Azure Blob / MinIO              | Anexos e arquivos gerados                    | Upload e download indisponíveis, o startup tolera e adia a criação do bucket |
 | Keycloak + OAuth Service (.NET) | Identidade corporativa                       | Login bloqueado no provedor `keycloak`                                       |
 | Serviço de e-mail corporativo   | Envio de aprovação ao cliente                | Central de aprovações não envia                                              |
 | Flower                          | Observabilidade de filas                     | Perda de visibilidade, sem impacto funcional                                 |
@@ -169,24 +160,23 @@ Todos carregados por variável de ambiente via `src/core/config.py` (Pydantic Se
 
 ## 4. Segurança Aplicada
 
-- **Autenticação em duas vias.** Cookie `HttpOnly` `access_token` tem precedência; na
-  ausência dele, aceita-se `Authorization: Bearer`. O refresh token tem cookie com path
-  restrito a `/v1/auth/refresh`.
-- **Quatro perfis** (`admin`, `manager`, `analyst`, `none`). Toda rota de negócio exige,
-  no mínimo, JWT válido **e** role diferente de `none`. `POST /v1/access-request` é a
-  única exceção acessível com `none`.
-- **Callbacks internos** vivem em `internal_router` separado, sem JWT, com
-  `X-Callback-Secret` e `include_in_schema=False`.
-- **Rate limiting** global (60/min por IP) com limites específicos por endpoint —
-  10/min no login, 30/min na criação de lançamento, 10/min nas operações em lote.
-- **Auditoria automática.** `AuditMiddleware` grava toda requisição mutante em
-  `audit_logs`, em background, com usuário extraído do token. O login é explicitamente
-  excluído para não persistir credenciais.
-- **Docs fechadas em produção.** `/docs` e `/redoc` só existem com `DEBUG=true`.
-- **Validação de upload** por MIME type **e** extensão, com teto de 25 MB.
-- **Skills de revisão versionadas** no repositório: `sec-route`, `sec-oracle`,
-  `sec-secrets`, `sec-review` — checagens dirigidas para rota nova, SQL Oracle, segredos
-  e OWASP.
+A segurança da aplicação foi pensada em diferentes camadas, buscando proteger o acesso, os dados e as operações realizadas pelo sistema.
+
+- **Autenticação em duas vias:** o sistema prioriza o cookie `HttpOnly` `access_token` para autenticar as requisições. Caso ele não esteja presente, também aceita o token enviado pelo cabeçalho `Authorization: Bearer`. Já o cookie de refresh token possui acesso restrito à rota `/v1/auth/refresh`.
+
+- **Controle de acesso por perfil:** existem quatro perfis de usuário (`admin`, `manager`, `analyst` e `none`), cada um com suas permissões. Para acessar as funcionalidades de negócio, é necessário possuir um JWT válido e um perfil diferente de `none`. A única exceção é a rota `POST /v1/access-request`, que permite solicitações de acesso sem autenticação de perfil.
+
+- **Proteção de callbacks internos:** as rotas utilizadas para comunicação interna ficam isoladas em um `internal_router`, sem autenticação JWT. O acesso é protegido por meio do cabeçalho `X-Callback-Secret`, e essas rotas não são exibidas na documentação da API.
+
+- **Limitação de requisições:** a aplicação conta com um controle global de 60 requisições por minuto, por IP. Além disso, algumas operações possuem limites próprios, como login (10/min), criação de lançamentos (30/min) e operações em lote (10/min), reduzindo o risco de uso abusivo.
+
+- **Registro de atividades:** o `AuditMiddleware` registra automaticamente as requisições que alteram dados, armazenando as informações na tabela `audit_logs` em segundo plano. Quando disponível, o usuário responsável pela operação é identificado pelo token. A rota de login é excluída desse processo para evitar o armazenamento de credenciais.
+
+- **Documentação protegida em produção:** as interfaces `/docs` e `/redoc` ficam disponíveis somente quando `DEBUG=true`, evitando a exposição da documentação técnica em ambientes de produção.
+
+- **Validação de arquivos enviados:** os uploads passam por uma verificação conjunta de tipo MIME e extensão, além de respeitarem o limite máximo de 25 MB por arquivo.
+
+- **Revisões de segurança padronizadas:** o projeto mantém no próprio repositório quatro skills versionadas (`sec-route`, `sec-oracle`, `sec-secrets` e `sec-review`). Elas ajudam a revisar novas rotas, consultas SQL Oracle, possíveis exposições de segredos e pontos de atenção relacionados às recomendações da OWASP.
 
 ---
 
@@ -194,21 +184,18 @@ Todos carregados por variável de ambiente via `src/core/config.py` (Pydantic Se
 
 | Controle                    | Ferramenta                                                          | Onde roda                 |
 | --------------------------- | ------------------------------------------------------------------- | ------------------------- |
-| Lint                        | Ruff (`E,F,I,UP,B,SIM,ASYNC`, linha 100)                            | Local + hook              |
+| Lint                        | Ruff                                                                | Local + hook              |
 | Tipagem                     | Mypy **strict**                                                     | Local + CI                |
-| Testes                      | Pytest + pytest-asyncio — **272 arquivos, ~2.900 casos**            | Local + CI                |
-| Segredos                    | Gitleaks via `epharma-cli scan`                                     | Local + CI                |
+| Testes                      | Pytest + pytest-asyncio                                             | Local + CI                |
+| Segredos                    | Gitleaks via ferramenta interna                                     | Local + CI                |
 | CVEs de imagem              | Trivy                                                               | CI (`Build & Trivy Scan`) |
 | DAST                        | Nuclei                                                              | CI (`Nuclei Scan`)        |
 | Revisão assistida           | PR-Agent (describe / review / improve) + verificação de self-review | CI, em paralelo           |
-| Cooldown de dependências    | `epharma-cli` (≥7 dias desde a publicação)                          | CI — mitiga supply-chain  |
+| Cooldown de dependências    | ferramenta interna (≥7 dias desde a publicação)                     | CI, mitiga supply-chain   |
 | Atualização de dependências | Renovate, com notificação no Teams                                  | CI                        |
-
 
 Os testes ficam **junto do código** (`src/domain/tests`, `src/application/use_cases/tests`,
 `src/infrastructure/tests`), não em um diretório `tests/` na raiz. A concentração maior
-está em `src/infrastructure/tests` (61 arquivos) e nos casos de uso de network (54).
+está em `src/infrastructure/tests`
 
 ---
-
-
