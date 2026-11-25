@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Fluxo geral" id="faturamento-redes-fluxo-geral">
-    <mxGraphModel dx="2017" dy="993" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1290" pageHeight="910" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="1549" dy="768" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1290" pageHeight="910" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -27,6 +27,9 @@
         </mxCell>
         <mxCell id="apim" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;strokeWidth=1.6;shadow=0;verticalAlign=middle;fontFamily=Helvetica;fontColor=#0B2239;fontSize=13;fillColor=#ECEAF9;strokeColor=#5B5BD6;shape=hexagon;perimeter=hexagonPerimeter2;arcSize=6;" value="&lt;b&gt;APIM&lt;/b&gt;&lt;div style=&quot;font-size:10px;color:#5A6B7C;margin-top:2px&quot;&gt;API Management · gateway&lt;/div&gt;" vertex="1">
           <mxGeometry height="84" width="170" x="375" y="308" as="geometry" />
+        </mxCell>
+        <mxCell id="K48f8uBrq1rtAL2ASkkw-5" edge="1" parent="1" source="api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;labelPadding=0 4;strokeColor=#2A987A;" target="K48f8uBrq1rtAL2ASkkw-1" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="api" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;strokeWidth=1.6;shadow=0;verticalAlign=middle;fontFamily=Helvetica;fontColor=#0B2239;fontSize=13;fillColor=#E4F6F0;strokeColor=#1E9E7C;" value="&lt;b&gt;Backend API&lt;/b&gt;&lt;div style=&quot;font-size:10px;color:#5A6B7C;margin-top:2px&quot;&gt;REST · regras de faturamento&lt;/div&gt;" vertex="1">
           <mxGeometry height="90" width="170" x="695" y="305" as="geometry" />
@@ -57,7 +60,9 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e4" edge="1" parent="1" source="front" style="exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=7;strokeColor=#2D6FB3;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=11;fontColor=#33475B;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" target="apim" value="③ HTTPS · REST">
-          <mxGeometry relative="1" as="geometry" />
+          <mxGeometry relative="1" x="-0.0833" y="-10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="e5" edge="1" parent="1" source="apim" style="exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=7;strokeColor=#2D6FB3;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=11;fontColor=#33475B;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" target="api" value="④ roteia · rate limit">
           <mxGeometry relative="1" as="geometry" />
@@ -127,6 +132,16 @@
         </mxCell>
         <mxCell id="nt" parent="1" style="rounded=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D6DEE7;strokeWidth=1.2;verticalAlign=top;align=left;spacingLeft=14;spacingTop=8;spacingRight=12;fontSize=12;fontFamily=Helvetica;fontColor=#0B2239;" value="&lt;b&gt;Notas&lt;/b&gt;&lt;div style=&quot;font-size:11px;color:#33475B;margin-top:8px;line-height:1.55&quot;&gt;• Todo tráfego externo entra exclusivamente pelo APIM.&lt;br&gt;• O token é emitido pelo Keycloak, validado na borda e novamente no backend.&lt;br&gt;• Broker e worker respondem pelo processamento em lote da competência.&lt;br&gt;• Diagrama &lt;i&gt;proposto&lt;/i&gt;: ainda sem evidência de implantação verificada.&lt;/div&gt;" vertex="1">
           <mxGeometry height="132" width="510" x="725" y="738" as="geometry" />
+        </mxCell>
+        <mxCell id="K48f8uBrq1rtAL2ASkkw-1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;strokeWidth=1.6;shadow=0;verticalAlign=middle;fontFamily=Helvetica;fontColor=#0B2239;fontSize=13;fillColor=#E4F6F0;strokeColor=#1E9E7C;" value="&lt;b&gt;Email API&lt;/b&gt;&lt;div style=&quot;font-size: 10px; color: rgb(90, 107, 124); margin-top: 2px;&quot;&gt;API - SendGrid&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="170" x="695" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="K48f8uBrq1rtAL2ASkkw-6" edge="1" parent="1" style="exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;jumpStyle=arc;jumpSize=7;strokeColor=#2D6FB3;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=11;fontColor=#33475B;fontFamily=Helvetica;labelBackgroundColor=#FFFFFF;" target="apim" value="Dispara email">
+          <mxGeometry relative="1" x="1" y="428" as="geometry">
+            <mxPoint x="420" y="348" as="offset" />
+            <mxPoint x="290" y="350" as="sourcePoint" />
+            <mxPoint x="410" y="350" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
