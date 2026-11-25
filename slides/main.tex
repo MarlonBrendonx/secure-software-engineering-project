@@ -50,11 +50,17 @@
 }
 \makeatother
 
-\author[Marlon B. Ramos]{Marlon Brendo Ramos}
+\author[Ramos et al.]{%
+  \begin{tabular}{cc}
+    Marlon Brendo Ramos & Lucas Martins \\
+    {\scriptsize\texttt{marlonbrendoramos@ufu.br}} & {\scriptsize\texttt{lucas.martins@ufu.br}} \\[0.2cm]
+    Ricardo Alves Faval & Johnatas Freitas \\
+    {\scriptsize\texttt{ricardo.faval@ufu.br}} & {\scriptsize\texttt{johnatas@ufu.br}}
+  \end{tabular}}
 \title[Engenharia de Software Seguro]{Engenharia de Software Seguro em um Sistema de
 Faturamento de Redes Farmacêuticas, da
 Modelagem de Ameaças ao DevSecOps}
-\institute[UFU]{Universidade Federal de Uberlândia - UFU}
+\institute[UFU]{Faculdade de Computação (FACOM)\\Universidade Federal de Uberlândia (UFU)}
 \date{}
 
 \begin{document}
@@ -112,6 +118,524 @@ Modelagem de Ameaças ao DevSecOps}
 \end{frame}
 
 
+
+% =====================================================================
+% Conteúdo do projeto: etapas 1 a 7
+% Divisão sugerida da fala (15 min no total):
+%   Integrante 1 (~3,5 min): título, contexto, sistema, fluxo geral e "Como o trabalho foi feito"
+%   Integrante 2 (~4 min):   Etapas 1 e 2 (STRIDE, casos de abuso, riscos, NIST CSF 2.0)
+%   Integrante 3 (~3,5 min): Etapas 3, 4 e início da 5 (requisitos, arquitetura, código seguro, ZAP)
+%   Integrante 4 (~4 min):   resultados do ZAP, antes e depois, Etapas 6 e 7 e conclusão
+% As notas de fala (\note) não aparecem no PDF. Para vê-las, coloque no preâmbulo:
+%   \setbeameroption{show notes on second screen=right}   (requer \usepackage{pgfpages})
+% =====================================================================
+
+\begin{frame}{Como o Trabalho Foi Feito}
+    \begin{block}{Ponto de partida}
+        O software \textbf{já existia} e estava em uso. Fizemos a \textbf{análise reversa} da API: lemos o código, a configuração, o OpenAPI e os diagramas para reconstruir ativos, pontos de entrada e controles.
+    \end{block}
+
+    \vspace{0.15cm}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        etapa/.style={draw=UBCblue, fill=LightGray, rounded corners=3pt, align=center,
+                      text width=2.6cm, minimum height=1.15cm, font=\scriptsize},
+        seta/.style={-{Stealth[length=2mm]}, thick, UBCblue}]
+        \node[etapa] (e1) at (0,0)    {\textbf{1. STRIDE}\\ameaças e casos de abuso};
+        \node[etapa] (e2) at (3.2,0)  {\textbf{2. Riscos}\\priorização e NIST CSF 2.0};
+        \node[etapa] (e3) at (6.4,0)  {\textbf{3. Arquitetura}\\requisitos e decisões};
+        \node[etapa] (e4) at (9.6,0)  {\textbf{4. Código seguro}\\testes antes do código};
+        \node[etapa] (e5) at (1.6,-1.7) {\textbf{5. Verificação}\\OWASP ZAP e Dependency-Check};
+        \node[etapa] (e6) at (4.8,-1.7) {\textbf{6. Detecção}\\alertas e resposta a incidentes};
+        \node[etapa] (e7) at (8.0,-1.7) {\textbf{7. DevSecOps}\\segurança no pipeline};
+        \draw[seta] (e1) -- (e2); \draw[seta] (e2) -- (e3); \draw[seta] (e3) -- (e4);
+        \draw[seta] (e4.south) -- ++(0,-0.25) -| (e5.north);
+        \draw[seta] (e5) -- (e6); \draw[seta] (e6) -- (e7);
+    \end{tikzpicture}}
+
+    \vspace{0.2cm}
+    \small
+    \textbf{Fio condutor:} cada etapa usa o que a anterior produziu.\\
+    Ameaça (T) $\rightarrow$ caso de abuso (CA) $\rightarrow$ risco (R) $\rightarrow$ requisito (RS) $\rightarrow$ controle (C) $\rightarrow$ teste.
+    \note{Explicar que não construímos o sistema: ele já funcionava. Nosso trabalho foi olhar para ele de fora para dentro, como faria um auditor, e aplicar o ciclo de engenharia de software seguro. Destacar a cadeia de identificadores: ela permite apontar, para qualquer controle, qual ameaça o justificou.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 1: Modelagem de Ameaças com STRIDE}
+    \small
+    Percorremos cada componente e cada ponto de entrada perguntando: \emph{qual destas seis categorias se aplica aqui?}
+
+    \vspace{0.15cm}
+    \scriptsize
+    \renewcommand{\arraystretch}{1.25}
+    \begin{tabular}{@{}>{\columncolor{LightGray}}p{2.6cm} p{2.0cm} p{6.1cm}@{}}
+        \toprule
+        \textbf{Categoria} & \textbf{Propriedade} & \textbf{Exemplo no sistema} \\
+        \midrule
+        \textbf{S}poofing & Autenticidade & Conta de gestor capturada no SSO (T02); \textit{token} forjado com segredo vazado (T16) \\
+        \textbf{T}ampering & Integridade & Lançamento alterado depois de enviado (T01); \textit{admin} aprova o próprio lançamento (T24) \\
+        \textbf{R}epudiation & Não repúdio & Auditoria gravada em segundo plano se perde em uma falha (T34) \\
+        \textbf{I}nformation Disclosure & Confidencialidade & Trocar o ID na URL e ver dados de outro cliente, o IDOR (T26) \\
+        \textbf{D}enial of Service & Disponibilidade & Sobrecarga da máquina de estados de aprovação (T14a) \\
+        \textbf{E}levation of Privilege & Autorização & \textit{Guard} que libera o acesso quando ocorre um erro (T14b) \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.25cm}
+    \begin{columns}[T]
+        \column{0.32\textwidth}
+        \centering {\Large\textbf{\textcolor{UBCblue}{14}}}\\ \scriptsize ativos
+        \column{0.32\textwidth}
+        \centering {\Large\textbf{\textcolor{AccentRed}{37}}}\\ \scriptsize ameaças (T01 a T37)
+        \column{0.32\textwidth}
+        \centering {\Large\textbf{\textcolor{AccentGreen}{29}}}\\ \scriptsize casos de abuso
+    \end{columns}
+    \note{O STRIDE garante amplitude: nenhum componente fica sem ser examinado contra as seis categorias. Comentar que a modelagem foi revista duas vezes e que a segunda passada acrescentou T24 a T37, entre elas a autoaprovação do administrador, que depois virou um dos três riscos críticos.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 1: Casos de Abuso}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \small
+        O STRIDE classifica a ameaça. O caso de abuso conta o ataque como uma história: \textbf{quem} ataca, \textbf{como} e com qual \textbf{impacto}.
+
+        \vspace{0.2cm}
+        \begin{alertblock}{CA14: Autoaprovação (T24)}
+            \scriptsize
+            \begin{enumerate}
+                \item O \textit{admin} cria um lançamento com valor favorável.
+                \item Ele mesmo envia para aprovação.
+                \item Ele mesmo aprova.
+                \item O valor segue para o cliente e para o ERP.
+            \end{enumerate}
+            Nenhum controle técnico é burlado: só falta uma regra de negócio.
+        \end{alertblock}
+
+        \column{0.5\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figs/casos-de-abuso.png}
+
+        \vspace{0.05cm}
+        {\tiny Casos de abuso do módulo de autenticação: ataques (vermelho), funções ameaçadas (azul) e controles (verde).\par}
+    \end{columns}
+    \note{O caso de abuso usa a mesma linguagem dos requisitos funcionais, o que facilita conversar com quem conhece o negócio. O CA14 mostra uma ameaça que a análise por componente tende a esquecer: o usuário legítimo que usa as próprias permissões para fraudar.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 2: Avaliação e Priorização dos Riscos}
+    \begin{columns}[c]
+        \column{0.46\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.62, every node/.style={font=\scriptsize}]
+            \foreach \p in {1,...,4}{
+              \foreach \i in {1,...,4}{
+                \pgfmathtruncatemacro{\s}{\p*\i}
+                \ifnum\s>11 \def\cor{AccentRed!75}\else
+                  \ifnum\s>7 \def\cor{orange!70}\else
+                    \ifnum\s>3 \def\cor{yellow!55}\else \def\cor{AccentGreen!40}\fi\fi\fi
+                \fill[\cor] (\i-1,\p-1) rectangle (\i,\p);
+                \draw[white, thick] (\i-1,\p-1) rectangle (\i,\p);
+              }}
+            % quantidade de riscos em cada célula (probabilidade x impacto)
+            \node at (3.5,2.5) {\textbf{3}};
+            \node at (2.5,2.5) {\textbf{1}};
+            \node at (3.5,1.5) {\textbf{14}};
+            \node at (2.5,1.5) {\textbf{7}};
+            \node at (1.5,1.5) {\textbf{2}};
+            \node at (1.5,2.5) {\textbf{1}};
+            \node at (3.5,0.5) {\textbf{1}};
+            \foreach \k in {1,...,4}{
+                \node at (\k-0.5,-0.35) {\k};
+                \node at (-0.35,\k-0.5) {\k};}
+            \node at (2,-0.95) {Impacto};
+            \node[rotate=90] at (-1.0,2) {Probabilidade};
+        \end{tikzpicture}
+
+        \vspace{0.1cm}
+        \scriptsize
+        \textcolor{AccentRed}{\textbf{3 Críticos}} \quad \textcolor{orange}{\textbf{15 Altos}} \quad \textbf{11 Médios}
+
+        \column{0.54\textwidth}
+        \small
+        \textbf{29 riscos} (R01 a R29), cada um com nota de 1 a 4 e justificativa escrita.
+
+        \vspace{0.1cm}
+        \textbf{Risco = Probabilidade $\times$ Impacto}
+
+        \vspace{0.15cm}
+        \begin{block}{A nota não decide sozinha}
+            \scriptsize
+            \begin{itemize}
+                \item \textbf{R02} (conta capturada) vem primeiro: abre caminho para R01, R03, R05, R08 e R09.
+                \item \textbf{R10} (motor de cálculo) é Médio, mas sobe na fila: o erro seria silencioso e atingiria todos os valores.
+            \end{itemize}
+        \end{block}
+        \scriptsize
+        Os riscos foram agrupados em \textbf{5 estágios}: identidade e segredos, integridade do valor, confidencialidade, disponibilidade e canal externo.
+    \end{columns}
+    \note{Os três críticos são R01 (alterar lançamento), R02 (conta capturada no SSO) e R18 (autoaprovação), todos 3 x 4. Reforçar que a ordem considera dependências: de nada adianta restringir o acesso aos dados se um atacante consegue forjar um token de administrador.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 2: Tratamento com o NIST CSF 2.0}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        fn/.style={draw=white, rounded corners=3pt, text=white, align=center,
+                   minimum width=1.85cm, minimum height=0.95cm, font=\scriptsize\bfseries}]
+        \node[fn, fill=UBCblue]          at (0,0)    {GV\\Governar};
+        \node[fn, fill=UBCblue!80]       at (2.0,0)  {ID\\Identificar};
+        \node[fn, fill=AccentGreen]      at (4.0,0)  {PR\\Proteger};
+        \node[fn, fill=orange!85!black]  at (6.0,0)  {DE\\Detectar};
+        \node[fn, fill=AccentRed]        at (8.0,0)  {RS\\Responder};
+        \node[fn, fill=AccentRed!70!black] at (10.0,0) {RC\\Recuperar};
+    \end{tikzpicture}}
+
+    \vspace{0.2cm}
+    \raggedright
+    \small
+    \textbf{Exemplo: R01, alteração de um lançamento já enviado}
+
+    \vspace{0.05cm}
+    \scriptsize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{@{}l p{8.6cm}@{}}
+        \toprule
+        GV.RR & Matriz de quem pode escrever lançamentos e segregação entre quem cria e quem aprova \\
+        PR.AA & Mínimo privilégio na escrita; aprovação obrigatória depois do envio \\
+        DE.CM & Alerta para alteração fora do padrão \\
+        RS.MA & Bloquear o usuário e congelar o período de faturamento \\
+        RC.RP & Recompor o valor a partir da auditoria antes do envio ao ERP \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \scriptsize
+        \textbf{Estratégia:} \emph{reduzir} em 28 dos 29 riscos. R20 (modo de depuração em produção) foi \emph{evitado}, bloqueado no \textit{deploy}.
+        \column{0.5\textwidth}
+        \scriptsize
+        \textbf{Residual estimado:} de 3 Críticos, 15 Altos e 11 Médios para \textbf{18 Médios e 11 Baixos}, se os controles forem comprovados.
+    \end{columns}
+    \note{O CSF não diz qual controle usar; ele funciona como lista de verificação. Com ele vemos se o tratamento só impede o ataque ou se também prevê como percebê-lo, contê-lo e recuperar o que foi afetado. Identificar não aparece por risco porque é transversal: inventário de ativos e registro de riscos valem para todos. O residual é uma estimativa: mantém o impacto e reduz a probabilidade a 1.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 3: Requisitos de Segurança Verificáveis}
+    \small
+    Dos riscos prioritários saíram \textbf{8 requisitos}, cada um com um critério que um teste confirma.
+
+    \vspace{0.1cm}
+    \scriptsize
+    \renewcommand{\arraystretch}{1.1}
+    \setlength{\tabcolsep}{3pt}
+    \begin{tabular}{@{}l l >{\raggedright\arraybackslash}p{6.2cm} l@{}}
+        \toprule
+        \textbf{Req.} & \textbf{Risco} & \textbf{O que o servidor precisa garantir} & \textbf{CWE / OWASP} \\
+        \midrule
+        RS01 & R01, R18 & Nada muda após o envio; o autor não aprova & CWE-841 / A06 \\
+        RS02 & R02 & Admin e gestor só entram com MFA & CWE-308 / A07 \\
+        RS03 & R03 & Permissão conferida por registro, não por perfil & CWE-639 / A01 \\
+        RS04 & R06, R07 & \textit{Token} com chave assimétrica guardada no cofre & CWE-347 / A04 \\
+        RS05 & R26 & Auditoria na mesma transação da operação & CWE-778 / A09 \\
+        RS06 & R28 & \textit{Guards} negam por padrão quando algo falha & CWE-636 / A10 \\
+        RS07 & R23 & Carga do ERP sem fórmula e com manifesto assinado & CWE-345 / A08 \\
+        RS08 & R29 & Proteção contra CSRF nas rotas que alteram dados & CWE-352 / A01 \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.2cm}
+    \begin{exampleblock}{Seleção em duas rodadas}
+        \scriptsize
+        1ª rodada: riscos centrais (R01, R02, R03). 2ª rodada: riscos dos quais esses controles dependem. Conferir o perfil no \textit{token} só adianta se ninguém conseguir forjá-lo (RS04).
+    \end{exampleblock}
+    \note{O CWE e o OWASP Top 10 dão nome à falha que cada requisito precisa fechar. Exemplo: "alterar lançamento já enviado" é, no vocabulário técnico, a imposição incorreta do fluxo de trabalho, CWE-841. As cheat sheets da OWASP serviram de base para escrever os critérios de verificação.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 3: Arquitetura Segura Proposta}
+    \centering
+    \includegraphics[width=\textwidth]{figs/arquitetura-segura.pdf}
+
+    \vspace{0.1cm}
+    \raggedright
+    \scriptsize
+    \textbf{5 fronteiras de confiança} (F1 a F5), \textbf{14 controles} (C1 a C14) e \textbf{8 decisões} de arquitetura.
+    Regra de posicionamento: o controle fica onde a informação para decidir existe e \textbf{por onde todo caminho passa}. Por isso a regra do RS01 mora na \textbf{máquina de estados}, e não na tela.
+    \note{Seguir o fluxo numerado: login com MFA (1), emissão do token com chave no cofre (2 e 3), gateway (4), API (5). Na API a requisição passa por três barreiras: anti-CSRF, guards e autorização por recurso. A mudança de status, a auditoria e o evento ao monitoramento são gravados juntos (7), e só a versão aprovada chega ao ERP (8).}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}[fragile]{Etapa 4: Código Seguro com Testes Antes do Código}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \begin{block}{Prática 1: autorização por recurso}
+            \scriptsize
+            Risco R03 $\rightarrow$ RS03\\
+            \textbf{TS01:} a analista abre o lançamento do seu cliente $\Rightarrow$ permitido.\\
+            \textbf{TS02:} troca o ID por outro cliente $\Rightarrow$ \texttt{404}, a mesma resposta de um ID que não existe.
+        \end{block}
+        \column{0.5\textwidth}
+        \begin{block}{Prática 2: \textit{token} e MFA}
+            \scriptsize
+            Risco R02 $\rightarrow$ RS02\\
+            \textbf{TS03:} gestor com segundo fator aprova $\Rightarrow$ permitido.\\
+            \textbf{TS04:} \textit{token} válido, mas sem MFA $\Rightarrow$ \texttt{401} e tentativa registrada.
+        \end{block}
+    \end{columns}
+
+    \vspace{0.15cm}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\tiny, frame=single,
+    backgroundcolor=\color{LightGray}, keywordstyle=\color{UBCblue}\bfseries,
+    commentstyle=\color{AccentGreen}]
+def obter_lancamento(usuario, id_lancamento):
+    lanc = repositorio.buscar(id_lancamento)
+    if lanc is None or not usuario.pode_acessar(lanc.cliente, lanc.periodo):
+        auditoria.registrar("acesso_negado", usuario, id_lancamento)
+        raise NaoEncontrado()   # 404: nao revela se o registro existe
+    return lanc
+\end{lstlisting}
+
+    \scriptsize
+    Referências usadas: OWASP \textit{Authorization}, \textit{IDOR Prevention}, \textit{MFA} e \textit{Session Management Cheat Sheets}, ASVS 5.0.
+    \note{A ordem foi sempre a mesma: risco, requisito, testes, implementação, resultado esperado. Escrever o teste primeiro obriga a definir o que é "seguro" antes de programar. Responder 404 em vez de 403 evita que o atacante descubra quais IDs existem.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 5: Verificação com o OWASP ZAP}
+    \begin{columns}[T]
+        \column{0.44\textwidth}
+        \raggedright
+        \small\textbf{Como testamos}\par
+        \vspace{0.1cm}
+        \scriptsize
+        \textcolor{UBCblue}{$\bullet$} Alvo: protótipo local, com dados fictícios.\par\vspace{0.08cm}
+        \textcolor{UBCblue}{$\bullet$} ZAP 2.17 em modo protegido: só ataca as URLs do contexto.\par\vspace{0.08cm}
+        \textcolor{UBCblue}{$\bullet$} Rotas importadas do \textbf{OpenAPI} da API.\par\vspace{0.08cm}
+        \textcolor{UBCblue}{$\bullet$} Regra do \textit{Replacer} injeta o \textit{token} de cada perfil (analista, gestor, admin).\par\vspace{0.08cm}
+        \textcolor{UBCblue}{$\bullet$} Varredura \textbf{passiva} (observa) e \textbf{ativa} (ataca).\par\vspace{0.08cm}
+        \textcolor{UBCblue}{$\bullet$} \textbf{Dependency-Check}: 191 dependências analisadas.\par
+
+        \vspace{0.25cm}
+        \small\textbf{Números}\par
+        \vspace{0.1cm}
+        \scriptsize
+        \textcolor{UBCblue}{$\bullet$} 1ª rodada: 11 alertas, nenhum de risco alto.\par\vspace{0.08cm}
+        \textcolor{UBCblue}{$\bullet$} Reteste autenticado: 14.912 requisições.\par
+
+        \column{0.56\textwidth}
+        \centering
+        \includegraphics[width=0.92\textwidth]{figs/zap-replacer-admin.png}\\[0.15cm]
+        \includegraphics[width=0.92\textwidth]{figs/dependency-check.png}
+    \end{columns}
+    \note{A primeira imagem mostra as rotas importadas e a regra "Token Admin" do Replacer; a segunda, o resumo do Dependency-Check, com a PyJWT na primeira linha. Comentar a dificuldade prática: o token de 15 minutos expirava no meio da varredura e o limite de requisições da API respondia 429. Isso foi corrigido na rodada seguinte.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 5: O que os Testes Mostraram}
+    \scriptsize
+    \renewcommand{\arraystretch}{1.15}
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{@{}l p{4.6cm} l l l@{}}
+        \toprule
+        \textbf{ID} & \textbf{Problema} & \textbf{Fonte} & \textbf{STRIDE} & \textbf{CSF} \\
+        \midrule
+        A01 & CSP do \textit{frontend} com \texttt{unsafe-inline} & ZAP & Info. Disclosure & PR.PS \\
+        A02 & API sem o cabeçalho \texttt{nosniff} & ZAP & Tampering & PR.PS \\
+        A03 & \texttt{X-Powered-By} expõe a tecnologia & ZAP & Info. Disclosure & PR.PS \\
+        V01 & \textit{Refresh token} aceito duas vezes (R25) & Manual & Spoofing & PR.AA \\
+        V02 & \textit{Token} no corpo e no \textit{cookie} HttpOnly & ZAP/manual & Info. Disclosure & PR.AA \\
+        V03 & CVE na PyJWT (falso positivo) & Dep.-Check & Tampering & ID.RA \\
+        \bottomrule
+    \end{tabular}
+
+    \vspace{0.25cm}
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \begin{exampleblock}{O ZAP viu o que a modelagem não previu}
+            \scriptsize
+            Nenhuma das 37 ameaças tratava de cabeçalhos HTTP. Um risco novo volta ao registro (ID.IM).
+        \end{exampleblock}
+        \column{0.5\textwidth}
+        \begin{alertblock}{A modelagem viu o que o ZAP não vê}
+            \scriptsize
+            Alterar lançamento enviado e autoaprovar são requisições \textbf{válidas}. Um \textit{scanner} não sabe que a regra de negócio deveria recusá-las.
+        \end{alertblock}
+    \end{columns}
+    \note{Mensagem principal: as duas abordagens se complementam. A varredura cobre configuração e superfície exposta; a modelagem cobre as regras que dão sentido ao sistema. O V03 mostra que resultado de ferramenta precisa de triagem: a CVE era de uma biblioteca PHP com o mesmo nome.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 5: Antes e Depois das Correções}
+    \begin{columns}[c]
+        \column{0.6\textwidth}
+        \scriptsize
+        \renewcommand{\arraystretch}{1.15}
+        \setlength{\tabcolsep}{3pt}
+        \begin{tabular}{@{}l l c c c@{}}
+            \toprule
+            \textbf{ID} & \textbf{Ataque} & \textbf{Esp.} & \textbf{Antes} & \textbf{Depois} \\
+            \midrule
+            V-01 & \texttt{PATCH} após o envio & 422 & \textcolor{AccentRed}{\textbf{200}} & \textcolor{AccentGreen}{\textbf{422}} \\
+            V-02 & \texttt{DELETE} após o envio & 422 & \textcolor{AccentRed}{\textbf{204}} & \textcolor{AccentGreen}{\textbf{422}} \\
+            V-03 & Reabrir após o envio & 200 & \textcolor{AccentRed}{\textbf{422}} & \textcolor{AccentGreen}{\textbf{200}} \\
+            V-04 & Admin aprova o próprio & 403 & \textcolor{AccentRed}{\textbf{200}} & \textcolor{AccentGreen}{\textbf{403}} \\
+            V-05 & Ler outro cliente & 404 & 404 & 404 \\
+            V-06 & Escrita sem MFA & 401 & 401 & 401 \\
+            V-07 & \textit{Token} \texttt{alg none} & 401 & 401 & 401 \\
+            V-08 & CSRF (sem RS08) & 403 & \textcolor{AccentRed}{200} & \textcolor{AccentRed}{200} \\
+            \bottomrule
+        \end{tabular}
+
+        \vspace{0.15cm}
+        Testes automatizados: \textbf{75} no original $\rightarrow$ \textbf{88} no corrigido (13 novos para RS01, R18 e RS05).
+
+        \column{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figs/zap-autoaprovacao-403.png}
+
+        \vspace{0.05cm}
+        {\tiny V-04 repetido no ZAP: \texttt{403}, ``Quem criou, enviou ou alterou o lançamento não pode aprová-lo''.\par}
+    \end{columns}
+    \note{Implementamos RS01, a segregação de funções de R18 e RS05 em uma cópia do protótipo e repetimos os mesmos ataques. As quatro primeiras linhas passaram de aceitas para recusadas. As três seguintes mostram que nada do que já funcionava quebrou. O V-08 continua aceito porque a proteção contra CSRF não foi implementada, e dizemos isso abertamente.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 6: Monitoramento, Detecção e Resposta}
+    \begin{columns}[T]
+        \column{0.52\textwidth}
+        \small
+        \textbf{14 regras de detecção}, ligadas a riscos e requisitos:
+        \scriptsize
+        \begin{itemize}
+            \item Falhas repetidas de MFA (R02)
+            \item Negações de acesso em sequência, sinal de IDOR (R03)
+            \item Reuso de \textit{refresh token}, o V01 da Etapa 5 (R25)
+            \item Tentativa de autoaprovação (R18)
+            \item Lacuna na auditoria (R26)
+            \item Carga do ERP com total divergente (R23)
+        \end{itemize}
+
+        \vspace{0.1cm}
+        Com o código proposto: \textbf{6} regras implementadas e testadas, \textbf{4} parciais e \textbf{4} só propostas.
+
+        \column{0.48\textwidth}
+        \centering
+        \small\textbf{Roteiro de resposta}\\[0.1cm]
+        \begin{tikzpicture}[
+            passo/.style={draw=UBCblue, fill=LightGray, rounded corners=2pt,
+                          minimum width=2.1cm, minimum height=0.42cm, font=\tiny},
+            seta/.style={-{Stealth[length=1.5mm]}, UBCblue}]
+            \node[passo] (p1) at (0,0)     {1. Identificação};
+            \node[passo] (p2) at (0,-0.6)  {2. Triagem};
+            \node[passo] (p3) at (0,-1.2)  {3. Contenção};
+            \node[passo] (p4) at (0,-1.8)  {4. Investigação};
+            \node[passo] (p5) at (2.5,-1.8)  {5. Correção};
+            \node[passo] (p6) at (2.5,-1.2) {6. Recuperação};
+            \node[passo] (p7) at (2.5,-0.6) {7. Comunicação};
+            \node[passo] (p8) at (2.5,0)    {8. Pós-incidente};
+            \draw[seta] (p1)--(p2); \draw[seta] (p2)--(p3); \draw[seta] (p3)--(p4);
+            \draw[seta] (p4)--(p5); \draw[seta] (p5)--(p6); \draw[seta] (p6)--(p7); \draw[seta] (p7)--(p8);
+            \node[font=\tiny, text=orange!85!black] at (0,-2.35) {DE};
+            \node[font=\tiny, text=AccentRed] at (1.25,-2.35) {RS};
+            \node[font=\tiny, text=AccentRed!70!black] at (2.5,-2.35) {RC};
+        \end{tikzpicture}
+    \end{columns}
+
+    \vspace{0.2cm}
+    \begin{alertblock}{O que ainda falta}
+        \scriptsize
+        O alerta ainda é um registro no log e no Redis. Não existe SOC, SIEM ou plantão: é planejamento, validado por testes.
+    \end{alertblock}
+    \note{Essa etapa preenche as funções Detectar, Responder e Recuperar do NIST CSF, que nas etapas anteriores estavam só previstas. Exemplo de ponta a ponta: o reuso de refresh token encontrado no teste manual (V01) virou uma regra de detecção (D05) e um passo de contenção, que é revogar a família de tokens. O código foi testado nas duas versões do protótipo: 109 testes no corrigido e 95 no original.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Etapa 7: DevSecOps, Segurança Dentro do Pipeline}
+    \small
+    Para que as falhas corrigidas \textbf{não voltem} a cada mudança, os testes das etapas anteriores entram no \textit{pipeline} de CI (controle C8).
+
+    \vspace{0.2cm}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[
+        est/.style={draw=UBCblue, fill=LightGray, rounded corners=3pt, align=center,
+                    text width=2.0cm, minimum height=1.35cm, font=\scriptsize},
+        fim/.style={est, fill=AccentGreen!25, draw=AccentGreen},
+        seta/.style={-{Stealth[length=2mm]}, thick, UBCblue}]
+        \node[est] (a) at (0,0)    {\textbf{Commit/PR}\\revisão de código};
+        \node[est] (b) at (2.5,0)  {\textbf{Segredos}\\Gitleaks};
+        \node[est] (c) at (5.0,0)  {\textbf{Testes}\\RS01 a RS08 e regras de detecção};
+        \node[est] (d) at (7.5,0)  {\textbf{Dependências}\\Dependency-Check e Trivy};
+        \node[est] (e) at (10.0,0) {\textbf{DAST}\\ZAP nas rotas da API};
+        \node[fim] (f) at (12.5,0) {\textbf{Deploy}\\bloqueado se algo falhar};
+        \draw[seta] (a)--(b); \draw[seta] (b)--(c); \draw[seta] (c)--(d);
+        \draw[seta] (d)--(e); \draw[seta] (e)--(f);
+    \end{tikzpicture}}
+
+    \vspace{0.25cm}
+    \raggedright
+    \begin{columns}[T]
+        \column{0.5\textwidth}
+        \begin{block}{O sistema real já tinha}
+            \scriptsize
+            Gitleaks local e no CI, Trivy, Renovate com espera de 7 dias para novas versões, tipagem estrita (mypy) e cerca de 2.900 testes.
+        \end{block}
+        \column{0.5\textwidth}
+        \begin{exampleblock}{O que o projeto acrescenta}
+            \scriptsize
+            Testes de autorização, estados, \textit{tokens} e auditoria; ZAP e Dependency-Check com triagem; o \textit{deploy} não sobe com modo local ou \texttt{DEBUG} ativo (R20).
+        \end{exampleblock}
+    \end{columns}
+    \note{DevSecOps aqui significa transformar cada requisito em um teste que roda sozinho a cada mudança. Se o teste falha, o deploy para. A cadeia de build também é alvo (T13, T37 e R10), por isso as dependências passam por análise e triagem antes de entrar.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}{Conclusões e Lições Aprendidas}
+    \small
+    \begin{enumerate}
+        \item \textbf{A modelagem encontrou as falhas mais graves.} Os riscos críticos ligados ao valor faturado (R01 e R18) se confirmaram como ataques reais e não apareceriam em varredura automática.
+        \item \textbf{Ferramentas e modelagem se completam.} O ZAP encontrou falhas de configuração que nenhuma das 37 ameaças cobria.
+        \item \textbf{O lugar do controle importa.} A regra na máquina de estados protegeu também a rota de lote, sem tratamento extra.
+        \item \textbf{A modelagem precisa de revisão.} A autoaprovação (R18) só surgiu na segunda passada do STRIDE.
+        \item \textbf{A rastreabilidade tem uso prático.} Ela mudou a ordem de implementação e liga cada resultado de teste a uma ameaça.
+    \end{enumerate}
+
+    \vspace{0.15cm}
+    \begin{alertblock}{Limitações}
+        \scriptsize
+        Verificação feita em protótipo (Redis e SSO simulado), não em produção. O risco residual continua sendo uma estimativa até os controles serem implementados e comprovados no sistema real.
+    \end{alertblock}
+    \note{Fechar retomando a ideia central do primeiro slide: perguntar antes como o sistema pode ser atacado. Mostramos o caminho completo, da ameaça ao teste no pipeline, e também onde ele ainda não chegou.}
+\end{frame}
+
+% ---------------------------------------------------------------------
+\begin{frame}[allowframebreaks]{Referências}
+    \tiny
+    \begin{thebibliography}{99}
+        \bibitem{shostack2014} A. Shostack. \emph{Threat Modeling: Designing for Security}. Wiley, 2014.
+        \bibitem{kohnfelder1999} L. Kohnfelder e P. Garg. \emph{The Threats to Our Products}. Microsoft Interface, Microsoft Corporation, 1999.
+        \bibitem{mcdermott1999} J. McDermott e C. Fox. Using Abuse Case Models for Security Requirements Analysis. In: \emph{15th Annual Computer Security Applications Conference (ACSAC)}, IEEE, p. 55--64, 1999.
+        \bibitem{sindre2005} G. Sindre e A. L. Opdahl. Eliciting Security Requirements with Misuse Cases. \emph{Requirements Engineering}, v. 10, n. 1, p. 34--44, 2005.
+        \bibitem{mcgraw2006} G. McGraw. \emph{Software Security: Building Security In}. Addison-Wesley, 2006.
+        \bibitem{howard2006} M. Howard e S. Lipner. \emph{The Security Development Lifecycle}. Microsoft Press, 2006.
+        \bibitem{nist2024csf} NIST. \emph{The NIST Cybersecurity Framework (CSF) 2.0}. NIST CSWP 29, 2024. doi:10.6028/NIST.CSWP.29.
+        \bibitem{nist2022ssdf} NIST. \emph{Secure Software Development Framework (SSDF) Version 1.1}. NIST SP 800-218, 2022.
+        \bibitem{nist2012risk} NIST. \emph{Guide for Conducting Risk Assessments}. NIST SP 800-30 Rev. 1, 2012.
+        \bibitem{mitrecwe} The MITRE Corporation. \emph{CWE: Common Weakness Enumeration}. Disponível em: \url{https://cwe.mitre.org/}.
+        \bibitem{owasp2025top10} OWASP Foundation. \emph{OWASP Top 10:2025}. Disponível em: \url{https://top10.owasp.org/2025/}.
+        \bibitem{owaspcheatsheets} OWASP Foundation. \emph{OWASP Cheat Sheet Series}. Disponível em: \url{https://cheatsheetseries.owasp.org/}.
+        \bibitem{owaspasvs2025} OWASP Foundation. \emph{Application Security Verification Standard 5.0.0}, 2025.
+        \bibitem{zaproxy} ZAP Development Team. \emph{ZAP (Zed Attack Proxy) 2.17.0}. Disponível em: \url{https://www.zaproxy.org/}.
+        \bibitem{owaspdepcheck} OWASP Foundation. \emph{OWASP Dependency-Check 13.0.0}. Disponível em: \url{https://owasp.org/www-project-dependency-check/}.
+        \bibitem{nvdcve202545770} NIST. \emph{CVE-2025-45770 Detail}. National Vulnerability Database, 2025.
+        \bibitem{verizon2026} Verizon. \emph{2026 Data Breach Investigations Report}, 2026.
+        \bibitem{witty2024} A. Witty. \emph{Testimony before the Senate Finance Committee: Hacking America's Health Care}. United States Senate, 2024.
+    \end{thebibliography}
+\end{frame}
 
 \begin{frame}[plain]
     \centering
