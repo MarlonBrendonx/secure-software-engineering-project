@@ -2,7 +2,9 @@
 
 <!-- <img src="./imgs/banner.jpeg" alt="Logo do projeto" width="700"> -->
 
-[![Assistir à apresentação](./imgs/apresentacao-thumb.jpg)](./imgs/apresentacao.mp4)
+![Resumo da apresentação do protótipo](./imgs/apresentacao.gif)
+
+[▶ Ver a apresentação completa](./imgs/apresentacao.mp4)
 
 # Faturamento de Redes
 
