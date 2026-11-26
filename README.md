@@ -2,7 +2,7 @@
 
 <!-- <img src="./imgs/banner.jpeg" alt="Logo do projeto" width="700"> -->
 
-<video src="./imgs/apresentacao.mp4" controls width="100%"></video>
+[![Assistir à apresentação](./imgs/apresentacao-thumb.jpg)](./imgs/apresentacao.mp4)
 
 # Faturamento de Redes
 
