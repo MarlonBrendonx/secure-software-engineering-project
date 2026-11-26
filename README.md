@@ -4,7 +4,7 @@
 
 ![Resumo da apresentação do protótipo](./imgs/apresentacao.gif)
 
-[▶ Ver a apresentação completa](./imgs/apresentacao.mp4)
+[▶ Ver a apresentação completa](https://github.com/MarlonBrendonx/secure-software-engineering-project/raw/main/imgs/apresentacao.mp4)
 
 # Faturamento de Redes
 
