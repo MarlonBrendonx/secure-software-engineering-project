@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="./imgs/banner.jpeg" alt="Logo do projeto" width="700">
+<!-- <img src="./imgs/banner.jpeg" alt="Logo do projeto" width="700"> -->
+
+<video src="./imgs/apresentacao.mp4" controls width="100%"></video>
 
 # Faturamento de Redes
 
