@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./imgs/logo.png" alt="Logo do projeto" width="620">
+<img src="./imgs/banner.jpeg" alt="Logo do projeto" width="700">
 
 # Faturamento de Redes
 
@@ -70,3 +70,18 @@ O [mapa de rastreabilidade](https://htmlpreview.github.io/?https://github.com/Ma
 ├── evidencias/    # capturas de tela e relatórios (etapa-5/ e prototipo-corrigido/)
 └── imgs/          # imagens no geral
 ```
+
+## Como executar o protótipo
+
+Pré-requisito: Docker com Compose. Os comandos partem de
+[`extra/prototipo-psp`](extra/prototipo-psp/README.md).
+
+```bash
+cd extra/prototipo-psp
+cp backend/.env.example backend/.env   # preencha JWT_SECRET, MOCK_LOGIN_PASSWORD e MOCK_OTP_CODE
+docker compose up --build
+```
+
+Acesse `http://localhost:3000`. Os usuários de demonstração (`analyst`, `manager` e `admin`) usam a
+senha e o código OTP definidos no `.env`. Os detalhes de perfis, MFA e arquitetura estão no
+[README do protótipo](extra/prototipo-psp/README.md)
