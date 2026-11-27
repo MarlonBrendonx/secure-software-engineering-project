@@ -21,7 +21,7 @@ As regras e o roteiro desta etapa são planejamento. O código proposto nos dire
 
 ## Próximas etapas
 
-- Decidir em grupo em qual protótipo o código entra e aplicar os diretórios na ordem indicada no [índice](etapa-6-deteccao-de-intrusoes.md#como-aplicar-o-código-proposto).
+- Decidir em grupo em qual protótipo o código entra e aplicar os diretórios na ordem indicada no [índice](etapa-6-deteccao-de-intrusoes.md#como-aplicar-os-códigos-propostos).
 - Corrigir o V02 junto com a autenticação do WebSocket, para o frontend deixar de ler o token do corpo da resposta.
 - Atualizar o `PyJWT` (V03) e confirmar no Dependency-Check.
 - Criar a revogação de todas as sessões de um usuário e uma janela de tolerância para renovações simultâneas.
