@@ -34,7 +34,7 @@ A tabela liga cada achado à categoria OWASP, ao CWE e aos riscos e requisitos d
 | V02    | A04:2021 Insecure Design / CWE-522                     | relacionado a T15/T16 (exposição de credencial) | RS04 (token de sessão) | token só no cookie `HttpOnly` |
 | V03    | A06:2021 Vulnerable and Outdated Components / CWE-1395 | T37 (dependência vulnerável) | sem requisito dedicado; relacionado às decisões de cadeia de suprimentos (Trivy, cooldown) | atualizar o `PyJWT` |
 
-Os achados V01 a V03 vêm do [retest autenticado](etapa-5-retest-autenticado.md) e são vulnerabilidades, não só configuração. O V01 confirma, na prática, o risco **R25** já catalogado na [etapa 3](../etapa-3/etapa-3-requisitos.md).
+Os achados V01 a V03 vêm do [retest autenticado](etapa-5-retest-autenticado.md) e são vulnerabilidades, não só configuração. O V01 confirma, na prática, o risco **R25**, catalogado na [etapa 2](../etapa-2/etapa-2-criterios-e-registro.md#3-registro-de-riscos) e deixado fora dos riscos priorizados na [etapa 3](../etapa-3/etapa-3-requisitos.md#segunda-rodada-riscos-dos-quais-os-controles-dependem).
 
 **Lacuna encontrada.** Nenhum risco das etapas 2 e 3 trata de cabeçalhos HTTP de segurança. Os três achados vieram de um tipo de problema que o nosso registro de riscos não cobria. Como encaminhamento, registrar um risco de "configuração insegura de cabeçalhos HTTP" na próxima revisão da etapa 2.
 

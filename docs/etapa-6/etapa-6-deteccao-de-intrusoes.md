@@ -53,6 +53,8 @@ A tabela liga cada regra aos riscos da Etapa 2, aos requisitos da Etapa 3 e aos 
 
 O V02 (token também no corpo da resposta) e o V03 (`PyJWT` com CVE) não têm regra de detecção própria. Eles são tratados como correção, no passo 5 da [resposta a incidentes](etapa-6-resposta-a-incidentes.md#5-correção), e ficaram fora do código pelos motivos descritos [lá](etapa-6-resposta-a-incidentes.md#código-proposto).
 
+> **Nota sobre o V03.** A [verificação das correções](../prototipo-corrigido/verificacao-das-correcoes.md#5-análise-de-dependências) concluiu que a CVE-2025-45770 é um falso positivo para este sistema: a descrição e as referências da CVE apontam para a biblioteca PHP `lcobucci/jwt`, e não para o `PyJWT`, e a CVE está marcada como contestada (*disputed*). As menções ao V03 nesta etapa (fontes de dados, passo 5 da resposta a incidentes e próximas etapas) foram mantidas como exemplo de tratamento de uma dependência vulnerável, mas essa CVE não exige atualização do `PyJWT`.
+
 ## Como aplicar os códigos propostos
 
 Cada diretório é uma cópia do `backend/` do protótipo: um arquivo em `correções sugeridas/etapa-6-regras-de-deteccao/backend/src/application/detection.py` vai para `backend/src/application/detection.py`. 
