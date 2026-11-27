@@ -1,8 +1,10 @@
+# Etapa 1 — Identificação do sistema
+
 ## 1 Descrição do sistema
 
 ### Qual problema o sistema resolve
 
-Na visão geral do sistema, foram descritos vários módulos da aplicação. Porém, para o proposito desse projeto optamos por focar em todo motor de fluxo de aprovações e também na criação de serviços que entrarão nesse fluxo. Ou seja, registro, o cálculo e a aprovação dos valores que a empresa fatura a cada cliente da rede, por período. Antes de existir um sistema autoritativo, o valor faturado dependia de
+Na visão geral do sistema, foram descritos vários módulos da aplicação. Porém, para o propósito desse projeto optamos por focar em todo motor de fluxo de aprovações e também na criação de serviços que entrarão nesse fluxo. Ou seja, registro, o cálculo e a aprovação dos valores que a empresa fatura a cada cliente da rede, por período. Antes de existir um sistema autoritativo, o valor faturado dependia de
 planilhas manuais, sujeitas a erro de cálculo, a falta de auditoria de quem alterou o quê e
 a ausência de um fluxo formal de aprovação antes de o valor chegar ao ERP. O software resolve
 isso ao tornar o **servidor a autoridade sobre o valor** (todo valor é recalculado a

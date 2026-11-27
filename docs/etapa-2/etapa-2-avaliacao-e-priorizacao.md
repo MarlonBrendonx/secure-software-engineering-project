@@ -336,6 +336,8 @@ Além da pontuação (Probabilidade × Impacto), a ordem considera:
 | 28 | **R28** — Contorno de autorização por falha aberta do guard | Alto | 2×4 = 8 | 1, 4 | Diferente de R03, o cenário abrange escrita e aprovação; a existência de falha aberta deve ser confirmada na implementação. |
 | 29 | **R29** — Alteração de lançamento por CSRF | Alto | 2×4 = 8 | 1, 4 | Complementa R01: a ação parte do navegador de uma vítima autenticada; requer que método, formato e envio do cookie permitam a requisição induzida. |
 
+> **Nota sobre as posições 24 a 29.** Os riscos R24 a R29 foram acrescentados ao registro depois da primeira priorização, para cobrir casos de abuso que ainda não tinham risco correspondente, e entraram no fim da tabela para não alterar as posições já definidas. Pela pontuação e pelos critérios da seção 5.1, os Altos R25, R26, R28 e R29 ficariam à frente dos riscos Médios das posições 14 e 17 a 24. Na prática, essa diferença não muda o tratamento: na [sequência de tratamento](#53-sequência-de-tratamento) e na [ordem de implementação](etapa-2-plano-e-residual.md#10-ordem-de-implementação), R25 está no estágio 1 e R26, R28 e R29 no estágio 2, à frente de todos os riscos dos estágios 3 a 5.
+
 ### 5.3 Sequência de tratamento
 
 Vários riscos compartilham o mesmo controle (R06 e R12, por exemplo, se resolvem com o mesmo cofre). Por isso, os riscos são agrupados em estágios de tratamento, evitando tratar duas vezes o mesmo problema.

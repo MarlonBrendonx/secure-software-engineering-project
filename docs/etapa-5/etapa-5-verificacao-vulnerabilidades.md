@@ -36,6 +36,8 @@ A tabela liga cada achado à categoria OWASP, ao CWE e aos riscos e requisitos d
 
 Os achados V01 a V03 vêm do [retest autenticado](etapa-5-retest-autenticado.md) e são vulnerabilidades, não só configuração. O V01 confirma, na prática, o risco **R25**, catalogado na [etapa 2](../etapa-2/etapa-2-criterios-e-registro.md#3-registro-de-riscos) e deixado fora dos riscos priorizados na [etapa 3](../etapa-3/etapa-3-requisitos.md#segunda-rodada-riscos-dos-quais-os-controles-dependem).
 
+> **Nota sobre a edição do OWASP Top 10.** Os achados desta etapa foram classificados pela edição 2021 do OWASP Top 10, enquanto a [Etapa 3](../etapa-3/etapa-3-vulnerabilidades.md) adota a edição 2025. A correspondência com a edição 2025 é: A05:2021 Security Misconfiguration → A02:2025 Security Misconfiguration (A01 a A03); A07:2021 Identification and Authentication Failures → A07:2025 Authentication Failures (V01); A04:2021 Insecure Design → A06:2025 Insecure Design (V02); e A06:2021 Vulnerable and Outdated Components → A03:2025 Software Supply Chain Failures (V03). Os CWE não mudam.
+
 **Lacuna encontrada.** Nenhum risco das etapas 2 e 3 trata de cabeçalhos HTTP de segurança. Os três achados vieram de um tipo de problema que o nosso registro de riscos não cobria. Como encaminhamento, registrar um risco de "configuração insegura de cabeçalhos HTTP" na próxima revisão da etapa 2.
 
 ---
